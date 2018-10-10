@@ -2,3 +2,4 @@ edit 1
 edit 2 glover
 edit 3 decourse
 edit 4 szuk
+edit 5 tringlan
