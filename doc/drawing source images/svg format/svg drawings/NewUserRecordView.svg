@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="540"
+   height="960"
+   viewBox="0 0 142.875 254"
+   version="1.1"
+   id="svg4629"
+   sodipodi:docname="NewUserRecordView.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <defs
+     id="defs4623">
+    <linearGradient
+       id="linearGradient6811"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop6809" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.75544332"
+     inkscape:cx="205.0053"
+     inkscape:cy="463.33976"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     units="px">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4718" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata4626">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-42.99997)">
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect4796"
+       width="51.834904"
+       height="25.567217"
+       x="3.1521225"
+       y="61.991714" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555556px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332;"
+       x="21.364388"
+       y="87.909164"
+       id="text6905"><tspan
+         sodipodi:role="line"
+         id="tspan6903"
+         x="21.364388"
+         y="97.564659"
+         style="stroke-width:0.26458332;font-size:7.05555556px;" /></text>
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1.01899719;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect6948"
+       width="62.528534"
+       height="10.156837"
+       x="34.323116"
+       y="51.834877" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="48.332546"
+       y="58.489357"
+       id="text6952"><tspan
+         sodipodi:role="line"
+         id="tspan6950"
+         x="48.332546"
+         y="58.489357"
+         style="stroke-width:0.26458332">Problem 1</tspan></text>
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1.58749998;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1496"
+       width="141.49529"
+       height="252.87029"
+       x="1.7511792"
+       y="44.129688" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1.01899719;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect6948-0"
+       width="62.528534"
+       height="10.156837"
+       x="34.229836"
+       y="69.52179" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="51.134434"
+       y="76.701622"
+       id="text2167"><tspan
+         sodipodi:role="line"
+         id="tspan2165"
+         x="51.134434"
+         y="76.701622"
+         style="stroke-width:0.26458332">Record 1</tspan></text>
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1.27615857;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2169"
+       width="47.242947"
+       height="12.91983"
+       x="16.784039"
+       y="86.224152" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="18.912735"
+       y="95.614357"
+       id="text2173"><tspan
+         sodipodi:role="line"
+         id="tspan2171"
+         x="18.912735"
+         y="95.614357"
+         style="stroke-width:0.26458332">Edit Record</tspan></text>
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1.6914947;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2175"
+       width="52.781822"
+       height="12.537965"
+       x="75.01899"
+       y="85.84301" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="75.650948"
+       y="94.563652"
+       id="text2179"><tspan
+         sodipodi:role="line"
+         id="tspan2177"
+         x="75.650948"
+         y="94.563652"
+         style="stroke-width:0.26458332">Delete Record</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="36.424526"
+       y="173.71695"
+       id="text2235"><tspan
+         sodipodi:role="line"
+         id="tspan2233"
+         x="36.424526"
+         y="173.71695"
+         style="stroke-width:0.26458332">Add a geo location </tspan></text>
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#030000;stroke-width:1.51201224;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2237"
+       width="80.979965"
+       height="17.237045"
+       x="30.082539"
+       y="162.8219" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#030000;stroke-width:1.58749998;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2241"
+       width="0.7004717"
+       height="184.92453"
+       x="136.94221"
+       y="104.37025" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="7.7051883"
+       y="225.20163"
+       id="text2251"><tspan
+         sodipodi:role="line"
+         id="tspan2249"
+         x="7.7051883"
+         y="225.20163"
+         style="stroke-width:0.26458332">Doctor Comment:</tspan></text>
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#030000;stroke-width:1.58749998;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2253"
+       width="108.57311"
+       height="33.272404"
+       x="10.507074"
+       y="231.50586" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#030000;stroke-width:1.51201224;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2237-2"
+       width="80.979965"
+       height="17.237045"
+       x="29.907423"
+       y="116.06541" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="43.07901"
+       y="126.78535"
+       id="text2274"><tspan
+         sodipodi:role="line"
+         id="tspan2272"
+         x="43.07901"
+         y="126.78535"
+         style="stroke-width:0.26458332">Add an image</tspan></text>
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#030000;stroke-width:1.51201224;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2237-2-7"
+       width="80.979965"
+       height="17.237045"
+       x="30.25766"
+       y="138.90623" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="34.76091"
+       y="149.11287"
+       id="text2295"><tspan
+         sodipodi:role="line"
+         id="tspan2293"
+         x="34.76091"
+         y="149.11287"
+         style="stroke-width:0.26458332">Add a body location</tspan></text>
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#030000;stroke-width:1.51201224;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2237-2-6"
+       width="80.979965"
+       height="17.237045"
+       x="30.25766"
+       y="187.51352" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="33.272404"
+       y="198.93393"
+       id="text2314"><tspan
+         sodipodi:role="line"
+         id="tspan2312"
+         x="33.272404"
+         y="198.93393"
+         style="stroke-width:0.26458332">Add a user comment</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:6.6712842px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.25017315"
+       x="17.546045"
+       y="198.52101"
+       id="text2318"
+       transform="scale(0.81866546,1.2215002)"><tspan
+         sodipodi:role="line"
+         id="tspan2316"
+         x="17.546045"
+         y="198.52101"
+         style="stroke-width:0.25017315">Your doctor has not commented yet</tspan></text>
+  </g>
+</svg>
