@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="540"
+   height="960"
+   viewBox="0 0 142.875 254"
+   version="1.1"
+   id="svg4629"
+   sodipodi:docname="UserEditProblem.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <defs
+     id="defs4623">
+    <linearGradient
+       id="linearGradient6811"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop6809" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.75544332"
+     inkscape:cx="-33.360573"
+     inkscape:cy="508.3108"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     units="px">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4718" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata4626">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-42.99997)">
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect4796"
+       width="51.834904"
+       height="25.567217"
+       x="3.1521225"
+       y="61.991714" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555556px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332;"
+       x="21.364388"
+       y="87.909164"
+       id="text6905"><tspan
+         sodipodi:role="line"
+         id="tspan6903"
+         x="21.364388"
+         y="97.564659"
+         style="stroke-width:0.26458332;font-size:7.05555556px;" /></text>
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1.01899719;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect6948"
+       width="62.528534"
+       height="10.156837"
+       x="35.023586"
+       y="74.249969" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="49.383255"
+       y="81.604919"
+       id="text6952"><tspan
+         sodipodi:role="line"
+         id="tspan6950"
+         x="49.383255"
+         y="81.604919"
+         style="stroke-width:0.26458332">Problem 1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="10.507076"
+       y="103.66978"
+       id="text6956"><tspan
+         sodipodi:role="line"
+         id="tspan6954"
+         x="10.507076"
+         y="103.66978"
+         style="stroke-width:0.26458332">Date of first discovery:</tspan></text>
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1.58749998;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect6958"
+       width="118.02948"
+       height="15.060142"
+       x="12.258254"
+       y="109.27355" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="9.4563684"
+       y="136.2417"
+       id="text6962"><tspan
+         sodipodi:role="line"
+         id="tspan6960"
+         x="9.4563684"
+         y="136.2417"
+         style="stroke-width:0.26458332">Problem Description:</tspan></text>
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:2.07569456;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect6964"
+       width="117.54128"
+       height="32.433975"
+       x="9.7004652"
+       y="141.73935" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:2.04332447;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect7015"
+       width="53.830734"
+       height="10.751726"
+       x="11.085223"
+       y="186.20312" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:6.73865795px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.25269967"
+       x="12.531363"
+       y="184.98132"
+       id="text7019"
+       transform="scale(0.95508541,1.0470268)"><tspan
+         sodipodi:role="line"
+         id="tspan7017"
+         x="12.531363"
+         y="184.98132"
+         style="stroke-width:0.25269967">Accept Changes</tspan></text>
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1.61076021;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect7021"
+       width="60.567535"
+       height="11.884759"
+       x="72.510445"
+       y="185.6366" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1.57425833;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1496"
+       width="140.10759"
+       height="251.13234"
+       x="1.7445585"
+       y="45.173771"
+       ry="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="73.54953"
+       y="194.03062"
+       id="text1502"><tspan
+         sodipodi:role="line"
+         id="tspan1500"
+         x="73.54953"
+         y="194.03062"
+         style="stroke-width:0.26458332">Discard Changes</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="36.424526"
+       y="62.341953"
+       id="text1506"><tspan
+         sodipodi:role="line"
+         id="tspan1504"
+         x="36.424526"
+         y="62.341953"
+         style="stroke-width:0.26458332">Editing Problem 1</tspan></text>
+  </g>
+</svg>
