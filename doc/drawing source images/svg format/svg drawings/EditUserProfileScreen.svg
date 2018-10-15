@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="540"
+   height="960"
+   viewBox="0 0 142.875 254"
+   version="1.1"
+   id="svg4629"
+   sodipodi:docname="EditUserProfileScreen.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <defs
+     id="defs4623">
+    <linearGradient
+       id="linearGradient6811"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop6809" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.75544332"
+     inkscape:cx="181.74491"
+     inkscape:cy="508.3108"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     units="px">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4718" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata4626">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-42.99997)">
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect4796"
+       width="51.834904"
+       height="25.567217"
+       x="3.1521225"
+       y="61.991714" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:9.70146847px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.24253671"
+       x="40.297665"
+       y="56.826206"
+       id="text6821"
+       transform="scale(0.91667422,1.0909001)"><tspan
+         sodipodi:role="line"
+         id="tspan6819"
+         x="40.297665"
+         y="56.826206"
+         style="stroke-width:0.24253671">Edit Your Profile</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555556px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332;"
+       x="21.364388"
+       y="87.909164"
+       id="text6905"><tspan
+         sodipodi:role="line"
+         id="tspan6903"
+         x="21.364388"
+         y="97.564659"
+         style="stroke-width:0.26458332;font-size:7.05555556px;" /></text>
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1.58749998;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect881"
+       width="143.24648"
+       height="254.62148"
+       x="0.35023585"
+       y="43.078979" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="14.009435"
+       y="86.15799"
+       id="text2322"><tspan
+         sodipodi:role="line"
+         id="tspan2320"
+         x="14.009435"
+         y="86.15799"
+         style="stroke-width:0.26458332">User Id:</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="23.816038"
+       y="101.91859"
+       id="text2326"><tspan
+         sodipodi:role="line"
+         id="tspan2324"
+         x="23.816038"
+         y="101.91859"
+         style="stroke-width:0.26458332">YourUserID</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="14.709904"
+       y="124.68393"
+       id="text2330"><tspan
+         sodipodi:role="line"
+         id="tspan2328"
+         x="14.709904"
+         y="124.68393"
+         style="stroke-width:0.26458332">Email Address:</tspan><tspan
+         sodipodi:role="line"
+         x="14.709904"
+         y="133.50337"
+         style="stroke-width:0.26458332"
+         id="tspan2332" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="23.816038"
+       y="140.79478"
+       id="text2336"><tspan
+         sodipodi:role="line"
+         id="tspan2334"
+         x="23.816038"
+         y="140.79478"
+         style="stroke-width:0.26458332">YourEmail@computer.com</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="15.760613"
+       y="166.71222"
+       id="text2340"><tspan
+         sodipodi:role="line"
+         id="tspan2338"
+         x="15.760613"
+         y="166.71222"
+         style="stroke-width:0.26458332">Phone Number:</tspan><tspan
+         sodipodi:role="line"
+         x="15.760613"
+         y="175.53166"
+         style="stroke-width:0.26458332"
+         id="tspan2342" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="24.866743"
+       y="181.77237"
+       id="text2346"><tspan
+         sodipodi:role="line"
+         id="tspan2344"
+         x="24.866743"
+         y="181.77237"
+         style="stroke-width:0.26458332">(123) 456 -7890</tspan></text>
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1.42965877;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2348"
+       width="55.495102"
+       height="19.070578"
+       x="10.077918"
+       y="218.81845" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="27.668633"
+       y="231.15564"
+       id="text2352"><tspan
+         sodipodi:role="line"
+         id="tspan2350"
+         x="27.668633"
+         y="231.15564"
+         style="stroke-width:0.26458332">Save </tspan></text>
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1.58749998;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2354"
+       width="104.72052"
+       height="21.014151"
+       x="15.760613"
+       y="89.310112" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1.58749998;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2354-2"
+       width="104.72052"
+       height="21.014151"
+       x="15.585495"
+       y="128.18629" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1.58749998;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2373"
+       width="104.37029"
+       height="19.963444"
+       x="17.161558"
+       y="169.16388" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1.58749998;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2375"
+       width="55.6875"
+       height="18.5625"
+       x="75.650948"
+       y="219.2476" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="91.761787"
+       y="231.15562"
+       id="text2383"><tspan
+         sodipodi:role="line"
+         id="tspan2381"
+         x="91.761787"
+         y="231.15562"
+         style="stroke-width:0.26458332">Cancel</tspan></text>
+  </g>
+</svg>
