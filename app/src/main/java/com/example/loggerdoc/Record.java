@@ -21,8 +21,7 @@ public class Record {
     // private Calendar timestamp;
 
     public Record() {
-        this.title = "";
-        this.comment = "";
+        this("");
     }
 
     public Record(String title) {
