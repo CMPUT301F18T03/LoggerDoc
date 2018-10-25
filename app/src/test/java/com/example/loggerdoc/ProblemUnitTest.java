@@ -2,6 +2,8 @@ package com.example.loggerdoc;
 
 import org.junit.Test;
 
+import java.time.LocalDateTime;
+
 import static org.junit.Assert.*;
 
 public class ProblemUnitTest {
@@ -23,6 +25,19 @@ public class ProblemUnitTest {
         Problem problem = new Problem();
         problem.setDescription(desc);
         assertEquals("Problem description should be read", desc, problem.getDescription());
+    }
+
+    @Test
+    public void TestProblemTimestamp() {
+        LocalDateTime beforeTime = LocalDateTime.now();
+        Problem problem = new Problem();
+        LocalDateTime problemTime = problem.getTimestamp();
+        LocalDateTime afterTime = LocalDateTime.now();
+
+        assertTrue("Before time should be before or equal to problem timestamp",
+                beforeTime.isBefore(problemTime) || beforeTime.isEqual(problemTime));
+        assertTrue("After time should be after or equal to problem timestamp",
+                afterTime.isAfter(problemTime) || afterTime.isEqual(problemTime));
     }
 
     @Test

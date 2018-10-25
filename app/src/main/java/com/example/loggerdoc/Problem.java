@@ -6,13 +6,13 @@
 
 package com.example.loggerdoc;
 
+import java.time.LocalDateTime;
+
 public class Problem {
 
     private String title;
     private String description;
-
-    // TODO: What type should we use to represent timestamps?
-    // private Calendar timestamp;
+    private LocalDateTime timestamp;
 
     private RecordList recordList;
 
@@ -23,6 +23,7 @@ public class Problem {
     public Problem(String title) {
         this.title = title;
         this.description = "";
+        this.timestamp = LocalDateTime.now();
 
         this.recordList = new RecordList();
     }
@@ -41,6 +42,10 @@ public class Problem {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
     }
 
     public RecordList getRecordList() {

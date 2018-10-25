@@ -7,18 +7,18 @@
 
 package com.example.loggerdoc;
 
+import java.time.LocalDateTime;
+
 public class Record {
 
     private String title;
     private String comment;
+    private LocalDateTime timestamp;
 
     // TODO: The following classes are not yet defined.
     // private RecordGeoLocation recordGeoLocation;
     // private RecordBodyLocation recordBodyLocation;
     // private RecordPhotoList recordPhotoList;
-
-    // TODO: What type should we use to represent timestamps?
-    // private Calendar timestamp;
 
     public Record() {
         this("");
@@ -27,6 +27,7 @@ public class Record {
     public Record(String title) {
         this.title = title;
         this.comment = "";
+        this.timestamp = LocalDateTime.now();
     }
 
     public String getTitle() {
@@ -43,6 +44,10 @@ public class Record {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
     }
 
 }
