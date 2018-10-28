@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">LoggerDoc</string>
+    <string name="create_account">Create Account</string>
+    <string name="username">UserName:</string>
+    <string name="enter_your_username">Enter your Username</string>
+    <string name="login">Login</string>
+    <string name="error">Error</string>
+    <string name="browse_problems">Browse Problems</string>
+    <string name="browse_problem_map">Browse Problem Map</string>
+    <string name="caregiver_information">Caregiver Information</string>
+    <string name="browse_patients">Browse Patients</string>
 </resources>
