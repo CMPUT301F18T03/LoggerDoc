@@ -17,7 +17,19 @@
             </intent-filter>
         </activity>
         <activity android:name=".ActivityPatientHomePage" />
-        <activity android:name=".ActivityCareGiverHomePage"></activity>
+        <activity android:name=".ActivityCareGiverHomePage" />
+        <activity android:name=".ActivityProblemMap" />
+        <activity android:name=".ActivityCareGiverBrowsePatients" />
+        <activity android:name=".ActivityCareGiverAddPatient" />
+        <activity android:name=".ActivityBrowseProblems" />
+        <activity android:name=".ActivityAddProblem" />
+        <activity android:name=".ActivitySearch" />
+        <activity android:name=".ActivityViewProblem" />
+        <activity android:name=".ActivityEditProblem" />
+        <activity android:name=".ActivityViewRecord" />
+        <activity android:name=".ActivityAddGeoLocation" />
+        <activity android:name=".ActivityUserProfile" />
+        <activity android:name=".ActivityUserProfileEdit"></activity>
     </application>
 
 </manifest>
