@@ -9,5 +9,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 public class BodyLocationPhotoUnitTest {
+    @Test
+    public void TestsetPhoto() {
+        Bitmap image = BitmapFactory.decodeFile("someimage.png");
+        BodyLocationPhoto BLphoto = new BodyLocationPhoto();
+        BLphoto.setPhoto(image);
+        assertEquals("Problem description should be read", image, BLphoto.getPhoto("someimage.png"));
 
+    }
 }
