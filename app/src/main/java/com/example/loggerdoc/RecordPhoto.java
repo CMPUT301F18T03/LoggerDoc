@@ -4,18 +4,14 @@ import android.graphics.Bitmap;
 
 public class RecordPhoto implements Photo {
 
+
     @Override
-    public Bitmap getPhoto(String filename) {
+    public String getPhoto() {
         return null;
     }
 
     @Override
-    public String setPhoto(Bitmap newPhoto) {
-        return null;
-    }
-
-    @Override
-    public void Delete() {
+    public void setPhoto(String newPhoto) {
 
     }
 }

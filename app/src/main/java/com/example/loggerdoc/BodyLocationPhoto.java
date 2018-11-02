@@ -1,24 +1,16 @@
 package com.example.loggerdoc;
 
-import android.graphics.Bitmap;
-
 public class BodyLocationPhoto implements Photo {
 
-
+    private String file;
 
     @Override
-    public Bitmap getPhoto(String filename) {
-        return null;
+    public String getPhoto() {
+        return this.file;
     }
 
     @Override
-    public String setPhoto(Bitmap newPhoto) {
-        return null;
-    }
-
-
-    @Override
-    public void Delete() {
-
+    public void setPhoto(String newPhoto) {
+        this.file = newPhoto;
     }
 }
