@@ -1,8 +1,5 @@
 package com.example.loggerdoc;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertTrue;
@@ -28,4 +25,5 @@ public class BodyLocationPhotoUnitTest {
         String photo = BLphoto.getPhoto();
         assertEquals("Should be same file name", image,photo);
 
-    }}
+    }
+}
