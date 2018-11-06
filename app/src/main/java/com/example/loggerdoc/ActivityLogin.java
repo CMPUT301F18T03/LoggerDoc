@@ -18,23 +18,29 @@ public class ActivityLogin extends AppCompatActivity {
 
     }
 
-    UserList tempUserList = new UserList();
+    UserList userList = new UserList();
     EditText userID = (EditText) findViewById(R.id.Username_Field);
-
 
     // If user hits the login button
     public void login(View view) {
         String userLogin = userID.getText().toString();
-        if (loginCheck(userLogin)) {
-            // TODO: check the type of account and go to proper activity
-        }
     }
 
-    public boolean verifyUsername(String id){
+    // When the create account button is pressed from the login screen this method gets run
+    // this method will display the create account alert dialog
+    public void createAccount(View view) {
+        createAccountInfo();
+    }
+
+    // need method to check if the username is taken when the user is creating an account
+    public void verifyUsername(String id) {
     }
 
 
-    public void createAccount(final String emotion) {
+    // This method will get called when the user clicks on create account from the ActivityLogin page.
+    // If the user presses the create account button when they do not have internet connection they will be prompted
+    // with a toast/error message saying they need internet to create an account
+    public void createAccountInfo() {
 
         LayoutInflater layoutInflater = LayoutInflater.from(ActivityLogin.this);
         View dialogView = layoutInflater.inflate(R.layout.account_creation_dialog, null);
@@ -49,28 +55,30 @@ public class ActivityLogin extends AppCompatActivity {
 
 
         // Triggered when the user clicks on the Patient button
+        // TODO: check if the username has already been taken, need elasticsearch
         builder.setPositiveButton("Patient", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 String username = userID.getText().toString();
                 String emailAddress = userEmail.getText().toString();
                 String phoneNumber = userPhoneNumber.getText().toString();
 
-                getEmotionList().addEmotion(new Emotion(emotion, date, user_comment));
-                saveList();
-
+                Patient patient = new Patient(username, emailAddress, phoneNumber, new CareGiverList());
+                userList.addUser(patient);
             }
         });
 
+        // Triggered when the user clicks on the CareGiver button
+        // TODO: check whether thee user id is taken, need elasticsearch
         builder.setPositiveButton("Caregiver", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 String username = userID.getText().toString();
                 String emailAddress = userEmail.getText().toString();
                 String phoneNumber = userPhoneNumber.getText().toString();
 
-                getEmotionList().addEmotion(new Emotion(emotion, date, user_comment));
-                saveList();
+                CareGiver careGiver = new CareGiver(username, emailAddress, phoneNumber, new PatientList());
+                userList.addUser(careGiver);
+            }
+        });
         builder.show();
-    }
-    }
     }
 }
