@@ -19,19 +19,19 @@ public class ActivityLogin extends AppCompatActivity {
     }
 
     UserList userList = new UserList();
-    EditText userID = (EditText) findViewById(R.id.Username_Field);
 
     // If user hits the login button
-    public void login(View view) {
+    public void login(View v) {
+        EditText userID = (EditText) findViewById(R.id.Username_Field);
         String userLogin = userID.getText().toString();
     }
 
+
     // When the create account button is pressed from the login screen this method gets run
     // this method will display the create account alert dialog
-    public void createAccount(View view) {
+    public void createAccount(View v) {
         createAccountInfo();
     }
-
     // need method to check if the username is taken when the user is creating an account
     public void verifyUsername(String id) {
     }
@@ -43,7 +43,7 @@ public class ActivityLogin extends AppCompatActivity {
     public void createAccountInfo() {
 
         LayoutInflater layoutInflater = LayoutInflater.from(ActivityLogin.this);
-        View dialogView = layoutInflater.inflate(R.layout.account_creation_dialog, null);
+        final View dialogView = layoutInflater.inflate(R.layout.account_creation_dialog, null);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(ActivityLogin.this);
         builder.setView(dialogView);
@@ -69,7 +69,7 @@ public class ActivityLogin extends AppCompatActivity {
 
         // Triggered when the user clicks on the CareGiver button
         // TODO: check whether thee user id is taken, need elasticsearch
-        builder.setPositiveButton("Caregiver", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Caregiver", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 String username = userID.getText().toString();
                 String emailAddress = userEmail.getText().toString();
@@ -77,6 +77,14 @@ public class ActivityLogin extends AppCompatActivity {
 
                 CareGiver careGiver = new CareGiver(username, emailAddress, phoneNumber, new PatientList());
                 userList.addUser(careGiver);
+            }
+        });
+
+        // If the user wants to cancel out of the AlertDialog
+        builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int id) {
+                dialogInterface.cancel();
             }
         });
         builder.show();
