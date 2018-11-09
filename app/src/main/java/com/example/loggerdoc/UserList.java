@@ -6,13 +6,18 @@
 package com.example.loggerdoc;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class UserList {
 
-    private ArrayList<User> userArrayList;
+    protected ArrayList<User> userArrayList;
 
     public UserList(){
         userArrayList = new ArrayList<User>();
+    }
+
+    public Collection<User> getUsers() {
+        return userArrayList;
     }
 
     public void addUser(User user){

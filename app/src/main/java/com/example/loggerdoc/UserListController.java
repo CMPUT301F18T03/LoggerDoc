@@ -1,5 +1,7 @@
 package com.example.loggerdoc;
 
+/** Created by Dylan on November 9th, 2018 **/
+
 public class UserListController {
 
     private static UserList userList = null;
