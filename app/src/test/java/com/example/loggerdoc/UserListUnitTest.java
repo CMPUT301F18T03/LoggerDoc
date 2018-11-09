@@ -20,6 +20,8 @@ public class UserListUnitTest {
 
         assertTrue("Does the list contain the object we added", testList.containsUser(testUser));
 
+        testList.removeUser(testUser);
+
     }
 
     @Test
@@ -32,6 +34,8 @@ public class UserListUnitTest {
         assertTrue("Size should be 1", testList.size() == 1);
 
         assertTrue("Does the list contain the object we added", testList.containsUser(testPatient));
+
+        testList.removeUser(testPatient);
 
     }
 
