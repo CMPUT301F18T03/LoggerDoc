@@ -18,7 +18,8 @@ public class ActivityLogin extends AppCompatActivity {
     }
 
     // Temporary userlist
-    UserList userList = new UserList();
+    // Made using the UserlistController lazy singleton to assure only one UserList ever made
+    UserList userList = UserListController.getUserList();
 
     // If user hits the login button
     public void login(View v) {
@@ -32,6 +33,8 @@ public class ActivityLogin extends AppCompatActivity {
     public void createAccount(View v) {
         createAccountInfo();
     }
+
+
     // need method to check if the username is taken when the user is creating an account
     public void verifyUsername(String id) {
     }
