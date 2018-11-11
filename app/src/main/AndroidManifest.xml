@@ -29,7 +29,10 @@
         <activity android:name=".ActivityViewRecord" />
         <activity android:name=".ActivityAddGeoLocation" />
         <activity android:name=".ActivityUserProfile" />
-        <activity android:name=".ActivityUserProfileEdit"></activity>
+        <activity android:name=".ActivityUserProfileEdit" />
+        <activity android:name=".activity_add_record" />
+        <activity android:name=".AcitivityAddRecord" />
+        <activity android:name=".ActivityAddRecord"></activity>
     </application>
 
 </manifest>

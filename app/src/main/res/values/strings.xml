@@ -14,4 +14,9 @@
     <string name="Problem_Start_Date_Instruction">Pick A Start Date For the Problem:</string>
     <string name="enter_problem_desc">Enter A Problem Description:</string>
     <string name="create_button">CREATE</string>
+    <string name="new_record_title">Add A Record:</string>
+    <string name="enter_record_title">Enter a Record Title:</string>
+    <string name="add_geo_button">Add Geo-Location</string>
+    <string name="add_body_location_button" translatable="false">Add Body Location</string>
+    <string name="add_photo_button">Add Photo</string>
 </resources>
