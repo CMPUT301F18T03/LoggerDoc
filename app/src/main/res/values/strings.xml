@@ -9,4 +9,9 @@
     <string name="browse_problem_map">Browse Problem Map</string>
     <string name="caregiver_information">Caregiver Information</string>
     <string name="browse_patients">Browse Patients</string>
+    <string name="new_problem_title">Create A New Problem</string>
+    <string name="enter_problem_title">Please Enter A Problem Title:</string>
+    <string name="Problem_Start_Date_Instruction">Pick A Start Date For the Problem:</string>
+    <string name="enter_problem_desc">Enter A Problem Description:</string>
+    <string name="create_button">CREATE</string>
 </resources>
