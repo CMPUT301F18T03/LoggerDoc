@@ -19,4 +19,8 @@
     <string name="add_geo_button">Add Geo-Location</string>
     <string name="add_body_location_button" translatable="false">Add Body Location</string>
     <string name="add_photo_button">Add Photo</string>
+    <string name="edit_problem_button">Edit</string>
+    <string name="delete_button">Delete</string>
+    <string name="view_problem_date">Date of First Discovery:</string>
+    <string name="prob_desc_title">Problem Description:</string>
 </resources>

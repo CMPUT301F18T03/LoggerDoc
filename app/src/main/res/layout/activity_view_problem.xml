@@ -6,4 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".ActivityViewProblem">
 
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="385dp"
+        android:layout_height="617dp"
+        android:fillViewport="true"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/edit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/edit_problem_button" />
+
+            <Button
+                android:id="@+id/delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="280dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/delete_button" />
+
+            <TextView
+                android:id="@+id/problem_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="154dp"
+                android:layout_marginTop="91dp"
+                android:text="TextView"
+                android:textColor="@android:color/black" />
+
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
 </android.support.constraint.ConstraintLayout>
