@@ -45,7 +45,7 @@ public class ActivityAddProblem extends AppCompatActivity {
                 problemDescriptionWarning.setVisibility(View.VISIBLE);
             }
 
-            emptyFieldAlertDialog();
+            showAlertDialog("Error: Empty Fields","Please fill in the fields indicated by the red stars");
         }
 
         else{
@@ -61,12 +61,12 @@ public class ActivityAddProblem extends AppCompatActivity {
 
         //check if the title is too long
         if (!problem.checkTitleLength(problem.getTitle())){
-            tooLongTitleAlertDialog();
+            showAlertDialog("Error: Too Long Title","The title can be a maximum of 30 characters. Please shorten it");
         }
 
         //check if the description is too long
         if (!problem.checkDescriptionLength(problem.getDescription())){
-            tooLongDescriptionAlertDialog();
+            showAlertDialog("Error: Too Long Description","The description can be a maximum of 300 characters. Please shorten it");
         }
 
         //TODO: Add Problem to the User's Problem List
@@ -80,59 +80,14 @@ public class ActivityAddProblem extends AppCompatActivity {
         return false;
     }
 
-    private void emptyFieldAlertDialog(){
+    private void showAlertDialog( String title, String message){
+        Bundle messageArgs = new Bundle();
+        messageArgs.putString(DialogProblem.TITLE_ID, title);
+        messageArgs.putString(DialogProblem.MESSAGE_ID, message);
 
-        LayoutInflater layoutInflater = LayoutInflater.from(ActivityAddProblem.this);
-        final View dialogView = layoutInflater.inflate(R.layout.account_creation_dialog, null);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(ActivityAddProblem.this);
-        builder.setView(dialogView);
-
-        builder.setTitle("Error: Empty Fields");
-        builder.setMessage("Please fill in the fields indicated by the red stars");
-
-        builder.setPositiveButton("OKAY", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-    }
-
-    private void tooLongTitleAlertDialog(){
-        LayoutInflater layoutInflater = LayoutInflater.from(ActivityAddProblem.this);
-        final View dialogView = layoutInflater.inflate(R.layout.account_creation_dialog, null);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(ActivityAddProblem.this);
-        builder.setView(dialogView);
-
-        builder.setTitle("Error: Too Long Title");
-        builder.setMessage("The title can be a maximum of 30 characters. Please shorten it.");
-
-        builder.setPositiveButton("OKAY", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-    }
-
-    private void tooLongDescriptionAlertDialog(){
-        LayoutInflater layoutInflater = LayoutInflater.from(ActivityAddProblem.this);
-        final View dialogView = layoutInflater.inflate(R.layout.account_creation_dialog, null);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(ActivityAddProblem.this);
-        builder.setView(dialogView);
-
-        builder.setTitle("Error: Too Long Description");
-        builder.setMessage("The title can be a maximum of 300 characters. Please shorten it.");
-
-        builder.setPositiveButton("OKAY", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
+        DialogProblem dialog = new DialogProblem();
+        dialog.setArguments(messageArgs);
+        dialog.show(getSupportFragmentManager(), "error_dialog");
     }
 
     public void changeActivity(View v){
