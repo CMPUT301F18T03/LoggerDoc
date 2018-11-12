@@ -9,4 +9,7 @@
     <string name="browse_problem_map">Browse Problem Map</string>
     <string name="caregiver_information">Caregiver Information</string>
     <string name="browse_patients">Browse Patients</string>
+    <string name="userID">User ID</string>
+    <string name="emailAddress">Email Address</string>
+    <string name="phoneNumber">123-456-7890</string>
 </resources>
