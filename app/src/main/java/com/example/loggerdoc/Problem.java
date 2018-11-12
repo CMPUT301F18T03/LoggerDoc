@@ -7,6 +7,7 @@
 package com.example.loggerdoc;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Problem {
 
@@ -16,14 +17,10 @@ public class Problem {
 
     private RecordList recordList;
 
-    public Problem() {
-        this("");
-    }
-
-    public Problem(String title) {
+    public Problem(String title, String timestamp, String description) {
         this.title = title;
-        this.description = "";
-        this.timestamp = LocalDateTime.now();
+        this.description = description;
+        this.timestamp = formatTimestamp(timestamp);
 
         this.recordList = new RecordList();
     }
@@ -44,6 +41,15 @@ public class Problem {
         this.description = description;
     }
 
+    public void setTimestamp (String newTime){
+        this.timestamp = formatTimestamp(newTime);
+    }
+
+    public LocalDateTime formatTimestamp(String newTime){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return LocalDateTime.parse(newTime, formatter);
+    }
+
     public LocalDateTime getTimestamp() {
         return timestamp;
     }
@@ -54,5 +60,22 @@ public class Problem {
 
     public void addRecord(Record record) {
         this.recordList.add(record);
+    }
+
+    public boolean checkTitleLength (String title){
+
+        if (title.length() > 30){
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean checkDescriptionLength (String description){
+
+        if (description.length() > 300){
+            return false;
+        }
+        return true;
     }
 }

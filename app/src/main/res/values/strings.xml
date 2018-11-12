@@ -18,7 +18,7 @@ HEAD
     <string name="new_record_title">Add A Record:</string>
     <string name="enter_record_title">Enter a Record Title:</string>
     <string name="add_geo_button">Add Geo-Location</string>
-    <string name="add_body_location_button" translatable="false">Add Body Location</string>
+    <string name="add_body_location_button">Add Body Location</string>
     <string name="add_photo_button">Add Photo</string>
     <string name="edit_problem_button">Edit</string>
     <string name="delete_button">Delete</string>

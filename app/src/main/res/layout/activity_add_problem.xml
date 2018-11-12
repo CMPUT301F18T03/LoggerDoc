@@ -87,11 +87,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:layout_marginEnd="80dp"
         android:text="@string/enter_problem_desc"
         android:textColor="@android:color/black"
         android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@+id/problem_start_date_text"
-        tools:layout_editor_absoluteX="80dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/problem_start_date_text" />
 
     <EditText
         android:id="@+id/problem_desc_text"
@@ -117,6 +118,7 @@
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="8dp"
         android:background="@color/colorPrimary"
+        android:onClick="checkProblemFields"
         android:text="@string/create_button"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -125,4 +127,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/problem_desc_text"
         app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/warning_Problem_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/problem_Title_Text"
+        app:layout_constraintEnd_toStartOf="@+id/Problem_Title_Instructions"
+        app:layout_constraintTop_toBottomOf="@+id/Add_Problem_Title"
+        app:layout_constraintVertical_bias="0.125"
+        app:srcCompat="@drawable/star" />
+
+    <ImageView
+        android:id="@+id/warning_Problem_Desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/problem_desc_text"
+        app:layout_constraintEnd_toStartOf="@+id/textView7"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/problem_start_date_text"
+        app:layout_constraintVertical_bias="0.8"
+        app:srcCompat="@drawable/star" />
+
 </android.support.constraint.ConstraintLayout>
