@@ -24,34 +24,36 @@ public class ActivityLogin extends AppCompatActivity {
     // Made using the UserlistController lazy singleton to assure only one UserList ever made
     UserList userList = UserListController.getUserList();
 
-        // If user hits the login button
-        public void login(View v) {
-            final EditText userID = findViewById(R.id.Username_Field);
-            String userLogin = userID.getText().toString();
+    // If user hits the login button
+    public void login(View v) {
+        final EditText userID = findViewById(R.id.Username_Field);
+        String userLogin = userID.getText().toString();
 
-            Log.d("TAG", "edit text = " + userLogin);
-            User temp_user = null;
+        Log.d("TAG", "edit text = " + userLogin);
+        User temp_user = null;
 
-            // verify that the user actually exists, if true then proceed with login
-            if (verifyUsername(userLogin)) {
-                Toast.makeText(this, "WORKS", Toast.LENGTH_SHORT).show();
-                for (User user : userList.getUsers()) {
-                    if (user.getUserID().equals(userLogin)) {
-                        temp_user = user;
-                        break;
-                    }
-                }
-                // Depending on if the user is a patient or caregiver, go to different activities
-                if (Patient.class == temp_user.getClass()) {
-                    Intent intent = new Intent(ActivityLogin.this, ActivityPatientHomePage.class);
-                    startActivity(intent);
-                }
-                if (CareGiver.class == temp_user.getClass()) {
-                    Intent intent = new Intent(ActivityLogin.this, ActivityCareGiverHomePage.class);
-                    startActivity(intent);
+        // verify that the user actually exists, if true then proceed with login
+        if (verifyUsername(userLogin)) {
+            Toast.makeText(this, "WORKS", Toast.LENGTH_SHORT).show();
+            for (User user : userList.getUsers()) {
+                if (user.getUserID().equals(userLogin)) {
+                    temp_user = user;
+                    break;
                 }
             }
+            // Depending on if the user is a patient or caregiver, go to different activities
+            if (Patient.class == temp_user.getClass()) {
+                Intent intent = new Intent(ActivityLogin.this, ActivityPatientHomePage.class);
+                intent.putExtra("Patient", temp_user.getUserID());
+                startActivity(intent);
+            }
+            if (CareGiver.class == temp_user.getClass()) {
+                Intent intent = new Intent(ActivityLogin.this, ActivityCareGiverHomePage.class);
+                intent.putExtra("Caregiver", temp_user.getUserID());
+                startActivity(intent);
+            }
         }
+    }
 
 
 
