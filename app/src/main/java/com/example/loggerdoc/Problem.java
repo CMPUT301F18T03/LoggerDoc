@@ -6,10 +6,11 @@
 
 package com.example.loggerdoc;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Problem {
+public class Problem implements Serializable {
 
     private String title;
     private String description;

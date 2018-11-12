@@ -69,6 +69,7 @@ public class ActivityAddProblem extends AppCompatActivity {
             tooLongDescriptionAlertDialog();
         }
 
+        //TODO: Add Problem to the User's Problem List
         changeActivity(v);
     }
 

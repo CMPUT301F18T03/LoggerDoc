@@ -30,5 +30,6 @@ HEAD
     <string name="userID">User ID</string>
     <string name="emailAddress">Email Address</string>
     <string name="phoneNumber">123-456-7890</string>
-6d355acae24733ee9f9d9d0017dc972737fbf333
+    <string name="edit_title_problem">Edit Title:</string>
+    6d355acae24733ee9f9d9d0017dc972737fbf333
 </resources>
