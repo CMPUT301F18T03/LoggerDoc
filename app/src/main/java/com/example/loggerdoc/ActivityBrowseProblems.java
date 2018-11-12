@@ -10,4 +10,6 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse_problems);
     }
+
+    
 }

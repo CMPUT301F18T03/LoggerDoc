@@ -1,11 +1,8 @@
 package com.example.loggerdoc;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -67,6 +64,9 @@ public class ActivityEditProblem extends AppCompatActivity {
             problem.setTitle(editTitle.getText().toString());
             problem.setTimestamp(editDate.getText().toString());
             problem.setDescription(editDescription.getText().toString());
+
+            problemTitleWarning.setVisibility(View.INVISIBLE);
+            problemDescriptionWarning.setVisibility(View.INVISIBLE);
 
             //check if the title is too long
             if (!problem.checkTitleLength(problem.getTitle())){
