@@ -23,4 +23,7 @@
     <string name="delete_button">Delete</string>
     <string name="view_problem_date">Date of First Discovery:</string>
     <string name="prob_desc_title">Problem Description:</string>
+    <string name="edit_problem_title">Edit Problem</string>
+    <string name="save_button">Save</string>
+    <string name="cancel_button">Cancel</string>
 </resources>
