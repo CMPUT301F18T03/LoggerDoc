@@ -1,12 +1,15 @@
 package com.example.loggerdoc;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class ActivityLogin extends AppCompatActivity {
 
@@ -21,11 +24,35 @@ public class ActivityLogin extends AppCompatActivity {
     // Made using the UserlistController lazy singleton to assure only one UserList ever made
     UserList userList = UserListController.getUserList();
 
-    // If user hits the login button
-    public void login(View v) {
-        EditText userID = (EditText) findViewById(R.id.Username_Field);
-        String userLogin = userID.getText().toString();
-    }
+        // If user hits the login button
+        public void login(View v) {
+            final EditText userID = findViewById(R.id.Username_Field);
+            String userLogin = userID.getText().toString();
+
+            Log.d("TAG", "edit text = " + userLogin);
+            User temp_user = null;
+
+            // verify that the user actually exists, if true then proceed with login
+            if (verifyUsername(userLogin)) {
+                Toast.makeText(this, "WORKS", Toast.LENGTH_SHORT).show();
+                for (User user : userList.getUsers()) {
+                    if (user.getUserID().equals(userLogin)) {
+                        temp_user = user;
+                        break;
+                    }
+                }
+                // Depending on if the user is a patient or caregiver, go to different activities
+                if (Patient.class == temp_user.getClass()) {
+                    Intent intent = new Intent(ActivityLogin.this, ActivityPatientHomePage.class);
+                    startActivity(intent);
+                }
+                if (CareGiver.class == temp_user.getClass()) {
+                    Intent intent = new Intent(ActivityLogin.this, ActivityCareGiverHomePage.class);
+                    startActivity(intent);
+                }
+            }
+        }
+
 
 
     // When the create account button is pressed from the login screen this method gets run
@@ -36,7 +63,16 @@ public class ActivityLogin extends AppCompatActivity {
 
 
     // need method to check if the username is taken when the user is creating an account
-    public void verifyUsername(String id) {
+    public boolean verifyUsername(String id) {
+        for (User user : userList.getUsers()) {
+            Log.d("TAG","userID" + user.getUserID());
+            if (user.getUserID().equals(id)) {
+                Log.d("TAG", "TRUE");
+                return true;
+            }
+        }
+        Toast.makeText(this, "That username does not exist! Please try again or create a new account!", Toast.LENGTH_SHORT).show();
+        return false;
     }
 
 
@@ -67,6 +103,9 @@ public class ActivityLogin extends AppCompatActivity {
 
                 Patient patient = new Patient(username, emailAddress, phoneNumber, new CareGiverList());
                 userList.addUser(patient);
+                if (userList.containsUser(patient)) {
+                    Toast.makeText(ActivityLogin.this, "Patient is in userList", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

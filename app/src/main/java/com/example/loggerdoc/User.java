@@ -1,6 +1,8 @@
 package com.example.loggerdoc;
 
 
+import java.lang.reflect.Type;
+
 public class User {
 
     private String userID;
@@ -38,4 +40,5 @@ public class User {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
 }
