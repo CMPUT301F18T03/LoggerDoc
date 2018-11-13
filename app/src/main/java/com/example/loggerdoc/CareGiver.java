@@ -14,4 +14,8 @@ public class CareGiver extends User {
         this.patients = patients;
     }
 
+    public PatientList getPatientList(){
+        return patients;
+    }
+
 }
