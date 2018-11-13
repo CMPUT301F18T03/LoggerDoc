@@ -17,7 +17,7 @@ public class VerifyUserTest {
         testList.addUser(testUser1);
 
 
-        assertTrue("Size should be 1", testList.size() == 4);
+        assertTrue("Size should be 1", testList.size() == 2);
 
         for (User user : testList.getUsers()){
             if (user.getUserID() == "test2") {
