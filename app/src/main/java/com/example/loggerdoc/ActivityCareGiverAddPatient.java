@@ -1,3 +1,10 @@
+/* Created 2018-11-13 by Stephen Zuk
+*
+*  The Caregiver add patient activity provides a screen for caregivers to add a patient
+*  to their list of patients, and can be accessed from the caregiver patient list activity
+*
+*/
+
 package com.example.loggerdoc;
 
 import android.support.v7.app.AppCompatActivity;
@@ -28,7 +35,9 @@ public class ActivityCareGiverAddPatient extends AppCompatActivity {
         //TODO Check If Entry Matches user
     }
 
-    //activated when a caregiver presses the add button
+    /*activated when a caregiver presses the add button. This method confirms that the
+    string entered into the edittext is a user and adds the user to the caregivers patient list
+    if it is. If the entered value is not a user, an error message pops up and the edittext is cleared*/
     public void addPatient(View view){
         String entered = userID.getText().toString();
         ArrayList<User> list = (ArrayList)UserListController.getUserList().getUsers();

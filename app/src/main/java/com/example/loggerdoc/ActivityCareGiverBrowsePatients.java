@@ -1,3 +1,10 @@
+/* Created 2018-11-13 by Stephen Zuk
+ *
+ *  The Caregiver Browse patients activity displays the list of patients that a caregiver is serving.
+ *  It uses the PatientListAdapter to display a custom field for each patient in the list.
+ *
+ */
+
 package com.example.loggerdoc;
 
 import android.content.Intent;
@@ -12,7 +19,7 @@ import android.widget.ListView;
 public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
     private ListView patientList;
     private ArrayAdapter<Patient> adapter;
-    private PatientList testPatients = new PatientList();
+    private PatientList testPatients = new PatientList();// TODO get this list from the caregiver
     private CareGiver loggedInCaregiver; // TODO get this caregiver from the previous activity
 
     @Override
@@ -27,6 +34,8 @@ public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        //The patient list adapter provides a custom view for each patient in the list, displaying
+        //their user ID, email and phone number
         adapter = new PatientListAdapter(this,
                 R.layout.patient_listview_layout, loggedInCaregiver.getPatientList().getPatients());
 

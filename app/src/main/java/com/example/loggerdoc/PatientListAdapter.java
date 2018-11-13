@@ -1,3 +1,11 @@
+/* Created 2018-11-13 by Stephen Zuk
+ *
+ *  The patient list adapter is a custom array adapter used to display some of the field variables
+ *  in the patient class using a custom layout made with and xml file
+ *
+ */
+
+
 package com.example.loggerdoc;
 
 import android.content.Context;
@@ -23,6 +31,8 @@ public class PatientListAdapter extends ArrayAdapter<Patient> {
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup Parent){
+        //This method gets the values of userID, emailAddress and phoneNumber from each
+        //patient in the list and displays them in the custom xml layout patient_listview_layout
         String patientID = getItem(position).getUserID();
         String patientEmail = getItem(position).getEmailAddress();
         String patientPhoneNum = getItem(position).getPhoneNumber();
