@@ -7,7 +7,7 @@
     tools:context=".ActivityViewProblem">
 
     <TextView
-        android:id="@+id/ProblemTitleVIew"
+        android:id="@+id/ProblemTitleView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -29,6 +29,7 @@
         android:layout_width="88dp"
         android:layout_height="37dp"
         android:layout_marginStart="5dp"
+        android:onClick="goDeleteProblem"
         android:text="@string/delete_button"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,9 +44,10 @@
         android:layout_height="37dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="25dp"
+        android:onClick="goEditProblem"
         android:text="@string/edit_problem_button"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-        app:layout_constraintEnd_toStartOf="@+id/ProblemTitleVIew"
+        app:layout_constraintEnd_toStartOf="@+id/ProblemTitleView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -144,6 +146,7 @@
             android:layout_height="37dp"
             android:layout_marginStart="15dp"
             android:layout_marginBottom="10dp"
+            android:onClick="goAddRecord"
             android:text="@string/addrecordbutton" />
 
         <TextView
@@ -156,15 +159,10 @@
             android:textColor="@android:color/black"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/caregiversComment"
+        <ListView
+            android:id="@+id/caregiverComment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginBottom="20dp"
-            android:text="Care Placeholder"
-            android:textColor="@android:color/black"
-            android:textSize="14sp" />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

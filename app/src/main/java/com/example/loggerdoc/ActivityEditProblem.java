@@ -101,7 +101,7 @@ public class ActivityEditProblem extends AppCompatActivity {
     }
 
     public void changeActivity(View v){
-        Intent intent = new Intent(this, ActivityBrowseProblems.class);
+        Intent intent = new Intent(this, ActivityViewProblem.class);
         startActivity(intent);
     }
 
