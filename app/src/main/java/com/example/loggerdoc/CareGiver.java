@@ -1,8 +1,9 @@
 package com.example.loggerdoc;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CareGiver extends User {
+public class CareGiver extends User implements Serializable {
 
     // An array list to store all of the patients that a caregiver has
     // Each CareGiver will have a unique set of patients
