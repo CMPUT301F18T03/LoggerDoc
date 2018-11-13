@@ -32,10 +32,25 @@ public class ActivityAddRecord extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         recordTitleText = (EditText) findViewById(R.id.record_title_text);
-        geoLocationText = (TextView) findViewById(R.id.Geolocation_text); 
+        geoLocationText = (TextView) findViewById(R.id.Geolocation_text);
     }
 
     public void createRecord (View v){
+
+        //Check if the Record Title is empty
+        boolean emptyTitle = checkEmptyString(recordTitleText.getText().toString());
+
+        if (emptyTitle){
+            showAlertDialog("Error: Empty Title","Please fill in the title field");
+        }
+
+        else{
+            Record newRecord = new Record (recordTitleText.getText().toString());
+
+            if (geoLocationText != null){
+                //add the geolocation to the newRecord
+            }
+        }
     }
 
 
@@ -56,7 +71,7 @@ public class ActivityAddRecord extends AppCompatActivity {
                         // Got last known location. In some rare situations this can be null.
                         if (location != null) {
                             // Logic to handle location object
-                            RecordGeoLocation geoLocation = new RecordGeoLocation(location.getLatitude(), location.getLongitude());
+                            geoLocationText.setText("Latitude: " + location.getLatitude() + ", Longitude: " + location.getLongitude());
                         }
                     }
                 });
@@ -69,4 +84,22 @@ public class ActivityAddRecord extends AppCompatActivity {
     public void addPhoto (View v){
 
     }
+
+    public boolean checkEmptyString(String string){
+        if (string.length() == 0){
+            return true;
+        }
+        return false;
+    }
+
+    private void showAlertDialog( String title, String message){
+        Bundle messageArgs = new Bundle();
+        messageArgs.putString(DialogProblem.TITLE_ID, title);
+        messageArgs.putString(DialogProblem.MESSAGE_ID, message);
+
+        DialogProblem dialog = new DialogProblem();
+        dialog.setArguments(messageArgs);
+        dialog.show(getSupportFragmentManager(), "error_dialog");
+    }
+
 }
