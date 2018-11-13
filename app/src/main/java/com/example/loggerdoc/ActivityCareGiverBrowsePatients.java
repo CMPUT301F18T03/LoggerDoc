@@ -48,10 +48,10 @@ public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //public void toAddPatient(View view) {
-      //  Intent intent = new Intent(this, ActivityCareGiverHomePage.class);
-      //  startActivity(intent);
-    //}
+    public void toAddPatient(View view) {
+        Intent intent = new Intent(this, ActivityCareGiverAddPatient.class);
+        startActivity(intent);
+    }
 
 
 
