@@ -1,11 +1,12 @@
 package com.example.loggerdoc;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
 // Class that handles a list of patients
-public class PatientList {
+public class PatientList implements Serializable {
 
     private ArrayList<Patient> patientList;
 

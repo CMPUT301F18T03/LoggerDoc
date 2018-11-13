@@ -1,7 +1,9 @@
 package com.example.loggerdoc;
 
 
-public class User {
+import java.io.Serializable;
+
+public abstract class User implements Serializable {
 
     private String userID;
     private String emailAddress;
@@ -38,4 +40,5 @@ public class User {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
 }

@@ -1,7 +1,9 @@
 package com.example.loggerdoc;
 
 
-public class Patient extends User {
+import java.io.Serializable;
+
+public class Patient extends User implements Serializable {
 
     private CareGiverList careGivers;
 
