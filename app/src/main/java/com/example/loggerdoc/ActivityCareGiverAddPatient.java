@@ -7,6 +7,7 @@
 
 package com.example.loggerdoc;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,6 +27,9 @@ public class ActivityCareGiverAddPatient extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_care_giver_add_patient);
+
+        Intent intent = getIntent();
+        loggedInCareGiver = (CareGiver) intent.getSerializableExtra("Caregiver");
     }
 
 

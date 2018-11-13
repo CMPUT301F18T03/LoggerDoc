@@ -19,8 +19,7 @@ import android.widget.ListView;
 public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
     private ListView patientList;
     private ArrayAdapter<Patient> adapter;
-    private PatientList testPatients = new PatientList();// TODO get this list from the caregiver
-    private CareGiver loggedInCaregiver; // TODO get this caregiver from the previous activity
+    private CareGiver loggedInCaregiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +27,8 @@ public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
         setContentView(R.layout.activity_care_giver_browse_patients);
 
         patientList = (ListView) findViewById(R.id.PatientList);
+        Intent intent = getIntent();
+        loggedInCaregiver = (CareGiver) intent.getSerializableExtra("Caregiver");
     }
 
 
@@ -59,6 +60,7 @@ public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
 
     public void toAddPatient(View view) {
         Intent intent = new Intent(this, ActivityCareGiverAddPatient.class);
+        intent.putExtra("Caregiver", loggedInCaregiver);
         startActivity(intent);
     }
 
