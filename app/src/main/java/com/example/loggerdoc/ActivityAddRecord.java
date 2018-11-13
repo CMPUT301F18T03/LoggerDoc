@@ -8,6 +8,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -15,8 +17,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 
 public class ActivityAddRecord extends AppCompatActivity {
     private FusedLocationProviderClient mFusedLocationClient;
-    int MY_PERMISSION_ACCESS_COARSE_LOCATION = 1;
-
+    private int MY_PERMISSION_ACCESS_COARSE_LOCATION = 1;
+    private EditText recordTitleText;
+    private TextView geoLocationText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +28,14 @@ public class ActivityAddRecord extends AppCompatActivity {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
     }
 
-    public void createRecord (View v){
+    @Override
+    protected void onResume(){
+        super.onResume();
+        recordTitleText = (EditText) findViewById(R.id.record_title_text);
+        geoLocationText = (TextView) findViewById(R.id.Geolocation_text); 
+    }
 
+    public void createRecord (View v){
     }
 
 
@@ -47,6 +56,7 @@ public class ActivityAddRecord extends AppCompatActivity {
                         // Got last known location. In some rare situations this can be null.
                         if (location != null) {
                             // Logic to handle location object
+                            RecordGeoLocation geoLocation = new RecordGeoLocation(location.getLatitude(), location.getLongitude());
                         }
                     }
                 });
