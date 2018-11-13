@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,14 +43,15 @@ public class ActivityLogin extends AppCompatActivity {
                 }
             }
             // Depending on if the user is a patient or caregiver, go to different activities
+            // Sends the users information to the new activity.
             if (Patient.class == temp_user.getClass()) {
                 Intent intent = new Intent(ActivityLogin.this, ActivityPatientHomePage.class);
-                intent.putExtra("Patient", temp_user.getUserID());
+                intent.putExtra("Patient", temp_user);
                 startActivity(intent);
             }
             if (CareGiver.class == temp_user.getClass()) {
                 Intent intent = new Intent(ActivityLogin.this, ActivityCareGiverHomePage.class);
-                intent.putExtra("Caregiver", temp_user.getUserID());
+                intent.putExtra("Caregiver", temp_user);
                 startActivity(intent);
             }
         }
@@ -77,6 +79,19 @@ public class ActivityLogin extends AppCompatActivity {
         return false;
     }
 
+    /**
+     * @source https://stackoverflow.com/questions/1819142/how-should-i-validate-an-e-mail-address
+     * @author mindriot
+     * @param email email that the user enters during account creation
+     * @return True if email is valid, false otherwise
+     */
+    public final static boolean isValidEmail(CharSequence email) {
+        if (TextUtils.isEmpty(email)) {
+            return false;
+        } else {
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+        }
+    }
 
     // This method will get called when the user clicks on create account from the ActivityLogin page.
     // If the user presses the create account button when they do not have internet connection they will be prompted
@@ -103,11 +118,22 @@ public class ActivityLogin extends AppCompatActivity {
                 String emailAddress = userEmail.getText().toString();
                 String phoneNumber = userPhoneNumber.getText().toString();
 
+                if (UserListController.findUser(username)) {
+                    Toast.makeText(ActivityLogin.this, "That username is already taken! please try again", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (username.length() < 8) {
+                    Toast.makeText(ActivityLogin.this, "Username has to be 8 or more characters. Please try again.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!isValidEmail(emailAddress)) {
+                    Toast.makeText(ActivityLogin.this, "Invalid email address! Please try again.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Patient patient = new Patient(username, emailAddress, phoneNumber, new CareGiverList());
                 userList.addUser(patient);
-                if (userList.containsUser(patient)) {
-                    Toast.makeText(ActivityLogin.this, "Patient is in userList", Toast.LENGTH_SHORT).show();
-                }
+                Toast.makeText(ActivityLogin.this, "Success", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -119,8 +145,18 @@ public class ActivityLogin extends AppCompatActivity {
                 String emailAddress = userEmail.getText().toString();
                 String phoneNumber = userPhoneNumber.getText().toString();
 
+                if (UserListController.findUser(username)) {
+                    Toast.makeText(ActivityLogin.this, "That username is already taken! please try again", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (username.length() < 8) {
+                    Toast.makeText(ActivityLogin.this, "Username has to be 8 or more characters. Please try again.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 CareGiver careGiver = new CareGiver(username, emailAddress, phoneNumber, new PatientList());
                 userList.addUser(careGiver);
+                Toast.makeText(ActivityLogin.this, "Success", Toast.LENGTH_SHORT).show();
+
             }
         });
 

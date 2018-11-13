@@ -15,20 +15,16 @@ public class ActivityPatientHomePage extends AppCompatActivity {
 
         // Get the userID being passed from ActivityLogin.java
         // Set the textview to display the username
-        // wil use the username to get the patient object from userlist.
         Intent intent = getIntent();
-        String userID = (String) intent.getSerializableExtra("Patient");
+        Patient patient = (Patient) intent.getSerializableExtra("Patient");
         TextView usernameTextView = (TextView) findViewById(R.id.Username_text);
-        usernameTextView.setText(userID);
+        usernameTextView.setText(patient.getUserID());
 
         UserList userList = UserListController.getUserList();
 
         // find the patient object using the given userId that was passed through
-        Patient patient = (Patient) UserListController.findUser(userID);
+        // Patient patient = (Patient) UserListController.findUser(userID);
 
-        Log.d("Tag", "Username = " + patient.getUserID());
-        Log.d("Tag", "Email = " + patient.getEmailAddress());
-        Log.d("Tag", "Phone = " + patient.getPhoneNumber());
 
 
     }
