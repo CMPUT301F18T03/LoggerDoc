@@ -21,8 +21,8 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         problemsList = (ListView) findViewById(R.id.problemsList);
     }
 
-    @Override
-    protected void onResume (){
+    //@Override
+    /*protected void onResume (){
         super.onResume();
         adapter = new ArrayAdapter<Problem>(this, R.layout.browse_problem_list_view, user.problemList);
         adapter.notifyDataSetChanged();
@@ -38,7 +38,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
     }
 
     public void changeActivity(View v, Problem problem){
-        
-    }
+
+    }*/
 
 }
