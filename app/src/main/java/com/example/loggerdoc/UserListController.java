@@ -21,5 +21,12 @@ public class UserListController {
         getUserList().removeUser(user);
     }
 
-
+    public static boolean findUser(String id) {
+        for (User user : userList.getUsers()) {
+            if (user.getUserID().equals(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -1,9 +1,12 @@
 package com.example.loggerdoc;
 
+
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class CareGiverList {
+public class CareGiverList implements Serializable {
 
     private ArrayList<CareGiver> careGiverList;
 
