@@ -12,17 +12,30 @@ import java.net.URL;
 import java.util.TreeMap;
 
 class ElasticClient {
-    private URL host;
+    private String host;
     ElasticClient(String host) {
+        this.host = host;
+    }
+    public TreeMap httpGET(String data){
+        HttpURLConnection conn;
+        TreeMap result;
         try {
-            this.host = new URL(host);
+            URL targ = new URL(host + data);
+            conn = (HttpURLConnection) targ.openConnection();
+            InputStreamReader inreader = new InputStreamReader(conn.getInputStream());
+            result = new Gson().fromJson(inreader, TreeMap.class);
         } catch (MalformedURLException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return result;
+
+
     }
 
     public String getElasticVersion(){
-        HttpURLConnection conn;
+        /*HttpURLConnection conn;
         String version = "";
         try {
             conn = (HttpURLConnection) host.openConnection();
@@ -40,6 +53,7 @@ class ElasticClient {
         } finally {
             conn.disconnect();
         }
-        return version;
+        return version;*/
+        return "2";
     }
 }
