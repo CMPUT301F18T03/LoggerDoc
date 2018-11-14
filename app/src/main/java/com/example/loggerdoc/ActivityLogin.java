@@ -1,5 +1,6 @@
 package com.example.loggerdoc;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -12,18 +13,21 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.FileOutputStream;
+
 public class ActivityLogin extends AppCompatActivity {
+
+    // Local userList to store all of the Users along with all the data associated with users
+    public static UserList userList = UserListController.getUserList();
+    protected final static String FILENAME = "file.sav";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        SaveLoadController.loadDataFromDisk(ActivityLogin.this, FILENAME);
     }
 
-    // Temporary userlist
-    // Made using the UserlistController lazy singleton to assure only one UserList ever made
-    UserList userList = UserListController.getUserList();
 
     // If user hits the login button
     public void login(View v) {
@@ -37,8 +41,11 @@ public class ActivityLogin extends AppCompatActivity {
         if (verifyUsername(userLogin)) {
             Toast.makeText(this, "WORKS", Toast.LENGTH_SHORT).show();
             for (User user : userList.getUsers()) {
+                Log.d("TAG", "email = " + user.getEmailAddress());
                 if (user.getUserID().equals(userLogin)) {
                     temp_user = user;
+                    Log.d("TAG", "we are nmaking temp_user = user");
+                    Log.d("TAG", "temp_user = " + temp_user.getClass());
                     break;
                 }
             }
@@ -133,6 +140,7 @@ public class ActivityLogin extends AppCompatActivity {
                 Patient patient = new Patient(username, emailAddress, phoneNumber, new CareGiverList());
                 userList.addUser(patient);
                 Toast.makeText(ActivityLogin.this, "Success", Toast.LENGTH_SHORT).show();
+                SaveLoadController.saveDataToDisk(ActivityLogin.this, userList, FILENAME);
 
             }
         });
@@ -153,9 +161,14 @@ public class ActivityLogin extends AppCompatActivity {
                     Toast.makeText(ActivityLogin.this, "Username has to be 8 or more characters. Please try again.", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if (!isValidEmail(emailAddress)) {
+                    Toast.makeText(ActivityLogin.this, "Invalid email address! Please try again.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 CareGiver careGiver = new CareGiver(username, emailAddress, phoneNumber, new PatientList());
                 userList.addUser(careGiver);
                 Toast.makeText(ActivityLogin.this, "Success", Toast.LENGTH_SHORT).show();
+                SaveLoadController.saveDataToDisk(ActivityLogin.this, userList, FILENAME);
 
             }
         });
