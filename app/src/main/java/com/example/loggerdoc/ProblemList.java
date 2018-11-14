@@ -5,9 +5,10 @@
 
 package com.example.loggerdoc;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ProblemList {
+public class ProblemList implements Serializable {
 
     private ArrayList<Problem> problemArrayList;
 
