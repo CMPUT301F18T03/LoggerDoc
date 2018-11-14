@@ -3,10 +3,11 @@ package com.example.loggerdoc;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 public class ActivityCareGiverHomePage extends AppCompatActivity {
-
+    CareGiver loggedInCareGiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,10 +17,17 @@ public class ActivityCareGiverHomePage extends AppCompatActivity {
         // Set the textview to display the username
         // wil use the username to get the patient object from userlist.
         Intent intent = getIntent();
-        CareGiver caregiver = (CareGiver) intent.getSerializableExtra("Caregiver");
+        loggedInCareGiver = (CareGiver) intent.getSerializableExtra("Caregiver");
         TextView usernameTextView = (TextView) findViewById(R.id.username_text);
-        usernameTextView.setText(caregiver.getUserID());
+        usernameTextView.setText(loggedInCareGiver.getUserID());
 
         UserList userList = UserListController.getUserList();
+    }
+
+
+    public void toCareGiverBrowsePatients(View view){
+        Intent intent = new Intent(this, ActivityCareGiverBrowsePatients.class);
+        intent.putExtra("Caregiver", loggedInCareGiver);
+        startActivity(intent);
     }
 }

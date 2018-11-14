@@ -15,4 +15,8 @@ public class CareGiver extends User implements Serializable {
         this.patients = patients;
     }
 
+    public PatientList getPatientList(){
+        return patients;
+    }
+
 }

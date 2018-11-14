@@ -15,7 +15,7 @@ public class PatientList implements Serializable {
         patientList = new ArrayList<Patient>();
     }
 
-    public Collection<Patient> getPatients(){
+    public ArrayList<Patient> getPatients(){
         return patientList;
     }
 
