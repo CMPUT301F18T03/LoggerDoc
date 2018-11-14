@@ -18,7 +18,7 @@ import java.io.FileOutputStream;
 public class ActivityLogin extends AppCompatActivity {
 
     // Local userList to store all of the Users along with all the data associated with users
-    public static UserList userList = UserListController.getUserList();
+    static UserList userList = UserListController.getUserList();
     protected final static String FILENAME = "file.sav";
 
     @Override
