@@ -22,6 +22,11 @@ public class ActivityPatientHomePage extends AppCompatActivity {
 
         UserList userList = UserListController.getUserList();
 
+        Log.d("TAG", "userID = " + patient.getUserID());
+        Log.d("TAG", "email = " + patient.getEmailAddress());
+        Log.d("TAG", "phone = " + patient.getPhoneNumber());
+        Log.d("TAG", "CareGiver List = " + patient.getCareGivers());
+
         // find the patient object using the given userId that was passed through
         // Patient patient = (Patient) UserListController.findUser(userID);
 

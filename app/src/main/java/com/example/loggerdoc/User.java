@@ -8,13 +8,15 @@ public class User implements Serializable {
     private String userID;
     private String emailAddress;
     private String phoneNumber;
+    private String role;
 
 
-    public User(String userID, String emailAddress, String phoneNumber) {
+    public User(String userID, String emailAddress, String phoneNumber ,String role) {
 
         this.userID = userID;
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
+        this.role = role;
     }
 
     public String getUserID() {
@@ -41,4 +43,11 @@ public class User implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

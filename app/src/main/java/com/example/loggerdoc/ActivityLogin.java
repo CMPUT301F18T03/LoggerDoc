@@ -19,13 +19,13 @@ public class ActivityLogin extends AppCompatActivity {
 
     // Local userList to store all of the Users along with all the data associated with users
     static UserList userList = UserListController.getUserList();
-    protected final static String FILENAME = "file.sav";
+    protected final static String UserListFile = "UserList.sav";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        SaveLoadController.loadDataFromDisk(ActivityLogin.this, FILENAME);
+        SaveLoadController.loadUserListFromDisk(ActivityLogin.this, UserListFile);
     }
 
 
@@ -35,7 +35,7 @@ public class ActivityLogin extends AppCompatActivity {
         String userLogin = userID.getText().toString();
 
         Log.d("TAG", "edit text = " + userLogin);
-        User temp_user = null;
+
 
         // verify that the user actually exists, if true then proceed with login
         if (verifyUsername(userLogin)) {
@@ -43,23 +43,19 @@ public class ActivityLogin extends AppCompatActivity {
             for (User user : userList.getUsers()) {
                 Log.d("TAG", "email = " + user.getEmailAddress());
                 if (user.getUserID().equals(userLogin)) {
-                    temp_user = user;
-                    Log.d("TAG", "we are nmaking temp_user = user");
-                    Log.d("TAG", "temp_user = " + temp_user.getClass());
-                    break;
+                    if (user.getRole().equals("Patient")) {
+                        Patient patient = SaveLoadController.loadPatientFromDisk(ActivityLogin.this, user.getUserID());
+                        Intent intent = new Intent(ActivityLogin.this, ActivityPatientHomePage.class);
+                        intent.putExtra("Patient", patient);
+                        startActivity(intent);
+                    }
+                    else {
+                        CareGiver careGiver = SaveLoadController.loadCareGiverFromDisk(ActivityLogin.this, user.getUserID());
+                        Intent intent = new Intent(ActivityLogin.this, ActivityCareGiverHomePage.class);
+                        intent.putExtra("CareGiver", careGiver);
+                        startActivity(intent);
+                    }
                 }
-            }
-            // Depending on if the user is a patient or caregiver, go to different activities
-            // Sends the users information to the new activity.
-            if (Patient.class == temp_user.getClass()) {
-                Intent intent = new Intent(ActivityLogin.this, ActivityPatientHomePage.class);
-                intent.putExtra("Patient", temp_user);
-                startActivity(intent);
-            }
-            if (CareGiver.class == temp_user.getClass()) {
-                Intent intent = new Intent(ActivityLogin.this, ActivityCareGiverHomePage.class);
-                intent.putExtra("Caregiver", temp_user);
-                startActivity(intent);
             }
         }
     }
@@ -137,10 +133,14 @@ public class ActivityLogin extends AppCompatActivity {
                     Toast.makeText(ActivityLogin.this, "Invalid email address! Please try again.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Patient patient = new Patient(username, emailAddress, phoneNumber, new CareGiverList());
+                Patient patient = new Patient(username, emailAddress, phoneNumber,"Patient", new CareGiverList());
                 userList.addUser(patient);
                 Toast.makeText(ActivityLogin.this, "Success", Toast.LENGTH_SHORT).show();
-                SaveLoadController.saveDataToDisk(ActivityLogin.this, userList, FILENAME);
+
+                // Save the userlist to disk for creating a new account offline we can check for unique userID
+                // Save the patients save file to disk
+                SaveLoadController.saveUserListToDisk(ActivityLogin.this, userList, UserListFile);
+                SaveLoadController.savePatientToDisk(ActivityLogin.this, patient);
 
             }
         });
@@ -165,10 +165,11 @@ public class ActivityLogin extends AppCompatActivity {
                     Toast.makeText(ActivityLogin.this, "Invalid email address! Please try again.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                CareGiver careGiver = new CareGiver(username, emailAddress, phoneNumber, new PatientList());
+                CareGiver careGiver = new CareGiver(username, emailAddress, phoneNumber,"Caregiver", new PatientList());
                 userList.addUser(careGiver);
                 Toast.makeText(ActivityLogin.this, "Success", Toast.LENGTH_SHORT).show();
-                SaveLoadController.saveDataToDisk(ActivityLogin.this, userList, FILENAME);
+                SaveLoadController.saveUserListToDisk(ActivityLogin.this, userList, UserListFile);
+                SaveLoadController.saveCareGiverToDisk(ActivityLogin.this, careGiver);
 
             }
         });
