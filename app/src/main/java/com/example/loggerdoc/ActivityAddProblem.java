@@ -8,11 +8,19 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 public class ActivityAddProblem extends AppCompatActivity {
+    Patient patient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_problem);
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Intent intent = getIntent();
+        patient = (Patient) intent.getSerializableExtra("Patient");
     }
 
     //To be called when the user hits the create button
@@ -64,7 +72,7 @@ public class ActivityAddProblem extends AppCompatActivity {
             showAlertDialog("Error: Too Long Description","The description can be a maximum of 300 characters. Please shorten it");
         }
 
-        //TODO: Add Problem to the User's Problem List
+        patient.getProblems().getProblemArrayList().add(problem);
         changeActivity(v);
     }
 
@@ -87,6 +95,7 @@ public class ActivityAddProblem extends AppCompatActivity {
 
     public void changeActivity(View v){
         Intent intent = new Intent(this, ActivityBrowseProblems.class);
+        intent.putExtra("Patient", patient);
         startActivity(intent);
     }
 }

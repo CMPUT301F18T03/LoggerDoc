@@ -22,13 +22,15 @@ public class ActivityViewProblem extends AppCompatActivity {
         super.onResume();
 
         Intent intent = getIntent();
-        problem = (Problem) intent.getSerializableExtra("problemToEdit");
+        Patient patient = (Patient) intent.getSerializableExtra("Patient");
+        int position = (int) intent.getSerializableExtra("Position");
+        Problem problem = patient.getProblems().getProblemArrayList().get(position);
 
         TextView problemTitleView = (TextView) findViewById(R.id.ProblemTitleView);
         problemTitleView.setText(problem.getTitle());
 
         TextView problemDateView = (TextView) findViewById(R.id.dateView);
-        problemDateView.setText(problem.getDate());
+        //problemDateView.setText(problem.getDate());
 
         TextView problemDescriptionView = (TextView) findViewById(R.id.ProblemDescriptionText);
         problemDescriptionView.setText(problem.getDescription());

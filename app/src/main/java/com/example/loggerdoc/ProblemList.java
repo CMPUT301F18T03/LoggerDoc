@@ -15,6 +15,10 @@ public class ProblemList {
         problemArrayList = new ArrayList<>();
     }
 
+    public ArrayList <Problem> getProblemArrayList(){
+        return this.problemArrayList;
+    }
+
     public void add(Problem problem) {
         problemArrayList.add(problem);
     }

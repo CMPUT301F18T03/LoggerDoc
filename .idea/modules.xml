@@ -3,10 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LoggerDoc.iml" filepath="$PROJECT_DIR$/LoggerDoc.iml" />
-<<<<<<< HEAD
-=======
-      <module fileurl="file://$PROJECT_DIR$/.idea/LoggerDoc.iml" filepath="$PROJECT_DIR$/.idea/LoggerDoc.iml" />
->>>>>>> 0a45a2f1a9dad3fc8766e1807d38a35339f414e2
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

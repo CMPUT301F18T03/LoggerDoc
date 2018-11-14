@@ -26,7 +26,6 @@ public class ActivityPatientHomePage extends AppCompatActivity {
         // Patient patient = (Patient) UserListController.findUser(userID);
 
 
-
     }
 
 
