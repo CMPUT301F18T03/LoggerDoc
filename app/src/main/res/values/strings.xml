@@ -35,5 +35,6 @@ HEAD
     <string name="addrecordbutton">Add Record</string>
     <string name="CaregiversCommentTitle">Caregiver\'s Comments:</string>
     <string name="recordImageTitle">Record Image(s):</string>
+    <string name="chooseDate">Pick Date</string>
     6d355acae24733ee9f9d9d0017dc972737fbf333
 </resources>

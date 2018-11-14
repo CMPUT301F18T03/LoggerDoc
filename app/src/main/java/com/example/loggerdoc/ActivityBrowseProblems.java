@@ -29,9 +29,12 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         Intent intent = getIntent();
         final Patient patient = (Patient) intent.getSerializableExtra("Patient");
 
-        adapter = new ArrayAdapter<Problem>(this, R.layout.browse_problem_list_view, patient.getProblems().getProblemArrayList());
-        adapter.notifyDataSetChanged();
+        //Initialize and set the custom adapter
+        adapter = new AdapterListProblems(this, patient.getProblems().getProblemArrayList());
         problemsList.setAdapter(adapter);
+
+        adapter.notifyDataSetChanged();
+
 
         problemsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

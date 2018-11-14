@@ -62,7 +62,7 @@ public class ActivityEditProblem extends AppCompatActivity {
 
         else {
             problem.setTitle(editTitle.getText().toString());
-            problem.setTimestamp(editDate.getText().toString());
+            //problem.setTimestamp(editDate.getText().toString());
             problem.setDescription(editDescription.getText().toString());
 
             problemTitleWarning.setVisibility(View.INVISIBLE);

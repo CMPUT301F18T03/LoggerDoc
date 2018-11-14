@@ -6,9 +6,10 @@
 
 package com.example.loggerdoc;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class RecordList {
+public class RecordList implements Serializable {
 
     private ArrayList<Record> recordArrayList;
 

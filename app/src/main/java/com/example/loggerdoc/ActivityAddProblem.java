@@ -3,13 +3,15 @@ package com.example.loggerdoc;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+
 public class ActivityAddProblem extends AppCompatActivity {
     Patient patient;
-
+    private DatePickerFragment datePicker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,12 +23,12 @@ public class ActivityAddProblem extends AppCompatActivity {
         super.onResume();
         Intent intent = getIntent();
         patient = (Patient) intent.getSerializableExtra("Patient");
+        datePicker = new DatePickerFragment();
     }
 
     //To be called when the user hits the create button
     public void checkProblemFields (View v){
         EditText problemTitle = (EditText) findViewById(R.id.problem_Title_Text);
-        EditText problemDate = (EditText) findViewById(R.id.problem_start_date_text);
         EditText problemDescription = (EditText) findViewById(R.id.problem_desc_text);
 
         ImageView problemTitleWarning = (ImageView) findViewById(R.id.warning_Problem_Title);
@@ -54,13 +56,13 @@ public class ActivityAddProblem extends AppCompatActivity {
         else{
             problemTitleWarning.setVisibility(View.INVISIBLE);
             problemDescription.setVisibility(View.INVISIBLE);
-            createProblem(problemTitle.getText().toString(), problemDate.getText().toString(), problemDescription.toString(), v);
+            createProblem(problemTitle.getText().toString(), problemDescription.toString(), v);
         }
     }
 
-    private void createProblem(String problemTitle, String problemDate, String problemDescription, View v){
+    private void createProblem(String problemTitle, String problemDescription, View v){
 
-        Problem problem = new Problem (problemTitle, problemDate,problemDescription);
+        Problem problem = new Problem (problemTitle, datePicker, problemDescription);
 
         //check if the title is too long
         if (!problem.checkTitleLength(problem.getTitle())){
@@ -71,8 +73,8 @@ public class ActivityAddProblem extends AppCompatActivity {
         if (!problem.checkDescriptionLength(problem.getDescription())){
             showAlertDialog("Error: Too Long Description","The description can be a maximum of 300 characters. Please shorten it");
         }
-
-        patient.getProblems().getProblemArrayList().add(problem);
+        patient.getProblems().add(problem);
+        Log.d("This size of the list is ", String.valueOf(patient.getProblems().getProblemArrayList().size()));
         changeActivity(v);
     }
 
@@ -81,6 +83,10 @@ public class ActivityAddProblem extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    public void clickPickDate(View v){
+        datePicker.show(getSupportFragmentManager(), "pick_date");
     }
 
     private void showAlertDialog( String title, String message){

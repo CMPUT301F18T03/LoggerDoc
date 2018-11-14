@@ -6,9 +6,13 @@
 
 package com.example.loggerdoc;
 
+import android.widget.DatePicker;
+
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class Problem implements Serializable {
 
@@ -18,10 +22,10 @@ public class Problem implements Serializable {
 
     private RecordList recordList;
 
-    public Problem(String title, String timestamp, String description) {
+    public Problem(String title, DatePickerFragment datePicker, String description) {
         this.title = title;
         this.description = description;
-        this.timestamp = formatTimestamp(timestamp);
+        this.timestamp = formatDateAndTime(datePicker);
 
         this.recordList = new RecordList();
     }
@@ -42,13 +46,20 @@ public class Problem implements Serializable {
         this.description = description;
     }
 
-    public void setTimestamp (String newTime){
-        this.timestamp = formatTimestamp(newTime);
+    public LocalDateTime formatDateAndTime(DatePickerFragment datePickerFragment){
+        LocalDateTime timestamp = LocalDateTime.now();
+
+        if(datePickerFragment.getSet()){
+            timestamp = timestamp.withDayOfMonth(datePickerFragment.getDay())
+                    .withMonth(datePickerFragment.getMonth()).withYear(datePickerFragment.getYear());
+        }
+        return timestamp;
     }
 
-    public LocalDateTime formatTimestamp(String newTime){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return LocalDateTime.parse(newTime, formatter);
+    //convert an object of type Date into a String Object
+    public String getDateToString(LocalDateTime time){
+        SimpleDateFormat sdf = new SimpleDateFormat(("yyyy-MM-dd'T'HH:mm:ss"), Locale.CANADA);
+        return(sdf.format(time));
     }
 
     public LocalDateTime getTimestamp() {
