@@ -3,15 +3,15 @@ package com.example.loggerdoc;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 
 public class ActivityAddProblem extends AppCompatActivity {
-    Patient patient;
+    private Patient patient;
     private DatePickerFragment datePicker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,16 +21,18 @@ public class ActivityAddProblem extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
+
         Intent intent = getIntent();
         patient = (Patient) intent.getSerializableExtra("Patient");
         datePicker = new DatePickerFragment();
+
     }
 
     //To be called when the user hits the create button
     public void checkProblemFields (View v){
+
         EditText problemTitle = (EditText) findViewById(R.id.problem_Title_Text);
         EditText problemDescription = (EditText) findViewById(R.id.problem_desc_text);
-
         ImageView problemTitleWarning = (ImageView) findViewById(R.id.warning_Problem_Title);
         ImageView problemDescriptionWarning = (ImageView) findViewById(R.id.warning_Problem_Desc);
 
@@ -38,6 +40,7 @@ public class ActivityAddProblem extends AppCompatActivity {
         boolean emptyTitle = checkEmptyString(problemTitle.getText().toString());
         boolean emptyDescription = checkEmptyString(problemDescription.getText().toString());
 
+        //If either of the problemTitle or the problemDescription is empty
         if (emptyTitle || emptyDescription){
 
             //Set the flag for the user to indicate the Title Field is Empty
@@ -54,8 +57,10 @@ public class ActivityAddProblem extends AppCompatActivity {
         }
 
         else{
+            //Turn flags off
             problemTitleWarning.setVisibility(View.INVISIBLE);
             problemDescription.setVisibility(View.INVISIBLE);
+
             createProblem(problemTitle.getText().toString(), problemDescription.getText().toString(), v);
         }
     }
@@ -64,20 +69,25 @@ public class ActivityAddProblem extends AppCompatActivity {
 
         Problem problem = new Problem (problemTitle, datePicker, problemDescription);
 
-        //check if the title is too long
+        //Check if the title is too long
         if (!problem.checkTitleLength(problem.getTitle())){
             showAlertDialog("Error: Too Long Title","The title can be a maximum of 30 characters. Please shorten it");
         }
 
-        //check if the description is too long
+        //Check if the description is too long
         if (!problem.checkDescriptionLength(problem.getDescription())){
             showAlertDialog("Error: Too Long Description","The description can be a maximum of 300 characters. Please shorten it");
         }
+
+        //Add problem to patient's problem list
         patient.getProblems().add(problem);
-        Log.d("This size of the list is ", String.valueOf(patient.getProblems().getProblemArrayList().size()));
         changeActivity(v);
     }
 
+    /*
+     * Check if the string is empty. Takes a string as a parameter and returns true if empty.
+     * Returns false otherwise.
+     */
     public boolean checkEmptyString(String string){
         if (string.length() == 0){
             return true;
@@ -85,10 +95,12 @@ public class ActivityAddProblem extends AppCompatActivity {
         return false;
     }
 
+    //Show the Date Picker
     public void clickPickDate(View v){
         datePicker.show(getSupportFragmentManager(), "pick_date");
     }
 
+    //Show an error Alert Dialog.
     private void showAlertDialog( String title, String message){
         Bundle messageArgs = new Bundle();
         messageArgs.putString(DialogProblem.TITLE_ID, title);
@@ -99,6 +111,7 @@ public class ActivityAddProblem extends AppCompatActivity {
         dialog.show(getSupportFragmentManager(), "error_dialog");
     }
 
+    //Change the activity to ActivityBrowseProblems
     public void changeActivity(View v){
         Intent intent = new Intent(this, ActivityBrowseProblems.class);
         intent.putExtra("Patient", patient);

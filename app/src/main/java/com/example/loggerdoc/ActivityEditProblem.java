@@ -104,6 +104,10 @@ public class ActivityEditProblem extends AppCompatActivity {
         return false;
     }
 
+    public void clickPickDate(View v){
+        datePickerFragment.show(getSupportFragmentManager(), "pick_date");
+    }
+
     private void showAlertDialog( String title, String message){
         Bundle messageArgs = new Bundle();
         messageArgs.putString(DialogProblem.TITLE_ID, title);
