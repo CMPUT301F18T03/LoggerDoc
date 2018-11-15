@@ -119,11 +119,11 @@
 
             <Button
                 android:id="@+id/addRecordButton"
-                android:text = "@string/addrecordbutton"
                 android:layout_width="120dp"
                 android:layout_height="37dp"
                 android:layout_marginStart="15dp"
-                />
+                android:onClick="goAddRecord"
+                android:text="@string/addrecordbutton" />
 
             <TextView
                 android:id="@+id/caregiverCommentTitle"

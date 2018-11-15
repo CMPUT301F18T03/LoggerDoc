@@ -12,7 +12,9 @@ public class ActivityEditProblem extends AppCompatActivity {
     private EditText editTitle;
     private EditText editDate;
     private EditText editDescription;
+    private Patient patient;
     private Problem problem;
+    private int position;
     private ImageView problemTitleWarning;
     private ImageView problemDescriptionWarning;
 
@@ -26,14 +28,17 @@ public class ActivityEditProblem extends AppCompatActivity {
     protected void onResume (){
         super.onResume();
 
+        Intent intent = getIntent();
+        patient = (Patient) intent.getSerializableExtra("Patient");
+        position = (int) intent.getSerializableExtra("Position");
+        problem = patient.getProblems().getProblemArrayList().get(position);
+
         editTitle = (EditText) findViewById(R.id.editTitle);
         editDate = (EditText) findViewById(R.id.edit_problem_date_pick);
         editDescription = (EditText) findViewById(R.id.edit_prob_desc);
         problemTitleWarning = (ImageView) findViewById(R.id.warningEditTitle);
         problemDescriptionWarning = (ImageView) findViewById(R.id.warningEditDesc);
 
-        Intent intent = getIntent();
-        problem = (Problem) intent.getSerializableExtra("problemToEdit");
 
         editTitle.setText(problem.getTitle());
         editDate.setText(problem.getTimestamp().toString());
@@ -78,7 +83,9 @@ public class ActivityEditProblem extends AppCompatActivity {
                 showAlertDialog("Error: Too Long Description","The description can be a maximum of 300 characters. Please shorten it");
             }
 
-            //TODO: Add Problem to the User's Problem List
+            patient.getProblems().remove(problem);
+            patient.getProblems().add(problem);
+
             changeActivity(v);
         }
     }
@@ -102,6 +109,8 @@ public class ActivityEditProblem extends AppCompatActivity {
 
     public void changeActivity(View v){
         Intent intent = new Intent(this, ActivityViewProblem.class);
+        intent.putExtra("Patient", patient);
+        intent.putExtra("Position", position);
         startActivity(intent);
     }
 

@@ -33,15 +33,11 @@ public class ActivityViewProblem extends AppCompatActivity {
         TextView problemTitleView = (TextView) findViewById(R.id.ProblemTitleView);
         problemTitleView.setText(problem.getTitle());
 
-        TextView problemDateView = (TextView) findViewById(R.id.dateView);
+        TextView problemDateView = (TextView) findViewById(R.id.dateProblemView);
         problemDateView.setText(problem.getTimestamp().toString());
 
-        TextView problemDescriptionView = (TextView) findViewById(R.id.ProblemDescriptionText);
+        TextView problemDescriptionView = (TextView) findViewById(R.id.descriptionProblemView);
         problemDescriptionView.setText(problem.getDescription());
-
-        Button editProblemButton = (Button) findViewById(R.id.editButton);
-        Button deleteProblemButton = (Button) findViewById(R.id.deleteButton);
-        Button addRecordButton = (Button) findViewById(R.id.addRecordButton);
     }
 
     public void goEditProblem (View v){
@@ -51,7 +47,7 @@ public class ActivityViewProblem extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void goDeleteProblem (View v){
+    public void goDeleteProblem (final View v){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Are you sure you would like to delete this problem?");
@@ -59,6 +55,7 @@ public class ActivityViewProblem extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 patient.getProblems().remove(problem);
+                goBrowseProblems(v);
                 dialog.dismiss();
             }
         });
@@ -71,6 +68,12 @@ public class ActivityViewProblem extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
+    }
+
+    public void goBrowseProblems(View v){
+        Intent intent = new Intent(this, ActivityBrowseProblems.class);
+        intent.putExtra("Patient", patient);
+        startActivity(intent);
     }
 
     public void goAddRecord (View v){
