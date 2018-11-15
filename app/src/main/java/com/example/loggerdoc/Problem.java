@@ -7,8 +7,7 @@
  *
  * Created 2018-10-24 by Nick Hoskins
  *
- * Problem represents a patient's problem. A problem has a title, a timestamp, and a description.
- * A problem also has a number of Records associated with it.
+ *
  */
 
 package com.example.loggerdoc;
@@ -179,7 +178,7 @@ public class Problem implements Serializable {
         if (description.length() > 300){
             return false;
         }
-        
+
         return true;
     }
 }
