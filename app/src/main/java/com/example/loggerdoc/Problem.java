@@ -6,8 +6,6 @@
 
 package com.example.loggerdoc;
 
-import android.util.Log;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 

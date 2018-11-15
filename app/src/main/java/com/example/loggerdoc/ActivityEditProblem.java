@@ -1,3 +1,7 @@
+/*
+
+ */
+
 package com.example.loggerdoc;
 
 import android.content.Intent;
