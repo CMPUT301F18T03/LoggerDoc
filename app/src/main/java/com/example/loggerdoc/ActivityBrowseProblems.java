@@ -50,6 +50,14 @@ public class ActivityBrowseProblems extends AppCompatActivity {
                 changeToAddProblemActivity(v, patient);
             }
         });
+
+        FloatingActionButton searchButton = (FloatingActionButton) findViewById(R.id.searchButton);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeToSearchActivity(v,patient);
+            }
+        });
     }
 
     public void changeToViewProblemActivity(View v, Patient patient, int position){
@@ -61,6 +69,12 @@ public class ActivityBrowseProblems extends AppCompatActivity {
 
     public void changeToAddProblemActivity (View v, Patient patient){
         Intent intent = new Intent(this, ActivityAddProblem.class);
+        intent.putExtra("Patient", patient);
+        startActivity(intent);
+    }
+
+    public void changeToSearchActivity(View v, Patient patient){
+        Intent intent = new Intent (this, ActivitySearch.class);
         intent.putExtra("Patient", patient);
         startActivity(intent);
     }

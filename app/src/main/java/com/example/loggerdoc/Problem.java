@@ -52,6 +52,10 @@ public class Problem implements Serializable {
         }
     }
 
+    public void setTimestamp (DatePickerFragment datePickerFragment){
+        formatDateAndTime(datePickerFragment);
+    }
+
     public LocalDateTime getTimestamp() {
         return timestamp;
     }

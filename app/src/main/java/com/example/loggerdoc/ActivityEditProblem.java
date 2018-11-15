@@ -17,6 +17,7 @@ public class ActivityEditProblem extends AppCompatActivity {
     private int position;
     private ImageView problemTitleWarning;
     private ImageView problemDescriptionWarning;
+    private DatePickerFragment datePickerFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,8 @@ public class ActivityEditProblem extends AppCompatActivity {
         editTitle.setText(problem.getTitle());
         editDate.setText(problem.getTimestamp().toString());
         editDescription.setText(problem.getDescription());
+
+        datePickerFragment = new DatePickerFragment();
     }
 
     public void updateProblem (View v){
@@ -67,7 +70,7 @@ public class ActivityEditProblem extends AppCompatActivity {
 
         else {
             problem.setTitle(editTitle.getText().toString());
-            //problem.setTimestamp(editDate.getText().toString());
+            problem.setTimestamp(datePickerFragment);
             problem.setDescription(editDescription.getText().toString());
 
             problemTitleWarning.setVisibility(View.INVISIBLE);
