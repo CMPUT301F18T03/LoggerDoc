@@ -56,7 +56,7 @@ public class ActivityAddProblem extends AppCompatActivity {
         else{
             problemTitleWarning.setVisibility(View.INVISIBLE);
             problemDescription.setVisibility(View.INVISIBLE);
-            createProblem(problemTitle.getText().toString(), problemDescription.toString(), v);
+            createProblem(problemTitle.getText().toString(), problemDescription.getText().toString(), v);
         }
     }
 

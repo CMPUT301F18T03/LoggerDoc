@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.app.DatePickerDialog;
+import android.util.Log;
 import android.widget.DatePicker;
 
 import java.util.Calendar;
@@ -15,7 +16,6 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     private int month;
     private int day;
     private Boolean isSet;
-    private DialogFragment nextFragment;
 
     public DatePickerFragment(){
         isSet = false;
@@ -24,7 +24,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     @NonNull
     @Override
     public Dialog onCreateDialog (Bundle saved){
-        Calendar calendar = Calendar.getInstance();
+        final Calendar calendar = Calendar.getInstance();
         this.year = calendar.get(Calendar.YEAR);
         this.month = calendar.get(Calendar.MONTH);
         this.day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -32,12 +32,25 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         return new DatePickerDialog(getActivity(), this, this.year, this.month, this.day);
     }
 
+    @Override
+    public void onDateSet (DatePicker view, int year, int month, int dayofMonth) {
+        this.year = year;
+        this.month = month;
+        this.day = dayofMonth;
+
+        this.isSet = true;
+    }
+
     public boolean getSet(){
         return this.isSet;
     }
 
     public int getDay(){
-        return this.day;
+
+        if (isSet){
+            return this.day;
+        }
+        return Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
     }
 
     public int getMonth(){
@@ -48,20 +61,4 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         return this.year;
     }
 
-    public void setNextFragment (DialogFragment nextFragment){
-        this.nextFragment = nextFragment;
-    }
-
-    @Override
-    public void onDateSet (DatePicker view, int year, int month, int dayofMonth){
-
-        this.year = year;
-        this.month = month;
-        this.day = day;
-
-        this.isSet = true;
-        if (this.nextFragment !=null){
-            this.nextFragment.show(getActivity().getSupportFragmentManager(), "Time Frag");
-        }
-    }
 }

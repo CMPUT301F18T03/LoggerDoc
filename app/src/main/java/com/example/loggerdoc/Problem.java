@@ -6,7 +6,7 @@
 
 package com.example.loggerdoc;
 
-import android.widget.DatePicker;
+import android.util.Log;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -25,13 +25,12 @@ public class Problem implements Serializable {
     public Problem(String title, DatePickerFragment datePicker, String description) {
         this.title = title;
         this.description = description;
-        this.timestamp = formatDateAndTime(datePicker);
-
+        formatDateAndTime(datePicker);
         this.recordList = new RecordList();
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public void setTitle(String title) {
@@ -39,27 +38,21 @@ public class Problem implements Serializable {
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public LocalDateTime formatDateAndTime(DatePickerFragment datePickerFragment){
-        LocalDateTime timestamp = LocalDateTime.now();
+    public void formatDateAndTime(DatePickerFragment datePickerFragment){
+
+        timestamp = LocalDateTime.now();
 
         if(datePickerFragment.getSet()){
             timestamp = timestamp.withDayOfMonth(datePickerFragment.getDay())
                     .withMonth(datePickerFragment.getMonth()).withYear(datePickerFragment.getYear());
         }
-        return timestamp;
-    }
-
-    //convert an object of type Date into a String Object
-    public String getDateToString(LocalDateTime time){
-        SimpleDateFormat sdf = new SimpleDateFormat(("yyyy-MM-dd'T'HH:mm:ss"), Locale.CANADA);
-        return(sdf.format(time));
     }
 
     public LocalDateTime getTimestamp() {
