@@ -37,6 +37,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/error"
         android:textSize="18sp"
+        android:clickable="true"
         app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
