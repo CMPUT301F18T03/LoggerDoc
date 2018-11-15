@@ -35,7 +35,7 @@ public class AdapterListRecords extends ArrayAdapter<Record> {
         TitleView.setText(currentRecords.getTitle());
 
         TextView date = (TextView) listitem.findViewById(R.id.DateView);
-        date.setText(currentRecords.getTimestamp());
+        date.setText(currentRecords.getTimestamp().toString());
 
         return listitem;
     }
