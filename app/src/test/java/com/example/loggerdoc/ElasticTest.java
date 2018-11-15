@@ -18,15 +18,19 @@ public class ElasticTest {
     @Test
     public void Testput(){
         ElasticClient testclient = ElasticSearchController.getClient();
+        System.out.println(testclient.getrecord("_doc/2"));
+        System.out.println(testclient.rawhttpPUT("_doc/2","{\"name\": \"Jane Doe\"}"));
+        System.out.println(testclient.getrecord("_doc/2"));
+
         /*System.out.println(testclient.httpGET(""));
-        System.out.println(testclient.httpGET("/test/_doc/2"));
-        System.out.println(testclient.httpPUT("/test/_doc/2","{\"name\": \"Jane Doe\"}"));
+        System.out.println(testclient.httpGET("_doc/2"));
+        System.out.println(testclient.httpPUT("_doc/2","{\"name\": \"Jane Doe\"}"));
 
-        System.out.println(testclient.httpGET("/test/_doc/2"));
+        System.out.println(testclient.httpGET("_doc/2"));
 
-        System.out.println(testclient.eSearch("/test/_doc/2")._version);
+        System.out.println(testclient.eSearch("_doc/2")._version);
 
-        System.out.println(testclient.httpDELETE("/test/_doc/2"));
-        System.out.println(testclient.httpGET("/test/_doc/2"));*/
+        System.out.println(testclient.httpDELETE("_doc/2"));
+        System.out.println(testclient.httpGET("_doc/2"));*/
     }
 }

@@ -16,6 +16,7 @@ class ElasticClient {
     //private OkHttpClient client;
     //private String host;
     private httphandler handler;
+    private final String endpointstr = "/test/";
 
 
     ElasticClient(String host,OkHttpClient client) {
@@ -24,10 +25,23 @@ class ElasticClient {
         handler = new httphandler(client,host);
     }
 
+    public String getrecord(String address){
+        String x = handler.httpGET(endpointstr + address);
 
+        Gson gson = new Gson(); // Library to save objects
 
+        searchResponse values = gson.fromJson(x, searchResponse.class);
+        if(values.found){
+            return values._source.toString();
+        }
+        return null;
+
+    }
+    public String rawhttpPUT(String address,String payload){
+        return handler.httpPUT(endpointstr+address,payload);
+    }
     public searchResponse eSearch(String address){
-        String x = handler.httpGET(address);
+        String x = handler.httpGET(endpointstr + address);
 
         Gson gson = new Gson(); // Library to save objects
 
