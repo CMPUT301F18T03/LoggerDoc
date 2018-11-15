@@ -6,7 +6,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class ActivityViewProblem extends AppCompatActivity {
@@ -14,6 +15,9 @@ public class ActivityViewProblem extends AppCompatActivity {
     private Patient patient;
     private Problem problem;
     private int position;
+    private ArrayAdapter<Record> recordAdapter;
+    private ArrayAdapter<CaregiverComment> commentAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +29,13 @@ public class ActivityViewProblem extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
 
+        //Set the patient and the problem
         Intent intent = getIntent();
         patient = (Patient) intent.getSerializableExtra("Patient");
         position = (int) intent.getSerializableExtra("Position");
         problem = patient.getProblems().getProblemArrayList().get(position);
 
-        TextView problemTitleView = (TextView) findViewById(R.id.ProblemTitleView);
+        TextView problemTitleView = (TextView) findViewById(R.id.TitleView);
         problemTitleView.setText(problem.getTitle());
 
         TextView problemDateView = (TextView) findViewById(R.id.dateProblemView);
@@ -38,8 +43,21 @@ public class ActivityViewProblem extends AppCompatActivity {
 
         TextView problemDescriptionView = (TextView) findViewById(R.id.descriptionProblemView);
         problemDescriptionView.setText(problem.getDescription());
+
+        //Initialize and set the adapter for the records
+        recordAdapter = new AdapterListRecords(this, problem.getRecordList().getRecordArrayList());
+        ListView recordList = (ListView) findViewById(R.id.recordsListView);
+        recordList.setAdapter(recordAdapter);
+        recordAdapter.notifyDataSetChanged();
+
+        //Initialize and set the adapter for the caregiver's comments
+        commentAdapter = new AdapterListComments(this, problem.getCommentList().getComments());
+        ListView commentList = (ListView) findViewById(R.id.commentProblemListView);
+        commentList.setAdapter(commentAdapter);
+        commentAdapter.notifyDataSetChanged();
     }
 
+    //Change to EditProblem activity
     public void goEditProblem (View v){
         Intent intent = new Intent(this, ActivityEditProblem.class);
         intent.putExtra("Patient", patient);
@@ -49,6 +67,7 @@ public class ActivityViewProblem extends AppCompatActivity {
 
     public void goDeleteProblem (final View v){
 
+        //Show an alert dialog to ask for user's confirmation whether they would like to delete
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Are you sure you would like to delete this problem?");
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
@@ -70,12 +89,14 @@ public class ActivityViewProblem extends AppCompatActivity {
 
     }
 
+    //Change to BrowseProblems activity
     public void goBrowseProblems(View v){
         Intent intent = new Intent(this, ActivityBrowseProblems.class);
         intent.putExtra("Patient", patient);
         startActivity(intent);
     }
 
+    //Change to AddRecord Activity
     public void goAddRecord (View v){
         Intent intent = new Intent(this, ActivityAddRecord.class);
         startActivity(intent);

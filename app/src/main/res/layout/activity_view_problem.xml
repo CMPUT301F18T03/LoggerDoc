@@ -7,7 +7,7 @@
     tools:context=".ActivityViewProblem">
 
     <TextView
-        android:id="@+id/ProblemTitleView"
+        android:id="@+id/TitleView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -31,7 +31,7 @@
         android:onClick="goDeleteProblem"
         android:text="@string/delete_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ProblemTitleView"
+        app:layout_constraintStart_toEndOf="@+id/TitleView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -42,7 +42,7 @@
         android:layout_marginEnd="1dp"
         android:onClick="goEditProblem"
         android:text="@string/edit_problem_button"
-        app:layout_constraintEnd_toStartOf="@+id/ProblemTitleView"
+        app:layout_constraintEnd_toStartOf="@+id/TitleView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -17,6 +17,10 @@ public class RecordList implements Serializable {
         recordArrayList = new ArrayList<>();
     }
 
+    public ArrayList<Record> getRecordArrayList (){
+        return this.recordArrayList;
+    }
+
     public void add(Record record) {
         recordArrayList.add(record);
     }

@@ -16,6 +16,7 @@ public class Problem implements Serializable {
     private LocalDateTime timestamp;
 
     private RecordList recordList;
+    private CaregiverCommentList commentList;
 
     public Problem(String title, DatePickerFragment datePicker, String description) {
         this.title = title;
@@ -64,6 +65,14 @@ public class Problem implements Serializable {
 
     public void addRecord(Record record) {
         this.recordList.add(record);
+    }
+
+    public CaregiverCommentList getCommentList(){
+        return this.commentList;
+    }
+
+    public void addComment(CaregiverComment comment){
+        this.commentList.addComment(comment);
     }
 
     public boolean checkTitleLength (String title){

@@ -32,13 +32,13 @@ public class AdapterListProblems extends ArrayAdapter<Problem> {
         }
         Problem currentProblem = problemList.get(position);
 
-        TextView problemTitle = (TextView) listitem.findViewById(R.id.ProblemTitleView);
+        TextView problemTitle = (TextView) listitem.findViewById(R.id.TitleView);
         problemTitle.setText(currentProblem.getTitle());
 
         TextView date = (TextView) listitem.findViewById(R.id.DateView);
         date.setText(currentProblem.getTimestamp().toString());
 
-        TextView numberRecords = (TextView) listitem.findViewById(R.id.numberofRecords);
+        TextView numberRecords = (TextView) listitem.findViewById(R.id.DescriptionView);
         numberRecords.setText("This problem has " + currentProblem.getRecordList().size() + " records");
 
         return listitem;
