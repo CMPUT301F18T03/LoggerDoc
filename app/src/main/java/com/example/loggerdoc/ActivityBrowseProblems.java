@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class ActivityBrowseProblems extends AppCompatActivity {
 
@@ -58,6 +59,10 @@ public class ActivityBrowseProblems extends AppCompatActivity {
                 changeToSearchActivity(v,patient);
             }
         });
+
+        TextView username = (TextView) findViewById(R.id.usernameText);
+        username.setText(patient.getUserID());
+        setOnClick(username, patient);
     }
 
     public void changeToViewProblemActivity(View v, Patient patient, int position){
@@ -75,6 +80,21 @@ public class ActivityBrowseProblems extends AppCompatActivity {
 
     public void changeToSearchActivity(View v, Patient patient){
         Intent intent = new Intent (this, ActivitySearch.class);
+        intent.putExtra("Patient", patient);
+        startActivity(intent);
+    }
+
+    public void setOnClick(final TextView username, final Patient patient){
+        username.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeToUserProfile(v, patient);
+            }
+        });
+    }
+
+    public void changeToUserProfile(View v, Patient patient){
+        Intent intent = new Intent (this, ActivityUserProfile.class);
         intent.putExtra("Patient", patient);
         startActivity(intent);
     }
