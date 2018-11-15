@@ -9,10 +9,7 @@ package com.example.loggerdoc;
 import android.util.Log;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 public class Problem implements Serializable {
 

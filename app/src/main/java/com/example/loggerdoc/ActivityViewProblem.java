@@ -13,6 +13,7 @@ public class ActivityViewProblem extends AppCompatActivity {
 
     private Patient patient;
     private Problem problem;
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,7 @@ public class ActivityViewProblem extends AppCompatActivity {
 
         Intent intent = getIntent();
         patient = (Patient) intent.getSerializableExtra("Patient");
-        int position = (int) intent.getSerializableExtra("Position");
+        position = (int) intent.getSerializableExtra("Position");
         problem = patient.getProblems().getProblemArrayList().get(position);
 
         TextView problemTitleView = (TextView) findViewById(R.id.ProblemTitleView);
@@ -45,6 +46,8 @@ public class ActivityViewProblem extends AppCompatActivity {
 
     public void goEditProblem (View v){
         Intent intent = new Intent(this, ActivityEditProblem.class);
+        intent.putExtra("Patient", patient);
+        intent.putExtra("Position", position);
         startActivity(intent);
     }
 
@@ -71,7 +74,7 @@ public class ActivityViewProblem extends AppCompatActivity {
     }
 
     public void goAddRecord (View v){
-        Intent intent = new Intent(this, ActivityEditProblem.class);
+        Intent intent = new Intent(this, ActivityAddRecord.class);
         startActivity(intent);
     }
 }
