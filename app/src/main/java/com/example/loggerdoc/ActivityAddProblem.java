@@ -81,6 +81,7 @@ public class ActivityAddProblem extends AppCompatActivity {
 
         //Add problem to patient's problem list
         patient.getProblems().add(problem);
+
         changeActivity(v);
     }
 

@@ -1,7 +1,3 @@
-/*
-
- */
-
 package com.example.loggerdoc;
 
 import android.content.Intent;
@@ -44,7 +40,7 @@ public class ActivityEditProblem extends AppCompatActivity {
         problemTitleWarning = (ImageView) findViewById(R.id.warningEditTitle);
         problemDescriptionWarning = (ImageView) findViewById(R.id.warningEditDesc);
 
-
+        //Set the EditText's boxes to the appropriate attributes from the problem
         editTitle.setText(problem.getTitle());
         editDate.setText(problem.getTimestamp().toString());
         editDescription.setText(problem.getDescription());
@@ -58,6 +54,7 @@ public class ActivityEditProblem extends AppCompatActivity {
         boolean emptyTitle = checkEmptyString(editTitle.getText().toString());
         boolean emptyDescription = checkEmptyString(editDescription.getText().toString());
 
+        //If either of the problemTitle or the problemDescription is empty
         if (emptyTitle || emptyDescription){
 
             //Set the flag for the user to indicate the Title Field is Empty
@@ -73,10 +70,12 @@ public class ActivityEditProblem extends AppCompatActivity {
         }
 
         else {
+            //Update the problem's attributes
             problem.setTitle(editTitle.getText().toString());
             problem.setTimestamp(datePickerFragment);
             problem.setDescription(editDescription.getText().toString());
 
+            //Turn off the flags
             problemTitleWarning.setVisibility(View.INVISIBLE);
             problemDescriptionWarning.setVisibility(View.INVISIBLE);
 
@@ -90,6 +89,7 @@ public class ActivityEditProblem extends AppCompatActivity {
                 showAlertDialog("Error: Too Long Description","The description can be a maximum of 300 characters. Please shorten it");
             }
 
+            //Update the problem's list
             patient.getProblems().remove(problem);
             patient.getProblems().add(problem);
 
@@ -97,6 +97,10 @@ public class ActivityEditProblem extends AppCompatActivity {
         }
     }
 
+    /*
+     * Check if the string is empty. Takes a string as a parameter and returns true if empty.
+     * Returns false otherwise.
+     */
     public boolean checkEmptyString(String string){
         if (string.length() == 0){
             return true;
@@ -104,10 +108,12 @@ public class ActivityEditProblem extends AppCompatActivity {
         return false;
     }
 
+    //Show the Date Picker
     public void clickPickDate(View v){
         datePickerFragment.show(getSupportFragmentManager(), "pick_date");
     }
 
+    //Show an error Alert Dialog.
     private void showAlertDialog( String title, String message){
         Bundle messageArgs = new Bundle();
         messageArgs.putString(DialogProblem.TITLE_ID, title);
@@ -118,6 +124,7 @@ public class ActivityEditProblem extends AppCompatActivity {
         dialog.show(getSupportFragmentManager(), "error_dialog");
     }
 
+    //Change the activity to ActivityViewProblems
     public void changeActivity(View v){
         Intent intent = new Intent(this, ActivityViewProblem.class);
         intent.putExtra("Patient", patient);
