@@ -1,59 +1,71 @@
 package com.example.loggerdoc;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.TreeMap;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 class ElasticClient {
-    private String host;
-    ElasticClient(String host) {
-        this.host = host;
-    }
-    public TreeMap httpGET(String data){
-        HttpURLConnection conn;
-        TreeMap result;
-        try {
-            URL targ = new URL(host + data);
-            conn = (HttpURLConnection) targ.openConnection();
-            InputStreamReader inreader = new InputStreamReader(conn.getInputStream());
-            result = new Gson().fromJson(inreader, TreeMap.class);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result;
+    //private OkHttpClient client;
+    //private String host;
+    private httphandler handler;
 
 
+    ElasticClient(String host,OkHttpClient client) {
+        //this.host = host;
+        //this.client = client;
+        handler = new httphandler(client,host);
     }
 
-    public String getElasticVersion(){
-        /*HttpURLConnection conn;
-        String version = "";
+
+
+    public searchResponse eSearch(String address){
+        String x = handler.httpGET(address);
+
+        Gson gson = new Gson(); // Library to save objects
+
+        return gson.fromJson(x, searchResponse.class);
+
+    }
+    /*public String getElasticVersion(){
+        Request request = new Request.Builder()
+                .url(host)
+                .build();
+        Response response;
         try {
-            conn = (HttpURLConnection) host.openConnection();
+            response = client.newCall(request).execute();
+
+            ResponseBody x = response.body();
+            return x.string();
         } catch (IOException e) {
             e.printStackTrace();
-            return "";
         }
-        try {
-            InputStream in = new BufferedInputStream(conn.getInputStream());
-            InputStreamReader inreader = new InputStreamReader(in);
-            TreeMap result = new Gson().fromJson(inreader, TreeMap.class);
-            version = (String)((com.google.gson.internal.LinkedTreeMap)result.get("version")).get("number");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            conn.disconnect();
-        }
-        return version;*/
-        return "2";
+        return null;
+    }*/
+    public class basicResponse{
+        public String _index;
+        public String _type;
+        public String _id;
+    }
+    public class searchResponse extends basicResponse{
+        public boolean found;
+        public String _version;
+        public JsonObject _source;
+
+    }
+    private class blankResponse {
+        public String name;
+        public String cluster_name;
+        public String cluster_uuid;
+        public String version;
     }
 }
+
+
