@@ -15,8 +15,7 @@ public class Record {
     private String comment;
     private LocalDateTime timestamp;
 
-    // TODO: The following classes are not yet defined.
-    // private RecordGeoLocation recordGeoLocation;
+    private RecordGeoLocation recordGeoLocation;
     // private RecordBodyLocation recordBodyLocation;
     // private RecordPhotoList recordPhotoList;
 
@@ -50,4 +49,11 @@ public class Record {
         return timestamp;
     }
 
+    public void setRecordGeoLocation (RecordGeoLocation geoLocation){
+        this.recordGeoLocation = geoLocation;
+    }
+
+    public RecordGeoLocation getRecordGeoLocation(){
+        return this.recordGeoLocation;
+    }
 }
