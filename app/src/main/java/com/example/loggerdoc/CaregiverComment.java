@@ -8,12 +8,21 @@ public class CaregiverComment {
     private LocalDateTime date;
     private String comment;
 
+    /**
+     *
+     * @param caregiver caregiver will be the CareGiver that is mkaing the comment
+     * @param comment Comment is a string that the CareGiver is making as a comment
+     */
     public CaregiverComment (CareGiver caregiver, String comment){
         this.caregiver = caregiver;
         this.date = LocalDateTime.now();
         this.comment = comment;
     }
 
+    /**
+     *
+     * @return Returns the caregiver who made the comment
+     */
     public CareGiver getCaregiver() {
         return this.caregiver;
     }
@@ -22,6 +31,10 @@ public class CaregiverComment {
         this.caregiver = newCaregiver;
     }
 
+    /**
+     *
+     * @return Returns the date of when the comment was posted
+     */
     public LocalDateTime getDate(){
         return this.date;
     }
@@ -30,6 +43,10 @@ public class CaregiverComment {
         this.date = newDate;
     }
 
+    /**
+     *
+     * @return Returns the comment that the CareGiver made
+     */
     public String getComment(){
         return this.comment;
     }
