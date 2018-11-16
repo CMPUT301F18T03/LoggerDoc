@@ -9,7 +9,32 @@
     <string name="browse_problem_map">Browse Problem Map</string>
     <string name="caregiver_information">Caregiver Information</string>
     <string name="browse_patients">Browse Patients</string>
+HEAD
+    <string name="new_problem_title">Create A New Problem</string>
+    <string name="enter_problem_title">Please Enter A Problem Title:</string>
+    <string name="Problem_Start_Date_Instruction">Pick A Start Date For the Problem:</string>
+    <string name="enter_problem_desc">Enter A Problem Description:</string>
+    <string name="create_button">CREATE</string>
+    <string name="new_record_title">Add A Record:</string>
+    <string name="enter_record_title">Enter a Record Title:</string>
+    <string name="add_geo_button">Add Geo-Location</string>
+    <string name="add_body_location_button">Add Body Location</string>
+    <string name="add_photo_button">Add Photo</string>
+    <string name="edit_problem_button">Edit</string>
+    <string name="delete_button">Delete</string>
+    <string name="view_problem_date">Date of First Discovery:</string>
+    <string name="prob_desc_title">Problem Description:</string>
+    <string name="edit_problem_title">Edit Problem</string>
+    <string name="save_button">Save</string>
+    <string name="cancel_button">Cancel</string>
     <string name="userID">User ID</string>
     <string name="emailAddress">Email Address</string>
     <string name="phoneNumber">123-456-7890</string>
+    <string name="edit_title_problem">Edit Title:</string>
+    <string name="problemRecordTItle">Problem Records:</string>
+    <string name="addrecordbutton">Add Record</string>
+    <string name="CaregiversCommentTitle">Caregiver\'s Comments:</string>
+    <string name="recordImageTitle">Record Image(s):</string>
+    <string name="chooseDate">Pick Date</string>
+    6d355acae24733ee9f9d9d0017dc972737fbf333
 </resources>
