@@ -10,8 +10,8 @@ public class CareGiver extends User implements Serializable {
     private PatientList patients;
 
     // CareGiver constructor with an ID, email address, phone number and list of patients
-    public CareGiver(String careGiverID, String emailAddress, String phoneNumber, PatientList patients) {
-        super(careGiverID, emailAddress, phoneNumber);
+    public CareGiver(String careGiverID, String emailAddress, String phoneNumber, String role, PatientList patients) {
+        super(careGiverID, emailAddress, phoneNumber, role);
         this.patients = patients;
     }
 
