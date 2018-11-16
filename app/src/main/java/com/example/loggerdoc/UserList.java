@@ -20,6 +20,10 @@ public class UserList {
         return userArrayList;
     }
 
+    public void setUsers(ArrayList<User> newUserList){
+        this.userArrayList = newUserList;
+    }
+
     public void addUser(User user){
         userArrayList.add(user);
     }

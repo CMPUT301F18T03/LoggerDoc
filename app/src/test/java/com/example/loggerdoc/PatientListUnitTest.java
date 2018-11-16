@@ -11,7 +11,7 @@ public class PatientListUnitTest {
         PatientList testList = new PatientList();
         assertTrue("Size should be 0 since we have not added anything", testList.size() == 0);
 
-        Patient testPatient = new Patient("test", "test", "test", new CareGiverList());
+        Patient testPatient = new Patient("test", "test", "test","test", new CareGiverList());
         testList.addPatient(testPatient);
         assertTrue("Size should be 1", testList.size() == 1);
 
@@ -24,7 +24,7 @@ public class PatientListUnitTest {
         PatientList testList = new PatientList();
         assertTrue("Size should be 0 since we have not added anything", testList.size() == 0);
 
-        Patient testPatient = new Patient("test", "test", "test", new CareGiverList());
+        Patient testPatient = new Patient("test", "test", "test","test", new CareGiverList());
         testList.addPatient(testPatient);
         assertTrue("Size should be 1", testList.size() == 1);
         assertTrue("Does the list contain the object we added", testList.contains(testPatient));

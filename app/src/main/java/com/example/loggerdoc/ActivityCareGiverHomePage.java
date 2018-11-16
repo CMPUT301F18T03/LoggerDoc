@@ -16,7 +16,7 @@ public class ActivityCareGiverHomePage extends AppCompatActivity {
         // Set the textview to display the username
         // wil use the username to get the patient object from userlist.
         Intent intent = getIntent();
-        CareGiver caregiver = (CareGiver) intent.getSerializableExtra("Caregiver");
+        CareGiver caregiver = (CareGiver) intent.getSerializableExtra("CareGiver");
         TextView usernameTextView = (TextView) findViewById(R.id.username_text);
         usernameTextView.setText(caregiver.getUserID());
 

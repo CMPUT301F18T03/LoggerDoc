@@ -15,7 +15,7 @@ public class UserListUnitTest {
         UserList testList = UserListController.getUserList();
         assertTrue("Size should be 0 since we have not added anything", testList.size() == 0);
 
-        Patient testPatient = new Patient("test", "test", "test", new CareGiverList());
+        Patient testPatient = new Patient("test", "test", "test","role", new CareGiverList());
         testList.addUser(testPatient);
         assertTrue("Size should be 1", testList.size() == 1);
 
@@ -30,7 +30,7 @@ public class UserListUnitTest {
         UserList testList = UserListController.getUserList();
         assertTrue("Size should be 0 since we have not added anything", testList.size() == 0);
 
-        Patient testPatient = new Patient("test", "test", "test", new CareGiverList());
+        Patient testPatient = new Patient("test", "test", "test","test", new CareGiverList());
         testList.addUser(testPatient);
         assertTrue("Size should be 1", testList.size() == 1);
 
