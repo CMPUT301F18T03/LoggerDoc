@@ -52,7 +52,7 @@ public class ActivityLogin extends AppCompatActivity {
                     else {
                         CareGiver careGiver = SaveLoadController.loadCareGiverFromDisk(ActivityLogin.this, user.getUserID());
                         Intent intent = new Intent(ActivityLogin.this, ActivityCareGiverHomePage.class);
-                        intent.putExtra("CareGiver", careGiver);
+                        intent.putExtra("Caregiver", careGiver);
                         startActivity(intent);
                     }
                 }
