@@ -23,6 +23,7 @@ public class Record {
         this("");
     }
 
+
     public Record(String title) {
         this.title = title;
         this.comment = "";
