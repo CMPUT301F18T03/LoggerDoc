@@ -26,7 +26,7 @@ public class User implements Serializable {
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
         this.role = role;
-        this.elasticID = 0;
+        this.elasticID = this.hashCode();
     }
 
     /**

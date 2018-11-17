@@ -1,9 +1,14 @@
 package com.example.loggerdoc;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -61,6 +66,34 @@ class ElasticClient {
                 sender.httpPUT("/user/_doc/"+targ.getElasticID().toString(),jsonout);
             }
             return null;
+        }
+    }
+    public static class getUsersTask extends AsyncTask<Void, Void,UserList> {
+        @Override
+        protected UserList doInBackground(Void... voids) {
+            httphandler receiver = ElasticSearchController.getHttpHandler();
+            Gson gson = new Gson();
+            UserList ret = new UserList();
+            String jsonin = receiver.httpGET("/user/_doc/_search?q=*:*&filter_path=hits.hits.*");
+            if(jsonin == null){
+                return null;
+            }
+            try {
+                JSONArray hits = new JSONObject(jsonin).getJSONObject("hits").getJSONArray("hits");
+                for(int num = 0; num < hits.length();num++){
+                    JSONObject currentuser = hits.getJSONObject(num).getJSONObject("_source");
+                    if(currentuser.has("problems")){
+                        ret.addUser(gson.fromJson(currentuser.toString(),Patient.class));
+                    }
+                    else if(currentuser.has("patients")){
+                        ret.addUser(gson.fromJson(currentuser.toString(),CareGiver.class));
+                    }
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return ret;
         }
     }
     public class basicResponse{

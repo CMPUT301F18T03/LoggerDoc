@@ -22,6 +22,10 @@ public class CareGiver extends User implements Serializable {
         super(careGiverID, emailAddress, phoneNumber, role);
         this.patients = patients;
     }
+    public CareGiver(String careGiverID, String emailAddress, String phoneNumber, String role) {
+        super(careGiverID, emailAddress, phoneNumber, role);
+        this.patients = new PatientList();
+    }
 
     /**
      *
