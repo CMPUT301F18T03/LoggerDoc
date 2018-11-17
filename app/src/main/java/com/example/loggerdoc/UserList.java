@@ -16,7 +16,7 @@ public class UserList {
         userArrayList = new ArrayList<User>();
     }
 
-    public Collection<User> getUsers() {
+    public ArrayList<User> getUsers() {
         return userArrayList;
     }
 

@@ -11,6 +11,7 @@ public class User implements Serializable {
     private String emailAddress;
     private String phoneNumber;
     private String role;
+    private Integer elasticID;
 
     /**
      *
@@ -25,6 +26,7 @@ public class User implements Serializable {
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
         this.role = role;
+        this.elasticID = 0;
     }
 
     /**
@@ -85,4 +87,11 @@ public class User implements Serializable {
     }
 
 
+    public Integer getElasticID() {
+        return elasticID;
+    }
+
+    public void setElasticID(Integer elasticID) {
+        this.elasticID = elasticID;
+    }
 }

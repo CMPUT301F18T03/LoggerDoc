@@ -1,16 +1,13 @@
 package com.example.loggerdoc;
 
+import android.os.AsyncTask;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import java.io.IOException;
+import java.util.ArrayList;
 
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
 
 class ElasticClient {
     //private OkHttpClient client;
@@ -48,21 +45,24 @@ class ElasticClient {
         return gson.fromJson(x, searchResponse.class);
 
     }
-    /*public String getElasticVersion(){
-        Request request = new Request.Builder()
-                .url(host)
-                .build();
-        Response response;
-        try {
-            response = client.newCall(request).execute();
+    public static class uploadUsersTask extends AsyncTask<UserList, Void, Void> {
 
-            ResponseBody x = response.body();
-            return x.string();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        @Override
+        protected Void doInBackground(UserList... users) {
+            //Because we for some reason take a list of userlists in....
+            ArrayList<User> tosend =  users[0].getUsers();
+            Gson gson = new Gson();
+            String jsonout;
+            httphandler sender = ElasticSearchController.getHttpHandler();
+
+            for (User targ:tosend) {
+                jsonout = gson.toJson(targ);
+                sender.httpPUT("/user/_doc/"+targ.getElasticID().toString(),jsonout);
+            }
+            return null;
         }
-        return null;
-    }*/
+    }
     public class basicResponse{
         public String _index;
         public String _type;

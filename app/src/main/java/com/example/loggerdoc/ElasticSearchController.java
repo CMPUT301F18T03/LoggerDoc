@@ -23,4 +23,8 @@ public class ElasticSearchController {
         }
         return client;
     }
+
+    public static httphandler getHttpHandler(){
+        return new httphandler(getHttpClient(),HOST);
+    }
 }
