@@ -63,3 +63,7 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
+
+\.idea/inspectionProfiles/profiles_settings\.xml
+
+\.idea/inspectionProfiles/Project_Default\.xml
