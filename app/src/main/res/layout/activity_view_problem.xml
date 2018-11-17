@@ -6,4 +6,145 @@
     android:layout_height="match_parent"
     tools:context=".ActivityViewProblem">
 
+    <TextView
+        android:id="@+id/TitleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Placeholder"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="88dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="4dp"
+        android:onClick="goDeleteProblem"
+        android:text="@string/delete_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/TitleView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/editButton"
+        android:layout_width="88dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="1dp"
+        android:onClick="goEditProblem"
+        android:text="@string/edit_problem_button"
+        app:layout_constraintEnd_toStartOf="@+id/TitleView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/dateOfFirstTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/view_problem_date"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="70dp"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/dateProblemView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/textviewborder"
+                android:padding="10dp"
+                android:text="PlaceholderForDate"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/descriptionProblemTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/prob_desc_title"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/descriptionProblemView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/textviewborder"
+                android:padding="10dp"
+                android:textColor="@android:color/black"
+                android:text="PlaceholderForDescription" />
+
+            <TextView
+                android:id="@+id/recordsProblemTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/problemRecordTItle"
+                android:textColor="@android:color/black"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:textSize="18sp" />
+
+            <ListView
+                android:id="@+id/recordsListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/textviewborder"
+                android:padding="10dp" />
+
+            <Button
+                android:id="@+id/addRecordButton"
+                android:layout_width="120dp"
+                android:layout_height="37dp"
+                android:layout_marginStart="15dp"
+                android:onClick="goAddRecord"
+                android:text="@string/addrecordbutton" />
+
+            <TextView
+                android:id="@+id/caregiverCommentTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/CaregiversCommentTitle"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"/>
+
+            <ListView
+                android:id="@+id/commentProblemListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/textviewborder"
+                android:padding="10dp"/>
+
+
+        </LinearLayout>
+    </ScrollView>
+
 </android.support.constraint.ConstraintLayout>

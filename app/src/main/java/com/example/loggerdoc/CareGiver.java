@@ -9,10 +9,26 @@ public class CareGiver extends User implements Serializable {
     // Each CareGiver will have a unique set of patients
     private PatientList patients;
 
+    /**
+     *
+     * @param careGiverID Unique username that the user picks. Must be at least 8 characters
+     * @param emailAddress email address of the user
+     * @param phoneNumber phone number of the user
+     * @param role role will always be "Caregiver" when making a CareGiver object
+     * @param patients A CareGiver will have a list of patients that they are connected too
+     */
     // CareGiver constructor with an ID, email address, phone number and list of patients
-    public CareGiver(String careGiverID, String emailAddress, String phoneNumber, PatientList patients) {
-        super(careGiverID, emailAddress, phoneNumber);
+    public CareGiver(String careGiverID, String emailAddress, String phoneNumber, String role, PatientList patients) {
+        super(careGiverID, emailAddress, phoneNumber, role);
         this.patients = patients;
+    }
+
+    /**
+     *
+     * @return returns the Patient List that the user has
+     */
+    public PatientList getPatientList(){
+        return patients;
     }
 
 }
