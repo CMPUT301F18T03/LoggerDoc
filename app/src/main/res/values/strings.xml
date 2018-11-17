@@ -9,7 +9,7 @@
     <string name="browse_problem_map">Browse Problem Map</string>
     <string name="caregiver_information">Caregiver Information</string>
     <string name="browse_patients">Browse Patients</string>
-HEAD
+    HEAD
     <string name="new_problem_title">Create A New Problem</string>
     <string name="enter_problem_title">Please Enter A Problem Title:</string>
     <string name="Problem_Start_Date_Instruction">Pick A Start Date For the Problem:</string>
@@ -36,5 +36,7 @@ HEAD
     <string name="CaregiversCommentTitle">Caregiver\'s Comments:</string>
     <string name="recordImageTitle">Record Image(s):</string>
     <string name="chooseDate">Pick Date</string>
+    <string name="title_activity_add_geolocation">Map</string>
+    <string name="google_maps_API_key">AIzaSyA2Qy_g9lI0RD34ZqSbCkOQm0KsM8Vro1I</string>
     6d355acae24733ee9f9d9d0017dc972737fbf333
 </resources>

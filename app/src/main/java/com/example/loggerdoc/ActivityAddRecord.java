@@ -1,31 +1,31 @@
 package com.example.loggerdoc;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import android.app.Dialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+
 
 public class ActivityAddRecord extends AppCompatActivity {
-    private FusedLocationProviderClient mFusedLocationClient;
-    private int MY_PERMISSION_ACCESS_COARSE_LOCATION = 1;
+
     private EditText recordTitleText;
     private TextView geoLocationText;
+    private static final String TAG = "ActivityAddRecord";
+    private static final int ERROR_DIALOG_REQUEST = 9001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_record);
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
     }
 
     @Override
@@ -33,6 +33,21 @@ public class ActivityAddRecord extends AppCompatActivity {
         super.onResume();
         recordTitleText = (EditText) findViewById(R.id.record_title_text);
         geoLocationText = (TextView) findViewById(R.id.Geolocation_text);
+
+        if (isServicesOkay()){
+          initialize();
+        }
+    }
+
+    private void initialize(){
+        Button mapButton = (Button) findViewById(R.id.mapButton);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityAddRecord.this, ActivityAddGeolocation.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void createRecord (View v){
@@ -47,35 +62,9 @@ public class ActivityAddRecord extends AppCompatActivity {
         else{
             Record newRecord = new Record (recordTitleText.getText().toString());
 
-            if (geoLocationText != null){
-                //add the geolocation to the newRecord
-            }
         }
     }
 
-
-    //To be called when Add Geo-Location button is pressed
-    public void addGeoLocation (View v){
-
-        //Check if we have permission to access Location Services
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // Permission is not granted
-            ActivityCompat.requestPermissions( this, new String[] {  android.Manifest.permission.ACCESS_COARSE_LOCATION  },
-                    MY_PERMISSION_ACCESS_COARSE_LOCATION );
-        }
-
-        mFusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        // Got last known location. In some rare situations this can be null.
-                        if (location != null) {
-                            // Logic to handle location object
-                            geoLocationText.setText("Latitude: " + location.getLatitude() + ", Longitude: " + location.getLongitude());
-                        }
-                    }
-                });
-    }
 
     public void addBodyLocation (View v){
 
@@ -83,6 +72,29 @@ public class ActivityAddRecord extends AppCompatActivity {
 
     public void addPhoto (View v){
 
+    }
+
+    public boolean isServicesOkay(){
+        Log.d(TAG, "isServicesOkay: checking google services version");
+        int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(ActivityAddRecord.this);
+
+        if (available == ConnectionResult.SUCCESS){
+            //everything is okay and the user can make map requests
+            Log.d(TAG, "google play services is working");
+            return true;
+        }
+
+        else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)){
+            //an error occured but we can resolve it
+            Log.d(TAG, "isServicesOkay: an error occured but we can fix it");
+            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(ActivityAddRecord.this,available,ERROR_DIALOG_REQUEST);
+            dialog.show();
+        }
+
+        else{
+            Toast.makeText(this, "You can't make map requests", Toast.LENGTH_SHORT).show();
+        }
+        return false;
     }
 
     public boolean checkEmptyString(String string){
