@@ -15,11 +15,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
     private ListView patientList;
     private ArrayAdapter<Patient> adapter;
     private CareGiver loggedInCaregiver;
+    private TextView userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,10 @@ public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
         Intent intent = getIntent();
         loggedInCaregiver = (CareGiver) intent.getSerializableExtra("Caregiver");
         intent.removeExtra("Caregiver");
+
+        //set textview to the logged in caregivers user ID
+        userId = (TextView) findViewById(R.id.patientListUsernameText);
+        userId.setText(loggedInCaregiver.getUserID());
     }
 
 

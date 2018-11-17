@@ -21,7 +21,8 @@ public class ActivityUpdateContactInfo extends AppCompatActivity {
     private EditText emailEditText;
     private EditText phoneNumberEditText;
     private ImageView contactInfoEmailWarning;
-    private ImageView contactInfoPhoneWarning; 
+    private ImageView contactInfoPhoneWarning;
+    private TextView userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +34,15 @@ public class ActivityUpdateContactInfo extends AppCompatActivity {
         phoneNumberEditText = (EditText) findViewById(R.id.edit_contact_info_number_view);
         contactInfoEmailWarning = (ImageView) findViewById(R.id.warningEditEmail);
         contactInfoPhoneWarning = (ImageView) findViewById(R.id.warningEditPhoneNumber);
+        userId = (TextView) findViewById(R.id.UpdateContactInfoUsernameView);
 
 
         //get the logged in user from the intent
         Intent intent = getIntent();
         getLoggedInUser(intent);
+        userId.setText(loggedInUser.getUserID());
+        emailEditText.setText(loggedInUser.getEmailAddress());
+        phoneNumberEditText.setText(loggedInUser.getPhoneNumber());
 
     }
 
@@ -48,10 +53,11 @@ public class ActivityUpdateContactInfo extends AppCompatActivity {
         String newEmail = emailEditText.getText().toString();
         String newPhoneNumber = phoneNumberEditText.getText().toString();
 
+        //if the new changes are valid, set them to the user and close the activity
         if(checkChanges(newEmail, newPhoneNumber)) {
             loggedInUser.setEmailAddress(newEmail);
             loggedInUser.setPhoneNumber(newPhoneNumber);
-            //TODO close the activity
+            finish();
         }
 
     }
@@ -59,7 +65,7 @@ public class ActivityUpdateContactInfo extends AppCompatActivity {
     //this method closes the update contact info method without updating any of the users
     //information
     public void cancelChanges(View view){
-        //TODO close the activity
+        finish();
     }
 
 
@@ -127,17 +133,24 @@ public class ActivityUpdateContactInfo extends AppCompatActivity {
 
 
     public void getLoggedInUser(Intent intent){
+        //try to get a caregiver object passed from previous intent
         try{
             loggedInUser = (CareGiver) intent.getSerializableExtra("Caregiver");
 
         }catch(Exception e){
-            //not a caregiver, must be Gryffendor
+            //not a caregiver
         }
-        try{
-            loggedInUser = (Patient) intent.getSerializableExtra("Patient");
 
-        }catch(Exception e){
-            //not a patient either? I think I broke something
+        //if the object is null, then a caregiver was not passed and it must have been a patient that was passed
+        if (loggedInUser == null) {
+
+            //try to get the patient passed from previous intent and set it to the user
+            try {
+                loggedInUser = (Patient) intent.getSerializableExtra("Patient");
+
+            } catch (Exception e) {
+                //not a patient either? not good
+            }
         }
 
     }
