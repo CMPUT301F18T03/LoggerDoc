@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityUpdateContactInfo">
+
+    <TextView
+        android:id="@+id/UpdateContactInfoUsernameView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Username"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/UpdateContactInfoCancelButton"
+        android:layout_width="88dp"
+        android:layout_height="37dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="28dp"
+        android:onClick="cancelChanges"
+        android:text="@string/cancel_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/UpdateContactInfoUsernameView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/updateContactInfoSaveButton"
+        android:layout_width="88dp"
+        android:layout_height="37dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginTop="30dp"
+        android:onClick="saveChanges"
+        android:text="@string/save_button"
+        app:layout_constraintEnd_toStartOf="@+id/UpdateContactInfoUsernameView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/warningEditPhoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="220dp"
+        android:layout_marginEnd="320dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/warningEditEmail"
+        app:srcCompat="@drawable/star" />
+
+    <ImageView
+        android:id="@+id/warningEditEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="320dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="95dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/star" />
+
+    <LinearLayout
+        android:layout_width="368dp"
+        android:layout_height="484dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UpdateContactInfoUsernameView">
+
+        <TextView
+            android:id="@+id/edit_contact_info_email_address"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="15dp"
+            android:text="@string/email_address"
+            android:textAppearance="@android:style/TextAppearance.Holo.Medium"
+            android:textSize="22dp" />
+
+        <EditText
+            android:id="@+id/edit_contact_info_email_view"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="Placeholder"
+            android:textAppearance="@android:style/TextAppearance.Holo.Medium"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/edit_contact_info_phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="15dp"
+            android:text="@string/phone_number"
+            android:textAppearance="@android:style/TextAppearance.Holo.Medium"
+            android:textSize="22sp" />
+
+        <EditText
+            android:id="@+id/edit_contact_info_number_view"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="Placeholder"
+            android:textAppearance="@android:style/TextAppearance.Holo.Medium"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

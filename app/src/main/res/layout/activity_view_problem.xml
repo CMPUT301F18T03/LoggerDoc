@@ -31,7 +31,7 @@
         android:onClick="goDeleteProblem"
         android:text="@string/delete_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/TitleView"
+        app:layout_constraintStart_toEndOf="@+id/UpdateContactInfoUsernameView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -42,7 +42,7 @@
         android:layout_marginEnd="1dp"
         android:onClick="goEditProblem"
         android:text="@string/edit_problem_button"
-        app:layout_constraintEnd_toStartOf="@+id/TitleView"
+        app:layout_constraintEnd_toStartOf="@+id/UpdateContactInfoUsernameView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
