@@ -40,5 +40,6 @@
     <string name="phone_number">Phone Number:</string>
     <string name="browse_patients_title">Browse Patients</string>
     <string name="caregiver_flag">Caregiver</string>
+    <string name="patient_flag">Patient</string>
     6d355acae24733ee9f9d9d0017dc972737fbf333
 </resources>
