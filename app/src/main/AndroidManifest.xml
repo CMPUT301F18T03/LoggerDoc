@@ -35,10 +35,7 @@
         <activity android:name=".ActivityAddGeoLocation" />
         <activity android:name=".ActivityUserProfile" />
         <activity android:name=".ActivityUserProfileEdit" />
-        HEAD
         <activity android:name=".ActivityAddRecord" />
-        =======
-        0a45a2f1a9dad3fc8766e1807d38a35339f414e2
         <activity android:name=".ActivityUpdateContactInfo"></activity>
     </application>
 
