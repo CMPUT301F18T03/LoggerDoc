@@ -18,21 +18,24 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class PatientListAdapter extends ArrayAdapter<Patient> {
+public class AdapterListPatient extends ArrayAdapter<Patient> {
     //custom adapter  built to display the data of a patient in the patient list
 
     private Context adapterContext;
     private int adapterResource;
-    public PatientListAdapter(Context context, int resource, ArrayList<Patient> patients){
+
+    public AdapterListPatient(Context context, int resource, ArrayList<Patient> patients){
         super(context, resource, patients);
         adapterContext = context;
         adapterResource = resource;
     }
+
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup Parent){
         //This method gets the values of userID, emailAddress and phoneNumber from each
         //patient in the list and displays them in the custom xml layout patient_listview_layout
+
         String patientID = getItem(position).getUserID();
         String patientEmail = getItem(position).getEmailAddress();
         String patientPhoneNum = getItem(position).getPhoneNumber();

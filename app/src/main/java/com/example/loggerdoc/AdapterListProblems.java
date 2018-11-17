@@ -32,7 +32,7 @@ public class AdapterListProblems extends ArrayAdapter<Problem> {
         }
         Problem currentProblem = problemList.get(position);
 
-        TextView problemTitle = (TextView) listitem.findViewById(R.id.TitleView);
+        TextView problemTitle = (TextView) listitem.findViewById(R.id.UpdateContactInfoUsernameView);
         problemTitle.setText(currentProblem.getTitle());
 
         TextView date = (TextView) listitem.findViewById(R.id.DateView);

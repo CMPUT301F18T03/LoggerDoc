@@ -8,9 +8,9 @@
 package com.example.loggerdoc;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,8 +25,9 @@ public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_care_giver_browse_patients);
-
         patientList = (ListView) findViewById(R.id.PatientList);
+
+        //get the caregiver from the intent
         Intent intent = getIntent();
         loggedInCaregiver = (CareGiver) intent.getSerializableExtra("Caregiver");
     }
@@ -37,11 +38,12 @@ public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
         super.onStart();
         //The patient list adapter provides a custom view for each patient in the list, displaying
         //their user ID, email and phone number
-        adapter = new PatientListAdapter(this,
+        //initialize adapter and set it to the patient list
+        adapter = new AdapterListPatient(this,
                 R.layout.patient_listview_layout, loggedInCaregiver.getPatientList().getPatients());
-
-
         patientList.setAdapter(adapter);
+
+        //Set the onClickListener for the listView. This will call toProblemListActivity().
         patientList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -51,13 +53,20 @@ public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
             }
         });
 
+
+        // Set the Add Patient button. When this button is pressed it will call toAddPatient().
+        FloatingActionButton addProblemButton = (FloatingActionButton) findViewById(R.id.addProblemButton);
+        addProblemButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toAddPatient(view);
+            }
+        });
+
     }
 
-    public void onHomeButton(View view) {
-        Intent intent = new Intent(this, ActivityCareGiverHomePage.class);
-        startActivity(intent);
-    }
 
+    //this method changes the current activity to the addPatient activity
     public void toAddPatient(View view) {
         Intent intent = new Intent(this, ActivityCareGiverAddPatient.class);
         intent.putExtra("Caregiver", loggedInCaregiver);
