@@ -25,16 +25,6 @@ public class ElasticTest {
         assertEquals("{\"_index\":\"test\",\"_type\":\"_doc\",\"_id\":\"2\",\"_version\":1,\"found\":true,\"_source\":{\"name\": \"Jane Doe\"}}",handler.httpGET("/test/_doc/2"));
         handler.httpDELETE("/test/_doc/2");
         assertEquals("{\"_index\":\"test\",\"_type\":\"_doc\",\"_id\":\"2\",\"found\":false}",handler.httpGET("/test/_doc/2"));
-
-        /*System.out.println(testclient.httpGET(""));
-        System.out.println(testclient.httpGET("_doc/2"));
-        System.out.println(testclient.httpPUT("_doc/2","{\"name\": \"Jane Doe\"}"));
-
-        System.out.println(testclient.httpGET("_doc/2"));
-
-        System.out.println(testclient.eSearch("_doc/2")._version);
-
-        System.out.println(testclient.httpDELETE("_doc/2"));
-        System.out.println(testclient.httpGET("_doc/2"));*/
+        
     }
 }
