@@ -30,6 +30,7 @@ public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
         //get the caregiver from the intent
         Intent intent = getIntent();
         loggedInCaregiver = (CareGiver) intent.getSerializableExtra("Caregiver");
+        intent.removeExtra("Caregiver");
     }
 
 
@@ -57,8 +58,8 @@ public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
 
 
         // Set the Add Patient button. When this button is pressed it will call toAddPatient().
-        FloatingActionButton addProblemButton = (FloatingActionButton) findViewById(R.id.addProblemButton);
-        addProblemButton.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton addPatientButton = (FloatingActionButton) findViewById(R.id.addPatientButton);
+        addPatientButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 toAddPatient(view);

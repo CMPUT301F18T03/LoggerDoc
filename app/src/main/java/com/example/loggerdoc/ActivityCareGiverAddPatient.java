@@ -20,13 +20,15 @@ public class ActivityCareGiverAddPatient extends AppCompatActivity {
 
     private CareGiver loggedInCareGiver;
     private Patient patientToAdd;
+    EditText userID;
 
-    EditText userID = (EditText) findViewById(R.id.AddPatientEditText);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_care_giver_add_patient);
+        userID = (EditText) findViewById(R.id.AddPatientEditText);
 
         Intent intent = getIntent();
         loggedInCareGiver = (CareGiver) intent.getSerializableExtra("Caregiver");

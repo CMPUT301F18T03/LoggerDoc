@@ -18,16 +18,22 @@ import android.widget.TextView;
 public class ActivityUpdateContactInfo extends AppCompatActivity {
 
     User loggedInUser;
-    EditText emailEditText = (EditText) findViewById(R.id.edit_contact_info_email_view);
-    EditText phoneNumberEditText = (EditText) findViewById(R.id.edit_contact_info_number_view);
-    private ImageView contactInfoEmailWarning = (ImageView) findViewById(R.id.warningEditEmail);
-    private ImageView contactInfoPhoneWarning = (ImageView) findViewById(R.id.warningEditPhoneNumber);
-
+    private EditText emailEditText;
+    private EditText phoneNumberEditText;
+    private ImageView contactInfoEmailWarning;
+    private ImageView contactInfoPhoneWarning; 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_contact_info);
+
+        //initialize all of the views
+        emailEditText = (EditText) findViewById(R.id.edit_contact_info_email_view);
+        phoneNumberEditText = (EditText) findViewById(R.id.edit_contact_info_number_view);
+        contactInfoEmailWarning = (ImageView) findViewById(R.id.warningEditEmail);
+        contactInfoPhoneWarning = (ImageView) findViewById(R.id.warningEditPhoneNumber);
+
 
         //get the logged in user from the intent
         Intent intent = getIntent();
