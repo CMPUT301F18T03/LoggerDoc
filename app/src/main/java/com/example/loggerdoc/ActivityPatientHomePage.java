@@ -19,7 +19,7 @@ public class ActivityPatientHomePage extends AppCompatActivity {
         // Set the textview to display the username
         Intent intent = getIntent();
         patient = (Patient) intent.getSerializableExtra("Patient");
-        TextView usernameTextView = (TextView) findViewById(R.id.Username_text);
+        TextView usernameTextView = (TextView) findViewById(R.id.patient_username_text);
         usernameTextView.setText(patient.getUserID());
 
         UserList userList = UserListController.getUserList();
@@ -36,11 +36,23 @@ public class ActivityPatientHomePage extends AppCompatActivity {
 
     }
 
+
+    //this method changes the current activity to the browse problems activity
     public void changeActivity (View v){
         Intent intent = new Intent(this, ActivityBrowseProblems.class);
         intent.putExtra("Patient", patient);
         startActivity(intent);
     }
+
+    //this method changes the current activity to the update contact info activity
+    public void toUpdateContactInfo(View v){
+        Intent intent = new Intent(this, ActivityUpdateContactInfo.class);
+        intent.putExtra("Patient", patient);
+        startActivity(intent);
+
+    }
+
+
 
 
 

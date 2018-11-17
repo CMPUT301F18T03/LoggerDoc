@@ -43,6 +43,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/soft_blue"
+        android:onClick="toUpdateContactInfo"
         android:text="Edit Contact Information"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -48,6 +48,8 @@ public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Patient selectedPatient = (Patient) parent.getItemAtPosition(position);
+                toBrowseProblemsActivity(selectedPatient);
+
 
 
             }
@@ -70,6 +72,16 @@ public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
     public void toAddPatient(View view) {
         Intent intent = new Intent(this, ActivityCareGiverAddPatient.class);
         intent.putExtra("Caregiver", loggedInCaregiver);
+        startActivity(intent);
+    }
+
+
+    //this method takes a patient and switches the current activity to the patients browse problems activity
+    //@alex if you see this and I forget to ask, should it also pass the logged in caregiver so
+    //he/she can add comments?
+    public void toBrowseProblemsActivity(Patient patient){
+        Intent intent = new Intent(this, ActivityBrowseProblems.class);
+        intent.putExtra("Patient", patient);
         startActivity(intent);
     }
 
