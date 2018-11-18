@@ -41,6 +41,18 @@ public class ProblemUnitTest {
     }
 
     @Test
+    public void testGetRecordsList(){
+        Problem problem = new Problem("",new DatePickerFragment(),"");
+        Record record = new Record();
+        RecordList recordList = new RecordList();
+
+        problem.addRecord(record);
+        recordList.add(record);
+
+        assertEquals(recordList, problem.getRecordList());
+    }
+
+    @Test
     public void TestProblemRecordListAdd() {
         Problem problem = new Problem("",new DatePickerFragment(),"");
         Record record = new Record();
@@ -48,4 +60,36 @@ public class ProblemUnitTest {
         assertTrue("Problem's record list should contain record",
                 problem.getRecordList().contains(record));
     }
+
+    @Test
+    public void getCaregiverCommetnList(){
+        Problem problem = new Problem("",new DatePickerFragment(),"");
+        CaregiverComment caregiverComment = new CaregiverComment(new CareGiver("test",
+                "test", "test","test", new PatientList()),
+                "Looks good");
+
+        CaregiverCommentList comments = new CaregiverCommentList();
+
+        comments.addComment(caregiverComment);
+        problem.addComment(caregiverComment);
+
+        assertEquals(comments, problem.getCommentList());
+    }
+
+    @Test
+    public void testCaregiverCommentAdd(){
+        Problem problem = new Problem("",new DatePickerFragment(),"");
+        CaregiverComment caregiverComment = new CaregiverComment(new CareGiver("test",
+                "test", "test","test", new PatientList()),
+                "Looks good");
+
+        problem.addComment(caregiverComment);
+
+        assertTrue("Problem's caregiver comment list should contain comment",
+                problem.getCommentList().contains(caregiverComment));
+    }
+
+
+
+
 }
