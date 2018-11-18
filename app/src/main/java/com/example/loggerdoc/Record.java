@@ -7,9 +7,10 @@
 
 package com.example.loggerdoc;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Record {
+public class Record implements Serializable {
 
     private String title;
     private String comment;

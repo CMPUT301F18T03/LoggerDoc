@@ -1,8 +1,9 @@
 package com.example.loggerdoc;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CaregiverCommentList {
+public class CaregiverCommentList implements Serializable {
 
     private ArrayList <CaregiverComment> comments;
 
@@ -19,6 +20,10 @@ public class CaregiverCommentList {
      */
     public ArrayList<CaregiverComment> getComments(){
         return this.comments;
+    }
+
+    public boolean containsComment (CaregiverComment comment){
+        return this.comments.contains(comment);
     }
 
     /**
