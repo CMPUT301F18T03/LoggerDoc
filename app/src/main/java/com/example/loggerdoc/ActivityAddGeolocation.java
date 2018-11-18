@@ -58,7 +58,7 @@ public class ActivityAddGeolocation extends AppCompatActivity implements OnMapRe
                 RecordGeoLocation geoLocation = new RecordGeoLocation(options.getPosition());
                 Intent intent = new Intent(ActivityAddGeolocation.this, ActivityAddRecord.class);
                 intent.putExtra("Patient", patient);
-                intent.putExtra("Flag", "a");
+                intent.putExtra("Flag", "b");
                 intent.putExtra("Record", record);
                 intent.putExtra("geoLocation", geoLocation);
                 startActivity(intent);

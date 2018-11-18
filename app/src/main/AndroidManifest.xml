@@ -42,11 +42,8 @@
         <activity android:name=".ActivityUserProfile" />
         <activity android:name=".ActivityUserProfileEdit" />
         <activity android:name=".ActivityAddRecord" />
-<<<<<<< HEAD
         <activity android:name=".ActivityAddGeolocation"></activity>
-=======
         <activity android:name=".ActivityUpdateContactInfo"></activity>
->>>>>>> 51a6ac24f3ac78e343b563183163c65482c4ddf6
     </application>
 
 </manifest>

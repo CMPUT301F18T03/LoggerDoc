@@ -99,7 +99,7 @@ public class ActivityViewProblem extends AppCompatActivity {
     //Change to AddRecord Activity
     public void goAddRecord (View v){
         Intent intent = new Intent(this, ActivityAddRecord.class);
-        intent.putExtra("Flag", "b");
+        intent.putExtra("Flag", "a");
         startActivity(intent);
     }
 }

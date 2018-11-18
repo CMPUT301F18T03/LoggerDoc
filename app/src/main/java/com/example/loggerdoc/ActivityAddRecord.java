@@ -41,10 +41,14 @@ public class ActivityAddRecord extends AppCompatActivity {
         recordTitleText = (EditText) findViewById(R.id.record_title_text);
         geoLocationText = (TextView) findViewById(R.id.Geolocation_text);
 
-        if (flag.equals("a")){
+        if (flag.equals("b")){
             geoLocation = (RecordGeoLocation) intent.getSerializableExtra("geoLocation");
-            record = (Record) intent.getSerializableExtra("Record");
             geoLocationText.setText("Latitude: " + String.valueOf(geoLocation.getLatitude()) + " Longitude: " + String.valueOf(geoLocation.getLongitude()));
+        }
+
+        if (!flag.equals("a")){
+            record = (Record) intent.getSerializableExtra("Record");
+            recordTitleText.setText(record.getTitle());
         }
 
         if (isServicesOkay()){
@@ -76,16 +80,10 @@ public class ActivityAddRecord extends AppCompatActivity {
 
         else{
            record = new Record (recordTitleText.getText().toString());
+           if (geoLocation == null) {
+               record.setRecordGeoLocation(geoLocation);
+           }
         }
-    }
-
-
-    public void addBodyLocation (View v){
-
-    }
-
-    public void addPhoto (View v){
-
     }
 
     public boolean isServicesOkay(){

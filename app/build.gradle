@@ -31,10 +31,6 @@ dependencies {
     implementation 'com.android.support:support-v4:28.0.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation 'com.android.support:design:28.0.0'
-<<<<<<< HEAD
     implementation 'com.google.android.gms:play-services-places:16.0.0'
-
-=======
     implementation 'com.squareup.okhttp3:okhttp:3.7.0'
->>>>>>> 51a6ac24f3ac78e343b563183163c65482c4ddf6
 }
