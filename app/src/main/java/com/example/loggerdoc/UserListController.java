@@ -18,7 +18,7 @@ public class UserListController {
     }
 
     public static void setList(UserList list) {
-        userList.become(list);
+        getUserList().become(list);
     }
 
     public void addUser(User user) {

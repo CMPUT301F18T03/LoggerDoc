@@ -83,6 +83,9 @@ public class getUsersTask extends AsyncTask<Void, Void,UserList> {
     @Override
     protected void onPostExecute(UserList x){
         context = null;
-        callback.dataCallBack(x);
+        if(callback != null){
+            callback.dataCallBack(x);
+        }
+
     }
 }
