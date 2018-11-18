@@ -1,6 +1,7 @@
 package com.example.loggerdoc;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.annotation.NonNull;
@@ -9,6 +10,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -28,6 +31,7 @@ public class ActivityAddGeolocation extends AppCompatActivity implements OnMapRe
     private static final int locationPermissionRequestCode = 1234;
     private GoogleMap locationMap;
     private LatLng defaultLocation = new LatLng(53.5232, -113.5263);
+    private  MarkerOptions options;
 
     private boolean mapLocationPermissionsGranted = false;
     private FusedLocationProviderClient mapFusedLocationProviderClient;
@@ -42,7 +46,22 @@ public class ActivityAddGeolocation extends AppCompatActivity implements OnMapRe
     @Override
     protected void onResume() {
         super.onResume();
+        Intent firstIntent = getIntent();
+        final Patient patient = (Patient) firstIntent.getSerializableExtra("Patient");
+        final Record record = (Record) firstIntent.getSerializableExtra("Record");
+
         checkLocationPermissions();
+        Button saveButton = (Button) findViewById(R.id.saveGeolocationButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RecordGeoLocation geoLocation = new RecordGeoLocation(options.getPosition());
+                Intent intent = new Intent(ActivityAddGeolocation.this, ActivityAddRecord.class);
+                intent.putExtra("Patient", patient);
+                intent.putExtra("Record", record);
+                intent.putExtra("geoLocation", geoLocation);
+            }
+        });
     }
 
     private void checkLocationPermissions() {
@@ -141,7 +160,7 @@ public class ActivityAddGeolocation extends AppCompatActivity implements OnMapRe
     private void moveCamera (LatLng latLng, float zoom, String title){
         locationMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,zoom));
 
-        MarkerOptions options = new MarkerOptions().position(latLng).title(title);
+        options = new MarkerOptions().position(latLng).title(title);
         options.draggable(true);
         locationMap.addMarker(options);
     }

@@ -61,7 +61,6 @@ public class ActivityAddRecord extends AppCompatActivity {
 
         else{
             Record newRecord = new Record (recordTitleText.getText().toString());
-
         }
     }
 
@@ -86,7 +85,6 @@ public class ActivityAddRecord extends AppCompatActivity {
 
         else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)){
             //an error occured but we can resolve it
-            Log.d(TAG, "isServicesOkay: an error occured but we can fix it");
             Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(ActivityAddRecord.this,available,ERROR_DIALOG_REQUEST);
             dialog.show();
         }

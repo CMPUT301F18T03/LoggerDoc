@@ -13,14 +13,14 @@
         tools:context=".MapsActivity"
         android:name="com.google.android.gms.maps.SupportMapFragment" />
 
-    <ImageView
-        android:layout_width="40dp"
+    <Button
+        android:layout_width="80dp"
         android:layout_height="40dp"
-        android:id = "@+id/placePicker"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
-        android:scaleType="centerCrop"
-        android:src = "@drawable/ic_map"/>
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/save_button"
+        android:id = "@+id/saveGeolocationButton"
+        />
 
 
 </RelativeLayout>
