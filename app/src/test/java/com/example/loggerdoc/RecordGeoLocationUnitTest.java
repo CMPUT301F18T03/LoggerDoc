@@ -34,6 +34,6 @@ public class RecordGeoLocationUnitTest {
     public void testSetLatitude(){
         RecordGeoLocation geoLocation = new RecordGeoLocation(new LatLng(VALID_LATITUDE, VALID_LONGITUDE));
         geoLocation.setLatitude(40.0001);
-        assertEquals(40.001, geoLocation.getLatitude());
+        assertEquals(40.0001, geoLocation.getLatitude());
     }
 }

@@ -11,11 +11,11 @@ public class CaregiverCommentUnitTest {
 
     @Test
     public void testGetCaregiver(){
-        CaregiverComment caregiverComment = new CaregiverComment(new CareGiver("test",
-                "test", "test","test", new PatientList()),
-                "Looks good");
+        CareGiver careGiver = new CareGiver("test",
+                "test", "test","test", new PatientList());
+        CaregiverComment caregiverComment = new CaregiverComment(careGiver, "Looks good");
 
-        assertEquals("test", caregiverComment.getCaregiver());
+        assertEquals(careGiver, caregiverComment.getCaregiver());
     }
 
     @Test

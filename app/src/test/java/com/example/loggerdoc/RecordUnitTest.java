@@ -11,15 +11,6 @@ import static org.junit.Assert.*;
 public class RecordUnitTest {
 
     @Test
-    public void testConstructor(){
-
-        Record record = new Record("title");
-        assertEquals("title", record.getTitle());
-        assertNull(record.getComment());
-
-    }
-
-    @Test
     public void testSetRecordTitle() {
         String title = "A test record";
         Record record = new Record(title);

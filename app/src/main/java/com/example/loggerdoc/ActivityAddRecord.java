@@ -17,6 +17,7 @@ import com.google.android.gms.common.GoogleApiAvailability;
 public class ActivityAddRecord extends AppCompatActivity {
 
     private EditText recordTitleText;
+    private EditText recordCommentText;
     private RecordGeoLocation geoLocation;
     private TextView latitudeText;
     private TextView longitudeText;
@@ -44,6 +45,7 @@ public class ActivityAddRecord extends AppCompatActivity {
         recordTitleText = (EditText) findViewById(R.id.record_title_text);
         latitudeText = (TextView) findViewById(R.id.latitude_text);
         longitudeText = (TextView) findViewById(R.id.longitude_text);
+        recordCommentText = (EditText) findViewById(R.id.recordCommentText);
 
         if (flag.equals("b")){
             //the previous activity was ActivityAddGeolocation
@@ -86,7 +88,7 @@ public class ActivityAddRecord extends AppCompatActivity {
         else{
             //Create a new record
            record = new Record (recordTitleText.getText().toString());
-
+           record.setComment(recordCommentText.getText().toString());
            //add a geolocation to the record
            if (geoLocation != null) {
                record.setRecordGeoLocation(geoLocation);
