@@ -24,7 +24,7 @@
         android:layout_marginRight="4dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="sans-serif"
-        android:hint="@string/emailAddress"/>
+        android:hint="@string/emailAddressHint"/>
     <EditText
         android:id="@+id/userPhoneNumber"
         android:inputType="phone"
@@ -35,5 +35,5 @@
         android:layout_marginRight="4dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="sans-serif"
-        android:hint="@string/phoneNumber"/>
+        android:hint="@string/phoneNumberHint"/>
 </LinearLayout>

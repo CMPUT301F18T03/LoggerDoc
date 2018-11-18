@@ -20,13 +20,15 @@ public class ActivityCareGiverAddPatient extends AppCompatActivity {
 
     private CareGiver loggedInCareGiver;
     private Patient patientToAdd;
+    EditText userID;
 
-    EditText userID = (EditText) findViewById(R.id.AddPatientEditText);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_care_giver_add_patient);
+        userID = (EditText) findViewById(R.id.AddPatientEditText);
 
         Intent intent = getIntent();
         loggedInCareGiver = (CareGiver) intent.getSerializableExtra("Caregiver");
@@ -44,7 +46,7 @@ public class ActivityCareGiverAddPatient extends AppCompatActivity {
     if it is. If the entered value is not a user, an error message pops up and the edittext is cleared*/
     public void addPatient(View view){
         String entered = userID.getText().toString();
-        ArrayList<User> list = (ArrayList)UserListController.getUserList().getUsers();
+        ArrayList<User> list = UserListController.getUserList().getUsers();
         for(User user :list){
             if (user.getUserID().equals(entered)){
                 patientToAdd =(Patient) user;

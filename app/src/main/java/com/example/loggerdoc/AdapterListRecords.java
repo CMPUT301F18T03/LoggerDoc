@@ -31,7 +31,7 @@ public class AdapterListRecords extends ArrayAdapter<Record> {
         }
         Record currentRecords = recordsList.get(position);
 
-        TextView TitleView = (TextView) listitem.findViewById(R.id.TitleView);
+        TextView TitleView = (TextView) listitem.findViewById(R.id.UpdateContactInfoUsernameView);
         TitleView.setText(currentRecords.getTitle());
 
         TextView date = (TextView) listitem.findViewById(R.id.DateView);

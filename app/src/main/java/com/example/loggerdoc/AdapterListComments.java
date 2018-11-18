@@ -32,7 +32,7 @@ public class AdapterListComments extends ArrayAdapter<CaregiverComment> {
         }
         CaregiverComment currentComment = commentList.get(position);
 
-        TextView TitleView = (TextView) listitem.findViewById(R.id.TitleView);
+        TextView TitleView = (TextView) listitem.findViewById(R.id.UpdateContactInfoUsernameView);
         TitleView.setText(currentComment.getCaregiver().getUserID());
 
         TextView date = (TextView) listitem.findViewById(R.id.DateView);

@@ -35,7 +35,7 @@ public class ActivityViewProblem extends AppCompatActivity {
         position = (int) intent.getSerializableExtra("Position");
         problem = patient.getProblems().getProblemArrayList().get(position);
 
-        TextView problemTitleView = (TextView) findViewById(R.id.TitleView);
+        TextView problemTitleView = (TextView) findViewById(R.id.UpdateContactInfoUsernameView);
         problemTitleView.setText(problem.getTitle());
 
         TextView problemDateView = (TextView) findViewById(R.id.dateProblemView);
