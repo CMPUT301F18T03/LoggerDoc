@@ -22,6 +22,10 @@ public class CaregiverCommentList implements Serializable {
         return this.comments;
     }
 
+    public boolean containsComment (CaregiverComment comment){
+        return this.comments.contains(comment);
+    }
+
     /**
      *
      * @param comment comment that the CareGiver adds. Gets added to the CareGivers comment list.

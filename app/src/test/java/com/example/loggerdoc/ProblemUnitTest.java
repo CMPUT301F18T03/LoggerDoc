@@ -86,7 +86,7 @@ public class ProblemUnitTest {
         problem.addComment(caregiverComment);
 
         assertTrue("Problem's caregiver comment list should contain comment",
-                problem.getCommentList().contains(caregiverComment));
+                problem.getCommentList().containsComment(caregiverComment));
     }
 
 
