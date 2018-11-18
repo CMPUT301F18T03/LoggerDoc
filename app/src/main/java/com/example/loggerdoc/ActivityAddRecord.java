@@ -18,7 +18,10 @@ import com.google.android.gms.common.GoogleApiAvailability;
 public class ActivityAddRecord extends AppCompatActivity {
 
     private EditText recordTitleText;
+    private RecordGeoLocation geoLocation;
     private TextView geoLocationText;
+    private Record record;
+    private static Patient patient;
     private static final String TAG = "ActivityAddRecord";
     private static final int ERROR_DIALOG_REQUEST = 9001;
 
@@ -31,8 +34,18 @@ public class ActivityAddRecord extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
+        Intent intent = getIntent();
+        patient = (Patient) intent.getSerializableExtra("Patient");
+        String flag = (String) intent.getSerializableExtra("Flag");
+
         recordTitleText = (EditText) findViewById(R.id.record_title_text);
         geoLocationText = (TextView) findViewById(R.id.Geolocation_text);
+
+        if (flag.equals("a")){
+            geoLocation = (RecordGeoLocation) intent.getSerializableExtra("geoLocation");
+            record = (Record) intent.getSerializableExtra("Record");
+            geoLocationText.setText("Latitude: " + String.valueOf(geoLocation.getLatitude()) + " Longitude: " + String.valueOf(geoLocation.getLongitude()));
+        }
 
         if (isServicesOkay()){
           initialize();
@@ -45,6 +58,8 @@ public class ActivityAddRecord extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ActivityAddRecord.this, ActivityAddGeolocation.class);
+                intent.putExtra("Patient", patient);
+                intent.putExtra("Record", record);
                 startActivity(intent);
             }
         });
@@ -60,7 +75,7 @@ public class ActivityAddRecord extends AppCompatActivity {
         }
 
         else{
-            Record newRecord = new Record (recordTitleText.getText().toString());
+           record = new Record (recordTitleText.getText().toString());
         }
     }
 

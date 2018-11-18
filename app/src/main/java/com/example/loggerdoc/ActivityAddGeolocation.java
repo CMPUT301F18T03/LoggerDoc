@@ -58,8 +58,10 @@ public class ActivityAddGeolocation extends AppCompatActivity implements OnMapRe
                 RecordGeoLocation geoLocation = new RecordGeoLocation(options.getPosition());
                 Intent intent = new Intent(ActivityAddGeolocation.this, ActivityAddRecord.class);
                 intent.putExtra("Patient", patient);
+                intent.putExtra("Flag", "a");
                 intent.putExtra("Record", record);
                 intent.putExtra("geoLocation", geoLocation);
+                startActivity(intent);
             }
         });
     }
@@ -120,8 +122,6 @@ public class ActivityAddGeolocation extends AppCompatActivity implements OnMapRe
     }
 
     private void getDeviceLocation() {
-        Log.d(TAG, "getDeviceLocation: getting the devices current location");
-
         mapFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         try{
