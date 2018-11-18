@@ -1,5 +1,7 @@
 package com.example.loggerdoc;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import org.junit.Test;
 
 import java.time.LocalDateTime;
@@ -9,7 +11,16 @@ import static org.junit.Assert.*;
 public class RecordUnitTest {
 
     @Test
-    public void TestRecordTitle() {
+    public void testConstructor(){
+
+        Record record = new Record("title");
+        assertEquals("title", record.getTitle());
+        assertNull(record.getComment());
+
+    }
+
+    @Test
+    public void testSetRecordTitle() {
         String title = "A test record";
         Record record = new Record(title);
         assertEquals("Record title should be read from record", title, record.getTitle());
@@ -20,7 +31,7 @@ public class RecordUnitTest {
     }
 
     @Test
-    public void TestRecordComment() {
+    public void testSetRecordComment() {
         String comment = "A test comment";
         Record record = new Record();
         record.setComment(comment);
@@ -28,7 +39,7 @@ public class RecordUnitTest {
     }
 
     @Test
-    public void TestRecordTimestamp() {
+    public void testSetRecordTimestamp() {
         LocalDateTime beforeTime = LocalDateTime.now();
         Record record = new Record();
         LocalDateTime recordTime = record.getTimestamp();
@@ -38,5 +49,14 @@ public class RecordUnitTest {
                 beforeTime.isBefore(recordTime) || beforeTime.isEqual(recordTime));
         assertTrue("After time should be after or equal to record timestamp",
                 afterTime.isAfter(recordTime) || afterTime.isEqual(recordTime));
+    }
+
+    @Test
+    public void testAddGeolocation(){
+        Record record = new Record("title");
+        RecordGeoLocation geoLocation = new RecordGeoLocation(new LatLng(80.000, 90.12));
+        record.setRecordGeoLocation(geoLocation);
+
+        assertEquals(geoLocation, record.getRecordGeoLocation());
     }
 }
