@@ -1,6 +1,7 @@
 /* Created 2018-11-01 by Alexandra Tyrrell
  *
- *
+ * This class represents the geolocation for a record. It requires two attributes:
+ * a latitude and a longitude.
  */
 
 package com.example.loggerdoc;
