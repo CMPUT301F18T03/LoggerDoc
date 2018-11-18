@@ -39,4 +39,8 @@ public class UserList {
     public int size(){
         return userArrayList.size();
     }
+
+    public void become(UserList list) {
+        userArrayList = list.getUsers();
+    }
 }

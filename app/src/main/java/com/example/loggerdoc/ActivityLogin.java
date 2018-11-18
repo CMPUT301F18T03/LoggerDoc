@@ -1,31 +1,34 @@
 package com.example.loggerdoc;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.FileOutputStream;
+import com.example.loggerdoc.elasticclient.ElasticDataCallback;
+import com.example.loggerdoc.elasticclient.getUsersTask;
+import com.example.loggerdoc.elasticclient.uploadUsersTask;
 
-public class ActivityLogin extends AppCompatActivity {
+public class ActivityLogin extends AppCompatActivity implements ElasticDataCallback<UserList>{
 
     // Local userList to store all of the Users along with all the data associated with users
     static UserList userList = UserListController.getUserList();
-    protected final static String UserListFile = "UserList.sav";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        SaveLoadController.loadUserListFromDisk(ActivityLogin.this, UserListFile);
+        findViewById(R.id.Login_Button).setEnabled(false);
+        getUsersTask loadUserList = new getUsersTask(this,this);
+        loadUserList.execute();
     }
 
 
@@ -44,16 +47,18 @@ public class ActivityLogin extends AppCompatActivity {
                 Log.d("TAG", "email = " + user.getEmailAddress());
                 if (user.getUserID().equals(userLogin)) {
                     if (user.getRole().equals("Patient")) {
-                        Patient patient = SaveLoadController.loadPatientFromDisk(ActivityLogin.this, user.getUserID());
+                        Patient patient = (Patient) user;
                         Intent intent = new Intent(ActivityLogin.this, ActivityPatientHomePage.class);
                         intent.putExtra("Patient", patient);
                         startActivity(intent);
+                        break;
                     }
                     else {
-                        CareGiver careGiver = SaveLoadController.loadCareGiverFromDisk(ActivityLogin.this, user.getUserID());
+                        CareGiver careGiver = (CareGiver)user;
                         Intent intent = new Intent(ActivityLogin.this, ActivityCareGiverHomePage.class);
                         intent.putExtra("Caregiver", careGiver);
                         startActivity(intent);
+                        break;
                     }
                 }
             }
@@ -108,9 +113,9 @@ public class ActivityLogin extends AppCompatActivity {
         builder.setView(dialogView);
 
         builder.setTitle("Account Creation");
-        final EditText userID = (EditText) dialogView.findViewById(R.id.userID);
-        final EditText userEmail = (EditText) dialogView.findViewById(R.id.userEmailAddress);
-        final EditText userPhoneNumber = (EditText) dialogView.findViewById(R.id.userPhoneNumber);
+        final EditText userID = dialogView.findViewById(R.id.userID);
+        final EditText userEmail = dialogView.findViewById(R.id.userEmailAddress);
+        final EditText userPhoneNumber = dialogView.findViewById(R.id.userPhoneNumber);
 
 
         // Triggered when the user clicks on the Patient button
@@ -138,9 +143,7 @@ public class ActivityLogin extends AppCompatActivity {
                 Toast.makeText(ActivityLogin.this, "Success", Toast.LENGTH_SHORT).show();
 
                 // Save the userlist to disk for creating a new account offline we can check for unique userID
-                // Save the patients save file to disk
-                SaveLoadController.saveUserListToDisk(ActivityLogin.this, userList, UserListFile);
-                SaveLoadController.savePatientToDisk(ActivityLogin.this, patient);
+                new uploadUsersTask(getBaseContext()).execute(userList);//Fire and forget
 
             }
         });
@@ -168,8 +171,9 @@ public class ActivityLogin extends AppCompatActivity {
                 CareGiver careGiver = new CareGiver(username, emailAddress, phoneNumber,"Caregiver", new PatientList());
                 userList.addUser(careGiver);
                 Toast.makeText(ActivityLogin.this, "Success", Toast.LENGTH_SHORT).show();
-                SaveLoadController.saveUserListToDisk(ActivityLogin.this, userList, UserListFile);
-                SaveLoadController.saveCareGiverToDisk(ActivityLogin.this, careGiver);
+                //SaveLoadController.saveUserListToDisk(ActivityLogin.this, userList, UserListFile);
+                //SaveLoadController.saveCareGiverToDisk(ActivityLogin.this, careGiver);
+                new uploadUsersTask(getBaseContext()).execute(userList);
 
             }
         });
@@ -182,5 +186,13 @@ public class ActivityLogin extends AppCompatActivity {
             }
         });
         builder.show();
+    }
+
+    @Override
+    public void dataCallBack(UserList data) {
+        UserListController.setList(data);
+        Button loginbut = findViewById(R.id.Login_Button);
+        loginbut.setEnabled(true);
+
     }
 }

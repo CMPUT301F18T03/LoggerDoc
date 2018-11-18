@@ -1,5 +1,8 @@
 package com.example.loggerdoc;
 
+import com.example.loggerdoc.elasticclient.ElasticClient;
+import com.example.loggerdoc.elasticclient.httphandler;
+
 import okhttp3.OkHttpClient;
 
 public class ElasticSearchController {
