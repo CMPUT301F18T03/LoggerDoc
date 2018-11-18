@@ -1,4 +1,4 @@
-package com.example.loggerdoc;
+package com.example.loggerdoc.elasticclient;
 
 import java.io.IOException;
 
@@ -15,7 +15,7 @@ public class httphandler{
     private static final MediaType JSON
             = MediaType.parse("application/json; charset=utf-8");
 
-    httphandler(OkHttpClient client,String host) {
+    public httphandler(OkHttpClient client,String host) {
         this.client = client;
         this.host = host;
     }

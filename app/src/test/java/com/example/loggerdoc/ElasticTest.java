@@ -1,12 +1,9 @@
 package com.example.loggerdoc;
 
-import android.util.Log;
+import com.example.loggerdoc.elasticclient.httphandler;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.TreeMap;
-import java.util.concurrent.ExecutionException;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
