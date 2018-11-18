@@ -25,16 +25,22 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+/*
+ * This activity allows the user to select a geolocation to add to a record. The activity will show
+ * a google map on the screen with a marker set to either the device's current location or a default
+ * location. The user can then drag the marker to their desired location and click the save button.
+ */
+
 public class ActivityAddGeolocation extends AppCompatActivity implements OnMapReadyCallback {
 
-    private static final String TAG = "ActivityAddGeolocation";
-    private static final int locationPermissionRequestCode = 1234;
     private GoogleMap locationMap;
-    private LatLng defaultLocation = new LatLng(53.5232, -113.5263);
     private  MarkerOptions options;
-
-    private boolean mapLocationPermissionsGranted = false;
     private FusedLocationProviderClient mapFusedLocationProviderClient;
+
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
+    private static final String TAG = "ActivityAddGeolocation";
+    private static final LatLng DEFAULT_LOCATION = new LatLng(53.5232, -113.5263);
+    private boolean mapLocationPermissionsGranted = false;
     private static final float DEFAULT_ZOOM = 15;
 
     @Override
@@ -46,12 +52,17 @@ public class ActivityAddGeolocation extends AppCompatActivity implements OnMapRe
     @Override
     protected void onResume() {
         super.onResume();
+
+        //Get the objects that were passed from the previous activity
         Intent firstIntent = getIntent();
         final Patient patient = (Patient) firstIntent.getSerializableExtra("Patient");
         final Record record = (Record) firstIntent.getSerializableExtra("Record");
         final int position = (int) firstIntent.getSerializableExtra("Position");
 
+        //Check the location permissions
         checkLocationPermissions();
+
+        //Initialize the save button and the onclick method for it.
         Button saveButton = (Button) findViewById(R.id.saveGeolocationButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,33 +79,43 @@ public class ActivityAddGeolocation extends AppCompatActivity implements OnMapRe
         });
     }
 
+    //Check if we have permission to access fine location and coarse location
     private void checkLocationPermissions() {
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
 
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             if (ContextCompat.checkSelfPermission(this.getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                //if we have both locations then the map can be intialized
                 mapLocationPermissionsGranted = true;
                 initializeMap();
             } else {
-                ActivityCompat.requestPermissions(this, permissions, locationPermissionRequestCode);
+                //We don't have permission to access coarse location so we request it
+                ActivityCompat.requestPermissions(this, permissions, LOCATION_PERMISSION_REQUEST_CODE);
             }
         } else {
-            ActivityCompat.requestPermissions(this, permissions, locationPermissionRequestCode);
+            //We don't have permission to access fine locations so we resuest it
+            ActivityCompat.requestPermissions(this, permissions, LOCATION_PERMISSION_REQUEST_CODE);
         }
     }
 
 
     private void initializeMap() {
+        //intialize the map object
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(ActivityAddGeolocation.this);
     }
 
+    /*
+     *Callback for the result of requesting permissions. If we don't have permissions than
+     * mapLocationPermissionsGranted is set to false. If we have the permissions than
+     * mapLocationPermissionsGranted is set to true.
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         mapLocationPermissionsGranted = false;
 
-        if (requestCode == locationPermissionRequestCode) {
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0) {
                 for (int result : grantResults) {
                     if (result != PackageManager.PERMISSION_GRANTED) {
@@ -108,6 +129,11 @@ public class ActivityAddGeolocation extends AppCompatActivity implements OnMapRe
         }
     }
 
+    /*
+     * Callback interface for when the map is ready to be used. This method calls getDeviceLocation()
+     * in an attempt to get the device's current location. Then the map will set the location and
+     * zoom controls.
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         locationMap = googleMap;
@@ -123,6 +149,12 @@ public class ActivityAddGeolocation extends AppCompatActivity implements OnMapRe
         }
     }
 
+    /*
+     * Method to get the current location of the device. This uses a FusedLocationProviderClient
+     * in an attempt to get the current (last) location of the device. If it is successful, the
+     * map will move to the current location and set a marker there. If it is unsuccessful, the
+     * map will move to a default location and set a marker there.
+     */
     private void getDeviceLocation() {
         mapFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -136,15 +168,13 @@ public class ActivityAddGeolocation extends AppCompatActivity implements OnMapRe
                         if(task.isSuccessful() && task.getResult() != null){
                             Location currentLocation = (Location) task.getResult();
 
-                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
-                                    DEFAULT_ZOOM,
-                                    "My Location");
+                            moveCamera(new LatLng(currentLocation.getLatitude(),
+                                            currentLocation.getLongitude()), DEFAULT_ZOOM,
+                                        "My Location");
 
                         }
                         else if (task.isSuccessful()){
-                            moveCamera(defaultLocation,
-                                    DEFAULT_ZOOM,
-                                    "Default Location");
+                            moveCamera(DEFAULT_LOCATION, DEFAULT_ZOOM, "Default Location");
                         }
                         else{
                             Toast.makeText(ActivityAddGeolocation.this, "unable to get current location", Toast.LENGTH_SHORT).show();
@@ -153,15 +183,18 @@ public class ActivityAddGeolocation extends AppCompatActivity implements OnMapRe
                 });
             }
         }
+        //Security exception if the permissions are not granted.
         catch (SecurityException e){
             Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage() );
         }
     }
 
-
+    //move camera to specified location (latitude and longitude)
     private void moveCamera (LatLng latLng, float zoom, String title){
+
         locationMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,zoom));
 
+        //set the marker to the set latitude and longitude, with a title.
         options = new MarkerOptions().position(latLng).title(title);
         options.draggable(true);
         locationMap.addMarker(options);

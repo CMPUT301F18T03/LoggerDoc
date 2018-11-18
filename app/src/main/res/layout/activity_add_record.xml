@@ -60,23 +60,25 @@
         android:layout_marginTop="56dp"
         android:layout_marginEnd="8dp"
         android:text="@string/add_geo_button"
-        app:layout_constraintEnd_toStartOf="@+id/Geolocation_text"
+        app:layout_constraintEnd_toStartOf="@+id/latitude_text"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/record_title_text" />
 
     <TextView
-        android:id="@+id/Geolocation_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="36dp"
+        android:id="@+id/latitude_text"
+        android:layout_width="105dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="28dp"
         android:layout_marginBottom="8dp"
-        android:text="TextView"
-        android:textColor="@android:color/black"
         android:lines="2"
+        android:text="Placeholder"
+        android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/mapButton"
         app:layout_constraintTop_toBottomOf="@+id/record_title_text"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -121,4 +123,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button4"
         app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/longitude_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="271dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="75dp"
+        android:layout_marginBottom="275dp"
+        android:text="Placeholder"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/latitude_text" />
 </android.support.constraint.ConstraintLayout>
