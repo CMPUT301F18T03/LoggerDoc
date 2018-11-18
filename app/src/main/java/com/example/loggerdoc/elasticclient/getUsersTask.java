@@ -34,7 +34,7 @@ public class getUsersTask extends AsyncTask<Void, Void,UserList> {
         httphandler receiver = ElasticSearchController.getHttpHandler();
         Gson gson = new Gson();
         UserList ret = new UserList();
-        String jsonin = receiver.httpGET("/user/_doc/_search?q=*:*&filter_path=hits.hits.*");
+        String jsonin = receiver.httpGET("/user/_doc/_search?q=*:*&filter_path=hits.hits.*&size=10000");
         if(jsonin == null){
             InputStream fis;
             try {
