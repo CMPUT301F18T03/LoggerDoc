@@ -41,6 +41,9 @@ public class UserList {
     }
 
     public void become(UserList list) {
-        userArrayList = list.getUsers();
+        if(list == null){
+            userArrayList = list.getUsers();
+        }
+
     }
 }
