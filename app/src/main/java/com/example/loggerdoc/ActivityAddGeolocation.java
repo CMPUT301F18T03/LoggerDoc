@@ -49,6 +49,7 @@ public class ActivityAddGeolocation extends AppCompatActivity implements OnMapRe
         Intent firstIntent = getIntent();
         final Patient patient = (Patient) firstIntent.getSerializableExtra("Patient");
         final Record record = (Record) firstIntent.getSerializableExtra("Record");
+        final int position = (int) firstIntent.getSerializableExtra("Position");
 
         checkLocationPermissions();
         Button saveButton = (Button) findViewById(R.id.saveGeolocationButton);
@@ -58,6 +59,7 @@ public class ActivityAddGeolocation extends AppCompatActivity implements OnMapRe
                 RecordGeoLocation geoLocation = new RecordGeoLocation(options.getPosition());
                 Intent intent = new Intent(ActivityAddGeolocation.this, ActivityAddRecord.class);
                 intent.putExtra("Patient", patient);
+                intent.putExtra("Position", position);
                 intent.putExtra("Flag", "b");
                 intent.putExtra("Record", record);
                 intent.putExtra("geoLocation", geoLocation);

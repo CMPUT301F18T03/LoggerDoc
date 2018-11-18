@@ -22,6 +22,7 @@ public class ActivityAddRecord extends AppCompatActivity {
     private TextView geoLocationText;
     private Record record;
     private static Patient patient;
+    private static int position;
     private static final String TAG = "ActivityAddRecord";
     private static final int ERROR_DIALOG_REQUEST = 9001;
 
@@ -36,6 +37,7 @@ public class ActivityAddRecord extends AppCompatActivity {
         super.onResume();
         Intent intent = getIntent();
         patient = (Patient) intent.getSerializableExtra("Patient");
+        position = (int) intent.getSerializableExtra("Position");
         String flag = (String) intent.getSerializableExtra("Flag");
 
         recordTitleText = (EditText) findViewById(R.id.record_title_text);
@@ -44,11 +46,6 @@ public class ActivityAddRecord extends AppCompatActivity {
         if (flag.equals("b")){
             geoLocation = (RecordGeoLocation) intent.getSerializableExtra("geoLocation");
             geoLocationText.setText("Latitude: " + String.valueOf(geoLocation.getLatitude()) + " Longitude: " + String.valueOf(geoLocation.getLongitude()));
-        }
-
-        if (!flag.equals("a")){
-            record = (Record) intent.getSerializableExtra("Record");
-            recordTitleText.setText(record.getTitle());
         }
 
         if (isServicesOkay()){
@@ -63,6 +60,7 @@ public class ActivityAddRecord extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ActivityAddRecord.this, ActivityAddGeolocation.class);
                 intent.putExtra("Patient", patient);
+                intent.putExtra("Position", position);
                 intent.putExtra("Record", record);
                 startActivity(intent);
             }
@@ -83,7 +81,13 @@ public class ActivityAddRecord extends AppCompatActivity {
            if (geoLocation == null) {
                record.setRecordGeoLocation(geoLocation);
            }
+           patient.getProblems().getProblemArrayList().get(position).getRecordList().getRecordArrayList().add(record);
         }
+
+        Intent intent = new Intent(ActivityAddRecord.this, ActivityViewProblem.class);
+        intent.putExtra("Patient", patient);
+        intent.putExtra("Position", position);
+        startActivity(intent);
     }
 
     public boolean isServicesOkay(){
