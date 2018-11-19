@@ -85,15 +85,17 @@ public class ActivityEditProblem extends AppCompatActivity {
             }
 
             //check if the description is too long
-            if (!problem.checkDescriptionLength(problem.getDescription())){
+            else if (!problem.checkDescriptionLength(problem.getDescription())){
                 showAlertDialog("Error: Too Long Description","The description can be a maximum of 300 characters. Please shorten it");
             }
 
-            //Update the problem's list
-            patient.getProblems().remove(problem);
-            patient.getProblems().add(problem);
+            else {
+                //Update the problem's list
+                patient.getProblems().remove(problem);
+                patient.getProblems().add(problem);
 
-            changeActivity(v);
+                changeActivity(v);
+            }
         }
     }
 
