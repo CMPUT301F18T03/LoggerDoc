@@ -1,23 +1,27 @@
 /* Created 2018-11-01 by Alexandra Tyrrell
  *
- *
+ * This class represents the geolocation for a record. It requires two attributes:
+ * a latitude and a longitude.
  */
 
 package com.example.loggerdoc;
 
-public class RecordGeoLocation {
+import com.google.android.gms.maps.model.LatLng;
+
+import java.io.Serializable;
+
+public class RecordGeoLocation implements Serializable {
 
     private double latitude;
     private double longitude;
 
     /**
      *
-     * @param latitude Latitude of the geolocation
-     * @param longitude longitude of the geoocation
+     * @param latLng Latitude of the geolocation
      */
-    RecordGeoLocation (double latitude, double longitude){
-        this.latitude = latitude;
-        this.longitude = longitude;
+    RecordGeoLocation (LatLng latLng){
+        this.latitude = latLng.latitude;
+        this.longitude = latLng.longitude;
     }
 
     /**

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -35,7 +36,7 @@ public class ActivityViewProblem extends AppCompatActivity {
         position = (int) intent.getSerializableExtra("Position");
         problem = patient.getProblems().getProblemArrayList().get(position);
 
-        TextView problemTitleView = (TextView) findViewById(R.id.UpdateContactInfoUsernameView);
+        TextView problemTitleView = (TextView) findViewById(R.id.TitleView);
         problemTitleView.setText(problem.getTitle());
 
         TextView problemDateView = (TextView) findViewById(R.id.dateProblemView);
@@ -99,6 +100,9 @@ public class ActivityViewProblem extends AppCompatActivity {
     //Change to AddRecord Activity
     public void goAddRecord (View v){
         Intent intent = new Intent(this, ActivityAddRecord.class);
+        intent.putExtra("Patient", patient);
+        intent.putExtra("Position", position);
+        intent.putExtra("Flag", "a");
         startActivity(intent);
     }
 }
