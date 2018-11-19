@@ -37,6 +37,8 @@ public class ActivityAddProblem extends AppCompatActivity {
         problemTitleWarning = (ImageView) findViewById(R.id.warning_Problem_Title);
         problemDescriptionWarning = (ImageView) findViewById(R.id.warning_Problem_Desc);
 
+        problemDescription.setText("YAy");
+
     }
 
     //To be called when the user hits the create button
@@ -65,7 +67,7 @@ public class ActivityAddProblem extends AppCompatActivity {
         else{
             //Turn flags off
             problemTitleWarning.setVisibility(View.INVISIBLE);
-            problemDescription.setVisibility(View.INVISIBLE);
+            problemDescriptionWarning.setVisibility(View.INVISIBLE);
 
             Problem problem = new Problem (problemTitle.getText().toString(), datePicker, problemDescription.getText().toString());
 
