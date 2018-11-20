@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import com.example.loggerdoc.ElasticSearchController;
 import com.example.loggerdoc.User;
 import com.example.loggerdoc.UserList;
+import com.example.loggerdoc.UserListController;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -19,23 +20,25 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
-public class uploadUsersTask extends AsyncTask<UserList, Void, Void> {
+public class modifyUserTask extends AsyncTask<User, Void, Void> {
     private Context context;
-    public uploadUsersTask(Context context){
+    public modifyUserTask(Context context){
         this.context = context;
     }
     @Override
-    protected Void doInBackground(UserList... users) {
-        //Because we for some reason take a list of userlists in....
-        ArrayList<User> tosend =  users[0].getUsers();
+    protected Void doInBackground(User... users) {
+        User tosend =  users[0];
+
         Gson gson = new Gson();
         String jsonout;
         httphandler sender = ElasticSearchController.getHttpHandler();
-        JSONArray store = new JSONArray();
+        jsonout = gson.toJson(tosend);
+        sender.httpPUT("/user/_doc/"+tosend.getElasticID().toString(),jsonout);
 
-        for (User targ:tosend) {
+        JSONArray store = new JSONArray();
+        ArrayList<User> allusers = UserListController.getUserList().getUsers();
+        for (User targ:allusers) {
             jsonout = gson.toJson(targ);
-            sender.httpPUT("/user/_doc/"+targ.getElasticID().toString(),jsonout);
             store.put(jsonout);
         }
 
@@ -67,4 +70,3 @@ public class uploadUsersTask extends AsyncTask<UserList, Void, Void> {
         context = null;
     }
 }
-
