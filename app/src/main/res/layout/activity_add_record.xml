@@ -74,13 +74,12 @@
         app:layout_constraintTop_toBottomOf="@+id/mapButton" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/gallary_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="137dp"
-        android:onClick="addPhoto"
         android:text="@string/add_photo_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,7 +100,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4"
+        app:layout_constraintTop_toBottomOf="@+id/gallary_button"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
@@ -136,7 +135,7 @@
         app:layout_constraintBottom_toTopOf="@+id/button5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toBottomOf="@+id/gallary_button" />
 
     <TextView
         android:id="@+id/latitude_text"
@@ -155,4 +154,16 @@
         app:layout_constraintStart_toEndOf="@+id/mapButton"
         app:layout_constraintTop_toBottomOf="@+id/record_title_text"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/Camera_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="137dp"
+        android:text="@string/add_photo_camera_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button3" />
 </android.support.constraint.ConstraintLayout>

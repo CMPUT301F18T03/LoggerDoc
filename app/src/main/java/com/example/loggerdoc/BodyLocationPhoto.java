@@ -1,16 +1,18 @@
 package com.example.loggerdoc;
 
-public class BodyLocationPhoto implements Photo {
+import android.net.Uri;
 
-    private String file;
+public class BodyLocationPhoto {
 
-    @Override
-    public String getPhoto() {
-        return this.file;
+    private Uri photo;
+
+
+    public Uri getPhoto() {
+        return this.photo;
     }
 
-    @Override
-    public void setPhoto(String newPhoto) {
-        this.file = newPhoto;
+
+    public void setPhoto(Uri newPhoto) {
+        this.photo = newPhoto;
     }
 }
