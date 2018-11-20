@@ -30,6 +30,7 @@ public class Record implements Serializable {
         this.title = title;
         this.comment = "";
         this.timestamp = LocalDateTime.now();
+        this.recordPhotoList = new RecordPhotoList();
 
     }
 
@@ -57,7 +58,7 @@ public class Record implements Serializable {
         this.recordGeoLocation = geoLocation;
     }
 
-    public RecordPhotoList getRecordPhotoList(){return recordPhotoList;}
+    public RecordPhotoList getRecordPhotoList(){return this.recordPhotoList;}
 
     public void setList(RecordPhotoList photos){this.recordPhotoList = photos;}
 

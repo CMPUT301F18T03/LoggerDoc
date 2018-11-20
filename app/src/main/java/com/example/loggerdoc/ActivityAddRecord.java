@@ -4,7 +4,9 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,11 +19,16 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class ActivityAddRecord extends AppCompatActivity {
 
+    private static String PhotoPath;
     private EditText recordTitleText;
     private EditText recordCommentText;
     private RecordGeoLocation geoLocation;
@@ -122,13 +129,12 @@ public class ActivityAddRecord extends AppCompatActivity {
            //add record to the problem
 
             if (photos.size() != 0) {
-                RecordPhotoList list = record.getRecordPhotoList();
                 for (int i = 0; i<photos.size(); i++){
-                    list.addPhoto(photos.get(i));
+                    record.getRecordPhotoList().addPhoto(photos.get(i));
                 }
 
 
-                Log.i("SIZE_TEST", String.valueOf(record.getRecordPhotoList().getPhoto(1)));
+                Log.i("SIZE_TEST", String.valueOf(record.getRecordPhotoList().size()));
            }
 
             patient.getProblems().getProblemArrayList().get(position).getRecordList().getRecordArrayList().add(record);
@@ -192,13 +198,60 @@ public class ActivityAddRecord extends AppCompatActivity {
     private void dispatchTakePictureIntent(int request) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, request);
+            File photoFile = null;
+            try{
+                photoFile = createImageFile();
+            }catch(IOException ex){
+                Log.i("THIS_IS_TAG", "exception");
+
+            }
+            if (photoFile != null){
+                Uri photoUri = FileProvider.getUriForFile(this,"com.example.loggerdoc.fileprovider",photoFile);
+
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                //Log.i("THIS_IS_TAG", "exception");
+
+                startActivityForResult(takePictureIntent, request);
+
+            }
+            //startActivityForResult(takePictureIntent, request);
         }
+    }
+
+    /**
+     * creates a file to store image from the camera
+     * @return path to file
+     * @throws IOException
+     */
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+
+        // Save a file: path for use with ACTION_VIEW intents
+        PhotoPath = image.getAbsolutePath();
+        Log.i("THIS_IS_TAG", String.valueOf(image));
+
+        return image;
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE_RECORD && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
+            File f = new File(PhotoPath);
+            Uri uri = Uri.fromFile(f);
+            RecordPhoto photo = new RecordPhoto();
+            photo.setPhoto(uri);
+            photos.add(photo);
+            PhotoPath = null;
+
         }
         if (requestCode == GALLERY_REQUEST_RECORD && resultCode == RESULT_OK){
             final Uri imageUri = data.getData();

@@ -10,21 +10,21 @@ import static org.junit.Assert.assertFalse;
 public class RecordPhotoListUnitTest {
 @Test
 public void TestsetPhoto() {
-    /*
+
     RecordPhotoList list = new RecordPhotoList();
         RecordPhoto recordPhoto = new RecordPhoto();
-        list.add(recordPhoto);
-        assertTrue("Photo list should contain added photo", list.contains(recordPhoto));
+        list.addPhoto(recordPhoto);
+        assertTrue("Photo list should contain added photo", list.containsPhoto(recordPhoto));
 }
     @Test
     public void TestProblemListRemove() {
         RecordPhotoList list = new RecordPhotoList();
         RecordPhoto photo = new RecordPhoto();
-        list.add(photo);
-        Assert.assertTrue("ProblemList should contain added problem", list.contains(photo));
+        list.addPhoto(photo);
+        Assert.assertTrue("ProblemList should contain added problem", list.containsPhoto(photo));
 
-        list.remove(photo);
-        assertFalse("ProblemList should not contain added problem", list.contains(photo));
+        list.removePhoto(photo);
+        assertFalse("ProblemList should not contain added problem", list.containsPhoto(photo));
     }
 
     @Test
@@ -33,14 +33,14 @@ public void TestsetPhoto() {
         assertEquals("ProblemList should have size 0", 0, list.size());
 
         RecordPhoto photo1 = new RecordPhoto();
-        list.add(photo1);
+        list.addPhoto(photo1);
         assertEquals("RecordList should have size 1", 1, list.size());
 
         RecordPhoto photo2 = new RecordPhoto();
-        list.add(photo2);
+        list.addPhoto(photo2);
         assertEquals("RecordList should have size 2", 2, list.size());
 
-        list.remove(photo1);
+        list.removePhoto(photo1);
         assertEquals("RecordList should have size 1 after deletion", 1, list.size());
-    }*/
-}}
+    }
+}
