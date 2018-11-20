@@ -171,8 +171,6 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
                 CareGiver careGiver = new CareGiver(username, emailAddress, phoneNumber,"Caregiver", new PatientList());
                 userList.addUser(careGiver);
                 Toast.makeText(ActivityLogin.this, "Success", Toast.LENGTH_SHORT).show();
-                //SaveLoadController.saveUserListToDisk(ActivityLogin.this, userList, UserListFile);
-                //SaveLoadController.saveCareGiverToDisk(ActivityLogin.this, careGiver);
                 new uploadUsersTask(getBaseContext()).execute(userList);
 
             }
