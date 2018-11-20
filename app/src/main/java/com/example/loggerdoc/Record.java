@@ -9,6 +9,7 @@ package com.example.loggerdoc;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Record implements Serializable {
 
@@ -18,7 +19,8 @@ public class Record implements Serializable {
 
     private RecordGeoLocation recordGeoLocation;
     // private RecordBodyLocation recordBodyLocation;
-    // private RecordPhotoList recordPhotoList;
+    private RecordPhotoList recordPhotoList;
+    private int test;
 
     public Record() {
         this("");
@@ -29,6 +31,7 @@ public class Record implements Serializable {
         this.title = title;
         this.comment = "";
         this.timestamp = LocalDateTime.now();
+        this.test = 1;
     }
 
     public String getTitle() {
@@ -54,6 +57,12 @@ public class Record implements Serializable {
     public void setRecordGeoLocation (RecordGeoLocation geoLocation){
         this.recordGeoLocation = geoLocation;
     }
+
+    public RecordPhotoList getRecordPhotoList(){return recordPhotoList;}
+
+    public void setList(RecordPhotoList photos){this.recordPhotoList = photos;}
+
+    public void addRecordPhoto(RecordPhoto photo){this.recordPhotoList.addPhoto(photo);}
 
     public RecordGeoLocation getRecordGeoLocation(){
         return this.recordGeoLocation;

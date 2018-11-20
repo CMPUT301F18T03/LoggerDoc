@@ -2,8 +2,12 @@ package com.example.loggerdoc;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +16,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+
+import java.util.ArrayList;
 
 
 public class ActivityAddRecord extends AppCompatActivity {
@@ -26,6 +32,10 @@ public class ActivityAddRecord extends AppCompatActivity {
     private static int position;
     private static final int ERROR_DIALOG_REQUEST = 9001;
 
+    static final int REQUEST_IMAGE_CAPTURE_RECORD = 1000;
+    static final int GALLERY_REQUEST_RECORD = 1001;
+
+    private ArrayList<RecordPhoto> photos = new ArrayList<RecordPhoto>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +45,6 @@ public class ActivityAddRecord extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-
         //get the objects that were passed from the previous activity
         Intent intent = getIntent();
         patient = (Patient) intent.getSerializableExtra("Patient");
@@ -47,6 +56,22 @@ public class ActivityAddRecord extends AppCompatActivity {
         longitudeText = (TextView) findViewById(R.id.longitude_text);
         recordCommentText = (EditText) findViewById(R.id.recordCommentText);
 
+        Button recordGallary = findViewById(R.id.gallary_button);
+        Button recordCamera = findViewById(R.id.Camera_button);
+
+        recordGallary.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+                GalaryIntent(GALLERY_REQUEST_RECORD);
+            }
+        });
+
+        recordCamera.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+                dispatchTakePictureIntent(REQUEST_IMAGE_CAPTURE_RECORD);
+            }
+        });
         if (flag.equals("b")){
             //the previous activity was ActivityAddGeolocation
             geoLocation = (RecordGeoLocation) intent.getSerializableExtra("geoLocation");
@@ -95,7 +120,18 @@ public class ActivityAddRecord extends AppCompatActivity {
            }
 
            //add record to the problem
-           patient.getProblems().getProblemArrayList().get(position).getRecordList().getRecordArrayList().add(record);
+
+            if (photos.size() != 0) {
+                RecordPhotoList list = record.getRecordPhotoList();
+                for (int i = 0; i<photos.size(); i++){
+                    list.addPhoto(photos.get(i));
+                }
+
+
+                Log.i("SIZE_TEST", String.valueOf(record.getRecordPhotoList().getPhoto(1)));
+           }
+
+            patient.getProblems().getProblemArrayList().get(position).getRecordList().getRecordArrayList().add(record);
         }
 
         //Change to ActivityViewProblem
@@ -144,6 +180,35 @@ public class ActivityAddRecord extends AppCompatActivity {
         DialogProblem dialog = new DialogProblem();
         dialog.setArguments(messageArgs);
         dialog.show(getSupportFragmentManager(), "error_dialog");
+    }
+
+    private void GalaryIntent(int request) {
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        photoPickerIntent.setType("image/*");
+        startActivityForResult(photoPickerIntent, request);
+    }
+
+
+    private void dispatchTakePictureIntent(int request) {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, request);
+        }
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE_RECORD && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+        }
+        if (requestCode == GALLERY_REQUEST_RECORD && resultCode == RESULT_OK){
+            final Uri imageUri = data.getData();
+            RecordPhoto photo = new RecordPhoto();
+            photo.setPhoto(imageUri);
+            photos.add(photo);
+            Log.i("THIS_IS_TAG", "onActivityResult: "+ photos.size());
+
+        }
+
     }
 
 }

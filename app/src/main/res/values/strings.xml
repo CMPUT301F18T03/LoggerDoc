@@ -18,7 +18,9 @@
     <string name="enter_record_title">Enter a Record Title:</string>
     <string name="add_geo_button">Add Geo-Location</string>
     <string name="add_body_location_button">Add Body Location</string>
-    <string name="add_photo_button">Add Photo</string>
+    <string name="add_photo_button">Add Gallary Photo</string>
+    <string name="add_photo_camera_button">Take Photo</string>
+
     <string name="edit_problem_button">Edit</string>
     <string name="delete_button">Delete</string>
     <string name="view_problem_date">Date of First Discovery:</string>
@@ -42,6 +44,7 @@
     <string name="browse_patients_title">Browse Patients</string>
     <string name="caregiver_flag">Caregiver</string>
     <string name="patient_flag">Patient</string>
+    <string name="title_activity_photo_grid">ActivityPhotoGrid</string>
 
     6d355acae24733ee9f9d9d0017dc972737fbf333
 </resources>

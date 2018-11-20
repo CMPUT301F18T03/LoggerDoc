@@ -1,17 +1,19 @@
 package com.example.loggerdoc;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 
-public class RecordPhoto implements Photo {
-    private String file;
+import java.io.Serializable;
 
-    @Override
-    public String getPhoto() {
-        return this.file;
+public class RecordPhoto implements Serializable {
+    private Uri path;
+
+
+    public Uri getPhoto() {
+        return this.path;
     }
 
-    @Override
-    public void setPhoto(String newPhoto) {
-        this.file = newPhoto;
+    public void setPhoto(Uri newPhoto) {
+        this.path = newPhoto;
     }
 }
