@@ -23,6 +23,7 @@ public class ActivityUpdateContactInfo extends AppCompatActivity {
     private ImageView contactInfoEmailWarning;
     private ImageView contactInfoPhoneWarning;
     private TextView userId;
+    private String userType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,12 @@ public class ActivityUpdateContactInfo extends AppCompatActivity {
         if(checkChanges(newEmail, newPhoneNumber)) {
             loggedInUser.setEmailAddress(newEmail);
             loggedInUser.setPhoneNumber(newPhoneNumber);
-            finish();
+            if (userType.equals("Caregiver")){
+                toCaregiverHomePage();
+            }
+            else if (userType.equals("Patient")){
+                toPatientHomePage();
+            }
         }
 
     }
@@ -136,6 +142,7 @@ public class ActivityUpdateContactInfo extends AppCompatActivity {
         //try to get a caregiver object passed from previous intent
         try{
             loggedInUser = (CareGiver) intent.getSerializableExtra("Caregiver");
+            userType = "Caregiver";
 
         }catch(Exception e){
             //not a caregiver
@@ -147,11 +154,26 @@ public class ActivityUpdateContactInfo extends AppCompatActivity {
             //try to get the patient passed from previous intent and set it to the user
             try {
                 loggedInUser = (Patient) intent.getSerializableExtra("Patient");
+                userType = "Patient";
 
             } catch (Exception e) {
                 //not a patient either? not good
             }
         }
+
+    }
+
+
+    public void toCaregiverHomePage(){
+        Intent intent = new Intent(this, ActivityCareGiverHomePage.class);
+        intent.putExtra("Caregiver", loggedInUser);
+        startActivity(intent);
+    }
+
+    public void toPatientHomePage(){
+        Intent intent = new Intent(this, ActivityPatientHomePage.class);
+        intent.putExtra("Patient", loggedInUser);
+        startActivity(intent);
 
     }
 
