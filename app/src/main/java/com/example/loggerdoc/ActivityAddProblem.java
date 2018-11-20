@@ -65,7 +65,7 @@ public class ActivityAddProblem extends AppCompatActivity {
         else{
             //Turn flags off
             problemTitleWarning.setVisibility(View.INVISIBLE);
-            problemDescription.setVisibility(View.INVISIBLE);
+            problemDescriptionWarning.setVisibility(View.INVISIBLE);
 
             Problem problem = new Problem (problemTitle.getText().toString(), datePicker, problemDescription.getText().toString());
 
