@@ -20,7 +20,6 @@ public class Record implements Serializable {
     private RecordGeoLocation recordGeoLocation;
     // private RecordBodyLocation recordBodyLocation;
     private RecordPhotoList recordPhotoList;
-    private int test;
 
     public Record() {
         this("");
@@ -31,7 +30,7 @@ public class Record implements Serializable {
         this.title = title;
         this.comment = "";
         this.timestamp = LocalDateTime.now();
-        this.test = 1;
+
     }
 
     public String getTitle() {

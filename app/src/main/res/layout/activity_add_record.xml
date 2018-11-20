@@ -80,7 +80,6 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="137dp"
-        android:onClick="addPhoto"
         android:text="@string/add_photo_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
