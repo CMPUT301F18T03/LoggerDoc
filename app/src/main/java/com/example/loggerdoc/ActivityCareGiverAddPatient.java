@@ -52,19 +52,23 @@ public class ActivityCareGiverAddPatient extends AppCompatActivity {
                 patientToAdd =(Patient) user;
                 loggedInCareGiver.getPatientList().addPatient(patientToAdd);
                 userID.setText("");
+                toBrowsePatientActivity();
             }
             else{
                 Toast.makeText(this, "That username does not exist. Please try again.", Toast.LENGTH_SHORT).show();
                 userID.setText("");
-                /*TODO Alex made a good alert error message creater for improper entries, consider using
-                that once merged to master to separate concerns and not rewrite code
-
-                 */
 
             }
 
 
         }
+    }
+
+
+    public void toBrowsePatientActivity(){
+        Intent intent = new Intent(this, ActivityCareGiverBrowsePatients.class);
+        intent.putExtra("Caregiver", loggedInCareGiver);
+        startActivity(intent);
     }
 
 }
