@@ -18,8 +18,8 @@ public class Record implements Serializable {
     private LocalDateTime timestamp;
 
     private RecordGeoLocation recordGeoLocation;
-    // private RecordBodyLocation recordBodyLocation;
     private RecordPhotoList recordPhotoList;
+    private Bodylocation bodylocation;
 
     public Record() {
         this("");
@@ -31,6 +31,7 @@ public class Record implements Serializable {
         this.comment = "";
         this.timestamp = LocalDateTime.now();
         this.recordPhotoList = new RecordPhotoList();
+        this.bodylocation = new Bodylocation();
 
     }
 
@@ -62,7 +63,10 @@ public class Record implements Serializable {
 
     public void setList(RecordPhotoList photos){this.recordPhotoList = photos;}
 
-    public void addRecordPhoto(RecordPhoto photo){this.recordPhotoList.addPhoto(photo);}
+    public void setBodylocation(Bodylocation bodylocation){
+        this.bodylocation = bodylocation;
+    }
+
 
     public RecordGeoLocation getRecordGeoLocation(){
         return this.recordGeoLocation;
