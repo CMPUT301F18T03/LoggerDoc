@@ -8,8 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
+import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
+
 public class ActivityPatientHomePage extends AppCompatActivity {
     private Patient patient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +27,7 @@ public class ActivityPatientHomePage extends AppCompatActivity {
         usernameTextView.setText(patient.getUserID());
 
         UserList userList = UserListController.getUserList();
+
 
         Log.d("TAG", "userID = " + patient.getUserID());
         Log.d("TAG", "email = " + patient.getEmailAddress());

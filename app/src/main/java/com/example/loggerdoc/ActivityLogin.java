@@ -16,8 +16,14 @@ import android.widget.Toast;
 import com.example.loggerdoc.elasticclient.ElasticDataCallback;
 import com.example.loggerdoc.elasticclient.getUsersTask;
 import com.example.loggerdoc.elasticclient.uploadUsersTask;
+import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
+import com.google.android.gms.ads.doubleclick.PublisherAdView;
+import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
 
 public class ActivityLogin extends AppCompatActivity implements ElasticDataCallback<UserList>{
+
+    private PublisherAdView mPublisherAdView;
+    private PublisherInterstitialAd mPublisherInterstitialAd;
 
     // Local userList to store all of the Users along with all the data associated with users
     static UserList userList = UserListController.getUserList();
@@ -29,8 +35,23 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
         findViewById(R.id.Login_Button).setEnabled(false);
         getUsersTask loadUserList = new getUsersTask(this,this);
         loadUserList.execute();
+
+        mPublisherAdView = findViewById(R.id.publisherAdView);
+        PublisherAdRequest adRequest = new PublisherAdRequest.Builder().build();
+        mPublisherAdView.loadAd(adRequest);
+
+        mPublisherInterstitialAd = new PublisherInterstitialAd(this);
+        mPublisherInterstitialAd.setAdUnitId("/6499/example/interstitial");
+        mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        mPublisherInterstitialAd = new PublisherInterstitialAd(this);
+        mPublisherInterstitialAd.setAdUnitId("/6499/example/interstitial");
+        mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
+    }
 
     // If user hits the login button
     public void login(View v) {
@@ -51,6 +72,10 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
                         Intent intent = new Intent(ActivityLogin.this, ActivityPatientHomePage.class);
                         intent.putExtra("Patient", patient);
                         startActivity(intent);
+                        if (mPublisherInterstitialAd.isLoaded()) {
+                            mPublisherInterstitialAd.show();
+                        }
+
                         break;
                     }
                     else {
