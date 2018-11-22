@@ -25,9 +25,9 @@ public class ActivityLoginIntentTest {
     public void setup() {
         ActivityLogin a = intentsTestRule.getActivity();
         Patient p = new Patient("Test Patient", "test@example.com", "555-555-1234", "Patient");
-        SaveLoadController.savePatientToDisk(a.getBaseContext(), p);
+        // SaveLoadController.savePatientToDisk(a.getBaseContext(), p);
         CareGiver c = new CareGiver("Test Caregiver", "test@example.com", "555-555-1234", "Caregiver");
-        SaveLoadController.saveCareGiverToDisk(a.getBaseContext(), c);
+        // SaveLoadController.saveCareGiverToDisk(a.getBaseContext(), c);
 
         UserList ul = new UserList();
         ul.addUser(p);
