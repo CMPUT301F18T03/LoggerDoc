@@ -118,11 +118,4 @@ public class ActivityAddProblem extends AppCompatActivity {
         dialog.setArguments(messageArgs);
         dialog.show(getSupportFragmentManager(), "error_dialog");
     }
-
-    //Change the activity to ActivityBrowseProblems
-    public void changeActivity(View v){
-        Intent intent = new Intent(this, ActivityBrowseProblems.class);
-        intent.putExtra("Patient", patient);
-        startActivity(intent);
-    }
 }
