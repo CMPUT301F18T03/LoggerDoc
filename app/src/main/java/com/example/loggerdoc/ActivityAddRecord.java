@@ -60,7 +60,7 @@ public class ActivityAddRecord extends AppCompatActivity {
         recordTitleText = (EditText) findViewById(R.id.record_title_text);
         latitudeText = (TextView) findViewById(R.id.latitude_text);
         longitudeText = (TextView) findViewById(R.id.longitude_text);
-        recordCommentText = (EditText) findViewById(R.id.recordCommentText);
+        recordCommentText = (EditText) findViewById(R.id.record_comment_text);
 
         Button recordGallery = findViewById(R.id.gallery_button);
         Button recordCamera = findViewById(R.id.Camera_button);
