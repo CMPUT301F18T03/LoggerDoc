@@ -2,7 +2,6 @@ package com.example.loggerdoc;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -63,13 +62,13 @@ public class ActivityAddRecord extends AppCompatActivity {
         longitudeText = (TextView) findViewById(R.id.longitude_text);
         recordCommentText = (EditText) findViewById(R.id.recordCommentText);
 
-        Button recordGallary = findViewById(R.id.gallary_button);
+        Button recordGallery = findViewById(R.id.gallery_button);
         Button recordCamera = findViewById(R.id.Camera_button);
 
-        recordGallary.setOnClickListener(new View.OnClickListener() {
+        recordGallery.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                GalaryIntent(GALLERY_REQUEST_RECORD);
+                GalleryIntent(GALLERY_REQUEST_RECORD);
             }
         });
 
@@ -140,11 +139,11 @@ public class ActivityAddRecord extends AppCompatActivity {
             patient.getProblems().getProblemArrayList().get(position).getRecordList().getRecordArrayList().add(record);
         }
 
-        //Change to ActivityViewProblem
-        Intent intent = new Intent(ActivityAddRecord.this, ActivityViewProblem.class);
-        intent.putExtra("Patient", patient);
-        intent.putExtra("Position", position);
-        startActivity(intent);
+        //Add record to problem list
+        Intent intent = new Intent();
+        intent.putExtra("Record", record);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     public boolean isServicesOkay(){
@@ -188,7 +187,7 @@ public class ActivityAddRecord extends AppCompatActivity {
         dialog.show(getSupportFragmentManager(), "error_dialog");
     }
 
-    private void GalaryIntent(int request) {
+    private void GalleryIntent(int request) {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, request);

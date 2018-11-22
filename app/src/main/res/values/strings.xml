@@ -18,7 +18,7 @@
     <string name="enter_record_title">Enter a Record Title:</string>
     <string name="add_geo_button">Add Geo-Location</string>
     <string name="add_body_location_button">Add Body Location</string>
-    <string name="add_photo_button">Add Gallary Photo</string>
+    <string name="add_photo_button">Add Gallery Photo</string>
     <string name="add_photo_camera_button">Take Photo</string>
 
     <string name="edit_problem_button">Edit</string>
