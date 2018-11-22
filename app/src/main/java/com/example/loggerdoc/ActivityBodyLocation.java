@@ -1,12 +1,15 @@
 package com.example.loggerdoc;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import java.util.ArrayList;
 
 public class ActivityBodyLocation extends Activity {
     public Bodylocation bodylocation;
@@ -19,7 +22,14 @@ public class ActivityBodyLocation extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_body_location);
-        bodylocation = new Bodylocation();
+        Intent intent = getIntent();
+
+        final ArrayList<Integer> location = new ArrayList<Integer>();
+        location.add(0);
+        location.add(0);
+        location.add(0);
+        location.add(0);
+
         FrontPic = (ImageView) findViewById(R.id.FrontPic);
         BackPic = (ImageView) findViewById(R.id.BackPic);
         Save = (Button)findViewById(R.id.BodLocSave);
@@ -33,18 +43,14 @@ public class ActivityBodyLocation extends Activity {
                 .load(R.drawable.cutout_650x500)
                 .into(BackPic);
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
 
         FrontPic.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 int x = (int) event.getX();
                 int y = (int) event.getY();
-                bodylocation.setFrontTuple(x,y);
+                location.set(0,x);
+                location.set(1,y);
                 return false;
             }
         });
@@ -54,7 +60,8 @@ public class ActivityBodyLocation extends Activity {
             public boolean onTouch(View v, MotionEvent event) {
                 int x = (int) event.getX();
                 int y = (int) event.getY();
-                bodylocation.setBackTuple(x,y);
+                location.set(2,x);
+                location.set(3,y);
                 return false;
             }
         });
@@ -63,10 +70,20 @@ public class ActivityBodyLocation extends Activity {
             @Override
             public void onClick(View v) {
                 //return to intent with bodylocation
+                setResult(RESULT_OK);
+                Intent intent1 = new Intent();
+                intent1.putExtra("BODYLOCATION", location);
+                setResult(Activity.RESULT_OK,intent1);
+                finish();
             }
         });
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
     }
 

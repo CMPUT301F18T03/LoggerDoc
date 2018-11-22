@@ -1,5 +1,6 @@
 package com.example.loggerdoc;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -41,8 +42,9 @@ public class ActivityAddRecord extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE_RECORD = 1000;
     static final int GALLERY_REQUEST_RECORD = 1001;
-
+    private static final int BODY_LOCATION_REQUEST = 1002;
     private ArrayList<RecordPhoto> photos = new ArrayList<RecordPhoto>();
+    private Bodylocation bodylocation = new Bodylocation();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +67,7 @@ public class ActivityAddRecord extends AppCompatActivity {
 
         Button recordGallary = findViewById(R.id.gallary_button);
         Button recordCamera = findViewById(R.id.Camera_button);
+        Button BodyLocationButton = findViewById(R.id.body_location_button);
 
         recordGallary.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -79,6 +82,15 @@ public class ActivityAddRecord extends AppCompatActivity {
                 dispatchTakePictureIntent(REQUEST_IMAGE_CAPTURE_RECORD);
             }
         });
+
+        BodyLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext() ,ActivityBodyLocation.class);
+                startActivityForResult(intent, BODY_LOCATION_REQUEST);
+            }
+        });
+
         if (flag.equals("b")){
             //the previous activity was ActivityAddGeolocation
             geoLocation = (RecordGeoLocation) intent.getSerializableExtra("geoLocation");
@@ -136,6 +148,7 @@ public class ActivityAddRecord extends AppCompatActivity {
 
                 Log.i("SIZE_TEST", String.valueOf(record.getRecordPhotoList().size()));
            }
+           record.setBodylocation(bodylocation);
 
             patient.getProblems().getProblemArrayList().get(position).getRecordList().getRecordArrayList().add(record);
         }
@@ -259,6 +272,14 @@ public class ActivityAddRecord extends AppCompatActivity {
             photo.setPhoto(imageUri);
             photos.add(photo);
             Log.i("THIS_IS_TAG", "onActivityResult: "+ photos.size());
+
+        }
+        if (requestCode == BODY_LOCATION_REQUEST && resultCode == Activity.RESULT_OK){
+            //Gets body location from body location activity
+            ArrayList<Integer> location = data.getIntegerArrayListExtra("BODYLOCATION");
+            bodylocation.setFrontTuple(location.get(0),location.get(1));
+            bodylocation.setBackTuple(location.get(2),location.get(3));
+
 
         }
 
