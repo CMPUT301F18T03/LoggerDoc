@@ -18,8 +18,12 @@ public class AdapterListProblems extends ArrayAdapter<Problem> {
 
     public AdapterListProblems (@NonNull Context context, ArrayList<Problem> list){
         super (context, 0, list);
-        problemContext = context;
-        problemList = list;
+        this.problemContext = context;
+        this.problemList = list;
+    }
+
+    public void refresh(ArrayList<Problem> a) {
+        this.problemList = a;
     }
 
     @NonNull
