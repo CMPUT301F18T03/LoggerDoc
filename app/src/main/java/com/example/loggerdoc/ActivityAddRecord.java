@@ -2,7 +2,6 @@ package com.example.loggerdoc;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -41,6 +40,7 @@ public class ActivityAddRecord extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE_RECORD = 1000;
     static final int GALLERY_REQUEST_RECORD = 1001;
+    static final int ADD_GEOLOCATION_RESULT = 1002;
 
     private ArrayList<RecordPhoto> photos = new ArrayList<RecordPhoto>();
     @Override
@@ -61,15 +61,15 @@ public class ActivityAddRecord extends AppCompatActivity {
         recordTitleText = (EditText) findViewById(R.id.record_title_text);
         latitudeText = (TextView) findViewById(R.id.latitude_text);
         longitudeText = (TextView) findViewById(R.id.longitude_text);
-        recordCommentText = (EditText) findViewById(R.id.recordCommentText);
+        recordCommentText = (EditText) findViewById(R.id.record_comment_text);
 
-        Button recordGallary = findViewById(R.id.gallary_button);
+        Button recordGallery = findViewById(R.id.gallery_button);
         Button recordCamera = findViewById(R.id.Camera_button);
 
-        recordGallary.setOnClickListener(new View.OnClickListener() {
+        recordGallery.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                GalaryIntent(GALLERY_REQUEST_RECORD);
+                GalleryIntent(GALLERY_REQUEST_RECORD);
             }
         });
 
@@ -79,15 +79,34 @@ public class ActivityAddRecord extends AppCompatActivity {
                 dispatchTakePictureIntent(REQUEST_IMAGE_CAPTURE_RECORD);
             }
         });
-        if (flag.equals("b")){
-            //the previous activity was ActivityAddGeolocation
-            geoLocation = (RecordGeoLocation) intent.getSerializableExtra("geoLocation");
-            latitudeText.setText("Latitude: " + String.valueOf(geoLocation.getLatitude()));
-            longitudeText.setText( "Longitude: " + String.valueOf(geoLocation.getLongitude()));
-        }
-
         if (isServicesOkay()){
           initialize();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_CAPTURE_RECORD && resultCode == RESULT_OK) {
+            File f = new File(PhotoPath);
+            Uri uri = Uri.fromFile(f);
+            RecordPhoto photo = new RecordPhoto();
+            photo.setPhoto(uri);
+            photos.add(photo);
+            PhotoPath = null;
+
+        }
+        if (requestCode == GALLERY_REQUEST_RECORD && resultCode == RESULT_OK){
+            final Uri imageUri = data.getData();
+            RecordPhoto photo = new RecordPhoto();
+            photo.setPhoto(imageUri);
+            photos.add(photo);
+            Log.i("THIS_IS_TAG", "onActivityResult: "+ photos.size());
+        }
+        if (requestCode == ADD_GEOLOCATION_RESULT && resultCode == RESULT_OK) {
+            geoLocation = (RecordGeoLocation) data.getSerializableExtra("geoLocation");
+            latitudeText.setText("Latitude: " + String.valueOf(geoLocation.getLatitude()));
+            longitudeText.setText("Longitude: " + String.valueOf(geoLocation.getLongitude()));
         }
     }
 
@@ -101,7 +120,7 @@ public class ActivityAddRecord extends AppCompatActivity {
                 intent.putExtra("Patient", patient);
                 intent.putExtra("Position", position);
                 intent.putExtra("Record", record);
-                startActivity(intent);
+                startActivityForResult(intent, ADD_GEOLOCATION_RESULT);
             }
         });
     }
@@ -140,11 +159,11 @@ public class ActivityAddRecord extends AppCompatActivity {
             patient.getProblems().getProblemArrayList().get(position).getRecordList().getRecordArrayList().add(record);
         }
 
-        //Change to ActivityViewProblem
-        Intent intent = new Intent(ActivityAddRecord.this, ActivityViewProblem.class);
-        intent.putExtra("Patient", patient);
-        intent.putExtra("Position", position);
-        startActivity(intent);
+        //Add record to problem list
+        Intent intent = new Intent();
+        intent.putExtra("Record", record);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     public boolean isServicesOkay(){
@@ -188,12 +207,11 @@ public class ActivityAddRecord extends AppCompatActivity {
         dialog.show(getSupportFragmentManager(), "error_dialog");
     }
 
-    private void GalaryIntent(int request) {
+    private void GalleryIntent(int request) {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, request);
     }
-
 
     private void dispatchTakePictureIntent(int request) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -241,27 +259,6 @@ public class ActivityAddRecord extends AppCompatActivity {
         Log.i("THIS_IS_TAG", String.valueOf(image));
 
         return image;
-    }
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE_RECORD && resultCode == RESULT_OK) {
-            File f = new File(PhotoPath);
-            Uri uri = Uri.fromFile(f);
-            RecordPhoto photo = new RecordPhoto();
-            photo.setPhoto(uri);
-            photos.add(photo);
-            PhotoPath = null;
-
-        }
-        if (requestCode == GALLERY_REQUEST_RECORD && resultCode == RESULT_OK){
-            final Uri imageUri = data.getData();
-            RecordPhoto photo = new RecordPhoto();
-            photo.setPhoto(imageUri);
-            photos.add(photo);
-            Log.i("THIS_IS_TAG", "onActivityResult: "+ photos.size());
-
-        }
-
     }
 
 }
