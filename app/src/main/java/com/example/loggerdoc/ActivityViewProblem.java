@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 public class ActivityViewProblem extends AppCompatActivity {
 
+    static final int ADD_RECORD_RESULT = 1;
+
     private Patient patient;
     private Problem problem;
     private int position;
@@ -24,6 +26,17 @@ public class ActivityViewProblem extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_problem);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADD_RECORD_RESULT) {
+            if (resultCode == RESULT_OK) {
+                Record r = (Record) data.getSerializableExtra("Record");
+                problem.addRecord(r);
+            }
+        }
     }
 
     @Override
@@ -67,7 +80,6 @@ public class ActivityViewProblem extends AppCompatActivity {
     }
 
     public void goDeleteProblem (final View v){
-
         //Show an alert dialog to ask for user's confirmation whether they would like to delete
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Are you sure you would like to delete this problem?");
@@ -103,6 +115,6 @@ public class ActivityViewProblem extends AppCompatActivity {
         intent.putExtra("Patient", patient);
         intent.putExtra("Position", position);
         intent.putExtra("Flag", "a");
-        startActivity(intent);
+        startActivityForResult(intent, ADD_RECORD_RESULT);
     }
 }

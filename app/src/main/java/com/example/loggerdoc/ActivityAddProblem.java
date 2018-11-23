@@ -84,8 +84,10 @@ public class ActivityAddProblem extends AppCompatActivity {
 
             else {
                 //Add problem to patient's problem list
-                patient.getProblems().add(problem);
-                changeActivity(v);
+                Intent intent = new Intent();
+                intent.putExtra("Problem", problem);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         }
     }
@@ -115,12 +117,5 @@ public class ActivityAddProblem extends AppCompatActivity {
         DialogProblem dialog = new DialogProblem();
         dialog.setArguments(messageArgs);
         dialog.show(getSupportFragmentManager(), "error_dialog");
-    }
-
-    //Change the activity to ActivityBrowseProblems
-    public void changeActivity(View v){
-        Intent intent = new Intent(this, ActivityBrowseProblems.class);
-        intent.putExtra("Patient", patient);
-        startActivity(intent);
     }
 }

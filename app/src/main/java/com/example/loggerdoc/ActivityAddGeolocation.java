@@ -67,14 +67,12 @@ public class ActivityAddGeolocation extends AppCompatActivity implements OnMapRe
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Return RecordGeoLocation to previous Activity
                 RecordGeoLocation geoLocation = new RecordGeoLocation(options.getPosition());
-                Intent intent = new Intent(ActivityAddGeolocation.this, ActivityAddRecord.class);
-                intent.putExtra("Patient", patient);
-                intent.putExtra("Position", position);
-                intent.putExtra("Flag", "b");
-                intent.putExtra("Record", record);
+                Intent intent = new Intent();
                 intent.putExtra("geoLocation", geoLocation);
-                startActivity(intent);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }

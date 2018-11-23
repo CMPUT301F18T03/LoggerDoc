@@ -10,25 +10,24 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class ActivityBrowseProblems extends AppCompatActivity {
 
-    private ArrayAdapter<Problem> adapter;
+    static final int ADD_PROBLEM_RESULT = 1;
+
+    private AdapterListProblems adapter;
+    private Patient patient;
 
     //To be called when the activity is created
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse_problems);
-    }
-
-    //To be called when the activity is resumed
-    @Override
-    protected void onResume (){
-        super.onResume();
 
         //get the patient from the intent
         Intent intent = getIntent();
-        final Patient patient = (Patient) intent.getSerializableExtra("Patient");
+        patient = (Patient) intent.getSerializableExtra("Patient");
 
         //Initialize and set the adapter
         adapter = new AdapterListProblems(this, patient.getProblems().getProblemArrayList());
@@ -82,6 +81,26 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADD_PROBLEM_RESULT) {
+            if (resultCode == RESULT_OK) {
+                Problem problem = (Problem) data.getSerializableExtra("Problem");
+                patient.getProblems().add(problem);
+            }
+        }
+    }
+
+    //To be called when the activity is resumed
+    @Override
+    protected void onResume (){
+        super.onResume();
+
+        adapter.refresh(patient.getProblems().getProblemArrayList());
+        adapter.notifyDataSetChanged();
+    }
+
     //Change to ActivityViewProblem.
     public void changeToViewProblemActivity(View view, Patient patient, int position){
         Intent intent = new Intent(this, ActivityViewProblem.class);
@@ -90,12 +109,11 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         startActivity(intent);
     }
 
-
     //Change to ActivityAddProblem.
     public void changeToAddProblemActivity (View view, Patient patient){
         Intent intent = new Intent(this, ActivityAddProblem.class);
         intent.putExtra("Patient", patient);
-        startActivity(intent);
+        startActivityForResult(intent, ADD_PROBLEM_RESULT);
     }
 
     //Change to ActivitySearch.
