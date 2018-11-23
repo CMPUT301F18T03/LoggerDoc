@@ -25,24 +25,5 @@ public class ElasticClient {
         handler = new httphandler(client,host);
     }
 
-
-
-    /*public class basicResponse{
-        public String _index;
-        public String _type;
-        public String _id;
-    }
-    public class searchResponse extends basicResponse{
-        public boolean found;
-        public String _version;
-        public JsonObject _source;
-
-    }
-    private class blankResponse {
-        public String name;
-        public String cluster_name;
-        public String cluster_uuid;
-        public String version;
-    }*/
 }
 

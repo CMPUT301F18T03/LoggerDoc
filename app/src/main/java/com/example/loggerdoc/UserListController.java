@@ -1,5 +1,9 @@
 package com.example.loggerdoc;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 /** Created by Dylan on November 9th, 2018 **/
 
 public class UserListController {
@@ -19,6 +23,18 @@ public class UserListController {
 
     public static void setList(UserList list) {
         getUserList().become(list);
+    }
+
+    public static ArrayList<Patient> getSpecificUserList(ArrayList<Integer> patients) {
+        ArrayList<Patient> ret = new ArrayList<>();
+        Map<Integer,Patient> userMap = new HashMap<>();
+        for(User x : getUserList().getUsers()){
+            userMap.put(x.getElasticID(),(Patient)x);
+        }
+        for(Integer tar : patients){
+            ret.add(userMap.get(tar));
+        }
+        return ret;
     }
 
     public void addUser(User user) {

@@ -47,7 +47,7 @@ public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
         //their user ID, email and phone number
         //initialize adapter and set it to the patient list
         adapter = new AdapterListPatient(this,
-                R.layout.patient_listview_layout, loggedInCaregiver.getPatientList().getPatients());
+                R.layout.patient_listview_layout, UserListController.getSpecificUserList(loggedInCaregiver.getPatientList().getPatients()));
         patientList.setAdapter(adapter);
 
         //Set the onClickListener for the listView. This will call toProblemListActivity().

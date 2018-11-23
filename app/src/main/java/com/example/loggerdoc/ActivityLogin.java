@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.loggerdoc.elasticclient.ElasticDataCallback;
 import com.example.loggerdoc.elasticclient.getUsersTask;
+import com.example.loggerdoc.elasticclient.modifyUserTask;
 import com.example.loggerdoc.elasticclient.uploadUsersTask;
 
 public class ActivityLogin extends AppCompatActivity implements ElasticDataCallback<UserList>{
@@ -28,6 +29,7 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
         setContentView(R.layout.activity_login);
         findViewById(R.id.Login_Button).setEnabled(false);
         getUsersTask loadUserList = new getUsersTask(this,this);
+        loadUserList.mkDirs();
         loadUserList.execute();
     }
 
@@ -143,7 +145,7 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
                 Toast.makeText(ActivityLogin.this, "Success", Toast.LENGTH_SHORT).show();
 
                 // Save the userlist to disk for creating a new account offline we can check for unique userID
-                new uploadUsersTask(getBaseContext()).execute(userList);//Fire and forget
+                new modifyUserTask(getBaseContext()).execute(patient);//Fire and forget
 
             }
         });
@@ -171,7 +173,7 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
                 CareGiver careGiver = new CareGiver(username, emailAddress, phoneNumber,"Caregiver", new PatientList());
                 userList.addUser(careGiver);
                 Toast.makeText(ActivityLogin.this, "Success", Toast.LENGTH_SHORT).show();
-                new uploadUsersTask(getBaseContext()).execute(userList);
+                new modifyUserTask(getBaseContext()).execute(careGiver);
 
             }
         });
