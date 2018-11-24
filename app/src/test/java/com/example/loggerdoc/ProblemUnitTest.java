@@ -11,7 +11,7 @@ public class ProblemUnitTest {
     @Test
     public void TestProblemTitle() {
         String title = "A test problem";
-        Problem problem = new Problem(title,new DatePickerFragment(),"desc");
+        Problem problem = new Problem(title,LocalDateTime.now(),"desc");
         assertEquals("Problem title should be read from problem", title, problem.getTitle());
 
         String newTitle = "An updated title";
@@ -22,7 +22,7 @@ public class ProblemUnitTest {
     @Test
     public void TestProblemDescription() {
         String desc = "A test description";
-        Problem problem = new Problem("title",new DatePickerFragment(),desc);
+        Problem problem = new Problem("title",LocalDateTime.now(),desc);
         problem.setDescription(desc);
         assertEquals("Problem description should be read", desc, problem.getDescription());
     }
@@ -30,7 +30,7 @@ public class ProblemUnitTest {
     @Test
     public void TestProblemTimestamp() {
         LocalDateTime beforeTime = LocalDateTime.now();
-        Problem problem = new Problem("",new DatePickerFragment(),"");
+        Problem problem = new Problem("",LocalDateTime.now(),"");
         LocalDateTime problemTime = problem.getTimestamp();
         LocalDateTime afterTime = LocalDateTime.now();
 
