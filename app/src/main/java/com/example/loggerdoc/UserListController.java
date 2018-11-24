@@ -1,8 +1,8 @@
 package com.example.loggerdoc;
 
+import android.util.SparseArray;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+
 
 /** Created by Dylan on November 9th, 2018 **/
 
@@ -21,14 +21,15 @@ public class UserListController {
         return userList;
     }
 
-    public static void setList(UserList list) {
-        getUserList().become(list);
+    public static void setList(ArrayList<User> list) {
+        getUserList().load(list);
     }
 
     public static ArrayList<Patient> getSpecificUserList(ArrayList<Integer> patients) {
         ArrayList<Patient> ret = new ArrayList<>();
-        Map<Integer,Patient> userMap = new HashMap<>();
-        for(User x : getUserList().getUsers()){
+
+        SparseArray<Patient> userMap = new SparseArray<>();
+        for(User x : getUserList().getArray()){
             userMap.put(x.getElasticID(),(Patient)x);
         }
         for(Integer tar : patients){
@@ -38,11 +39,11 @@ public class UserListController {
     }
 
     public void addUser(User user) {
-        getUserList().addUser(user);
+        getUserList().add(user);
     }
 
     public void removeUser(User user) {
-        getUserList().removeUser(user);
+        getUserList().remove(user);
     }
 
     /**
@@ -51,7 +52,7 @@ public class UserListController {
      * @return Returns True if user is in the userList, False if user is not in useList
      */
     public static boolean findUser(String id) {
-        for (User user : userList.getUsers()) {
+        for (User user : userList.getArray()) {
             if (user.getUserID().equals(id)) {
                 return true;
             }
@@ -59,3 +60,5 @@ public class UserListController {
         return false;
     }
 }
+
+

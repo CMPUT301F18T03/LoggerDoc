@@ -2,11 +2,12 @@ package com.example.loggerdoc.elasticclient;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
+import android.util.SparseArray;
 
 import com.example.loggerdoc.CareGiver;
 import com.example.loggerdoc.ElasticSearchController;
 import com.example.loggerdoc.Patient;
+import com.example.loggerdoc.User;
 import com.example.loggerdoc.UserList;
 import com.google.gson.Gson;
 
@@ -16,30 +17,26 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.util.ArrayList;
 
-public class getUsersTask extends AsyncTask<Void, Void,UserList> {
+public class getUsersTask extends AsyncTask<Void, Void,ArrayList<User>> {
     private Context context;
-    private ElasticDataCallback<UserList> callback;
+    private ElasticDataCallback<ArrayList<User>> callback;
     public getUsersTask(Context context){
         this.context = context;
     }
-    public getUsersTask(Context context,ElasticDataCallback<UserList> callback){
+    public getUsersTask(Context context,ElasticDataCallback<ArrayList<User>> callback){
         this.context = context;
         this.callback = callback;
     }
 
     @Override
-    protected UserList doInBackground(Void... voids) {
+    protected ArrayList<User> doInBackground(Void... voids) {
         httphandler receiver = ElasticSearchController.getHttpHandler();
         Gson gson = new Gson();
-        UserList ret = new UserList();
+        ArrayList<User> ret = new ArrayList<>();
         String jsonin = receiver.httpGET("/user/_doc/_search?q=*:*&filter_path=hits.hits.*&size=10000");
         if(jsonin != null){
             try {
@@ -47,10 +44,10 @@ public class getUsersTask extends AsyncTask<Void, Void,UserList> {
                 for(int num = 0; num < hits.length();num++){
                     JSONObject currentuser = hits.getJSONObject(num).getJSONObject("_source");
                     if(currentuser.has("problems")){
-                        ret.addUser(gson.fromJson(currentuser.toString(),Patient.class));
+                        ret.add(gson.fromJson(currentuser.toString(),Patient.class));
                     }
                     else if(currentuser.has("patients")){
-                        ret.addUser(gson.fromJson(currentuser.toString(),CareGiver.class));
+                        ret.add(gson.fromJson(currentuser.toString(),CareGiver.class));
                     }
                 }
 
@@ -69,10 +66,10 @@ public class getUsersTask extends AsyncTask<Void, Void,UserList> {
                         in = new BufferedReader(new FileReader(userdata));
                         JSONObject currentuser = new JSONObject(in.readLine());
                         if(currentuser.has("problems")){
-                            ret.addUser(gson.fromJson(currentuser.toString(),Patient.class));
+                            ret.add(gson.fromJson(currentuser.toString(),Patient.class));
                         }
                         else if(currentuser.has("patients")){
-                            ret.addUser(gson.fromJson(currentuser.toString(),CareGiver.class));
+                            ret.add(gson.fromJson(currentuser.toString(),CareGiver.class));
                         }
 
                     } catch (JSONException | IOException e) {
@@ -104,7 +101,7 @@ public class getUsersTask extends AsyncTask<Void, Void,UserList> {
         }
     }
     @Override
-    protected void onPostExecute(UserList x){
+    protected void onPostExecute(ArrayList<User> x){
         context = null;
         if(callback != null){
             callback.dataCallBack(x);

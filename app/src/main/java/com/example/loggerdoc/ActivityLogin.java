@@ -16,9 +16,10 @@ import android.widget.Toast;
 import com.example.loggerdoc.elasticclient.ElasticDataCallback;
 import com.example.loggerdoc.elasticclient.getUsersTask;
 import com.example.loggerdoc.elasticclient.modifyUserTask;
-import com.example.loggerdoc.elasticclient.uploadUsersTask;
 
-public class ActivityLogin extends AppCompatActivity implements ElasticDataCallback<UserList>{
+import java.util.ArrayList;
+
+public class ActivityLogin extends AppCompatActivity implements ElasticDataCallback<ArrayList<User>>{
 
     // Local userList to store all of the Users along with all the data associated with users
     static UserList userList = UserListController.getUserList();
@@ -45,7 +46,7 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
         // verify that the user actually exists, if true then proceed with login
         if (verifyUsername(userLogin)) {
             Toast.makeText(this, "WORKS", Toast.LENGTH_SHORT).show();
-            for (User user : userList.getUsers()) {
+            for (User user : userList.getArray()) {
                 Log.d("TAG", "email = " + user.getEmailAddress());
                 if (user.getUserID().equals(userLogin)) {
                     if (user.getRole().equals("Patient")) {
@@ -78,7 +79,7 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
 
     // need method to check if the username is taken when the user is creating an account
     public boolean verifyUsername(String id) {
-        for (User user : userList.getUsers()) {
+        for (User user : userList.getArray()) {
             Log.d("TAG","userID" + user.getUserID());
             if (user.getUserID().equals(id)) {
                 Log.d("TAG", "TRUE");
@@ -141,7 +142,7 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
                     return;
                 }
                 Patient patient = new Patient(username, emailAddress, phoneNumber,"Patient", new CareGiverList());
-                userList.addUser(patient);
+                userList.add(patient);
                 Toast.makeText(ActivityLogin.this, "Success", Toast.LENGTH_SHORT).show();
 
                 // Save the userlist to disk for creating a new account offline we can check for unique userID
@@ -171,7 +172,7 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
                     return;
                 }
                 CareGiver careGiver = new CareGiver(username, emailAddress, phoneNumber,"Caregiver", new PatientList());
-                userList.addUser(careGiver);
+                userList.add(careGiver);
                 Toast.makeText(ActivityLogin.this, "Success", Toast.LENGTH_SHORT).show();
                 new modifyUserTask(getBaseContext()).execute(careGiver);
 
@@ -189,7 +190,7 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
     }
 
     @Override
-    public void dataCallBack(UserList data) {
+    public void dataCallBack(ArrayList<User> data) {
         UserListController.setList(data);
         Button loginbut = findViewById(R.id.Login_Button);
         loginbut.setEnabled(true);

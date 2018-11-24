@@ -9,8 +9,11 @@
 
 package com.example.loggerdoc;
 
+import com.example.loggerdoc.elasticclient.ElasticID;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ProblemList implements Serializable {
 
@@ -69,3 +72,5 @@ public class ProblemList implements Serializable {
         return problemArrayList.size();
     }
 }
+
+

@@ -8,13 +8,8 @@ import com.example.loggerdoc.User;
 import com.example.loggerdoc.UserList;
 import com.google.gson.Gson;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -29,7 +24,7 @@ public class uploadUsersTask extends AsyncTask<UserList, Void, Void> {
     @Override
     protected Void doInBackground(UserList... users) {
         //Because we for some reason take a list of userlists in....
-        ArrayList<User> tosend =  users[0].getUsers();
+        ArrayList<User> tosend =  users[0].getArray();
         Gson gson = new Gson();
         String jsonout;
         httphandler sender = ElasticSearchController.getHttpHandler();

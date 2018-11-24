@@ -30,8 +30,8 @@ public class ActivityLoginIntentTest {
         // SaveLoadController.saveCareGiverToDisk(a.getBaseContext(), c);
 
         UserList ul = new UserList();
-        ul.addUser(p);
-        ul.addUser(c);
+        ul.add(p);
+        ul.add(c);
         ActivityLogin.userList = ul;
     }
 
