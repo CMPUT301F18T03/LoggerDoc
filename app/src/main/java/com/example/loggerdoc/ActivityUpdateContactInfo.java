@@ -35,7 +35,7 @@ public class ActivityUpdateContactInfo extends AppCompatActivity {
         phoneNumberEditText = (EditText) findViewById(R.id.edit_contact_info_number_view);
         contactInfoEmailWarning = (ImageView) findViewById(R.id.warningEditEmail);
         contactInfoPhoneWarning = (ImageView) findViewById(R.id.warningEditPhoneNumber);
-        userId = (TextView) findViewById(R.id.UpdateContactInfoUsernameView);
+        userId = (TextView) findViewById(R.id.ProblemTitle);
 
 
         //get the logged in user from the intent

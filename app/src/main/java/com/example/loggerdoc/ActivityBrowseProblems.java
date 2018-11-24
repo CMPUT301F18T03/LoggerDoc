@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 public class ActivityBrowseProblems extends AppCompatActivity {
 
     static final int ADD_PROBLEM_RESULT = 1;
+    static final int VIEW_PROBLEM_RESULT = 2;
 
     private AdapterListProblems adapter;
     private Patient patient;
@@ -90,13 +92,19 @@ public class ActivityBrowseProblems extends AppCompatActivity {
                 patient.getProblems().add(problem);
             }
         }
+
+        if (requestCode == VIEW_PROBLEM_RESULT){
+            if (resultCode == RESULT_OK){
+                int position = (int) data.getSerializableExtra("Position");
+                patient.getProblems().getProblemArrayList().remove(position);
+            }
+        }
     }
 
     //To be called when the activity is resumed
     @Override
     protected void onResume (){
         super.onResume();
-
         adapter.refresh(patient.getProblems().getProblemArrayList());
         adapter.notifyDataSetChanged();
     }
@@ -106,7 +114,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         Intent intent = new Intent(this, ActivityViewProblem.class);
         intent.putExtra("Patient", patient);
         intent.putExtra("Position", position);
-        startActivity(intent);
+        startActivityForResult(intent, VIEW_PROBLEM_RESULT);
     }
 
     //Change to ActivityAddProblem.
