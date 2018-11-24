@@ -9,10 +9,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import java.time.LocalDateTime;
+
 
 public class ActivityAddProblem extends AppCompatActivity {
     private Patient patient;
     private DatePickerFragment datePicker;
+    private TimePickerFragment timePicker;
     private EditText problemTitle;
     private EditText problemDescription;
     private ImageView problemTitleWarning;
@@ -30,7 +33,10 @@ public class ActivityAddProblem extends AppCompatActivity {
 
         Intent intent = getIntent();
         patient = (Patient) intent.getSerializableExtra("Patient");
-        datePicker = new DatePickerFragment();
+
+        datePicker = DatePickerFragment.newInstance(LocalDateTime.now());
+        timePicker = TimePickerFragment.newInstance(LocalDateTime.now());
+        datePicker.setNextFragment(timePicker);
 
         problemTitle = (EditText) findViewById(R.id.problem_Title_Text);
         problemDescription = (EditText) findViewById(R.id.problem_desc_text);
@@ -38,6 +44,7 @@ public class ActivityAddProblem extends AppCompatActivity {
         problemDescriptionWarning = (ImageView) findViewById(R.id.warning_Problem_Desc);
 
     }
+
 
     //To be called when the user hits the create button
     public void checkProblemFields (View v){
@@ -103,9 +110,9 @@ public class ActivityAddProblem extends AppCompatActivity {
         return false;
     }
 
-    //Show the Date Picker
+    //Show the Date Picker and Time Picker
     public void clickPickDate(View v){
-        datePicker.show(getSupportFragmentManager(), "pick_date");
+        datePicker.show(getSupportFragmentManager(), "Add Date Fragment");
     }
 
     //Show an error Alert Dialog.
@@ -118,4 +125,5 @@ public class ActivityAddProblem extends AppCompatActivity {
         dialog.setArguments(messageArgs);
         dialog.show(getSupportFragmentManager(), "error_dialog");
     }
+
 }

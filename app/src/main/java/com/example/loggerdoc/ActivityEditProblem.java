@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.time.LocalDateTime;
 
 public class ActivityEditProblem extends AppCompatActivity {
 
     private EditText editTitle;
-    private EditText editDate;
+    private TextView editDate;
     private EditText editDescription;
     private Patient patient;
     private Problem problem;
@@ -18,6 +21,7 @@ public class ActivityEditProblem extends AppCompatActivity {
     private ImageView problemTitleWarning;
     private ImageView problemDescriptionWarning;
     private DatePickerFragment datePickerFragment;
+    private TimePickerFragment timePickerFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,7 @@ public class ActivityEditProblem extends AppCompatActivity {
         problem = patient.getProblems().getProblemArrayList().get(position);
 
         editTitle = (EditText) findViewById(R.id.editTitle);
-        editDate = (EditText) findViewById(R.id.edit_problem_date_pick);
+        editDate = (TextView) findViewById(R.id.edit_problem_date_pick);
         editDescription = (EditText) findViewById(R.id.edit_prob_desc);
         problemTitleWarning = (ImageView) findViewById(R.id.warningEditTitle);
         problemDescriptionWarning = (ImageView) findViewById(R.id.warningEditDesc);
@@ -45,7 +49,10 @@ public class ActivityEditProblem extends AppCompatActivity {
         editDate.setText(problem.getTimestamp().toString());
         editDescription.setText(problem.getDescription());
 
-        datePickerFragment = new DatePickerFragment();
+        datePickerFragment = DatePickerFragment.newInstance(problem.getTimestamp());
+        timePickerFragment = TimePickerFragment.newInstance(problem.getTimestamp());
+        datePickerFragment.setNextFragment(timePickerFragment);
+
     }
 
     public void updateProblem (View v){
@@ -112,7 +119,7 @@ public class ActivityEditProblem extends AppCompatActivity {
 
     //Show the Date Picker
     public void clickPickDate(View v){
-        datePickerFragment.show(getSupportFragmentManager(), "pick_date");
+        datePickerFragment.show(getSupportFragmentManager(), "Edit Date Fragment");
     }
 
     //Show an error Alert Dialog.
