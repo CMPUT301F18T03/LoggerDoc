@@ -27,7 +27,7 @@ public class PatientList implements Serializable {
      *
      * @param patient adds patient to the patientList
      */
-    // add a careGiver to the list of careGivers
+    // add_internal a careGiver to the list of careGivers
     public void addPatient(Patient patient) {
         patientList.add(patient.getElasticID());
     }

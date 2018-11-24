@@ -140,7 +140,7 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
                     return;
                 }
                 Patient patient = new Patient(username, emailAddress, phoneNumber,"Patient", new CareGiverList());
-                //userList.add(patient);
+                //userList.add_internal(patient);
                 Toast.makeText(ActivityLogin.this, "Success", Toast.LENGTH_SHORT).show();
 
                 // Save the userlist to disk for creating a new account offline we can check for unique userID
@@ -171,7 +171,7 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
                     return;
                 }
                 CareGiver careGiver = new CareGiver(username, emailAddress, phoneNumber,"Caregiver", new PatientList());
-                //userList.add(careGiver);
+                //userList.add_internal(careGiver);
                 UserListController.getUserList().add(careGiver,getApplicationContext());
                 Toast.makeText(ActivityLogin.this, "Success", Toast.LENGTH_SHORT).show();
                 //new modifyUserTask(getBaseContext()).execute(careGiver);

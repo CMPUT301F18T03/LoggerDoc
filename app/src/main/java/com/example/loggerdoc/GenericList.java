@@ -18,7 +18,7 @@ public class GenericList<T extends ElasticID>{
      *
      * @param data The data that needs to be added to the generic list.
      */
-    protected void add(T data) {
+    protected void add_internal(T data) {
         datalist.put(data.getElasticID(),data);
     }
 

@@ -54,7 +54,7 @@ public class getRecordsTask extends AsyncTask<Integer, Void,ArrayList<Record>> {
         else {
             File datafile = new File(context.getFilesDir().getAbsolutePath()+"/Records/");
             if(datafile.exists()){
-                File problems = new File(context.getFilesDir().getAbsolutePath()+"/Records/records"+EID.toString());
+                File problems = new File(context.getFilesDir().getAbsolutePath()+"/Records/records"+EID.toString()+".sav");
                 try {
                     BufferedReader in = new BufferedReader(new FileReader(problems));
                     String linein = in.readLine();

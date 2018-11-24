@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class RecordList extends GenericList<Record> implements ElasticDataCallback<ArrayList<Record>> {
 
     protected void add(Record data,Context context) {
-        super.add(data);
+        super.add_internal(data);
     }
 
     public void download(Integer elasticID, Context context) {

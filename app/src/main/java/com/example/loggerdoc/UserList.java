@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class UserList extends GenericList<User>{
 
     public void add(User data,Context context) {
-        super.add(data);
+        super.add_internal(data);
         new modifyUserTask(context).execute(data);
     }
 

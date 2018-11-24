@@ -12,7 +12,7 @@ public class ProblemListUnitTest {
     public void TestProblemListAdd() {
         ProblemList problemList = new ProblemList();
         Problem problem = new Problem("",LocalDateTime.now(),"",0);
-        problemList.add(problem);
+        problemList.add_internal(problem);
         assertTrue("ProblemList should contain added problem", problemList.contains(problem));
     }
 
@@ -20,7 +20,7 @@ public class ProblemListUnitTest {
     public void TestProblemListRemove() {
         ProblemList problemList = new ProblemList();
         Problem problem = new Problem("",LocalDateTime.now(),"",0);
-        problemList.add(problem);
+        problemList.add_internal(problem);
         assertTrue("ProblemList should contain added problem", problemList.contains(problem));
 
         problemList.remove(problem);
@@ -33,11 +33,11 @@ public class ProblemListUnitTest {
         assertEquals("ProblemList should have size 0", 0, problemList.size());
 
         Problem problemA = new Problem("",LocalDateTime.now(),"",0);
-        problemList.add(problemA);
+        problemList.add_internal(problemA);
         assertEquals("RecordList should have size 1", 1, problemList.size());
 
         Problem problemB = new Problem("",LocalDateTime.now(),"",0);
-        problemList.add(problemB);
+        problemList.add_internal(problemB);
         assertEquals("RecordList should have size 2", 2, problemList.size());
 
         problemList.remove(problemA);

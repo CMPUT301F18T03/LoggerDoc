@@ -5,14 +5,11 @@ import android.os.AsyncTask;
 import com.example.loggerdoc.ElasticSearchController;
 import com.example.loggerdoc.Problem;
 import com.google.gson.Gson;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -53,7 +50,7 @@ public class getProblemsTask extends AsyncTask<Integer, Void,ArrayList<Problem>>
         else {
             File datafile = new File(context.getFilesDir().getAbsolutePath()+"/Problems/");
             if(datafile.exists()){
-                File problems = new File(context.getFilesDir().getAbsolutePath()+"/Problems/problems"+EID.toString());
+                File problems = new File(context.getFilesDir().getAbsolutePath()+"/Problems/problems"+EID.toString()+".sav");
                 try {
                     BufferedReader in = new BufferedReader(new FileReader(problems));
                     String linein = in.readLine();

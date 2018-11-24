@@ -129,7 +129,7 @@ public class Problem implements Serializable,ElasticID {
      * @param record The record that needs to be added.
      */
     public void addRecord(Record record) {
-        this.recordList.add(record);
+        this.recordList.add_internal(record);
     }
 
     /**
