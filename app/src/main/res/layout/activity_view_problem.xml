@@ -99,31 +99,14 @@
                 android:textColor="@android:color/black"
                 android:text="PlaceholderForDescription" />
 
-            <TextView
-                android:id="@+id/recordsProblemTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/problemRecordTItle"
-                android:textColor="@android:color/black"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:textSize="18sp" />
-
-            <ListView
-                android:id="@+id/recordsListView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/textviewborder"
-                android:padding="10dp" />
-
             <Button
-                android:id="@+id/addRecordButton"
-                android:layout_width="120dp"
-                android:layout_height="37dp"
-                android:layout_marginStart="15dp"
-                android:onClick="goAddRecord"
-                android:text="@string/addrecordbutton" />
+                android:id="@+id/viewRecord"
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="30dp"
+                android:onClick="goViewRecordList"
+                android:text="@string/view_records_button" />
 
             <TextView
                 android:id="@+id/caregiverCommentTitle"

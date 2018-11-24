@@ -45,6 +45,7 @@
     <string name="caregiver_flag">Caregiver</string>
     <string name="patient_flag">Patient</string>
     <string name="title_activity_photo_grid">ActivityPhotoGrid</string>
+    <string name="view_records_button">View Records</string>
 
     6d355acae24733ee9f9d9d0017dc972737fbf333
 </resources>

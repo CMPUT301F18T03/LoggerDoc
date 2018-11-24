@@ -14,12 +14,9 @@ import android.widget.TextView;
 
 public class ActivityViewProblem extends AppCompatActivity {
 
-    static final int ADD_RECORD_RESULT = 1;
-
     private Patient patient;
     private Problem problem;
     private int position;
-    private ArrayAdapter<Record> recordAdapter;
     private ArrayAdapter<CaregiverComment> commentAdapter;
 
 
@@ -29,16 +26,6 @@ public class ActivityViewProblem extends AppCompatActivity {
         setContentView(R.layout.activity_view_problem);
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == ADD_RECORD_RESULT) {
-            if (resultCode == RESULT_OK) {
-                Record r = (Record) data.getSerializableExtra("Record");
-                problem.addRecord(r);
-            }
-        }
-    }
 
     @Override
     protected void onResume(){
@@ -58,20 +45,6 @@ public class ActivityViewProblem extends AppCompatActivity {
 
         TextView problemDescriptionView = (TextView) findViewById(R.id.descriptionProblemView);
         problemDescriptionView.setText(problem.getDescription());
-
-        //Initialize and set the adapter for the records
-        recordAdapter = new AdapterListRecords(this, problem.getRecordList().getRecordArrayList());
-        ListView recordList = (ListView) findViewById(R.id.recordsListView);
-        recordList.setAdapter(recordAdapter);
-        //Set the onClickListener for the listView. This will call changeToViewProblemActivity().
-        recordList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                goViewRecord(view);
-            }
-        });
-
-        recordAdapter.notifyDataSetChanged();
 
         //Initialize and set the adapter for the caregiver's comments
         commentAdapter = new AdapterListComments(this, problem.getCommentList().getComments());
@@ -113,18 +86,9 @@ public class ActivityViewProblem extends AppCompatActivity {
 
     }
 
-
-    //Change to AddRecord Activity
-    public void goAddRecord (View v){
-        Intent intent = new Intent(this, ActivityAddRecord.class);
-        intent.putExtra("Patient", patient);
-        intent.putExtra("Position", position);
-        intent.putExtra("Flag", "a");
-        startActivityForResult(intent, ADD_RECORD_RESULT);
-    }
-
-    public void goViewRecord(View v){
+    public void goViewRecordList(View v, Problem problem){
         Intent intent = new Intent(this, ActivityViewRecord.class);
+        intent.putExtra("Problem", problem);
         startActivity(intent);
     }
 }
