@@ -1,6 +1,8 @@
 package com.example.loggerdoc;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
@@ -84,6 +86,29 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
         Intent intent = new Intent(this, ActivityEditRecord.class);
         intent.putExtra("Record", record);
         startActivityForResult(intent, EDIT_RECORD_RESULT);
+    }
+    private void goDeleteRecord (final View v){
+        //Show an alert dialog to ask for user's confirmation whether they would like to delete
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Are you sure you would like to delete this record?");
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent();
+                intent.putExtra("Position", position);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
+
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 }
