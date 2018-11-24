@@ -42,7 +42,7 @@ public class ProblemUnitTest {
 
     @Test
     public void TestProblemRecordListAdd() {
-        Problem problem = new Problem("",new DatePickerFragment(),"");
+        Problem problem = new Problem("",LocalDateTime.now(),"");
         Record record = new Record();
         problem.addRecord(record);
         assertTrue("Problem's record list should contain record",
@@ -51,7 +51,7 @@ public class ProblemUnitTest {
 
     @Test
     public void testCaregiverCommentAdd(){
-        Problem problem = new Problem("",new DatePickerFragment(),"");
+        Problem problem = new Problem("",LocalDateTime.now(),"");
         CaregiverComment caregiverComment = new CaregiverComment(new CareGiver("test",
                 "test", "test","test", new PatientList()),
                 "Looks good");
@@ -63,13 +63,13 @@ public class ProblemUnitTest {
     }
 
     public void testTitleTooLong(){
-        Problem problem = new Problem("yuUAuGVmRMKiGcFxuSY8RfS1YedXJB5\n",new DatePickerFragment(),"");
+        Problem problem = new Problem("yuUAuGVmRMKiGcFxuSY8RfS1YedXJB5\n",LocalDateTime.now(),"");
 
         assertFalse("The problem title is too long",problem.checkTitleLength(problem.getTitle()));
     }
 
     public void testCommentTooLong(){
-        Problem problem = new Problem("",new DatePickerFragment(),
+        Problem problem = new Problem("",LocalDateTime.now(),
                 "mDiy1zVeCt8hAjXX3f9kpdvx8sD08qEi9emAWP4VBNOYJmZTkf2EI2A8GYXLODIgAmt1rLFLr7y546tDqUyJHJRvy8W1iQHVvj5359rld5BT9qXPdEet5qxA0Sv7pMHUJ8Ff8Pl00uwHT5ANgfiqV9LeG1yA1BJfhdaclMI4cwjSvw4FoThOjeWuePILfELyO57h9bZyNJs730NYraUi1AjJBNZhPx83UgqKt9Vvw7nWujrejFNxi8zDR4txwpV6wU779Z6sjVE8gQUwc4BMcNVbQ7b4zKt97GIpjJOIODo1Q");
 
         assertFalse("The problem description is too long", problem.checkDescriptionLength(problem.getDescription()));

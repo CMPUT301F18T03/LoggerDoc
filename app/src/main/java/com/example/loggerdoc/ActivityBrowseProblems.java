@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class ActivityBrowseProblems extends AppCompatActivity {
 
     static final int ADD_PROBLEM_RESULT = 1;
-    static final int DELETE_PROBLEM_RESULT = 2;
+    static final int VIEW_PROBLEM_RESULT = 2;
 
     private AdapterListProblems adapter;
     private Patient patient;
@@ -92,11 +92,12 @@ public class ActivityBrowseProblems extends AppCompatActivity {
             }
         }
 
-        if (requestCode == DELETE_PROBLEM_RESULT){
+        if (requestCode == VIEW_PROBLEM_RESULT){
             if (resultCode == RESULT_OK){
                 Problem problem = (Problem) data.getSerializableExtra("Problem");
                 patient.getProblems().remove(problem);
             }
+
         }
     }
 
@@ -114,7 +115,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         Intent intent = new Intent(this, ActivityViewProblem.class);
         intent.putExtra("Patient", patient);
         intent.putExtra("Position", position);
-        startActivity(intent);
+        startActivityForResult(intent, VIEW_PROBLEM_RESULT);
     }
 
     //Change to ActivityAddProblem.
