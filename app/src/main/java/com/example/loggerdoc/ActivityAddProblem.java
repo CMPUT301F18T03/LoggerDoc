@@ -87,8 +87,8 @@ public class ActivityAddProblem extends AppCompatActivity {
 
             else {
                 //Add problem to patient's problem list
+                ProblemRecordListController.getProblemList().add(problem,getApplicationContext());
                 Intent intent = new Intent();
-                intent.putExtra("Problem", problem);
                 setResult(RESULT_OK, intent);
                 finish();
             }

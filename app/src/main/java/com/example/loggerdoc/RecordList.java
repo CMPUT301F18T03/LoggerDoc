@@ -8,10 +8,22 @@ package com.example.loggerdoc;
 
 import android.content.Context;
 
-public class RecordList extends GenericList<Record> {
+import com.example.loggerdoc.elasticclient.ElasticDataCallback;
+import com.example.loggerdoc.elasticclient.getRecordsTask;
+
+import java.util.ArrayList;
+
+public class RecordList extends GenericList<Record> implements ElasticDataCallback<ArrayList<Record>> {
 
     protected void add(Record data,Context context) {
         super.add(data);
     }
 
+    public void download(Integer elasticID, Context context) {
+        new getRecordsTask(context,this).execute(elasticID);
+    }
+
+    public void dataCallBack(ArrayList<Record> data) {
+        super.load(data);
+    }
 }

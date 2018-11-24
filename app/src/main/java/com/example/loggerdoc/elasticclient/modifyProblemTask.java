@@ -5,26 +5,18 @@ import android.os.AsyncTask;
 
 import com.example.loggerdoc.ElasticSearchController;
 import com.example.loggerdoc.User;
-import com.example.loggerdoc.UserList;
-import com.example.loggerdoc.UserListController;
 import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
 
-public class modifyUserTask extends AsyncTask<User, Void, Void> {
+public class modifyProblemTask extends AsyncTask<User, Void, Void> {
     private Context context;
-    public modifyUserTask(Context context){
+    public modifyProblemTask(Context context){
         this.context = context;
     }
     @Override
@@ -60,5 +52,3 @@ public class modifyUserTask extends AsyncTask<User, Void, Void> {
         context = null;
     }
 }
-
-

@@ -25,6 +25,7 @@ public class Record implements Serializable,ElasticID {
     private RecordPhotoList recordPhotoList;
 
     private Integer ElasticID;
+    private Integer ElasticID_Owner;
     private Integer ElasticID_OwnerProblem;
 
     public Record() {
@@ -38,6 +39,18 @@ public class Record implements Serializable,ElasticID {
         this.timestamp = LocalDateTime.now();
         this.recordPhotoList = new RecordPhotoList();
         ElasticID_OwnerProblem = Ownerproblem;
+        ElasticID_Owner = ProblemRecordListController.getProblemList().get(ElasticID_OwnerProblem).getElasticID_Owner();
+        ElasticID = this.hashCode();
+
+    }
+
+    public Record(String title,Integer Ownerproblem,Integer Owner) {
+        this.title = title;
+        this.comment = "";
+        this.timestamp = LocalDateTime.now();
+        this.recordPhotoList = new RecordPhotoList();
+        ElasticID_OwnerProblem = Ownerproblem;
+        ElasticID_Owner = Owner;
         ElasticID = this.hashCode();
 
     }
@@ -81,7 +94,11 @@ public class Record implements Serializable,ElasticID {
     public Integer getElasticID() {
         return this.ElasticID;
     }
+    public Integer getElasticID_Owner(){
+        return this.ElasticID_Owner;
+    }
     public Integer getElasticID_OwnerProblem(){
         return this.ElasticID_OwnerProblem;
     }
+
 }

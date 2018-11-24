@@ -27,6 +27,7 @@ public class getUsersTask extends AsyncTask<Void, Void,ArrayList<User>> {
     public getUsersTask(Context context){
         this.context = context;
     }
+
     public getUsersTask(Context context,ElasticDataCallback<ArrayList<User>> callback){
         this.context = context;
         this.callback = callback;
@@ -84,6 +85,7 @@ public class getUsersTask extends AsyncTask<Void, Void,ArrayList<User>> {
                 new File(context.getFilesDir().getAbsolutePath()+"/Records/").mkdir();
                 new File(context.getFilesDir().getAbsolutePath()+"/Problems/").mkdir();
                 new File(context.getFilesDir().getAbsolutePath()+"/Data/").mkdir();
+                new File(context.getFilesDir().getAbsolutePath()+"/Uploads/").mkdir();
                 return null;
 
             }
@@ -98,6 +100,7 @@ public class getUsersTask extends AsyncTask<Void, Void,ArrayList<User>> {
             new File(context.getFilesDir().getAbsolutePath()+"/Records/").mkdir();
             new File(context.getFilesDir().getAbsolutePath()+"/Problems/").mkdir();
             new File(context.getFilesDir().getAbsolutePath()+"/Data/").mkdir();
+            new File(context.getFilesDir().getAbsolutePath()+"/Uploads/").mkdir();
         }
     }
     @Override
@@ -109,3 +112,6 @@ public class getUsersTask extends AsyncTask<Void, Void,ArrayList<User>> {
 
     }
 }
+
+
+

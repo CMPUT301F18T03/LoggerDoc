@@ -17,17 +17,15 @@ public class ActivityPatientHomePage extends AppCompatActivity {
         setContentView(R.layout.activity_patient__home__page);
 
         // Get the userID being passed from ActivityLogin.java
-        // Set the textview to display the username
         Intent intent = getIntent();
         patient_ID = intent.getIntExtra("Patient",0);
         patient = (Patient) UserListController.getUserList().get(patient_ID);
-
-
-        TextView usernameTextView = findViewById(R.id.patient_username_text);
-        usernameTextView.setText(patient.getUserID());
         ProblemRecordListController.loadUser(patient_ID,getApplicationContext());
 
-        UserList userList = UserListController.getUserList();
+        // Set the textview to display the username
+        TextView usernameTextView = findViewById(R.id.patient_username_text);
+        usernameTextView.setText(patient.getUserID());
+
 
         Log.d("TAG", "userID = " + patient.getUserID());
         Log.d("TAG", "email = " + patient.getEmailAddress());
@@ -45,14 +43,14 @@ public class ActivityPatientHomePage extends AppCompatActivity {
     //this method changes the current activity to the browse problems activity
     public void changeActivity (View v){
         Intent intent = new Intent(this, ActivityBrowseProblems.class);
-        intent.putExtra("Patient", patient);
+        intent.putExtra("Patient", patient_ID);
         startActivity(intent);
     }
 
     //this method changes the current activity to the update contact info activity
     public void toUpdateContactInfo(View v){
         Intent intent = new Intent(this, ActivityUpdateContactInfo.class);
-        intent.putExtra("Patient", patient);
+        intent.putExtra("Patient", patient_ID);
         startActivity(intent);
 
     }

@@ -33,6 +33,8 @@ public class ProblemRecordListController {
 
     static public void loadUser(Integer ElasticID, Context context){
         Loaded_Patient = ElasticID;
+        getProblemList().download(ElasticID,context);
+        getRecordList().download(ElasticID,context);
     }
 
     public static Integer getUserID() {

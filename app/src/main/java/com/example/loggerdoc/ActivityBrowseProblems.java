@@ -16,6 +16,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
 
     private AdapterListProblems adapter;
     private Patient patient;
+    private Integer patient_ID;
 
     //To be called when the activity is created
     @Override
@@ -25,7 +26,8 @@ public class ActivityBrowseProblems extends AppCompatActivity {
 
         //get the patient from the intent
         Intent intent = getIntent();
-        patient = (Patient) intent.getSerializableExtra("Patient");
+        patient_ID = intent.getIntExtra("Patient",0);
+        patient = (Patient) UserListController.getUserList().get(patient_ID);
 
         //Initialize and set the adapter
         adapter = new AdapterListProblems(this, ProblemRecordListController.getProblemList().getArray());
