@@ -46,6 +46,8 @@
     <string name="patient_flag">Patient</string>
     <string name="title_activity_photo_grid">ActivityPhotoGrid</string>
     <string name="view_records_button">View Records</string>
+    <string name="record_geo_title">Record Geolocation</string>
+    <string name="record_comment_title">Record Comment:</string>
 
     6d355acae24733ee9f9d9d0017dc972737fbf333
 </resources>

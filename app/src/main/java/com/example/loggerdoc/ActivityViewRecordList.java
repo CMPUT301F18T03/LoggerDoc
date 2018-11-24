@@ -12,8 +12,6 @@ import android.widget.TextView;
 
 public class ActivityViewRecordList extends AppCompatActivity {
 
-    private ArrayAdapter<Record> recordAdapter;
-    private TextView problemTitle;
     static final int VIEW_RECORD_RESULT = 1;
     static final int ADD_RECORD_RESULT = 2;
     private Problem problem;
@@ -32,7 +30,7 @@ public class ActivityViewRecordList extends AppCompatActivity {
         problem = (Problem) intent.getSerializableExtra("Problem");
 
         //Initialize the problem title
-        problemTitle = (TextView) findViewById(R.id.viewRecordListProblemTitle);
+        TextView problemTitle = (TextView) findViewById(R.id.viewRecordListProblemTitle);
         problemTitle.setText(problem.getTitle());
 
         FloatingActionButton addRecordButton = (FloatingActionButton) findViewById(R.id.addProblemButton);
@@ -44,7 +42,7 @@ public class ActivityViewRecordList extends AppCompatActivity {
         });
 
         //Initialize and set the adapter for the records
-        recordAdapter = new AdapterListRecords(this, problem.getRecordList().getRecordArrayList());
+        ArrayAdapter<Record> recordAdapter = new AdapterListRecords(this, problem.getRecordList().getRecordArrayList());
         ListView recordList = (ListView) findViewById(R.id.recordsListView);
         recordList.setAdapter(recordAdapter);
         //Set the onClickListener for the listView. This will call changeToViewProblemActivity().
