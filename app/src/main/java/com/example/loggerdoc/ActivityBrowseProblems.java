@@ -4,14 +4,10 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 
 public class ActivityBrowseProblems extends AppCompatActivity {
 
@@ -32,7 +28,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         patient = (Patient) intent.getSerializableExtra("Patient");
 
         //Initialize and set the adapter
-        adapter = new AdapterListProblems(this, patient.getProblems().getProblemArrayList());
+        adapter = new AdapterListProblems(this, patient.getProblems().getArray());
         ListView problemsList = (ListView) findViewById(R.id.ProblemList);
         problemsList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -96,7 +92,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         if (requestCode == VIEW_PROBLEM_RESULT){
             if (resultCode == RESULT_OK){
                 int position = (int) data.getSerializableExtra("Position");
-                patient.getProblems().getProblemArrayList().remove(position);
+                patient.getProblems().getArray().remove(position);
             }
         }
     }
@@ -105,7 +101,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
     @Override
     protected void onResume (){
         super.onResume();
-        adapter.refresh(patient.getProblems().getProblemArrayList());
+        adapter.refresh(patient.getProblems().getArray());
         adapter.notifyDataSetChanged();
     }
 

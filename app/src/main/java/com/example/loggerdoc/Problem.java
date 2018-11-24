@@ -12,10 +12,12 @@
 
 package com.example.loggerdoc;
 
+import com.example.loggerdoc.elasticclient.ElasticID;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Problem implements Serializable {
+public class Problem implements Serializable,ElasticID {
 
     private String title;
     private String description;
@@ -23,6 +25,9 @@ public class Problem implements Serializable {
 
     private RecordList recordList;
     private CaregiverCommentList commentList;
+    private Integer ElasticID;
+
+    private Integer ElasticID_Owner;
 
     /**
      * Returns a Problem object that holds a title, description, date, a list of records and a
@@ -35,12 +40,24 @@ public class Problem implements Serializable {
      * @param description The description of the problem.
      */
 
-    public Problem(String title, LocalDateTime timestamp, String description) {
+    public Problem(String title, LocalDateTime timestamp, String description,Integer ElasticID_Owner) {
+        this.ElasticID = this.hashCode();
         this.title = title;
         this.description = description;
         this.timestamp = timestamp;
         this.recordList = new RecordList();
         this.commentList = new CaregiverCommentList();
+        this.ElasticID_Owner = ElasticID_Owner;
+    }
+
+    public Problem(String title, LocalDateTime timestamp, String description,Integer ElasticID,Integer ElasticID_Owner) {
+        this.ElasticID = ElasticID;
+        this.title = title;
+        this.description = description;
+        this.timestamp = timestamp;
+        this.recordList = new RecordList();
+        this.commentList = new CaregiverCommentList();
+        this.ElasticID_Owner = ElasticID_Owner;
     }
 
     /**
@@ -164,5 +181,14 @@ public class Problem implements Serializable {
         }
 
         return true;
+    }
+
+    @Override
+    public Integer getElasticID() {
+        return ElasticID;
+    }
+
+    public Integer getElasticID_Owner(){
+        return ElasticID_Owner;
     }
 }

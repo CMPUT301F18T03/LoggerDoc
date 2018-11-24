@@ -7,11 +7,14 @@
 
 package com.example.loggerdoc;
 
+import com.example.loggerdoc.elasticclient.ElasticID;
+
 import java.io.Serializable;
+import java.security.acl.Owner;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Record implements Serializable {
+public class Record implements Serializable,ElasticID {
 
     private String title;
     private String comment;
@@ -21,18 +24,24 @@ public class Record implements Serializable {
     // private RecordBodyLocation recordBodyLocation;
     private RecordPhotoList recordPhotoList;
 
+    private Integer ElasticID;
+    private Integer ElasticID_OwnerProblem;
+
     public Record() {
-        this("");
+        this("",null);
     }
 
 
-    public Record(String title) {
+    public Record(String title,Integer Ownerproblem) {
         this.title = title;
         this.comment = "";
         this.timestamp = LocalDateTime.now();
         this.recordPhotoList = new RecordPhotoList();
+        ElasticID_OwnerProblem = Ownerproblem;
+        ElasticID = this.hashCode();
 
     }
+
 
     public String getTitle() {
         return title;
@@ -66,5 +75,10 @@ public class Record implements Serializable {
 
     public RecordGeoLocation getRecordGeoLocation(){
         return this.recordGeoLocation;
+    }
+
+    @Override
+    public Integer getElasticID() {
+        return this.ElasticID;
     }
 }

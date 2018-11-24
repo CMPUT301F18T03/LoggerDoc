@@ -39,8 +39,8 @@ public class GenericList<T extends ElasticID>{
      *
      * @param ElasticID The ID of the data that needs to be fetched to the generic list.
      */
-    public void get(Integer ElasticID) {
-        datalist.get(ElasticID);
+    public T get(Integer ElasticID) {
+        return datalist.get(ElasticID);
     }
 
     /**

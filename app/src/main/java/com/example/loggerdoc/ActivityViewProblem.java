@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -48,7 +47,7 @@ public class ActivityViewProblem extends AppCompatActivity {
         Intent intent = getIntent();
         patient = (Patient) intent.getSerializableExtra("Patient");
         position = (int) intent.getSerializableExtra("Position");
-        problem = patient.getProblems().getProblemArrayList().get(position);
+        problem = patient.getProblems().getArray().get(position);
 
         TextView problemTitleView = (TextView) findViewById(R.id.TitleView);
         problemTitleView.setText(problem.getTitle());
@@ -60,7 +59,7 @@ public class ActivityViewProblem extends AppCompatActivity {
         problemDescriptionView.setText(problem.getDescription());
 
         //Initialize and set the adapter for the records
-        recordAdapter = new AdapterListRecords(this, problem.getRecordList().getRecordArrayList());
+        recordAdapter = new AdapterListRecords(this, problem.getRecordList().getArray());
         ListView recordList = (ListView) findViewById(R.id.recordsListView);
         recordList.setAdapter(recordAdapter);
         //Set the onClickListener for the listView. This will call changeToViewProblemActivity().
