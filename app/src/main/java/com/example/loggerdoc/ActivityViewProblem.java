@@ -96,11 +96,12 @@ public class ActivityViewProblem extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent();
-                intent.putExtra("Problem", problem);
+                intent.putExtra("Position", position);
                 setResult(RESULT_OK, intent);
                 finish();
             }
         });
+
         builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

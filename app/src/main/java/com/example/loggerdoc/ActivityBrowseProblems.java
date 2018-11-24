@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -94,10 +95,9 @@ public class ActivityBrowseProblems extends AppCompatActivity {
 
         if (requestCode == VIEW_PROBLEM_RESULT){
             if (resultCode == RESULT_OK){
-                Problem problem = (Problem) data.getSerializableExtra("Problem");
-                patient.getProblems().remove(problem);
+                int position = (int) data.getSerializableExtra("Position");
+                patient.getProblems().getProblemArrayList().remove(position);
             }
-
         }
     }
 
@@ -105,7 +105,6 @@ public class ActivityBrowseProblems extends AppCompatActivity {
     @Override
     protected void onResume (){
         super.onResume();
-
         adapter.refresh(patient.getProblems().getProblemArrayList());
         adapter.notifyDataSetChanged();
     }
