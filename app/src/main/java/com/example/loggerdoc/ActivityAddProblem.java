@@ -74,7 +74,8 @@ public class ActivityAddProblem extends AppCompatActivity {
             problemTitleWarning.setVisibility(View.INVISIBLE);
             problemDescriptionWarning.setVisibility(View.INVISIBLE);
 
-            Problem problem = new Problem (problemTitle.getText().toString(), datePicker, problemDescription.getText().toString());
+            LocalDateTime problemTime = formatDateAndTime(datePicker, timePicker);
+            Problem problem = new Problem (problemTitle.getText().toString(), problemTime, problemDescription.getText().toString());
 
             //Check if the title is too long or description is too long
             if (!problem.checkTitleLength(problem.getTitle()) || !problem.checkDescriptionLength(problem.getDescription()) ){
@@ -124,6 +125,31 @@ public class ActivityAddProblem extends AppCompatActivity {
         DialogProblem dialog = new DialogProblem();
         dialog.setArguments(messageArgs);
         dialog.show(getSupportFragmentManager(), "error_dialog");
+    }
+
+    /**
+     * @author = Alexandra Tyrrell
+     * Sets the timestamp of the problem. This method creates a LocalDateTime object that stores the
+     * date of the problem. The day, month and year is taken from the datePickerFragment.
+     *
+     * @param datePickerFragment the object that holds the date of the problem
+     */
+    public LocalDateTime formatDateAndTime (DatePickerFragment datePickerFragment,
+                                            TimePickerFragment timePickerFragment){
+
+        LocalDateTime date = LocalDateTime.now();
+
+        if(datePickerFragment.getSet()){
+            date = date.withDayOfMonth(datePickerFragment.getDay())
+                    .withMonth(datePickerFragment.getMonth()).withYear(datePickerFragment.getYear());
+        }
+
+        if (timePickerFragment.getIsSet()){
+            date = date.withHour(timePickerFragment.getHour())
+                    .withMinute(timePickerFragment.getMinute());
+        }
+
+        return date;
     }
 
 }

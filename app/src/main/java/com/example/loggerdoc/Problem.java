@@ -31,14 +31,14 @@ public class Problem implements Serializable {
      * This method always returns immediately.
      *
      * @param title The title of the problem
-     * @param datePicker The datePicker holds the date of the problem.
+     * @param timestamp  timestamp holds the date of the problem.
      * @param description The description of the problem.
      */
 
-    public Problem(String title, DatePickerFragment datePicker, String description) {
+    public Problem(String title, LocalDateTime timestamp, String description) {
         this.title = title;
         this.description = description;
-        formatDateAndTime(datePicker);
+        this.timestamp = timestamp;
         this.recordList = new RecordList();
         this.commentList = new CaregiverCommentList();
     }
@@ -80,28 +80,12 @@ public class Problem implements Serializable {
     }
 
     /**
-     * Sets the timestamp of the problem. This method creates a LocalDateTime object that stores the
-     * date of the problem. The day, month and year is taken from the datePickerFragment.
-     *
-     * @param datePickerFragment the object that holds the date of the problem
-     */
-    public void formatDateAndTime(DatePickerFragment datePickerFragment){
-
-        timestamp = LocalDateTime.now();
-
-        if(datePickerFragment.getSet()){
-            timestamp = timestamp.withDayOfMonth(datePickerFragment.getDay())
-                    .withMonth(datePickerFragment.getMonth()).withYear(datePickerFragment.getYear());
-        }
-    }
-
-    /**
      * Sets the timestamp of the problem by calling formatDateAndTime.
      *
-     * @param datePickerFragment the object that holds the date of the problem
+     * @param newTime the object that holds the date of the problem
      */
-    public void setTimestamp (DatePickerFragment datePickerFragment){
-        formatDateAndTime(datePickerFragment);
+    public void setTimestamp (LocalDateTime newTime){
+        this.timestamp = newTime;
     }
 
     /**

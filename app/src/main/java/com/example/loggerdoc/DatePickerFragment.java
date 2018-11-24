@@ -1,12 +1,14 @@
 package com.example.loggerdoc;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.app.DatePickerDialog;
 import android.util.Log;
 import android.widget.DatePicker;
+import android.widget.TextView;
 
 import java.time.LocalDateTime;
 import java.util.Calendar;
@@ -16,13 +18,11 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     private int year;
     private int month;
     private int day;
-    private Boolean isSet;
+    private Boolean isSet = false;
     private DialogFragment nextFragment;
-
 
     public static DatePickerFragment newInstance(@NonNull LocalDateTime date){
         DatePickerFragment datePickerFragment = new DatePickerFragment();
-        Log.d("The date is ", date.toString());
 
         Bundle message = new Bundle();
         message.putInt("YEAR", date.getYear());
@@ -36,7 +36,6 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     @NonNull
     @Override
     public Dialog onCreateDialog (Bundle saved){
-
         return new DatePickerDialog(getActivity(), this, getArguments().getInt("YEAR"),
                 getArguments().getInt("MONTH")-1, getArguments().getInt("DAY"));
     }
@@ -76,5 +75,4 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     public int getYear(){
         return this.year;
     }
-
 }

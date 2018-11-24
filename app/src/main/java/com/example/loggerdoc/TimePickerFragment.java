@@ -13,7 +13,7 @@ import java.util.Calendar;
 
 public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener{
 
-    private Boolean isSet;
+    private Boolean isSet = false;
     private int hour;
     private int minute;
 
@@ -31,7 +31,6 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
     @NonNull
     @Override
     public Dialog onCreateDialog (Bundle saved){
-
         return new TimePickerDialog(getActivity(), this, getArguments().getInt("HOUR"),
                 getArguments().getInt("MINUTE"), DateFormat.is24HourFormat(getActivity()));
     }
