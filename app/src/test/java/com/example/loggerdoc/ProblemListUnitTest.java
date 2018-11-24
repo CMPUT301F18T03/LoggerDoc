@@ -11,7 +11,7 @@ public class ProblemListUnitTest {
     @Test
     public void TestProblemListAdd() {
         ProblemList problemList = new ProblemList();
-        Problem problem = new Problem("",LocalDateTime.now(),"");
+        Problem problem = new Problem("",LocalDateTime.now(),"",0);
         problemList.add(problem);
         assertTrue("ProblemList should contain added problem", problemList.contains(problem));
     }
@@ -19,7 +19,7 @@ public class ProblemListUnitTest {
     @Test
     public void TestProblemListRemove() {
         ProblemList problemList = new ProblemList();
-        Problem problem = new Problem("",LocalDateTime.now(),"");
+        Problem problem = new Problem("",LocalDateTime.now(),"",0);
         problemList.add(problem);
         assertTrue("ProblemList should contain added problem", problemList.contains(problem));
 
@@ -32,11 +32,11 @@ public class ProblemListUnitTest {
         ProblemList problemList = new ProblemList();
         assertEquals("ProblemList should have size 0", 0, problemList.size());
 
-        Problem problemA = new Problem("",LocalDateTime.now(),"");
+        Problem problemA = new Problem("",LocalDateTime.now(),"",0);
         problemList.add(problemA);
         assertEquals("RecordList should have size 1", 1, problemList.size());
 
-        Problem problemB = new Problem("",LocalDateTime.now(),"");
+        Problem problemB = new Problem("",LocalDateTime.now(),"",0);
         problemList.add(problemB);
         assertEquals("RecordList should have size 2", 2, problemList.size());
 

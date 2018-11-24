@@ -13,7 +13,7 @@ public class RecordUnitTest {
     @Test
     public void testSetRecordTitle() {
         String title = "A test record";
-        Record record = new Record(title);
+        Record record = new Record(title,0);
         assertEquals("Record title should be read from record", title, record.getTitle());
 
         String newTitle = "An updated title";
@@ -44,7 +44,7 @@ public class RecordUnitTest {
 
     @Test
     public void testAddGeolocation(){
-        Record record = new Record("title");
+        Record record = new Record("title",0);
         RecordGeoLocation geoLocation = new RecordGeoLocation(new LatLng(80.000, 90.12));
         record.setRecordGeoLocation(geoLocation);
 
