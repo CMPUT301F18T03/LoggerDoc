@@ -1,5 +1,7 @@
 package com.example.loggerdoc.elasticclient;
 
-public interface ElasticDataCallback<T>{
+import java.util.ArrayList;
+
+public interface ElasticDataCallback<T extends ArrayList>{
      void dataCallBack(T data);
 }

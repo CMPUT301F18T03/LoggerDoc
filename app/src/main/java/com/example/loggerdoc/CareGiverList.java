@@ -8,18 +8,18 @@ import java.util.Collection;
 
 public class CareGiverList implements Serializable {
 
-    private ArrayList<CareGiver> careGiverList;
+    private ArrayList<Integer> careGiverList;
 
     //PatientList constructor
     public CareGiverList(){
-        careGiverList = new ArrayList<CareGiver>();
+        careGiverList = new ArrayList<>();
     }
 
     /**
      *
      * @return Returns a collection of CareGivers
      */
-    public Collection<CareGiver> getCareGivers(){
+    public ArrayList<Integer> getCareGivers(){
         return careGiverList;
     }
 
@@ -27,9 +27,9 @@ public class CareGiverList implements Serializable {
      *
      * @param careGiver CareGiver object that wil be added to a Patients CareGiverList
      */
-    // add a careGiver to the list of careGivers
+    // add_internal a careGiver to the list of careGivers
     public void addCareGiver(CareGiver careGiver) {
-        careGiverList.add(careGiver);
+        careGiverList.add(careGiver.getElasticID());
     }
 
     /**
@@ -38,7 +38,7 @@ public class CareGiverList implements Serializable {
      */
     // remove a careGiver from the list of careGivers
     public void removeCareGiver(CareGiver careGiver) {
-        careGiverList.remove(careGiver);
+        careGiverList.remove(careGiver.getElasticID());
     }
 
     /**
@@ -55,7 +55,7 @@ public class CareGiverList implements Serializable {
      * @return Returns true or false depending on whether careGiver is in the list
      */
     public boolean contains(CareGiver careGiver){
-        return careGiverList.contains(careGiver);
+        return careGiverList.contains(careGiver.getElasticID());
     }
 
 }

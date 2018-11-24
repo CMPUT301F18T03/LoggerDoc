@@ -138,14 +138,14 @@ public class ActivityAddRecord extends AppCompatActivity {
 
         else{
             //Create a new record
-           record = new Record (recordTitleText.getText().toString());
+           record = new Record (recordTitleText.getText().toString(),2147483647);
            record.setComment(recordCommentText.getText().toString());
-           //add a geolocation to the record
+           //add_internal a geolocation to the record
            if (geoLocation != null) {
                record.setRecordGeoLocation(geoLocation);
            }
 
-           //add record to the problem
+           //add_internal record to the problem
 
             if (photos.size() != 0) {
                 for (int i = 0; i<photos.size(); i++){
@@ -155,8 +155,8 @@ public class ActivityAddRecord extends AppCompatActivity {
 
                 Log.i("SIZE_TEST", String.valueOf(record.getRecordPhotoList().size()));
            }
-
-            patient.getProblems().getProblemArrayList().get(position).getRecordList().getRecordArrayList().add(record);
+            ProblemRecordListController.getRecordList().add(record,getApplicationContext());
+            //patient.getProblems().getArray().get(position).getRecordList().getArray().add_internal(record);
         }
 
         //Add record to problem list

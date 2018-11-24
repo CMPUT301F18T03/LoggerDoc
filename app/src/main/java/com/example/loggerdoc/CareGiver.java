@@ -7,7 +7,7 @@ public class CareGiver extends User implements Serializable {
 
     // An array list to store all of the patients that a caregiver has
     // Each CareGiver will have a unique set of patients
-    private PatientList patients;
+    private ArrayList<Integer> patients;
 
     /**
      *
@@ -20,19 +20,22 @@ public class CareGiver extends User implements Serializable {
     // CareGiver constructor with an ID, email address, phone number and list of patients
     public CareGiver(String careGiverID, String emailAddress, String phoneNumber, String role, PatientList patients) {
         super(careGiverID, emailAddress, phoneNumber, role);
-        this.patients = patients;
+        this.patients = patients.getPatients();
     }
     public CareGiver(String careGiverID, String emailAddress, String phoneNumber, String role) {
         super(careGiverID, emailAddress, phoneNumber, role);
-        this.patients = new PatientList();
+        this.patients = new ArrayList<>();
     }
 
     /**
      *
      * @return returns the Patient List that the user has
      */
-    public PatientList getPatientList(){
+    public ArrayList<Integer> getPatientList(){
         return patients;
     }
 
+    public void addPatient(Patient patientToAdd) {
+        patients.add(patientToAdd.getElasticID());
+    }
 }
