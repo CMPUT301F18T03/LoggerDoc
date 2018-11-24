@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.loggerdoc.ElasticSearchController;
+import com.example.loggerdoc.Problem;
 import com.example.loggerdoc.User;
 import com.google.gson.Gson;
 
@@ -14,24 +15,24 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
-public class modifyProblemTask extends AsyncTask<User, Void, Void> {
+public class modifyProblemTask extends AsyncTask<Problem, Void, Void> {
     private Context context;
     public modifyProblemTask(Context context){
         this.context = context;
     }
     @Override
-    protected Void doInBackground(User... users) {
+    protected Void doInBackground(Problem... problems) {
         Gson gson = new Gson();
         String jsonout;
         httphandler sender = ElasticSearchController.getHttpHandler();
         OutputStream fos;
         BufferedWriter out;
-        for(User tosend : users){
+        for(Problem tosend : problems){
             jsonout = gson.toJson(tosend);
-            sender.httpPUT("/user/_doc/"+tosend.getElasticID().toString(),jsonout);
+            sender.httpPUT("/problem/_doc/"+tosend.getElasticID().toString(),jsonout);
             try {
 
-                fos = new FileOutputStream(new File(context.getFilesDir().getAbsolutePath()+"/Users/User"+tosend.getElasticID()+".sav"));
+                fos = new FileOutputStream(new File(context.getFilesDir().getAbsolutePath()+"/Problems/problem"+tosend.getElasticID()+".sav"));
                 out = new BufferedWriter(new OutputStreamWriter(fos));
                 out.write(jsonout);
                 out.flush();

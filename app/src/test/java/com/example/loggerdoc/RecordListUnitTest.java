@@ -9,7 +9,7 @@ public class RecordListUnitTest {
     @Test
     public void TestRecordListAdd() {
         RecordList recordList = new RecordList();
-        Record record = new Record();
+        Record record = new Record("ha",0,0);
         recordList.add(record);
         assertTrue("RecordList should contain added record", recordList.contains(record));
     }
@@ -17,7 +17,7 @@ public class RecordListUnitTest {
     @Test
     public void TestRecordListRemove() {
         RecordList recordList = new RecordList();
-        Record record = new Record();
+        Record record = new Record("ha",0,0);
         recordList.add(record);
         assertTrue("RecordList should contain added record", recordList.contains(record));
 
@@ -30,11 +30,11 @@ public class RecordListUnitTest {
         RecordList recordList = new RecordList();
         assertEquals("RecordList should have size 0", 0, recordList.size());
 
-        Record recordA = new Record();
+        Record recordA = new Record("ha",0,0);
         recordList.add(recordA);
         assertEquals("RecordList should have size 1", 1, recordList.size());
 
-        Record recordB = new Record();
+        Record recordB = new Record("he",1,0);
         recordList.add(recordB);
         assertEquals("RecordList should have size 2", 2, recordList.size());
 

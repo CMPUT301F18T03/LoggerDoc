@@ -43,7 +43,7 @@ public class ProblemUnitTest {
     @Test
     public void TestProblemRecordListAdd() {
         Problem problem = new Problem("",LocalDateTime.now(),"",0);
-        Record record = new Record();
+        Record record = new Record("ha",0,0);
         problem.addRecord(record);
         assertTrue("Problem's record list should contain record",
                 problem.getRecordList().contains(record));

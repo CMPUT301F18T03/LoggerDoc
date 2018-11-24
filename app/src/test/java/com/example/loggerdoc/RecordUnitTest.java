@@ -13,7 +13,7 @@ public class RecordUnitTest {
     @Test
     public void testSetRecordTitle() {
         String title = "A test record";
-        Record record = new Record(title,0);
+        Record record = new Record(title,0,0);
         assertEquals("Record title should be read from record", title, record.getTitle());
 
         String newTitle = "An updated title";
@@ -24,7 +24,7 @@ public class RecordUnitTest {
     @Test
     public void testSetRecordComment() {
         String comment = "A test comment";
-        Record record = new Record();
+        Record record = new Record("ha",0,0);
         record.setComment(comment);
         assertEquals("Record comment should be read from record", comment, record.getComment());
     }
@@ -32,7 +32,7 @@ public class RecordUnitTest {
     @Test
     public void testSetRecordTimestamp() {
         LocalDateTime beforeTime = LocalDateTime.now();
-        Record record = new Record();
+        Record record = new Record("ha",0,0);
         LocalDateTime recordTime = record.getTimestamp();
         LocalDateTime afterTime = LocalDateTime.now();
 
@@ -44,7 +44,7 @@ public class RecordUnitTest {
 
     @Test
     public void testAddGeolocation(){
-        Record record = new Record("title",0);
+        Record record = new Record("title",0,0);
         RecordGeoLocation geoLocation = new RecordGeoLocation(new LatLng(80.000, 90.12));
         record.setRecordGeoLocation(geoLocation);
 
