@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -62,6 +63,14 @@ public class ActivityViewProblem extends AppCompatActivity {
         recordAdapter = new AdapterListRecords(this, problem.getRecordList().getRecordArrayList());
         ListView recordList = (ListView) findViewById(R.id.recordsListView);
         recordList.setAdapter(recordAdapter);
+        //Set the onClickListener for the listView. This will call changeToViewProblemActivity().
+        recordList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                goViewRecord(view);
+            }
+        });
+
         recordAdapter.notifyDataSetChanged();
 
         //Initialize and set the adapter for the caregiver's comments
@@ -86,11 +95,13 @@ public class ActivityViewProblem extends AppCompatActivity {
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                patient.getProblems().remove(problem);
-                goBrowseProblems(v);
-                dialog.dismiss();
+                Intent intent = new Intent();
+                intent.putExtra("Position", position);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
+
         builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -102,12 +113,6 @@ public class ActivityViewProblem extends AppCompatActivity {
 
     }
 
-    //Change to BrowseProblems activity
-    public void goBrowseProblems(View v){
-        Intent intent = new Intent(this, ActivityBrowseProblems.class);
-        intent.putExtra("Patient", patient);
-        startActivity(intent);
-    }
 
     //Change to AddRecord Activity
     public void goAddRecord (View v){
@@ -116,5 +121,10 @@ public class ActivityViewProblem extends AppCompatActivity {
         intent.putExtra("Position", position);
         intent.putExtra("Flag", "a");
         startActivityForResult(intent, ADD_RECORD_RESULT);
+    }
+
+    public void goViewRecord(View v){
+        Intent intent = new Intent(this, ActivityViewRecord.class);
+        startActivity(intent);
     }
 }

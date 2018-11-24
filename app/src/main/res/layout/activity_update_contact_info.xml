@@ -7,7 +7,7 @@
     tools:context=".ActivityUpdateContactInfo">
 
     <TextView
-        android:id="@+id/UpdateContactInfoUsernameView"
+        android:id="@+id/ProblemTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -31,7 +31,7 @@
         android:onClick="cancelChanges"
         android:text="@string/cancel_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/UpdateContactInfoUsernameView"
+        app:layout_constraintStart_toEndOf="@+id/ProblemTitle"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -42,7 +42,7 @@
         android:layout_marginTop="30dp"
         android:onClick="saveChanges"
         android:text="@string/save_button"
-        app:layout_constraintEnd_toStartOf="@+id/UpdateContactInfoUsernameView"
+        app:layout_constraintEnd_toStartOf="@+id/ProblemTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -85,7 +85,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UpdateContactInfoUsernameView">
+        app:layout_constraintTop_toBottomOf="@+id/ProblemTitle">
 
         <TextView
             android:id="@+id/edit_contact_info_email_address"
