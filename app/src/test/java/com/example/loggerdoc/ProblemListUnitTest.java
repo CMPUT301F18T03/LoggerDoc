@@ -2,6 +2,8 @@ package com.example.loggerdoc;
 
 import org.junit.Test;
 
+import java.time.LocalDateTime;
+
 import static org.junit.Assert.*;
 
 public class ProblemListUnitTest {
@@ -9,7 +11,7 @@ public class ProblemListUnitTest {
     @Test
     public void TestProblemListAdd() {
         ProblemList problemList = new ProblemList();
-        Problem problem = new Problem("",new DatePickerFragment(),"");
+        Problem problem = new Problem("",LocalDateTime.now(),"");
         problemList.add(problem);
         assertTrue("ProblemList should contain added problem", problemList.contains(problem));
     }
@@ -17,7 +19,7 @@ public class ProblemListUnitTest {
     @Test
     public void TestProblemListRemove() {
         ProblemList problemList = new ProblemList();
-        Problem problem = new Problem("",new DatePickerFragment(),"");
+        Problem problem = new Problem("",LocalDateTime.now(),"");
         problemList.add(problem);
         assertTrue("ProblemList should contain added problem", problemList.contains(problem));
 
@@ -30,11 +32,11 @@ public class ProblemListUnitTest {
         ProblemList problemList = new ProblemList();
         assertEquals("ProblemList should have size 0", 0, problemList.size());
 
-        Problem problemA = new Problem("",new DatePickerFragment(),"");
+        Problem problemA = new Problem("",LocalDateTime.now(),"");
         problemList.add(problemA);
         assertEquals("RecordList should have size 1", 1, problemList.size());
 
-        Problem problemB = new Problem("",new DatePickerFragment(),"");
+        Problem problemB = new Problem("",LocalDateTime.now(),"");
         problemList.add(problemB);
         assertEquals("RecordList should have size 2", 2, problemList.size());
 

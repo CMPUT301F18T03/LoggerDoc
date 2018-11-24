@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 
 
 public class ActivityAddProblem extends AppCompatActivity {
-    private Patient patient;
     private DatePickerFragment datePicker;
     private TimePickerFragment timePicker;
     private EditText problemTitle;
@@ -31,9 +30,6 @@ public class ActivityAddProblem extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
 
-        Intent intent = getIntent();
-        patient = (Patient) intent.getSerializableExtra("Patient");
-
         datePicker = DatePickerFragment.newInstance(LocalDateTime.now());
         timePicker = TimePickerFragment.newInstance(LocalDateTime.now());
         datePicker.setNextFragment(timePicker);
@@ -42,7 +38,6 @@ public class ActivityAddProblem extends AppCompatActivity {
         problemDescription = (EditText) findViewById(R.id.problem_desc_text);
         problemTitleWarning = (ImageView) findViewById(R.id.warning_Problem_Title);
         problemDescriptionWarning = (ImageView) findViewById(R.id.warning_Problem_Desc);
-
     }
 
 
