@@ -9,7 +9,13 @@
 
 package com.example.loggerdoc;
 
+import android.content.Context;
+
 public class ProblemList extends GenericList<Problem> {
+
+    protected void add(Problem data,Context context) {
+        super.add(data);
+    }
 
 }
 

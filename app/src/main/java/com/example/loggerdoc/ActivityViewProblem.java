@@ -17,7 +17,7 @@ public class ActivityViewProblem extends AppCompatActivity {
 
     private Patient patient;
     private Problem problem;
-    private int position;
+    private int problem_ID;
     private ArrayAdapter<Record> recordAdapter;
     private ArrayAdapter<CaregiverComment> commentAdapter;
 
@@ -46,8 +46,8 @@ public class ActivityViewProblem extends AppCompatActivity {
         //Set the patient and the problem
         Intent intent = getIntent();
         patient = (Patient) intent.getSerializableExtra("Patient");
-        position = (int) intent.getSerializableExtra("Position");
-        problem = patient.getProblems().getArray().get(position);
+        problem_ID = (int) intent.getSerializableExtra("Position");
+        problem = ProblemRecordListController.getProblemList().get(problem_ID);
 
         TextView problemTitleView = (TextView) findViewById(R.id.TitleView);
         problemTitleView.setText(problem.getTitle());
@@ -83,7 +83,7 @@ public class ActivityViewProblem extends AppCompatActivity {
     public void goEditProblem (View v){
         Intent intent = new Intent(this, ActivityEditProblem.class);
         intent.putExtra("Patient", patient);
-        intent.putExtra("Position", position);
+        intent.putExtra("Position", problem_ID);
         startActivity(intent);
     }
 
@@ -95,7 +95,7 @@ public class ActivityViewProblem extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent();
-                intent.putExtra("Position", position);
+                intent.putExtra("Position", problem_ID);
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -117,7 +117,7 @@ public class ActivityViewProblem extends AppCompatActivity {
     public void goAddRecord (View v){
         Intent intent = new Intent(this, ActivityAddRecord.class);
         intent.putExtra("Patient", patient);
-        intent.putExtra("Position", position);
+        intent.putExtra("Position", problem_ID);
         intent.putExtra("Flag", "a");
         startActivityForResult(intent, ADD_RECORD_RESULT);
     }

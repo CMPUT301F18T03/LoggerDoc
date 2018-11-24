@@ -6,7 +6,12 @@
 package com.example.loggerdoc;
 
 
+import android.content.Context;
+
 public class RecordList extends GenericList<Record> {
 
+    protected void add(Record data,Context context) {
+        super.add(data);
+    }
 
 }

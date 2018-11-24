@@ -28,7 +28,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         patient = (Patient) intent.getSerializableExtra("Patient");
 
         //Initialize and set the adapter
-        adapter = new AdapterListProblems(this, patient.getProblems().getArray());
+        adapter = new AdapterListProblems(this, ProblemRecordListController.getProblemList().getArray());
         ListView problemsList = (ListView) findViewById(R.id.ProblemList);
         problemsList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -85,14 +85,14 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         if (requestCode == ADD_PROBLEM_RESULT) {
             if (resultCode == RESULT_OK) {
                 Problem problem = (Problem) data.getSerializableExtra("Problem");
-                patient.getProblems().add(problem);
+                ProblemRecordListController.getProblemList().add(problem,getApplicationContext());
             }
         }
 
         if (requestCode == VIEW_PROBLEM_RESULT){
             if (resultCode == RESULT_OK){
                 int position = (int) data.getSerializableExtra("Position");
-                patient.getProblems().getArray().remove(position);
+                //patient.getProblems().getArray().remove(position);//TODO I dont know what this does
             }
         }
     }
@@ -101,7 +101,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
     @Override
     protected void onResume (){
         super.onResume();
-        adapter.refresh(patient.getProblems().getArray());
+        adapter.refresh(ProblemRecordListController.getProblemList().getArray());
         adapter.notifyDataSetChanged();
     }
 

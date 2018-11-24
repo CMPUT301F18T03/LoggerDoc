@@ -1,5 +1,7 @@
 package com.example.loggerdoc;
 
+import android.content.Context;
+
 public class ProblemRecordListController {
 
     private static ProblemList problemList = null;
@@ -29,7 +31,7 @@ public class ProblemRecordListController {
         return recordList;
     }
 
-    static public void loadUser(Integer ElasticID){
+    static public void loadUser(Integer ElasticID, Context context){
         Loaded_Patient = ElasticID;
     }
 

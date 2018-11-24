@@ -18,7 +18,7 @@ public class GenericList<T extends ElasticID>{
      *
      * @param data The data that needs to be added to the generic list.
      */
-    public void add(T data) {
+    protected void add(T data) {
         datalist.put(data.getElasticID(),data);
     }
 
@@ -48,7 +48,7 @@ public class GenericList<T extends ElasticID>{
      *
      * @param data The data that needs to be updated from the generic list.
      */
-    public void remove(T data) {
+    protected void remove(T data) {
         datalist.remove(data.getElasticID());
     }
 

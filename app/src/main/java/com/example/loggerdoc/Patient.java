@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 public class Patient extends User implements Serializable {
 
-    private CareGiverList careGivers;
+    private ArrayList<Integer> careGivers;
 
-    private ProblemList problems;
+    private ArrayList<Integer> problems;
 
     /**
      *
@@ -20,20 +20,20 @@ public class Patient extends User implements Serializable {
      */
     public Patient(String patientID, String emailAddress, String phoneNumber, String role, CareGiverList careGivers) {
         super(patientID, emailAddress, phoneNumber, role);
-        this.careGivers = careGivers;
-        problems = new ProblemList();
+        this.careGivers = new ArrayList<>();//TODO: Fix caregiverlists in general
+        problems = new ArrayList<>();
     }
     public Patient(String patientID, String emailAddress, String phoneNumber, String role) {
         super(patientID, emailAddress, phoneNumber, role);
-        this.careGivers = new CareGiverList();
-        problems = new ProblemList();
+        this.careGivers = new ArrayList<>();
+        problems = new ArrayList<>();
     }
 
     /**
      *
      * @return Returns the CareGiverList that is associated with a specific Patient object
      */
-    public CareGiverList getCareGivers() {
+    public ArrayList<Integer> getCareGivers() {
         return careGivers;
     }
 
@@ -41,12 +41,9 @@ public class Patient extends User implements Serializable {
      *
      * @return Returns the list of problems that a Patient has
      */
-    public ProblemList getProblems(){
+    public ArrayList<Integer> getProblems(){
         return this.problems;
     }
 
 
-    public void setCareGivers(CareGiverList careGivers) {
-        this.careGivers = careGivers;
-    }
 }

@@ -155,8 +155,8 @@ public class ActivityAddRecord extends AppCompatActivity {
 
                 Log.i("SIZE_TEST", String.valueOf(record.getRecordPhotoList().size()));
            }
-
-            patient.getProblems().getArray().get(position).getRecordList().getArray().add(record);
+            ProblemRecordListController.getRecordList().add(record,getApplicationContext());
+            //patient.getProblems().getArray().get(position).getRecordList().getArray().add(record);
         }
 
         //Add record to problem list

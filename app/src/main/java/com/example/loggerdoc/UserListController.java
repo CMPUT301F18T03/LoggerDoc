@@ -38,14 +38,6 @@ public class UserListController {
         return ret;
     }
 
-    public void addUser(User user) {
-        getUserList().add(user);
-    }
-
-    public void removeUser(User user) {
-        getUserList().remove(user);
-    }
-
     /**
      *
      * @param id Unique username of the user that is being searched for

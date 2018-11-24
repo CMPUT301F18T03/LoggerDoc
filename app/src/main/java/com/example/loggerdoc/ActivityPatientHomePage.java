@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 public class ActivityPatientHomePage extends AppCompatActivity {
     private Patient patient;
+    private Integer patient_ID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,9 +19,13 @@ public class ActivityPatientHomePage extends AppCompatActivity {
         // Get the userID being passed from ActivityLogin.java
         // Set the textview to display the username
         Intent intent = getIntent();
-        patient = (Patient) intent.getSerializableExtra("Patient");
-        TextView usernameTextView = (TextView) findViewById(R.id.patient_username_text);
+        patient_ID = intent.getIntExtra("Patient",0);
+        patient = (Patient) UserListController.getUserList().get(patient_ID);
+
+
+        TextView usernameTextView = findViewById(R.id.patient_username_text);
         usernameTextView.setText(patient.getUserID());
+        ProblemRecordListController.loadUser(patient_ID,getApplicationContext());
 
         UserList userList = UserListController.getUserList();
 

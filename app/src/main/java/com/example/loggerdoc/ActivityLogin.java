@@ -50,16 +50,14 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
                 Log.d("TAG", "email = " + user.getEmailAddress());
                 if (user.getUserID().equals(userLogin)) {
                     if (user.getRole().equals("Patient")) {
-                        Patient patient = (Patient) user;
                         Intent intent = new Intent(ActivityLogin.this, ActivityPatientHomePage.class);
-                        intent.putExtra("Patient", patient);
+                        intent.putExtra("Patient", user.getElasticID());
                         startActivity(intent);
                         break;
                     }
                     else {
-                        CareGiver careGiver = (CareGiver)user;
                         Intent intent = new Intent(ActivityLogin.this, ActivityCareGiverHomePage.class);
-                        intent.putExtra("Caregiver", careGiver);
+                        intent.putExtra("Caregiver", user.getElasticID());
                         startActivity(intent);
                         break;
                     }
@@ -142,11 +140,12 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
                     return;
                 }
                 Patient patient = new Patient(username, emailAddress, phoneNumber,"Patient", new CareGiverList());
-                userList.add(patient);
+                //userList.add(patient);
                 Toast.makeText(ActivityLogin.this, "Success", Toast.LENGTH_SHORT).show();
 
                 // Save the userlist to disk for creating a new account offline we can check for unique userID
-                new modifyUserTask(getBaseContext()).execute(patient);//Fire and forget
+                UserListController.getUserList().add(patient,getApplicationContext());
+                //new modifyUserTask(getBaseContext()).execute(patient);//Fire and forget
 
             }
         });
@@ -172,9 +171,10 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
                     return;
                 }
                 CareGiver careGiver = new CareGiver(username, emailAddress, phoneNumber,"Caregiver", new PatientList());
-                userList.add(careGiver);
+                //userList.add(careGiver);
+                UserListController.getUserList().add(careGiver,getApplicationContext());
                 Toast.makeText(ActivityLogin.this, "Success", Toast.LENGTH_SHORT).show();
-                new modifyUserTask(getBaseContext()).execute(careGiver);
+                //new modifyUserTask(getBaseContext()).execute(careGiver);
 
             }
         });

@@ -50,7 +50,8 @@ public class ActivityCareGiverAddPatient extends AppCompatActivity {
         for(User user :list){
             if (user.getUserID().equals(entered)){
                 patientToAdd =(Patient) user;
-                loggedInCareGiver.getPatientList().addPatient(patientToAdd);
+                loggedInCareGiver.addPatient(patientToAdd);
+                UserListController.getUserList().add(loggedInCareGiver,getApplicationContext());
                 userID.setText("");
                 toBrowsePatientActivity();
             }
