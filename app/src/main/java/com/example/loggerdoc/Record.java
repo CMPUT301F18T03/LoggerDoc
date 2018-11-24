@@ -81,4 +81,7 @@ public class Record implements Serializable,ElasticID {
     public Integer getElasticID() {
         return this.ElasticID;
     }
+    public Integer getElasticID_OwnerProblem(){
+        return this.ElasticID_OwnerProblem;
+    }
 }

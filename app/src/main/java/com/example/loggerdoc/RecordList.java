@@ -7,6 +7,6 @@ package com.example.loggerdoc;
 
 
 public class RecordList extends GenericList<Record> {
-    
+
 
 }

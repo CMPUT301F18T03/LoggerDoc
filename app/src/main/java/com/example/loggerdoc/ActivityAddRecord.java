@@ -138,7 +138,7 @@ public class ActivityAddRecord extends AppCompatActivity {
 
         else{
             //Create a new record
-           record = new Record (recordTitleText.getText().toString());
+           record = new Record (recordTitleText.getText().toString(),2147483647);
            record.setComment(recordCommentText.getText().toString());
            //add a geolocation to the record
            if (geoLocation != null) {

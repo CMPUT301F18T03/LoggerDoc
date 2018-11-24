@@ -25,8 +25,8 @@ public class Problem implements Serializable,ElasticID {
 
     private RecordList recordList;
     private CaregiverCommentList commentList;
-    private Integer ElasticID;
 
+    private Integer ElasticID;
     private Integer ElasticID_Owner;
 
     /**
@@ -174,7 +174,7 @@ public class Problem implements Serializable,ElasticID {
      * @return
      */
 
-    public boolean checkDescriptionLength (String description){
+    public boolean checkDescriptionLength(String description){
 
         if (description.length() > 300){
             return false;

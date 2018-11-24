@@ -70,7 +70,7 @@ public class ActivityAddProblem extends AppCompatActivity {
             problemDescriptionWarning.setVisibility(View.INVISIBLE);
 
             LocalDateTime problemTime = formatDateAndTime(datePicker, timePicker);
-            Problem problem = new Problem (problemTitle.getText().toString(), problemTime, problemDescription.getText().toString());
+            Problem problem = new Problem (problemTitle.getText().toString(), problemTime, problemDescription.getText().toString(),ProblemRecordListController.getUserID());
 
             //Check if the title is too long or description is too long
             if (!problem.checkTitleLength(problem.getTitle()) || !problem.checkDescriptionLength(problem.getDescription()) ){
