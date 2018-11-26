@@ -34,14 +34,7 @@ public class ActivityBodyLocation extends Activity {
         BackPic = (ImageView) findViewById(R.id.BackPic);
         Save = (Button)findViewById(R.id.BodLocSave);
 
-        GlideApp
-                .with(context)
-                .load(R.drawable.cutout_650x500)
-                .into(FrontPic);
-        GlideApp
-                .with(context)
-                .load(R.drawable.cutout_650x500)
-                .into(BackPic);
+
 
 
         FrontPic.setOnTouchListener(new View.OnTouchListener() {

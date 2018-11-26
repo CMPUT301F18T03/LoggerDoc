@@ -1,5 +1,6 @@
 package com.example.loggerdoc;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -41,8 +42,10 @@ public class ActivityAddRecord extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE_RECORD = 1000;
     static final int GALLERY_REQUEST_RECORD = 1001;
     static final int ADD_GEOLOCATION_RESULT = 1002;
+    static final int BODY_LOCATION_REQUEST = 1003;
 
     private ArrayList<RecordPhoto> photos = new ArrayList<RecordPhoto>();
+    private Bodylocation bodylocation = new Bodylocation();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +68,7 @@ public class ActivityAddRecord extends AppCompatActivity {
 
         Button recordGallery = findViewById(R.id.gallery_button);
         Button recordCamera = findViewById(R.id.Camera_button);
+        Button bodyLocationButton = findViewById(R.id.body_location_button);
 
         recordGallery.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -79,6 +83,14 @@ public class ActivityAddRecord extends AppCompatActivity {
                 dispatchTakePictureIntent(REQUEST_IMAGE_CAPTURE_RECORD);
             }
         });
+
+        bodyLocationButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent  = new Intent(v.getContext(), ActivityBodyLocation.class);
+                startActivityForResult(intent, BODY_LOCATION_REQUEST);
+            }
+        });
+
         if (isServicesOkay()){
           initialize();
         }
@@ -107,6 +119,17 @@ public class ActivityAddRecord extends AppCompatActivity {
             geoLocation = (RecordGeoLocation) data.getSerializableExtra("geoLocation");
             latitudeText.setText("Latitude: " + String.valueOf(geoLocation.getLatitude()));
             longitudeText.setText("Longitude: " + String.valueOf(geoLocation.getLongitude()));
+        }
+        if(requestCode == BODY_LOCATION_REQUEST && resultCode == Activity.RESULT_OK){
+            ArrayList<Integer> location = data.getIntegerArrayListExtra("BODYLOCATION");
+            bodylocation.setFrontTuple(location.get(0), location.get(1));
+            bodylocation.setBackTuple(location.get(2), location.get(3));
+            Log.i("THISTAG", String.valueOf(location.get(0)));
+            Log.i("THISTAG", String.valueOf(location.get(1)));
+            Log.i("THISTAG", String.valueOf(location.get(2)));
+            Log.i("THISTAG", String.valueOf(location.get(3)));
+
+
         }
     }
 
@@ -153,8 +176,8 @@ public class ActivityAddRecord extends AppCompatActivity {
                 }
 
 
-                Log.i("SIZE_TEST", String.valueOf(record.getRecordPhotoList().size()));
            }
+           record.setBodylocation(bodylocation);
             ProblemRecordListController.getRecordList().add(record,getApplicationContext());
             //patient.getProblems().getArray().get(position).getRecordList().getArray().add_internal(record);
         }
