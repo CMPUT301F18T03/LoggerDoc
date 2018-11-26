@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.time.LocalDateTime;
 
@@ -17,7 +15,7 @@ public class ActivityEditProblem extends AppCompatActivity {
     private EditText editDescription;
     private Patient patient;
     private Problem problem;
-    private int position;
+    private int problem_ID;
     private ImageView problemTitleWarning;
     private ImageView problemDescriptionWarning;
     private DatePickerFragment datePickerFragment;
@@ -35,8 +33,8 @@ public class ActivityEditProblem extends AppCompatActivity {
 
         Intent intent = getIntent();
         patient = (Patient) intent.getSerializableExtra("Patient");
-        position = (int) intent.getSerializableExtra("Position");
-        problem = patient.getProblems().getProblemArrayList().get(position);
+        problem_ID = (int) intent.getSerializableExtra("Position");
+        problem = ProblemRecordListController.getProblemList().get(problem_ID);
 
         editTitle = (EditText) findViewById(R.id.editTitle);
 
@@ -97,9 +95,7 @@ public class ActivityEditProblem extends AppCompatActivity {
 
             else {
                 //Update the problem's list
-                patient.getProblems().remove(problem);
-                patient.getProblems().add(problem);
-
+                ProblemRecordListController.getProblemList().add(problem,getApplicationContext());
                 changeActivity(v);
             }
         }
@@ -136,7 +132,7 @@ public class ActivityEditProblem extends AppCompatActivity {
     public void changeActivity(View v){
         Intent intent = new Intent(this, ActivityViewProblem.class);
         intent.putExtra("Patient", patient);
-        intent.putExtra("Position", position);
+        intent.putExtra("Position", problem_ID);
         startActivity(intent);
     }
 

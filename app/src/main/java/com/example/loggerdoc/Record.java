@@ -7,32 +7,55 @@
 
 package com.example.loggerdoc;
 
+import com.example.loggerdoc.elasticclient.ElasticID;
+
 import java.io.Serializable;
+import java.security.acl.Owner;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Record implements Serializable {
+public class Record implements Serializable,ElasticID {
 
     private String title;
     private String comment;
     private LocalDateTime timestamp;
 
     private RecordGeoLocation recordGeoLocation;
-    // private RecordBodyLocation recordBodyLocation;
+    private Bodylocation bodylocation;
     private RecordPhotoList recordPhotoList;
 
+    private Integer ElasticID;
+    private Integer ElasticID_Owner;
+    private Integer ElasticID_OwnerProblem;
+
     public Record() {
-        this("");
+        this("",null);
     }
 
 
-    public Record(String title) {
+    public Record(String title,Integer Ownerproblem) {
         this.title = title;
         this.comment = "";
         this.timestamp = LocalDateTime.now();
         this.recordPhotoList = new RecordPhotoList();
 
+        ElasticID_OwnerProblem = Ownerproblem;
+        ElasticID_Owner = ProblemRecordListController.getProblemList().get(ElasticID_OwnerProblem).getElasticID_Owner();
+        ElasticID = this.hashCode();
+
     }
+
+    public Record(String title,Integer Ownerproblem,Integer Owner) {
+        this.title = title;
+        this.comment = "";
+        this.timestamp = LocalDateTime.now();
+        this.recordPhotoList = new RecordPhotoList();
+        ElasticID_OwnerProblem = Ownerproblem;
+        ElasticID_Owner = Owner;
+        ElasticID = this.hashCode();
+
+    }
+
 
     public String getTitle() {
         return title;
@@ -67,4 +90,24 @@ public class Record implements Serializable {
     public RecordGeoLocation getRecordGeoLocation(){
         return this.recordGeoLocation;
     }
+
+    public void setBodylocation(Bodylocation BodLoc){
+        this.bodylocation = BodLoc;
+    }
+
+    public Bodylocation getBodylocation(){
+        return this.bodylocation;
+    }
+
+    @Override
+    public Integer getElasticID() {
+        return this.ElasticID;
+    }
+    public Integer getElasticID_Owner(){
+        return this.ElasticID_Owner;
+    }
+    public Integer getElasticID_OwnerProblem(){
+        return this.ElasticID_OwnerProblem;
+    }
+
 }

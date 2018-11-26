@@ -1,11 +1,13 @@
 package com.example.loggerdoc;
 
 
+import com.example.loggerdoc.elasticclient.ElasticID;
+
 import java.io.Serializable;
 
 
 
-public class User implements Serializable {
+public class User implements Serializable, ElasticID {
 
     private String userID;
     private String emailAddress;

@@ -60,6 +60,11 @@
         <activity android:name=".ActivityAddGeolocation" />
         <activity android:name=".ActivityUpdateContactInfo" />
         <activity android:name=".ActivityViewRecordList"></activity>
+
+        <activity
+            android:name=".ActivityBodyLocation"
+            android:label="@string/title_activity_body_location"></activity>
+
     </application>
 
 </manifest>

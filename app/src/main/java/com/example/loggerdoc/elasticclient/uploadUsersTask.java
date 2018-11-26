@@ -8,12 +8,9 @@ import com.example.loggerdoc.User;
 import com.example.loggerdoc.UserList;
 import com.google.gson.Gson;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -27,38 +24,27 @@ public class uploadUsersTask extends AsyncTask<UserList, Void, Void> {
     @Override
     protected Void doInBackground(UserList... users) {
         //Because we for some reason take a list of userlists in....
-        ArrayList<User> tosend =  users[0].getUsers();
+        ArrayList<User> tosend =  users[0].getArray();
         Gson gson = new Gson();
         String jsonout;
         httphandler sender = ElasticSearchController.getHttpHandler();
-        JSONArray store = new JSONArray();
 
+        OutputStream fos;
+        BufferedWriter out;
         for (User targ:tosend) {
             jsonout = gson.toJson(targ);
             sender.httpPUT("/user/_doc/"+targ.getElasticID().toString(),jsonout);
-            store.put(jsonout);
-        }
-
-        OutputStream fos = null;
-        try {
-            fos = context.openFileOutput("Users.sav", Context.MODE_PRIVATE);
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
-            JSONObject output = new JSONObject();
             try {
-                output.put("Users",store);
-            } catch (JSONException e) {
+
+                fos = new FileOutputStream(new File(context.getFilesDir().getAbsolutePath()+"/Users/User"+targ.getElasticID()+".sav"));
+                out = new BufferedWriter(new OutputStreamWriter(fos));
+                out.write(jsonout);
+                out.flush();
+                fos.close();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-            out.write(output.toString());
-
-            out.flush();
-            fos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-
 
         return null;
     }

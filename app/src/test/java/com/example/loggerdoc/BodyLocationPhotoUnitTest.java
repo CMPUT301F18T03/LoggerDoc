@@ -15,7 +15,7 @@ public class BodyLocationPhotoUnitTest {
         BodyLocationPhoto BLphoto = new BodyLocationPhoto();
         BLphoto.setPhoto(image);
         BodyLocationPhotoList list = new BodyLocationPhotoList();
-        list.add(BLphoto);
+        list.add_internal(BLphoto);
         assertTrue("size should be 1", list.contains(BLphoto));
 
     }
