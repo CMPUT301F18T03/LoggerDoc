@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.loggerdoc">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -13,8 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
-        >
+        android:usesCleartextTraffic="true">
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.loggerdoc.fileprovider"
@@ -25,11 +25,13 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA2Qy_g9lI0RD34ZqSbCkOQm0KsM8Vro1I"/>
+            android:value="AIzaSyA2Qy_g9lI0RD34ZqSbCkOQm0KsM8Vro1I" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -57,8 +59,11 @@
         <activity android:name=".ActivityUserProfile" />
         <activity android:name=".ActivityUserProfileEdit" />
         <activity android:name=".ActivityAddRecord" />
-        <activity android:name=".ActivityAddGeolocation"></activity>
-        <activity android:name=".ActivityUpdateContactInfo"></activity>
+        <activity android:name=".ActivityAddGeolocation" />
+        <activity android:name=".ActivityUpdateContactInfo" />
+        <activity
+            android:name=".ActivityBodyLocation"
+            android:label="@string/title_activity_body_location"></activity>
     </application>
 
 </manifest>
