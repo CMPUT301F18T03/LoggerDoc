@@ -5,45 +5,23 @@
  */
 package com.example.loggerdoc;
 
+import android.content.Context;
+import com.example.loggerdoc.elasticclient.modifyUserTask;
+
 import java.util.ArrayList;
-import java.util.Collection;
 
-public class UserList {
+public class UserList extends GenericList<User>{
 
-    protected ArrayList<User> userArrayList;
-
-    public UserList(){
-        userArrayList = new ArrayList<User>();
+    public void add(User data,Context context) {
+        super.add_internal(data);
+        new modifyUserTask(context).execute(data);
     }
 
-    public ArrayList<User> getUsers() {
-        return userArrayList;
-    }
-
-    public void setUsers(ArrayList<User> newUserList){
-        this.userArrayList = newUserList;
-    }
-
-    public void addUser(User user){
-        userArrayList.add(user);
-    }
-
-    public void removeUser (User user){
-        userArrayList.remove(user);
-    }
-
-    public boolean containsUser (User user){
-        return userArrayList.contains(user);
-    }
-
-    public int size(){
-        return userArrayList.size();
-    }
-
-    public void become(UserList list) {
-        if(list != null){
-            userArrayList = list.getUsers();
+    public ArrayList<User> getUsers(ArrayList<Integer> patientList) {
+        ArrayList<User> ret = new ArrayList<>();
+        for(Integer x: patientList){
+            ret.add(datalist.get(x));
         }
-
+        return ret;
     }
 }

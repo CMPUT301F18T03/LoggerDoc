@@ -9,10 +9,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import java.time.LocalDateTime;
+
 
 public class ActivityAddProblem extends AppCompatActivity {
-    private Patient patient;
     private DatePickerFragment datePicker;
+    private TimePickerFragment timePicker;
     private EditText problemTitle;
     private EditText problemDescription;
     private ImageView problemTitleWarning;
@@ -28,16 +30,16 @@ public class ActivityAddProblem extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
 
-        Intent intent = getIntent();
-        patient = (Patient) intent.getSerializableExtra("Patient");
-        datePicker = new DatePickerFragment();
+        datePicker = DatePickerFragment.newInstance(LocalDateTime.now());
+        timePicker = TimePickerFragment.newInstance(LocalDateTime.now());
+        datePicker.setNextFragment(timePicker);
 
         problemTitle = (EditText) findViewById(R.id.problem_Title_Text);
         problemDescription = (EditText) findViewById(R.id.problem_desc_text);
         problemTitleWarning = (ImageView) findViewById(R.id.warning_Problem_Title);
         problemDescriptionWarning = (ImageView) findViewById(R.id.warning_Problem_Desc);
-
     }
+
 
     //To be called when the user hits the create button
     public void checkProblemFields (View v){
@@ -67,7 +69,8 @@ public class ActivityAddProblem extends AppCompatActivity {
             problemTitleWarning.setVisibility(View.INVISIBLE);
             problemDescriptionWarning.setVisibility(View.INVISIBLE);
 
-            Problem problem = new Problem (problemTitle.getText().toString(), datePicker, problemDescription.getText().toString());
+            LocalDateTime problemTime = formatDateAndTime(datePicker, timePicker);
+            Problem problem = new Problem (problemTitle.getText().toString(), problemTime, problemDescription.getText().toString(),ProblemRecordListController.getUserID());
 
             //Check if the title is too long or description is too long
             if (!problem.checkTitleLength(problem.getTitle()) || !problem.checkDescriptionLength(problem.getDescription()) ){
@@ -84,8 +87,8 @@ public class ActivityAddProblem extends AppCompatActivity {
 
             else {
                 //Add problem to patient's problem list
+                ProblemRecordListController.getProblemList().add(problem,getApplicationContext());
                 Intent intent = new Intent();
-                intent.putExtra("Problem", problem);
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -103,9 +106,9 @@ public class ActivityAddProblem extends AppCompatActivity {
         return false;
     }
 
-    //Show the Date Picker
+    //Show the Date Picker and Time Picker
     public void clickPickDate(View v){
-        datePicker.show(getSupportFragmentManager(), "pick_date");
+        datePicker.show(getSupportFragmentManager(), "Add Date Fragment");
     }
 
     //Show an error Alert Dialog.
@@ -118,4 +121,30 @@ public class ActivityAddProblem extends AppCompatActivity {
         dialog.setArguments(messageArgs);
         dialog.show(getSupportFragmentManager(), "error_dialog");
     }
+
+    /**
+     * @author = Alexandra Tyrrell
+     * Sets the timestamp of the problem. This method creates a LocalDateTime object that stores the
+     * date of the problem. The day, month and year is taken from the datePickerFragment.
+     *
+     * @param datePickerFragment the object that holds the date of the problem
+     */
+    public LocalDateTime formatDateAndTime (DatePickerFragment datePickerFragment,
+                                            TimePickerFragment timePickerFragment){
+
+        LocalDateTime date = LocalDateTime.now();
+
+        if(datePickerFragment.getSet()){
+            date = date.withDayOfMonth(datePickerFragment.getDay())
+                    .withMonth(datePickerFragment.getMonth()).withYear(datePickerFragment.getYear());
+        }
+
+        if (timePickerFragment.getIsSet()){
+            date = date.withHour(timePickerFragment.getHour())
+                    .withMinute(timePickerFragment.getMinute());
+        }
+
+        return date;
+    }
+
 }

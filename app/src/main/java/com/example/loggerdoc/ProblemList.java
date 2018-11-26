@@ -9,63 +9,26 @@
 
 package com.example.loggerdoc;
 
-import java.io.Serializable;
+import android.content.Context;
+
+import com.example.loggerdoc.elasticclient.ElasticDataCallback;
+import com.example.loggerdoc.elasticclient.getProblemsTask;
+
 import java.util.ArrayList;
 
-public class ProblemList implements Serializable {
+public class ProblemList extends GenericList<Problem> implements ElasticDataCallback<ArrayList<Problem>> {
 
-    private ArrayList<Problem> problemArrayList;
-
-    /**
-     * Return a ProblemList object.
-     */
-    public ProblemList() {
-        problemArrayList = new ArrayList<>();
+    protected void add(Problem data,Context context) {
+        super.add_internal(data);
     }
 
-    /**
-     * Return the ArrayList of ProblemList.
-     *
-     * @return The ArrayList of ProblemList.
-     */
-    public ArrayList <Problem> getProblemArrayList(){
-        return this.problemArrayList;
+    public void download(Integer elasticID, Context context) {
+        new getProblemsTask(context,this).execute(elasticID);
     }
 
-    /**
-     * Add a problem to the ProblemList.
-     *
-     * @param problem The problem that needs to be added to the ProblemList.
-     */
-    public void add(Problem problem) {
-        problemArrayList.add(problem);
-    }
-
-    /**
-     * Remove a problem from the ProblemList.
-     *
-     * @param problem The problem needs to be removed from the ProblemList.
-     */
-    public void remove(Problem problem) {
-        problemArrayList.remove(problem);
-    }
-
-    /**
-     * Checks if the ProblemList contains a specified problem. Returns true if yes and false
-     * otherwise.
-     *
-     * @param problem The problem that needs to be checked.
-     * @return a boolean value (True or False)
-     */
-    public boolean contains(Problem problem) {
-        return problemArrayList.contains(problem);
-    }
-
-    /**
-     * Returns how many problems are stored in the ProblemList Object.
-     * @return the size of the ProblemList.
-     */
-    public int size() {
-        return problemArrayList.size();
+    public void dataCallBack(ArrayList<Problem> data) {
+        super.load(data);
     }
 }
+
+

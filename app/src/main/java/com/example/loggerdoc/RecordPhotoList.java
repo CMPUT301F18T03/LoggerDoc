@@ -26,7 +26,7 @@ public class RecordPhotoList implements Serializable {
 
     /**
      *
-     * @param photo record photo to add to list
+     * @param photo record photo to add_internal to list
      */
     public void addPhoto(RecordPhoto photo) {
         recordPhotos.add(photo);

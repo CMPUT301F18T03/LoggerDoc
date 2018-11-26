@@ -6,18 +6,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 
 public class ActivityBrowseProblems extends AppCompatActivity {
 
     static final int ADD_PROBLEM_RESULT = 1;
+    static final int VIEW_PROBLEM_RESULT = 2;
 
     private AdapterListProblems adapter;
     private Patient patient;
+    private Integer patient_ID;
 
     //To be called when the activity is created
     @Override
@@ -27,10 +26,11 @@ public class ActivityBrowseProblems extends AppCompatActivity {
 
         //get the patient from the intent
         Intent intent = getIntent();
-        patient = (Patient) intent.getSerializableExtra("Patient");
+        patient_ID = intent.getIntExtra("Patient",0);
+        patient = (Patient) UserListController.getUserList().get(patient_ID);
 
         //Initialize and set the adapter
-        adapter = new AdapterListProblems(this, patient.getProblems().getProblemArrayList());
+        adapter = new AdapterListProblems(this, ProblemRecordListController.getProblemList().getArray());
         ListView problemsList = (ListView) findViewById(R.id.ProblemList);
         problemsList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -87,7 +87,14 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         if (requestCode == ADD_PROBLEM_RESULT) {
             if (resultCode == RESULT_OK) {
                 Problem problem = (Problem) data.getSerializableExtra("Problem");
-                patient.getProblems().add(problem);
+                ProblemRecordListController.getProblemList().add(problem,getApplicationContext());
+            }
+        }
+
+        if (requestCode == VIEW_PROBLEM_RESULT){
+            if (resultCode == RESULT_OK){
+                int position = (int) data.getSerializableExtra("Position");
+                //patient.getProblems().getArray().remove(position);//TODO I dont know what this does
             }
         }
     }
@@ -96,8 +103,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
     @Override
     protected void onResume (){
         super.onResume();
-
-        adapter.refresh(patient.getProblems().getProblemArrayList());
+        adapter.refresh(ProblemRecordListController.getProblemList().getArray());
         adapter.notifyDataSetChanged();
     }
 
@@ -106,7 +112,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         Intent intent = new Intent(this, ActivityViewProblem.class);
         intent.putExtra("Patient", patient);
         intent.putExtra("Position", position);
-        startActivity(intent);
+        startActivityForResult(intent, VIEW_PROBLEM_RESULT);
     }
 
     //Change to ActivityAddProblem.

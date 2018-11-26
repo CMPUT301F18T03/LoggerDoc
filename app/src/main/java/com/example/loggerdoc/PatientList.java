@@ -8,18 +8,18 @@ import java.util.Collection;
 // Class that handles a list of patients
 public class PatientList implements Serializable {
 
-    private ArrayList<Patient> patientList;
+    private ArrayList<Integer> patientList;
 
     //PatientList constructor
     public PatientList(){
-        patientList = new ArrayList<Patient>();
+        patientList = new ArrayList<>();
     }
 
     /**
      *
      * @return Returns a list of patients
      */
-    public ArrayList<Patient> getPatients(){
+    public ArrayList<Integer> getPatients(){
         return patientList;
     }
 
@@ -27,9 +27,9 @@ public class PatientList implements Serializable {
      *
      * @param patient adds patient to the patientList
      */
-    // add a careGiver to the list of careGivers
+    // add_internal a careGiver to the list of careGivers
     public void addPatient(Patient patient) {
-        patientList.add(patient);
+        patientList.add(patient.getElasticID());
     }
 
     /**
@@ -38,7 +38,7 @@ public class PatientList implements Serializable {
      */
     // remove a careGiver from the list of careGivers
     public void removePatient(Patient patient) {
-        patientList.remove(patient);
+        patientList.remove(patient.getElasticID());
     }
 
     /**
@@ -55,7 +55,7 @@ public class PatientList implements Serializable {
      * @return Returns true if patient is in patientList, otherwise return false
      */
     public boolean contains(Patient patient){
-        return patientList.contains(patient);
+        return patientList.contains(patient.getElasticID());
     }
 
 }

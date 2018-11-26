@@ -35,7 +35,7 @@ public class ActivityUpdateContactInfo extends AppCompatActivity {
         phoneNumberEditText = (EditText) findViewById(R.id.edit_contact_info_number_view);
         contactInfoEmailWarning = (ImageView) findViewById(R.id.warningEditEmail);
         contactInfoPhoneWarning = (ImageView) findViewById(R.id.warningEditPhoneNumber);
-        userId = (TextView) findViewById(R.id.UpdateContactInfoUsernameView);
+        userId = (TextView) findViewById(R.id.ProblemTitle);
 
 
         //get the logged in user from the intent
@@ -58,7 +58,7 @@ public class ActivityUpdateContactInfo extends AppCompatActivity {
         if(checkChanges(newEmail, newPhoneNumber)) {
             loggedInUser.setEmailAddress(newEmail);
             loggedInUser.setPhoneNumber(newPhoneNumber);
-            if (userType.equals("Caregiver")){
+            if (userType.equals("CareGiver")){
                 toCaregiverHomePage();
             }
             else if (userType.equals("Patient")){
@@ -139,28 +139,12 @@ public class ActivityUpdateContactInfo extends AppCompatActivity {
 
 
     public void getLoggedInUser(Intent intent){
-        //try to get a caregiver object passed from previous intent
-        try{
-            loggedInUser = (CareGiver) intent.getSerializableExtra("Caregiver");
-            userType = "Caregiver";
-
-        }catch(Exception e){
-            //not a caregiver
+        Integer patient_ID = intent.getIntExtra("Patient",0);
+        if(patient_ID == 0){
+            patient_ID = intent.getIntExtra("Caregiver",0);
         }
-
-        //if the object is null, then a caregiver was not passed and it must have been a patient that was passed
-        if (loggedInUser == null) {
-
-            //try to get the patient passed from previous intent and set it to the user
-            try {
-                loggedInUser = (Patient) intent.getSerializableExtra("Patient");
-                userType = "Patient";
-
-            } catch (Exception e) {
-                //not a patient either? not good
-            }
-        }
-
+        loggedInUser = UserListController.getUserList().get(patient_ID);
+        userType = loggedInUser.getRole();
     }
 
 

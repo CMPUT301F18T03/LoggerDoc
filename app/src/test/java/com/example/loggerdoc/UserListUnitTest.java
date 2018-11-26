@@ -16,12 +16,12 @@ public class UserListUnitTest {
         assertTrue("Size should be 0 since we have not added anything", testList.size() == 0);
 
         Patient testPatient = new Patient("test", "test", "test","role", new CareGiverList());
-        testList.addUser(testPatient);
+        testList.add_internal(testPatient);
         assertTrue("Size should be 1", testList.size() == 1);
 
-        assertTrue("Does the list contain the object we added", testList.containsUser(testPatient));
+        assertTrue("Does the list contain the object we added", testList.contains(testPatient));
 
-        testList.removeUser(testPatient);
+        testList.remove(testPatient);
 
     }
 
@@ -31,12 +31,12 @@ public class UserListUnitTest {
         assertTrue("Size should be 0 since we have not added anything", testList.size() == 0);
 
         Patient testPatient = new Patient("test", "test", "test","test", new CareGiverList());
-        testList.addUser(testPatient);
+        testList.add_internal(testPatient);
         assertTrue("Size should be 1", testList.size() == 1);
 
-        assertTrue("Does the list contain the object we added", testList.containsUser(testPatient));
+        assertTrue("Does the list contain the object we added", testList.contains(testPatient));
 
-        testList.removeUser(testPatient);
+        testList.remove(testPatient);
         assertTrue("Size should be 0 since we have not added anything", testList.size() == 0);
 
     }

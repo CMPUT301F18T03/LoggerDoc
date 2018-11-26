@@ -2,10 +2,12 @@ package com.example.loggerdoc.elasticclient;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.SparseArray;
 
 import com.example.loggerdoc.CareGiver;
 import com.example.loggerdoc.ElasticSearchController;
 import com.example.loggerdoc.Patient;
+import com.example.loggerdoc.User;
 import com.example.loggerdoc.UserList;
 import com.google.gson.Gson;
 
@@ -14,74 +16,95 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
-public class getUsersTask extends AsyncTask<Void, Void,UserList> {
+public class getUsersTask extends AsyncTask<Void, Void,ArrayList<User>> {
     private Context context;
-    private ElasticDataCallback<UserList> callback;
+    private ElasticDataCallback<ArrayList<User>> callback;
     public getUsersTask(Context context){
         this.context = context;
     }
-    public getUsersTask(Context context,ElasticDataCallback<UserList> callback){
+
+    public getUsersTask(Context context,ElasticDataCallback<ArrayList<User>> callback){
         this.context = context;
         this.callback = callback;
     }
 
     @Override
-    protected UserList doInBackground(Void... voids) {
+    protected ArrayList<User> doInBackground(Void... voids) {
         httphandler receiver = ElasticSearchController.getHttpHandler();
         Gson gson = new Gson();
-        UserList ret = new UserList();
+        ArrayList<User> ret = new ArrayList<>();
         String jsonin = receiver.httpGET("/user/_doc/_search?q=*:*&filter_path=hits.hits.*&size=10000");
-        if(jsonin == null){
-            InputStream fis;
+        if(jsonin != null){
             try {
-                fis = context.openFileInput("Users.sav");
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                return null;
-            }
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-            try {
-                JSONObject input = new JSONObject(in.toString());
-                JSONArray inputdata = input.getJSONArray("Users");
-                for(int num = 0; num < inputdata.length();num++){
-                    JSONObject currentuser = inputdata.getJSONObject(num).getJSONObject("_source");
+                JSONArray hits = new JSONObject(jsonin).getJSONObject("hits").getJSONArray("hits");
+                for(int num = 0; num < hits.length();num++){
+                    JSONObject currentuser = hits.getJSONObject(num).getJSONObject("_source");
                     if(currentuser.has("problems")){
-                        ret.addUser(gson.fromJson(currentuser.toString(),Patient.class));
+                        ret.add(gson.fromJson(currentuser.toString(),Patient.class));
                     }
                     else if(currentuser.has("patients")){
-                        ret.addUser(gson.fromJson(currentuser.toString(),CareGiver.class));
+                        ret.add(gson.fromJson(currentuser.toString(),CareGiver.class));
                     }
                 }
 
             } catch (JSONException e) {
                 e.printStackTrace();
-                return null;
             }
             return ret;
         }
-        try {
-            JSONArray hits = new JSONObject(jsonin).getJSONObject("hits").getJSONArray("hits");
-            for(int num = 0; num < hits.length();num++){
-                JSONObject currentuser = hits.getJSONObject(num).getJSONObject("_source");
-                if(currentuser.has("problems")){
-                    ret.addUser(gson.fromJson(currentuser.toString(),Patient.class));
+        else {
+            File datafile = new File(context.getFilesDir().getAbsolutePath()+"/Users/");
+            if(datafile.exists()){
+                File[] users = datafile.listFiles();
+                BufferedReader in;
+                for (File userdata: users){
+                    try {
+                        in = new BufferedReader(new FileReader(userdata));
+                        JSONObject currentuser = new JSONObject(in.readLine());
+                        if(currentuser.has("problems")){
+                            ret.add(gson.fromJson(currentuser.toString(),Patient.class));
+                        }
+                        else if(currentuser.has("patients")){
+                            ret.add(gson.fromJson(currentuser.toString(),CareGiver.class));
+                        }
+
+                    } catch (JSONException | IOException e) {
+                        e.printStackTrace();//literally impossible
+                    }
                 }
-                else if(currentuser.has("patients")){
-                    ret.addUser(gson.fromJson(currentuser.toString(),CareGiver.class));
-                }
+                return ret;
+            }
+            else{
+                //Complains that no one cares if the folder is actually made.
+                datafile.mkdir();
+                new File(context.getFilesDir().getAbsolutePath()+"/Records/").mkdir();
+                new File(context.getFilesDir().getAbsolutePath()+"/Problems/").mkdir();
+                new File(context.getFilesDir().getAbsolutePath()+"/Data/").mkdir();
+                new File(context.getFilesDir().getAbsolutePath()+"/Uploads/").mkdir();
+                return null;
+
             }
 
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-        return ret;
+
+    }
+    public void mkDirs(){
+        File datafile = new File(context.getFilesDir().getAbsolutePath()+"/Users/");
+        if(!datafile.exists()) {
+            datafile.mkdir();
+            new File(context.getFilesDir().getAbsolutePath()+"/Records/").mkdir();
+            new File(context.getFilesDir().getAbsolutePath()+"/Problems/").mkdir();
+            new File(context.getFilesDir().getAbsolutePath()+"/Data/").mkdir();
+            new File(context.getFilesDir().getAbsolutePath()+"/Uploads/").mkdir();
+        }
     }
     @Override
-    protected void onPostExecute(UserList x){
+    protected void onPostExecute(ArrayList<User> x){
         context = null;
         if(callback != null){
             callback.dataCallBack(x);
@@ -89,3 +112,6 @@ public class getUsersTask extends AsyncTask<Void, Void,UserList> {
 
     }
 }
+
+
+
