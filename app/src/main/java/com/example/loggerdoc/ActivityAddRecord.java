@@ -122,8 +122,10 @@ public class ActivityAddRecord extends AppCompatActivity {
         }
         if(requestCode == BODY_LOCATION_REQUEST && resultCode == Activity.RESULT_OK){
             ArrayList<Integer> location = data.getIntegerArrayListExtra("BODYLOCATION");
-            bodylocation.setFrontTuple(location.get(0), location.get(1));
-            bodylocation.setBackTuple(location.get(2), location.get(3));
+            bodylocation.setFrontX(location.get(0));
+            bodylocation.setFrontY(location.get(1));
+            bodylocation.setBackX(location.get(2));
+            bodylocation.setBackY(location.get(3));
             Log.i("THISTAG", String.valueOf(location.get(0)));
             Log.i("THISTAG", String.valueOf(location.get(1)));
             Log.i("THISTAG", String.valueOf(location.get(2)));

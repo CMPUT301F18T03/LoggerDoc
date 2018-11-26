@@ -12,32 +12,31 @@ public class BodyLocationUnitTest {
     public void TestDefault(){
         Bodylocation bodylocation = new Bodylocation();
         //Should be initialized to zero
-        assertEquals(bodylocation.getBackTuple().get(0),bodylocation.getBackTuple().get(1));
+        assertEquals(bodylocation.getBackX(), 0);
+        assertEquals(bodylocation.getBackY(), 0);
+        assertEquals(bodylocation.getFrontX(), 0);
+        assertEquals(bodylocation.getFrontY(), 0);
     }
     @Test
     public void TestSetandGetBack(){
         Bodylocation bodylocation = new Bodylocation();
-        ArrayList<Integer> list = new ArrayList<>();
-        list.add(1);
-        list.add(20);
+        bodylocation.setBackY(2);
+        bodylocation.setBackX(3);
 
-        bodylocation.setBackTuple(list.get(0), list.get(1));
-
-        assertEquals(list.get(0), bodylocation.getBackTuple().get(0));
-        assertEquals(list.get(1), bodylocation.getBackTuple().get(1));
+        assertEquals(2, bodylocation.getBackY());
+        assertEquals(3, bodylocation.getBackX());
 
     }
     @Test
     public void TestSetandGetFront(){
         Bodylocation bodylocation = new Bodylocation();
-        ArrayList<Integer> list = new ArrayList<>();
-        list.add(1);
-        list.add(20);
 
-        bodylocation.setFrontTuple(list.get(0), list.get(1));
 
-        assertEquals(list.get(0), bodylocation.getFrontTuple().get(0));
-        assertEquals(list.get(1), bodylocation.getFrontTuple().get(1));
+        bodylocation.setFrontX(33);
+        bodylocation.setFrontY(20);
+
+        assertEquals(33, bodylocation.getFrontX());
+        assertEquals(20, bodylocation.getFrontY());
 
     }
 }

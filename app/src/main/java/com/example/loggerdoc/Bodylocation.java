@@ -4,36 +4,47 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Bodylocation implements Serializable {
-    private ArrayList<Integer> FrontTuple;
-    private ArrayList<Integer> BackTuple;
+    private int FrontX;
+    private int FrontY;
+    private int BackX;
+    private int BackY;
 
     public Bodylocation(){
-        this.FrontTuple = new ArrayList<Integer>();
-        this.BackTuple = new ArrayList<Integer>();
-
-        this.FrontTuple.add(0);
-        this.FrontTuple.add(0);
-
-        this.BackTuple.add(0);
-        this.BackTuple.add(0);
+        this.FrontX = 0;
+        this.FrontY = 0;
+        this.BackX = 0;
+        this.BackX = 0;
     }
 
-    public void setFrontTuple(Integer x, Integer y) {
-        this.FrontTuple.set(0,x);
-        this.FrontTuple.set(1,y);
-
+    public int getBackX() {
+        return this.BackX;
     }
 
-    public void setBackTuple(Integer x,Integer y ){
-        this.BackTuple.set(0,x);
-        this.BackTuple.set(1,y);
+    public int getBackY(){
+        return this.BackY;
     }
 
-    public ArrayList<Integer> getFrontTuple(){
-        return this.FrontTuple;
+    public int getFrontX() {
+        return this.FrontX;
     }
 
-    public ArrayList<Integer> getBackTuple() {
-        return BackTuple;
+    public int getFrontY(){
+        return this.FrontY;
+    }
+
+    public void setBackX(int backX) {
+        this.BackX = backX;
+    }
+
+    public void setBackY(int backY) {
+        this.BackY = backY;
+    }
+
+    public void setFrontX(int frontX) {
+        this.FrontX = frontX;
+    }
+
+    public void setFrontY(int frontY) {
+        this.FrontY = frontY;
     }
 }
