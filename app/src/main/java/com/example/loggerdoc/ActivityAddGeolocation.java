@@ -26,7 +26,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 /*
- * This activity allows the user to select a geolocation to add to a record. The activity will show
+ * This activity allows the user to select a geolocation to add_internal to a record. The activity will show
  * a google map on the screen with a marker set to either the device's current location or a default
  * location. The user can then drag the marker to their desired location and click the save button.
  */
@@ -67,14 +67,12 @@ public class ActivityAddGeolocation extends AppCompatActivity implements OnMapRe
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Return RecordGeoLocation to previous Activity
                 RecordGeoLocation geoLocation = new RecordGeoLocation(options.getPosition());
-                Intent intent = new Intent(ActivityAddGeolocation.this, ActivityAddRecord.class);
-                intent.putExtra("Patient", patient);
-                intent.putExtra("Position", position);
-                intent.putExtra("Flag", "b");
-                intent.putExtra("Record", record);
+                Intent intent = new Intent();
                 intent.putExtra("geoLocation", geoLocation);
-                startActivity(intent);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }

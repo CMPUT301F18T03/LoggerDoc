@@ -3,63 +3,27 @@
  * RecordList represents an ordered list of Record objects. The list of records associated with
  * each problem is represented by a RecordList.
  */
-
 package com.example.loggerdoc;
 
-import java.io.Serializable;
+
+import android.content.Context;
+
+import com.example.loggerdoc.elasticclient.ElasticDataCallback;
+import com.example.loggerdoc.elasticclient.getRecordsTask;
+
 import java.util.ArrayList;
 
-public class RecordList implements Serializable {
+public class RecordList extends GenericList<Record> implements ElasticDataCallback<ArrayList<Record>> {
 
-    private ArrayList<Record> recordArrayList;
-
-    /**
-     * Record list is a list that stores objects of type Record. Every Problem will have a list of records
-     * associated with it.
-     */
-    public RecordList() {
-        recordArrayList = new ArrayList<>();
+    protected void add(Record data,Context context) {
+        super.add_internal(data);
     }
 
-    /**
-     *
-     * @return Returns an ArrayList of Record objects
-     */
-    public ArrayList<Record> getRecordArrayList (){
-        return this.recordArrayList;
+    public void download(Integer elasticID, Context context) {
+        new getRecordsTask(context,this).execute(elasticID);
     }
 
-    /**
-     *
-     * @param record Adds record to the Record List
-     */
-    public void add(Record record) {
-        recordArrayList.add(record);
+    public void dataCallBack(ArrayList<Record> data) {
+        super.load(data);
     }
-
-    /**
-     *
-     * @param record Removes record from the Record List
-     */
-    public void remove(Record record) {
-        recordArrayList.remove(record);
-    }
-
-    /**
-     *
-     * @param record Searches Record List to see if record is in RecordList
-     * @return Returns True if record is in Record List, False if record is not in Record List
-     */
-    public boolean contains(Record record) {
-        return recordArrayList.contains(record);
-    }
-
-    /**
-     *
-     * @return Returns and int that corresponds to the size of the Record List
-     */
-    public int size() {
-        return recordArrayList.size();
-    }
-
 }

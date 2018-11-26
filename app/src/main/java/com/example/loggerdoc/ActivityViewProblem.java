@@ -5,17 +5,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 public class ActivityViewProblem extends AppCompatActivity {
 
+    static final int ADD_RECORD_RESULT = 1;
+
     private Patient patient;
     private Problem problem;
-    private int position;
+    private int problem_ID;
     private ArrayAdapter<Record> recordAdapter;
     private ArrayAdapter<CaregiverComment> commentAdapter;
 
@@ -27,14 +29,25 @@ public class ActivityViewProblem extends AppCompatActivity {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADD_RECORD_RESULT) {
+            if (resultCode == RESULT_OK) {
+                Record r = (Record) data.getSerializableExtra("Record");
+                problem.addRecord(r);
+            }
+        }
+    }
+
+    @Override
     protected void onResume(){
         super.onResume();
 
         //Set the patient and the problem
         Intent intent = getIntent();
         patient = (Patient) intent.getSerializableExtra("Patient");
-        position = (int) intent.getSerializableExtra("Position");
-        problem = patient.getProblems().getProblemArrayList().get(position);
+        problem_ID = (int) intent.getSerializableExtra("Position");
+        problem = ProblemRecordListController.getProblemList().get(problem_ID);
 
         TextView problemTitleView = (TextView) findViewById(R.id.TitleView);
         problemTitleView.setText(problem.getTitle());
@@ -46,9 +59,17 @@ public class ActivityViewProblem extends AppCompatActivity {
         problemDescriptionView.setText(problem.getDescription());
 
         //Initialize and set the adapter for the records
-        recordAdapter = new AdapterListRecords(this, problem.getRecordList().getRecordArrayList());
+        recordAdapter = new AdapterListRecords(this, problem.getRecordList().getArray());
         ListView recordList = (ListView) findViewById(R.id.recordsListView);
         recordList.setAdapter(recordAdapter);
+        //Set the onClickListener for the listView. This will call changeToViewProblemActivity().
+        recordList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                goViewRecord(view);
+            }
+        });
+
         recordAdapter.notifyDataSetChanged();
 
         //Initialize and set the adapter for the caregiver's comments
@@ -62,23 +83,24 @@ public class ActivityViewProblem extends AppCompatActivity {
     public void goEditProblem (View v){
         Intent intent = new Intent(this, ActivityEditProblem.class);
         intent.putExtra("Patient", patient);
-        intent.putExtra("Position", position);
+        intent.putExtra("Position", problem_ID);
         startActivity(intent);
     }
 
     public void goDeleteProblem (final View v){
-
         //Show an alert dialog to ask for user's confirmation whether they would like to delete
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Are you sure you would like to delete this problem?");
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                patient.getProblems().remove(problem);
-                goBrowseProblems(v);
-                dialog.dismiss();
+                Intent intent = new Intent();
+                intent.putExtra("Position", problem_ID);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
+
         builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -90,19 +112,18 @@ public class ActivityViewProblem extends AppCompatActivity {
 
     }
 
-    //Change to BrowseProblems activity
-    public void goBrowseProblems(View v){
-        Intent intent = new Intent(this, ActivityBrowseProblems.class);
-        intent.putExtra("Patient", patient);
-        startActivity(intent);
-    }
 
     //Change to AddRecord Activity
     public void goAddRecord (View v){
         Intent intent = new Intent(this, ActivityAddRecord.class);
         intent.putExtra("Patient", patient);
-        intent.putExtra("Position", position);
+        intent.putExtra("Position", problem_ID);
         intent.putExtra("Flag", "a");
+        startActivityForResult(intent, ADD_RECORD_RESULT);
+    }
+
+    public void goViewRecord(View v){
+        Intent intent = new Intent(this, ActivityViewRecord.class);
         startActivity(intent);
     }
 }

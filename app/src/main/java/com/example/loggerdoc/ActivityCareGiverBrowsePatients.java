@@ -47,7 +47,7 @@ public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
         //their user ID, email and phone number
         //initialize adapter and set it to the patient list
         adapter = new AdapterListPatient(this,
-                R.layout.patient_listview_layout, loggedInCaregiver.getPatientList().getPatients());
+                R.layout.patient_listview_layout, UserListController.getSpecificUserList(loggedInCaregiver.getPatientList()));
         patientList.setAdapter(adapter);
 
         //Set the onClickListener for the listView. This will call toProblemListActivity().
@@ -85,12 +85,14 @@ public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
 
     //this method takes a patient and switches the current activity to the patients browse problems activity
     //@alex if you see this and I forget to ask, should it also pass the logged in caregiver so
-    //he/she can add comments?
+    //he/she can add_internal comments?
     public void toBrowseProblemsActivity(Patient patient){
         Intent intent = new Intent(this, ActivityBrowseProblems.class);
         intent.putExtra("Patient", patient);
         startActivity(intent);
     }
+
+
 
 
 

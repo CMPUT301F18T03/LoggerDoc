@@ -1,11 +1,13 @@
 package com.example.loggerdoc;
 
 
+import com.example.loggerdoc.elasticclient.ElasticID;
+
 import java.io.Serializable;
 
 
 
-public class User implements Serializable {
+public class User implements Serializable, ElasticID {
 
     private String userID;
     private String emailAddress;
@@ -27,6 +29,22 @@ public class User implements Serializable {
         this.phoneNumber = phoneNumber;
         this.role = role;
         this.elasticID = this.hashCode();
+    }
+    /**
+     *
+     * @param userID A unique username for the User that is at least 8 characters long
+     * @param emailAddress email address of the user
+     * @param phoneNumber Users phone number
+     * @param role Role that the user will take. Either a Patient or CareGiver
+     * @param elasticID Unique identifier for the object.
+     */
+    public User(String userID, String emailAddress, String phoneNumber ,String role,Integer elasticID) {
+
+        this.userID = userID;
+        this.emailAddress = emailAddress;
+        this.phoneNumber = phoneNumber;
+        this.role = role;
+        this.elasticID = elasticID;
     }
 
     /**

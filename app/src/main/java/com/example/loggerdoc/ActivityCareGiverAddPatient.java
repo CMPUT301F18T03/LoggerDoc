@@ -1,6 +1,6 @@
 /* Created 2018-11-13 by Stephen Zuk
 *
-*  The Caregiver add patient activity provides a screen for caregivers to add a patient
+*  The Caregiver add_internal patient activity provides a screen for caregivers to add_internal a patient
 *  to their list of patients, and can be accessed from the caregiver patient list activity
 *
 */
@@ -41,30 +41,35 @@ public class ActivityCareGiverAddPatient extends AppCompatActivity {
         //TODO Check If Entry Matches user
     }
 
-    /*activated when a caregiver presses the add button. This method confirms that the
+    /*activated when a caregiver presses the add_internal button. This method confirms that the
     string entered into the edittext is a user and adds the user to the caregivers patient list
     if it is. If the entered value is not a user, an error message pops up and the edittext is cleared*/
     public void addPatient(View view){
         String entered = userID.getText().toString();
-        ArrayList<User> list = UserListController.getUserList().getUsers();
+        ArrayList<User> list = UserListController.getUserList().getArray();
         for(User user :list){
             if (user.getUserID().equals(entered)){
                 patientToAdd =(Patient) user;
-                loggedInCareGiver.getPatientList().addPatient(patientToAdd);
+                loggedInCareGiver.addPatient(patientToAdd);
+                UserListController.getUserList().add(loggedInCareGiver,getApplicationContext());
                 userID.setText("");
+                toBrowsePatientActivity();
             }
             else{
                 Toast.makeText(this, "That username does not exist. Please try again.", Toast.LENGTH_SHORT).show();
                 userID.setText("");
-                /*TODO Alex made a good alert error message creater for improper entries, consider using
-                that once merged to master to separate concerns and not rewrite code
-
-                 */
 
             }
 
 
         }
+    }
+
+
+    public void toBrowsePatientActivity(){
+        Intent intent = new Intent(this, ActivityCareGiverBrowsePatients.class);
+        intent.putExtra("Caregiver", loggedInCareGiver);
+        startActivity(intent);
     }
 
 }

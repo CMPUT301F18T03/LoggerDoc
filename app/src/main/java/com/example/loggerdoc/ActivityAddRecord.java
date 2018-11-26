@@ -1,9 +1,7 @@
 package com.example.loggerdoc;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -42,9 +40,9 @@ public class ActivityAddRecord extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE_RECORD = 1000;
     static final int GALLERY_REQUEST_RECORD = 1001;
-    private static final int BODY_LOCATION_REQUEST = 1002;
+    static final int ADD_GEOLOCATION_RESULT = 1002;
+
     private ArrayList<RecordPhoto> photos = new ArrayList<RecordPhoto>();
-    private Bodylocation bodylocation = new Bodylocation();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,16 +61,15 @@ public class ActivityAddRecord extends AppCompatActivity {
         recordTitleText = (EditText) findViewById(R.id.record_title_text);
         latitudeText = (TextView) findViewById(R.id.latitude_text);
         longitudeText = (TextView) findViewById(R.id.longitude_text);
-        recordCommentText = (EditText) findViewById(R.id.recordCommentText);
+        recordCommentText = (EditText) findViewById(R.id.record_comment_text);
 
-        Button recordGallary = findViewById(R.id.gallary_button);
+        Button recordGallery = findViewById(R.id.gallery_button);
         Button recordCamera = findViewById(R.id.Camera_button);
-        Button BodyLocationButton = findViewById(R.id.body_location_button);
 
-        recordGallary.setOnClickListener(new View.OnClickListener() {
+        recordGallery.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                GalaryIntent(GALLERY_REQUEST_RECORD);
+                GalleryIntent(GALLERY_REQUEST_RECORD);
             }
         });
 
@@ -82,24 +79,34 @@ public class ActivityAddRecord extends AppCompatActivity {
                 dispatchTakePictureIntent(REQUEST_IMAGE_CAPTURE_RECORD);
             }
         });
-
-        BodyLocationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext() ,ActivityBodyLocation.class);
-                startActivityForResult(intent, BODY_LOCATION_REQUEST);
-            }
-        });
-
-        if (flag.equals("b")){
-            //the previous activity was ActivityAddGeolocation
-            geoLocation = (RecordGeoLocation) intent.getSerializableExtra("geoLocation");
-            latitudeText.setText("Latitude: " + String.valueOf(geoLocation.getLatitude()));
-            longitudeText.setText( "Longitude: " + String.valueOf(geoLocation.getLongitude()));
-        }
-
         if (isServicesOkay()){
           initialize();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_CAPTURE_RECORD && resultCode == RESULT_OK) {
+            File f = new File(PhotoPath);
+            Uri uri = Uri.fromFile(f);
+            RecordPhoto photo = new RecordPhoto();
+            photo.setPhoto(uri);
+            photos.add(photo);
+            PhotoPath = null;
+
+        }
+        if (requestCode == GALLERY_REQUEST_RECORD && resultCode == RESULT_OK){
+            final Uri imageUri = data.getData();
+            RecordPhoto photo = new RecordPhoto();
+            photo.setPhoto(imageUri);
+            photos.add(photo);
+            Log.i("THIS_IS_TAG", "onActivityResult: "+ photos.size());
+        }
+        if (requestCode == ADD_GEOLOCATION_RESULT && resultCode == RESULT_OK) {
+            geoLocation = (RecordGeoLocation) data.getSerializableExtra("geoLocation");
+            latitudeText.setText("Latitude: " + String.valueOf(geoLocation.getLatitude()));
+            longitudeText.setText("Longitude: " + String.valueOf(geoLocation.getLongitude()));
         }
     }
 
@@ -113,7 +120,7 @@ public class ActivityAddRecord extends AppCompatActivity {
                 intent.putExtra("Patient", patient);
                 intent.putExtra("Position", position);
                 intent.putExtra("Record", record);
-                startActivity(intent);
+                startActivityForResult(intent, ADD_GEOLOCATION_RESULT);
             }
         });
     }
@@ -131,14 +138,14 @@ public class ActivityAddRecord extends AppCompatActivity {
 
         else{
             //Create a new record
-           record = new Record (recordTitleText.getText().toString());
+           record = new Record (recordTitleText.getText().toString(),2147483647);
            record.setComment(recordCommentText.getText().toString());
-           //add a geolocation to the record
+           //add_internal a geolocation to the record
            if (geoLocation != null) {
                record.setRecordGeoLocation(geoLocation);
            }
 
-           //add record to the problem
+           //add_internal record to the problem
 
             if (photos.size() != 0) {
                 for (int i = 0; i<photos.size(); i++){
@@ -148,16 +155,15 @@ public class ActivityAddRecord extends AppCompatActivity {
 
                 Log.i("SIZE_TEST", String.valueOf(record.getRecordPhotoList().size()));
            }
-           record.setBodylocation(bodylocation);
-
-            patient.getProblems().getProblemArrayList().get(position).getRecordList().getRecordArrayList().add(record);
+            ProblemRecordListController.getRecordList().add(record,getApplicationContext());
+            //patient.getProblems().getArray().get(position).getRecordList().getArray().add_internal(record);
         }
 
-        //Change to ActivityViewProblem
-        Intent intent = new Intent(ActivityAddRecord.this, ActivityViewProblem.class);
-        intent.putExtra("Patient", patient);
-        intent.putExtra("Position", position);
-        startActivity(intent);
+        //Add record to problem list
+        Intent intent = new Intent();
+        intent.putExtra("Record", record);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     public boolean isServicesOkay(){
@@ -201,12 +207,11 @@ public class ActivityAddRecord extends AppCompatActivity {
         dialog.show(getSupportFragmentManager(), "error_dialog");
     }
 
-    private void GalaryIntent(int request) {
+    private void GalleryIntent(int request) {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, request);
     }
-
 
     private void dispatchTakePictureIntent(int request) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -254,35 +259,6 @@ public class ActivityAddRecord extends AppCompatActivity {
         Log.i("THIS_IS_TAG", String.valueOf(image));
 
         return image;
-    }
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE_RECORD && resultCode == RESULT_OK) {
-            File f = new File(PhotoPath);
-            Uri uri = Uri.fromFile(f);
-            RecordPhoto photo = new RecordPhoto();
-            photo.setPhoto(uri);
-            photos.add(photo);
-            PhotoPath = null;
-
-        }
-        if (requestCode == GALLERY_REQUEST_RECORD && resultCode == RESULT_OK){
-            final Uri imageUri = data.getData();
-            RecordPhoto photo = new RecordPhoto();
-            photo.setPhoto(imageUri);
-            photos.add(photo);
-            Log.i("THIS_IS_TAG", "onActivityResult: "+ photos.size());
-
-        }
-        if (requestCode == BODY_LOCATION_REQUEST && resultCode == Activity.RESULT_OK){
-            //Gets body location from body location activity
-            ArrayList<Integer> location = data.getIntegerArrayListExtra("BODYLOCATION");
-            bodylocation.setFrontTuple(location.get(0),location.get(1));
-            bodylocation.setBackTuple(location.get(2),location.get(3));
-
-
-        }
-
     }
 
 }

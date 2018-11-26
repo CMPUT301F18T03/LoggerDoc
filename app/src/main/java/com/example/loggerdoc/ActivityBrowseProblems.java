@@ -6,32 +6,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 public class ActivityBrowseProblems extends AppCompatActivity {
 
-    private ArrayAdapter<Problem> adapter;
+    static final int ADD_PROBLEM_RESULT = 1;
+    static final int VIEW_PROBLEM_RESULT = 2;
+
+    private AdapterListProblems adapter;
+    private Patient patient;
+    private Integer patient_ID;
 
     //To be called when the activity is created
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse_problems);
-    }
-
-    //To be called when the activity is resumed
-    @Override
-    protected void onResume (){
-        super.onResume();
 
         //get the patient from the intent
         Intent intent = getIntent();
-        final Patient patient = (Patient) intent.getSerializableExtra("Patient");
+        patient_ID = intent.getIntExtra("Patient",0);
+        patient = (Patient) UserListController.getUserList().get(patient_ID);
 
         //Initialize and set the adapter
-        adapter = new AdapterListProblems(this, patient.getProblems().getProblemArrayList());
+        adapter = new AdapterListProblems(this, ProblemRecordListController.getProblemList().getArray());
         ListView problemsList = (ListView) findViewById(R.id.ProblemList);
         problemsList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -82,20 +81,45 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADD_PROBLEM_RESULT) {
+            if (resultCode == RESULT_OK) {
+                Problem problem = (Problem) data.getSerializableExtra("Problem");
+                ProblemRecordListController.getProblemList().add(problem,getApplicationContext());
+            }
+        }
+
+        if (requestCode == VIEW_PROBLEM_RESULT){
+            if (resultCode == RESULT_OK){
+                int position = (int) data.getSerializableExtra("Position");
+                //patient.getProblems().getArray().remove(position);//TODO I dont know what this does
+            }
+        }
+    }
+
+    //To be called when the activity is resumed
+    @Override
+    protected void onResume (){
+        super.onResume();
+        adapter.refresh(ProblemRecordListController.getProblemList().getArray());
+        adapter.notifyDataSetChanged();
+    }
+
     //Change to ActivityViewProblem.
     public void changeToViewProblemActivity(View view, Patient patient, int position){
         Intent intent = new Intent(this, ActivityViewProblem.class);
         intent.putExtra("Patient", patient);
         intent.putExtra("Position", position);
-        startActivity(intent);
+        startActivityForResult(intent, VIEW_PROBLEM_RESULT);
     }
-
 
     //Change to ActivityAddProblem.
     public void changeToAddProblemActivity (View view, Patient patient){
         Intent intent = new Intent(this, ActivityAddProblem.class);
         intent.putExtra("Patient", patient);
-        startActivity(intent);
+        startActivityForResult(intent, ADD_PROBLEM_RESULT);
     }
 
     //Change to ActivitySearch.

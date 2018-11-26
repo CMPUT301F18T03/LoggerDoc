@@ -1,5 +1,9 @@
 package com.example.loggerdoc;
 
+import android.util.SparseArray;
+import java.util.ArrayList;
+
+
 /** Created by Dylan on November 9th, 2018 **/
 
 public class UserListController {
@@ -17,16 +21,21 @@ public class UserListController {
         return userList;
     }
 
-    public static void setList(UserList list) {
-        getUserList().become(list);
+    public static void setList(ArrayList<User> list) {
+        getUserList().load(list);
     }
 
-    public void addUser(User user) {
-        getUserList().addUser(user);
-    }
+    public static ArrayList<Patient> getSpecificUserList(ArrayList<Integer> patients) {
+        ArrayList<Patient> ret = new ArrayList<>();
 
-    public void removeUser(User user) {
-        getUserList().removeUser(user);
+        SparseArray<Patient> userMap = new SparseArray<>();
+        for(User x : getUserList().getArray()){
+            userMap.put(x.getElasticID(),(Patient)x);
+        }
+        for(Integer tar : patients){
+            ret.add(userMap.get(tar));
+        }
+        return ret;
     }
 
     /**
@@ -35,7 +44,7 @@ public class UserListController {
      * @return Returns True if user is in the userList, False if user is not in useList
      */
     public static boolean findUser(String id) {
-        for (User user : userList.getUsers()) {
+        for (User user : userList.getArray()) {
             if (user.getUserID().equals(id)) {
                 return true;
             }
@@ -43,3 +52,5 @@ public class UserListController {
         return false;
     }
 }
+
+
