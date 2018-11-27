@@ -12,29 +12,22 @@ import android.widget.TextView;
 
 public class ActivityViewRecordList extends AppCompatActivity {
 
-    private int problem_ID;
+    private int problemID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_record_list);
-    }
-
-    @Override
-    public void onResume(){
-        super.onResume();
 
         Intent intent = getIntent();
-        problem_ID = intent.getIntExtra("Position",0);
-        Problem problem = ProblemRecordListController.getProblemList().get(problem_ID);
-
-        //TODO: somehow get the recordlist of the problem
+        problemID = intent.getIntExtra("Problem",0);
+        Problem problem = ProblemRecordListController.getProblemList().get(problemID);
 
         //Initialize the problem title
         TextView problemTitle = (TextView) findViewById(R.id.viewRecordListProblemTitle);
         problemTitle.setText(problem.getTitle());
 
-        FloatingActionButton addRecordButton = (FloatingActionButton) findViewById(R.id.addProblemButton);
+        FloatingActionButton addRecordButton = (FloatingActionButton) findViewById(R.id.addRecordButton);
         addRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,8 +35,21 @@ public class ActivityViewRecordList extends AppCompatActivity {
             }
         });
 
+        FloatingActionButton searchRecordsButton = (FloatingActionButton)findViewById(R.id.recordSearchButton);
+        searchRecordsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goSearchRecord(v);
+            }
+        });
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
         //Initialize and set the adapter for the records
-        /*ArrayAdapter<Record> recordAdapter = new AdapterListRecords(this, problem.getRecordList().getRecordArrayList());
+        ArrayAdapter<Record> recordAdapter = new AdapterListRecords(this, ProblemRecordListController.getRecordList().getRecords(problemID));
         ListView recordList = (ListView) findViewById(R.id.recordsListView);
         recordList.setAdapter(recordAdapter);
         //Set the onClickListener for the listView. This will call changeToViewProblemActivity().
@@ -54,20 +60,26 @@ public class ActivityViewRecordList extends AppCompatActivity {
             }
         });
 
-        recordAdapter.notifyDataSetChanged();*/
+        recordAdapter.notifyDataSetChanged();
     }
 
     public void goViewRecord(View v, int position){
         Intent intent = new Intent(this, ActivityViewRecord.class);
-        intent.putExtra("Problem", problem_ID);
-        intent.putExtra("Record", position);
+        intent.putExtra("Problem", problemID);
+        intent.putExtra("Record", ProblemRecordListController.getRecordList().getArray().get(position).getElasticID());
         startActivity(intent);
     }
 
     //Change to AddRecord Activity
     public void goAddRecord (View v){
         Intent intent = new Intent(this, ActivityAddRecord.class);
-        intent.putExtra("Problem", problem_ID);
+        intent.putExtra("Problem", problemID);
+        startActivity(intent);
+    }
+
+    //Change to ActivitySearch.
+    public void goSearchRecord(View view){
+        Intent intent = new Intent (this, ActivitySearch.class);
         startActivity(intent);
     }
 }

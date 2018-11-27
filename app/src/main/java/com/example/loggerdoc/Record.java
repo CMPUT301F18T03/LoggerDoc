@@ -20,7 +20,7 @@ public class Record implements Serializable,ElasticID {
     private String comment;
     private LocalDateTime timestamp;
 
-    private RecordGeoLocation recordGeoLocation;
+    private RecordGeoLocation recordGeoLocation = null;
     private Bodylocation bodylocation;
     private RecordPhotoList recordPhotoList;
 
@@ -33,7 +33,7 @@ public class Record implements Serializable,ElasticID {
     }
 
 
-    public Record(String title,Integer Ownerproblem) {
+    public Record(String title, Integer Ownerproblem) {
         this.title = title;
         this.comment = "";
         this.timestamp = LocalDateTime.now();

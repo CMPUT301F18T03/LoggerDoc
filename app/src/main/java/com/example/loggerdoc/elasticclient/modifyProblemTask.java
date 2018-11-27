@@ -2,6 +2,7 @@ package com.example.loggerdoc.elasticclient;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.loggerdoc.ElasticSearchController;
 import com.example.loggerdoc.Problem;
@@ -54,11 +55,11 @@ public class modifyProblemTask extends AsyncTask<Problem, Void, Void> {
         } catch (IOException e) {
             e.printStackTrace();
 
-
-
         }
 
 
+        Log.d ("The problem date is in the modifyProblemTask", problems[0].getTimestamp().toString());
+        Log.d ("The jsonout value is", jsonout);
 
         return null;
     }

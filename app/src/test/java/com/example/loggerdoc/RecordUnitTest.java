@@ -50,4 +50,5 @@ public class RecordUnitTest {
 
         assertEquals(geoLocation, record.getRecordGeoLocation());
     }
+
 }

@@ -52,9 +52,7 @@ public class ProblemUnitTest {
     @Test
     public void testCaregiverCommentAdd(){
         Problem problem = new Problem("",LocalDateTime.now(),"",0);
-        CaregiverComment caregiverComment = new CaregiverComment(new CareGiver("test",
-                "test", "test","test", new PatientList()),
-                "Looks good");
+        CaregiverComment caregiverComment = new CaregiverComment("Looks good");
 
         problem.addComment(caregiverComment);
 

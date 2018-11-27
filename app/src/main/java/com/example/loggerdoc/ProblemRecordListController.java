@@ -50,9 +50,5 @@ public class ProblemRecordListController {
     }
 
     /*public static void setList(ArrayList<Problem> list) {
-        getList().load(list);
     }*/
-
-
-
 }

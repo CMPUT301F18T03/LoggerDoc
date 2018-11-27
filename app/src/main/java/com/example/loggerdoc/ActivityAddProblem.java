@@ -10,8 +10,7 @@ import android.widget.ImageView;
 
 import java.time.LocalDateTime;
 
-
-public class ActivityAddProblem extends AppCompatActivity {
+public class ActivityAddProblem extends AppCompatActivity{
     private DatePickerFragment datePicker;
     private TimePickerFragment timePicker;
     private EditText problemTitle;
@@ -28,7 +27,7 @@ public class ActivityAddProblem extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-
+        Intent intent = getIntent();
         datePicker = DatePickerFragment.newInstance(LocalDateTime.now());
         timePicker = TimePickerFragment.newInstance(LocalDateTime.now());
         datePicker.setNextFragment(timePicker);
@@ -69,6 +68,9 @@ public class ActivityAddProblem extends AppCompatActivity {
             problemDescriptionWarning.setVisibility(View.INVISIBLE);
 
             LocalDateTime problemTime = formatDateAndTime(datePicker, timePicker);
+            if (problemTime == null){
+                problemTime = LocalDateTime.now();
+            }
             Problem problem = new Problem (problemTitle.getText().toString(), problemTime, problemDescription.getText().toString(),ProblemRecordListController.getUserID());
 
             //Check if the title is too long or description is too long
