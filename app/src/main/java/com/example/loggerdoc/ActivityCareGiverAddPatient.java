@@ -38,7 +38,7 @@ public class ActivityCareGiverAddPatient extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //TODO Check If Entry Matches user
+
     }
 
     /*activated when a caregiver presses the add_internal button. This method confirms that the
