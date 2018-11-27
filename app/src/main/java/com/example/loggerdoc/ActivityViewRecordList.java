@@ -42,6 +42,13 @@ public class ActivityViewRecordList extends AppCompatActivity {
             }
         });
 
+        FloatingActionButton searchRecordsButton = (FloatingActionButton)findViewById(R.id.recordSearchButton);
+        searchRecordsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goSearchRecord(v);
+            }
+        });
         //Initialize and set the adapter for the records
         /*ArrayAdapter<Record> recordAdapter = new AdapterListRecords(this, problem.getRecordList().getRecordArrayList());
         ListView recordList = (ListView) findViewById(R.id.recordsListView);
@@ -68,6 +75,12 @@ public class ActivityViewRecordList extends AppCompatActivity {
     public void goAddRecord (View v){
         Intent intent = new Intent(this, ActivityAddRecord.class);
         intent.putExtra("Problem", problemID);
+        startActivity(intent);
+    }
+
+    //Change to ActivitySearch.
+    public void goSearchRecord(View view){
+        Intent intent = new Intent (this, ActivitySearch.class);
         startActivity(intent);
     }
 }

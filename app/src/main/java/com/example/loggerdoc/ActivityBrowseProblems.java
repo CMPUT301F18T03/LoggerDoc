@@ -4,13 +4,10 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 
 public class ActivityBrowseProblems extends AppCompatActivity {
 
@@ -38,7 +35,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         addProblemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeToAddProblemActivity(v, patient);
+                changeToAddProblemActivity(v);
             }
         });
 
@@ -50,7 +47,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeToSearchActivity(v,patient);
+                changeToSearchActivity(v);
             }
         });
 
@@ -63,7 +60,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         username.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeToUserProfile(v, patient);
+                changeToUserProfile(v);
             }
         });
     }
@@ -98,19 +95,19 @@ public class ActivityBrowseProblems extends AppCompatActivity {
     }
 
     //Change to ActivityAddProblem.
-    public void changeToAddProblemActivity (View view, Patient patient){
+    public void changeToAddProblemActivity (View view){
         Intent intent = new Intent(this, ActivityAddProblem.class);
         startActivity(intent);
     }
 
     //Change to ActivitySearch.
-    public void changeToSearchActivity(View view, Patient patient){
+    public void changeToSearchActivity(View view){
         Intent intent = new Intent (this, ActivitySearch.class);
         startActivity(intent);
     }
 
     //Change to ActivityUserProfile.
-    public void changeToUserProfile (View view, Patient patient){
+    public void changeToUserProfile (View view){
         Intent intent = new Intent (this, ActivityUserProfile.class);
         startActivity(intent);
     }

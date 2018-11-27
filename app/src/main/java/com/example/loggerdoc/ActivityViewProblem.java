@@ -16,10 +16,8 @@ import android.widget.TextView;
 
 public class ActivityViewProblem extends AppCompatActivity {
 
-    static final int ADD_RECORD_RESULT = 1;
-
     private Problem problem;
-    private int problem_ID;
+    private int problemID;
     private AdapterListComments commentAdapter;
 
 
@@ -33,12 +31,10 @@ public class ActivityViewProblem extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
 
-        Log.d ("Made it to view", "problem");
-
         //Set the problem
         Intent intent = getIntent();
-        problem_ID= intent.getIntExtra("Position",0);
-        problem = ProblemRecordListController.getProblemList().get(problem_ID);
+        problemID= intent.getIntExtra("Position",0);
+        problem = ProblemRecordListController.getProblemList().get(problemID);
 
         TextView problemTitleView = (TextView) findViewById(R.id.TitleView);
         problemTitleView.setText(problem.getTitle());
@@ -54,17 +50,6 @@ public class ActivityViewProblem extends AppCompatActivity {
         ListView commentList = (ListView) findViewById(R.id.commentProblemListView);
         commentList.setAdapter(commentAdapter);
         commentAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == ADD_RECORD_RESULT) {
-            if (resultCode == RESULT_OK) {
-                //Record r = (Record) data.getSerializableExtra("Record");
-                //problem.addRecord(r);
-            }
-        }
     }
 
     //Change to EditProblem activity
@@ -99,7 +84,7 @@ public class ActivityViewProblem extends AppCompatActivity {
 
 
     public void addCaregiverComment (final View view){
-        //Show an alert dialog to ask for user's confirmation whether they would like to delete
+        //Show an alert dialog for caregiver to comment on a problem
         AlertDialog.Builder builder = new AlertDialog.Builder(ActivityViewProblem.this);
         builder.setTitle("ADD CAREGIVER COMMENT: ");
         final EditText input = new EditText(ActivityViewProblem.this);
@@ -114,7 +99,7 @@ public class ActivityViewProblem extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 problem.addComment(new CaregiverComment(input.getText().toString()));
                 ProblemRecordListController.getProblemList().update(problem, getApplicationContext());
-                commentAdapter.refresh(ProblemRecordListController.getProblemList().get(problem_ID).getCommentList().getComments());
+                commentAdapter.refresh(ProblemRecordListController.getProblemList().get(problemID).getCommentList().getComments());
                 commentAdapter.notifyDataSetChanged();
             }
         });
