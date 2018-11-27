@@ -9,6 +9,7 @@ package com.example.loggerdoc;
 import android.content.Context;
 import com.example.loggerdoc.elasticclient.ElasticDataCallback;
 import com.example.loggerdoc.elasticclient.getRecordsTask;
+import com.example.loggerdoc.elasticclient.modifyRecordTask;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,7 @@ public class RecordList extends GenericList<Record> implements ElasticDataCallba
 
     protected void add(Record data,Context context) {
         super.add_internal(data);
+        new modifyRecordTask(context).execute(data);
     }
 
     public void download(Integer elasticID, Context context) {
