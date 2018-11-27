@@ -3,9 +3,12 @@ package com.example.loggerdoc;
 import android.content.Intent;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+
+import java.time.LocalDateTime;
 
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
@@ -17,22 +20,26 @@ import static org.hamcrest.CoreMatchers.anything;
 
 public class ActivityBrowseProblemsIntentTest {
 
+    private Problem pr;
+
     @Rule
     public IntentsTestRule<ActivityBrowseProblems> intentsTestRule =
             new IntentsTestRule<>(ActivityBrowseProblems.class, false, false);
 
-    /*
     @Before
     // create mock patient with mock problem
     public void setup() {
-        Problem pr = new Problem("Test Problem", new DatePickerFragment(), "Test Problem's Description");
         Patient p = new Patient("Test Patient", "test@example.com", "555-555-1234", "Patient");
-        p.getProblems().add(pr);
+        pr = new Problem("Test Problem", LocalDateTime.now(), "Test Problem's Description", p.getElasticID());
+        p.getProblems().add(pr.getElasticID());
+
+        UserListController.getUserList().add_internal(p);
+        ProblemRecordListController.getProblemList().add_internal(pr);
+
         Intent i = new Intent();
-        i.putExtra("Patient", p);
+        i.putExtra("Patient", p.getElasticID());
         intentsTestRule.launchActivity(i);
     }
-    */
 
     @Test
     public void TestViewProblemFromBrowse() {
@@ -60,6 +67,11 @@ public class ActivityBrowseProblemsIntentTest {
         onView(withId(R.id.usernameText))
                 .perform(click());
         intended(hasComponent(ActivityUserProfile.class.getName()));
+    }
+
+    @After
+    public void after() {
+        ProblemRecordListController.getProblemList().remove(pr);
     }
 
 }
