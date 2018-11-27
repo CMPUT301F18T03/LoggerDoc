@@ -3,6 +3,7 @@ package com.example.loggerdoc;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -67,6 +68,9 @@ public class ActivityAddProblem extends AppCompatActivity{
             problemDescriptionWarning.setVisibility(View.INVISIBLE);
 
             LocalDateTime problemTime = formatDateAndTime(datePicker, timePicker);
+            if (problemTime == null){
+                problemTime = LocalDateTime.now();
+            }
             Problem problem = new Problem (problemTitle.getText().toString(), problemTime, problemDescription.getText().toString(),ProblemRecordListController.getUserID());
 
             //Check if the title is too long or description is too long

@@ -11,6 +11,7 @@ package com.example.loggerdoc;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 import com.example.loggerdoc.elasticclient.ElasticCallback;
 import com.example.loggerdoc.elasticclient.ElasticDataCallback;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 public class ProblemList extends GenericList<Problem> implements ElasticDataCallback<ArrayList<Problem>> {
 
     ElasticCallback callback = null;
+    
     protected void add(Problem data,Context context) {
         super.add_internal(data);
         new modifyProblemTask(context).execute(data);

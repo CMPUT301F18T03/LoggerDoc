@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class ActivityBrowseProblems extends AppCompatActivity {
 
@@ -27,7 +30,6 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         patient_ID = intent.getIntExtra("Patient",0);
         patient = (Patient) UserListController.getUserList().get(patient_ID);
 
-        //Initialize and set the adapter
         adapter = new AdapterListProblems(this, ProblemRecordListController.getProblemList().getArray());
         problemsList = (ListView) findViewById(R.id.ProblemList);
         problemsList.setAdapter(adapter);
@@ -40,7 +42,6 @@ public class ActivityBrowseProblems extends AppCompatActivity {
                 changeToViewProblemActivity(view, patient, position);
             }
         });
-
         /*
          * Set the Add Problem button. When this button is pressed it will call
          * changeToAddProblemActivity().
@@ -83,8 +84,9 @@ public class ActivityBrowseProblems extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        adapter.refresh(ProblemRecordListController.getProblemList().getArray());
-        adapter.notifyDataSetChanged();
+        //TODO: Replace when listeners are working
+        /*adapter.refresh(ProblemRecordListController.getProblemList().getArray());
+        adapter.notifyDataSetChanged();*/
     }
 
     //Change to ActivityViewProblem.

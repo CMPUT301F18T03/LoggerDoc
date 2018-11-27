@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,6 +29,8 @@ public class ActivityViewProblem extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
+
+        Log.d ("Made it to view", "problem");
 
         //Set the problem
         Intent intent = getIntent();
