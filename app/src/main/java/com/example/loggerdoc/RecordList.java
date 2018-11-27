@@ -21,6 +21,10 @@ public class RecordList extends GenericList<Record> implements ElasticDataCallba
         new modifyRecordTask(context).execute(data);
     }
 
+    protected void update(Record data,Context context){
+        add(data,context);
+    }
+
     public void download(Integer elasticID, Context context) {
         new getRecordsTask(context,this).execute(elasticID);
     }
@@ -37,5 +41,20 @@ public class RecordList extends GenericList<Record> implements ElasticDataCallba
             }
         }
         return Count;
+    }
+
+    /**
+     * Returns the records associated with a given problem ID
+     * @param ProblemID the problem in question
+     * @return an arraylist of records
+     */
+    public ArrayList<Record> getRecords(Integer ProblemID){
+        ArrayList<Record> ret = new ArrayList<>();
+        for(int num = 0;num < datalist.size();num++){
+            if(datalist.valueAt(num).getElasticID_OwnerProblem().equals(ProblemID)){
+                ret.add(datalist.valueAt(num));
+            }
+        }
+        return ret;
     }
 }
