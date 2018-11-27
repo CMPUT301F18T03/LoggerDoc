@@ -18,7 +18,6 @@ public class ActivityViewProblem extends AppCompatActivity {
 
     static final int ADD_RECORD_RESULT = 1;
 
-    private Integer position;
     private Problem problem;
     private int problem_ID;
     private AdapterListComments commentAdapter;
@@ -38,8 +37,8 @@ public class ActivityViewProblem extends AppCompatActivity {
 
         //Set the problem
         Intent intent = getIntent();
-        position = intent.getIntExtra("Position",0);
-        problem = ProblemRecordListController.getProblemList().getArray().get(position);
+        problem_ID= intent.getIntExtra("Position",0);
+        problem = ProblemRecordListController.getProblemList().getArray().get(problem_ID);
 
         TextView problemTitleView = (TextView) findViewById(R.id.TitleView);
         problemTitleView.setText(problem.getTitle());
@@ -109,7 +108,6 @@ public class ActivityViewProblem extends AppCompatActivity {
         startActivityForResult(intent, ADD_RECORD_RESULT);
     }
 
-<<<<<<< HEAD
     public void addCaregiverComment (View view){
         //Show an alert dialog to ask for user's confirmation whether they would like to delete
         AlertDialog.Builder builder = new AlertDialog.Builder(ActivityViewProblem.this);
@@ -140,10 +138,8 @@ public class ActivityViewProblem extends AppCompatActivity {
         });
     }
 
-=======
     public void goViewRecord(View v){
         Intent intent = new Intent(this, ActivityViewRecord.class);
         startActivity(intent);
     }
->>>>>>> d4818e20a8f76ed60e0191a46e69b7858154ad7f
 }

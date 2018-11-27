@@ -30,18 +30,6 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         patient_ID = intent.getIntExtra("Patient",0);
         patient = (Patient) UserListController.getUserList().get(patient_ID);
 
-        adapter = new AdapterListProblems(this, ProblemRecordListController.getProblemList().getArray());
-        problemsList = (ListView) findViewById(R.id.ProblemList);
-        problemsList.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-
-        //Set the onClickListener for the listView. This will call changeToViewProblemActivity().
-        problemsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                changeToViewProblemActivity(view, patient, position);
-            }
-        });
         /*
          * Set the Add Problem button. When this button is pressed it will call
          * changeToAddProblemActivity().
@@ -84,9 +72,20 @@ public class ActivityBrowseProblems extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        //TODO: Replace when listeners are working
-        /*adapter.refresh(ProblemRecordListController.getProblemList().getArray());
-        adapter.notifyDataSetChanged();*/
+
+        //TODO: fix if we get listeners working
+        adapter = new AdapterListProblems(this, ProblemRecordListController.getProblemList().getArray());
+        problemsList = (ListView) findViewById(R.id.ProblemList);
+        problemsList.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+        //Set the onClickListener for the listView. This will call changeToViewProblemActivity().
+        problemsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                changeToViewProblemActivity(view, patient, position);
+            }
+        });
     }
 
     //Change to ActivityViewProblem.
