@@ -2,7 +2,7 @@ package com.example.loggerdoc;
 
 import android.content.Context;
 
-import java.util.ArrayList;
+import com.example.loggerdoc.elasticclient.ElasticCallback;
 
 public class ProblemRecordListController {
 
@@ -36,6 +36,12 @@ public class ProblemRecordListController {
     static public void loadUser(Integer ElasticID, Context context){
         Loaded_Patient = ElasticID;
         getProblemList().download(ElasticID,context);
+        getRecordList().download(ElasticID,context);
+    }
+
+    static public void loadUser(Integer ElasticID, Context context, ElasticCallback callback){
+        Loaded_Patient = ElasticID;
+        getProblemList().download(ElasticID,context,callback);
         getRecordList().download(ElasticID,context);
     }
 

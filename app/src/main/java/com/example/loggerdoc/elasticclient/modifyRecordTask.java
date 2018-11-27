@@ -6,34 +6,29 @@ import android.os.AsyncTask;
 import com.example.loggerdoc.ElasticSearchController;
 import com.example.loggerdoc.Problem;
 import com.example.loggerdoc.ProblemRecordListController;
-import com.example.loggerdoc.User;
+import com.example.loggerdoc.Record;
 import com.google.gson.Gson;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
-public class modifyProblemTask extends AsyncTask<Problem, Void, Void> {
+public class modifyRecordTask extends AsyncTask<Record, Void, Void> {
     private Context context;
-    public modifyProblemTask(Context context){
+    public modifyRecordTask(Context context){
         this.context = context;
     }
     @Override
-    protected Void doInBackground(Problem... problems) {
+    protected Void doInBackground(Record... records) {
         Gson gson = new Gson();
         String jsonout;
-        Problem tosend = problems[0];
+        Record tosend = records[0];
         //File datafile = new File(context.getFilesDir().getAbsolutePath()+"/Problems/");
-        ArrayList<Problem> ret = ProblemRecordListController.getProblemList().getArray();
+        ArrayList<Record> ret = ProblemRecordListController.getRecordList().getArray();
         httphandler sender = ElasticSearchController.getHttpHandler();
         OutputStream fos;
         BufferedWriter out;
@@ -42,9 +37,9 @@ public class modifyProblemTask extends AsyncTask<Problem, Void, Void> {
 
         try {
 
-            fos = new FileOutputStream(new File(context.getFilesDir().getAbsolutePath()+"/Problems/problem"+tosend.getElasticID_Owner().toString()+".sav"));
+            fos = new FileOutputStream(new File(context.getFilesDir().getAbsolutePath()+"/Records/records"+tosend.getElasticID_Owner().toString()+".sav"));
             out = new BufferedWriter(new OutputStreamWriter(fos));
-            for(Problem x:ret){
+            for(Record x:ret){
                 out.write(gson.toJson(x));
                 out.newLine();
             }
@@ -66,4 +61,3 @@ public class modifyProblemTask extends AsyncTask<Problem, Void, Void> {
         context = null;
     }
 }
-

@@ -31,6 +31,7 @@ public class ActivityAddGeolocationIntentTest {
     public IntentsTestRule<ActivityAddGeolocation> intentsTestRule =
             new IntentsTestRule<>(ActivityAddGeolocation.class, false, false);
 
+    /*
     @Before
     // create mock intent with mock patient
     public void before() {
@@ -46,6 +47,7 @@ public class ActivityAddGeolocationIntentTest {
         intent.putExtra("Record", r);
         intentsTestRule.launchActivity(intent);
     }
+    */
 
     @Test
     public void TestResultFromActivity() {

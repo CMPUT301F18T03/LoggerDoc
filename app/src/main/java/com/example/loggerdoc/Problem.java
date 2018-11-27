@@ -23,7 +23,6 @@ public class Problem implements Serializable,ElasticID {
     private String description;
     private LocalDateTime timestamp;
 
-    private RecordList recordList;
     private CaregiverCommentList commentList;
 
     private Integer ElasticID;
@@ -45,7 +44,6 @@ public class Problem implements Serializable,ElasticID {
         this.title = title;
         this.description = description;
         this.timestamp = timestamp;
-        this.recordList = new RecordList();
         this.commentList = new CaregiverCommentList();
         this.ElasticID_Owner = ElasticID_Owner;
     }
@@ -55,7 +53,6 @@ public class Problem implements Serializable,ElasticID {
         this.title = title;
         this.description = description;
         this.timestamp = timestamp;
-        this.recordList = new RecordList();
         this.commentList = new CaregiverCommentList();
         this.ElasticID_Owner = ElasticID_Owner;
     }
@@ -119,8 +116,9 @@ public class Problem implements Serializable,ElasticID {
      *
      * @return the recordList.
      */
+    @Deprecated
     public RecordList getRecordList() {
-        return recordList;
+        return null;
     }
 
     /**
@@ -128,8 +126,9 @@ public class Problem implements Serializable,ElasticID {
      *
      * @param record The record that needs to be added.
      */
+    @Deprecated
     public void addRecord(Record record) {
-        this.recordList.add_internal(record);
+
     }
 
     /**

@@ -28,12 +28,15 @@ public class UserListController {
     public static ArrayList<Patient> getSpecificUserList(ArrayList<Integer> patients) {
         ArrayList<Patient> ret = new ArrayList<>();
 
-        SparseArray<Patient> userMap = new SparseArray<>();
+        SparseArray<Patient> patientMap = new SparseArray<>();
         for(User x : getUserList().getArray()){
-            userMap.put(x.getElasticID(),(Patient)x);
+            // if the iterated user is a patient, add it to the list of patients
+            if (x.getClass() == Patient.class) {
+                patientMap.put(x.getElasticID(), (Patient) x);
+            }
         }
         for(Integer tar : patients){
-            ret.add(userMap.get(tar));
+            ret.add(patientMap.get(tar));
         }
         return ret;
     }
@@ -44,7 +47,7 @@ public class UserListController {
      * @return Returns True if user is in the userList, False if user is not in useList
      */
     public static boolean findUser(String id) {
-        for (User user : userList.getArray()) {
+        for (User user : getUserList().getArray()) {
             if (user.getUserID().equals(id)) {
                 return true;
             }

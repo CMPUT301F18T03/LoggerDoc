@@ -45,7 +45,7 @@ public class AdapterListProblems extends ArrayAdapter<Problem> {
         date.setText(currentProblem.getTimestamp().toString());
 
         TextView numberRecords = (TextView) listitem.findViewById(R.id.DescriptionView);
-        numberRecords.setText("This problem has " + currentProblem.getRecordList().size() + " records");
+        numberRecords.setText("This problem has " + ProblemRecordListController.getRecordList().getRecordCount(currentProblem.getElasticID()) + " records");
 
         return listitem;
     }

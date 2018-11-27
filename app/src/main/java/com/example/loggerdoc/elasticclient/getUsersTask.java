@@ -16,9 +16,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 public class getUsersTask extends AsyncTask<Void, Void,ArrayList<User>> {
@@ -54,6 +58,21 @@ public class getUsersTask extends AsyncTask<Void, Void,ArrayList<User>> {
 
             } catch (JSONException e) {
                 e.printStackTrace();
+            }
+            OutputStream fos;
+            BufferedWriter out;
+            String jsonout;
+            for (User targ:ret) {
+                jsonout = gson.toJson(targ);
+                try {
+                    fos = new FileOutputStream(new File(context.getFilesDir().getAbsolutePath()+"/Users/User"+targ.getElasticID()+".sav"));
+                    out = new BufferedWriter(new OutputStreamWriter(fos));
+                    out.write(jsonout);
+                    out.flush();
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             return ret;
         }

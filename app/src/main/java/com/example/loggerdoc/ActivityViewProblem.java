@@ -31,7 +31,7 @@ public class ActivityViewProblem extends AppCompatActivity {
 
         //Set the problem
         Intent intent = getIntent();
-        problem_ID = (int) intent.getSerializableExtra("Position");
+        problem_ID = intent.getIntExtra("Position",0);
         problem = ProblemRecordListController.getProblemList().get(problem_ID);
 
         TextView problemTitleView = (TextView) findViewById(R.id.TitleView);

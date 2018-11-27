@@ -25,7 +25,7 @@ public class ActivityViewRecordList extends AppCompatActivity {
         super.onResume();
 
         Intent intent = getIntent();
-        problem_ID = (int) intent.getSerializableExtra("Position");
+        problem_ID = intent.getIntExtra("Position",0);
         Problem problem = ProblemRecordListController.getProblemList().get(problem_ID);
 
         //TODO: somehow get the recordlist of the problem
