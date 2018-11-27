@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 public class ActivityViewRecordList extends AppCompatActivity {
 
-    private int problem_ID;
+    private int problemID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +25,8 @@ public class ActivityViewRecordList extends AppCompatActivity {
         super.onResume();
 
         Intent intent = getIntent();
-        problem_ID = intent.getIntExtra("Problem",0);
-        Problem problem = ProblemRecordListController.getProblemList().get(problem_ID);
+        problemID = intent.getIntExtra("Problem",0);
+        Problem problem = ProblemRecordListController.getProblemList().get(problemID);
 
         //TODO: somehow get the recordlist of the problem
 
@@ -59,7 +59,7 @@ public class ActivityViewRecordList extends AppCompatActivity {
 
     public void goViewRecord(View v, int position){
         Intent intent = new Intent(this, ActivityViewRecord.class);
-        intent.putExtra("Problem", problem_ID);
+        intent.putExtra("Problem", problemID);
         intent.putExtra("Record", position);
         startActivity(intent);
     }
@@ -67,6 +67,7 @@ public class ActivityViewRecordList extends AppCompatActivity {
     //Change to AddRecord Activity
     public void goAddRecord (View v){
         Intent intent = new Intent(this, ActivityAddRecord.class);
+        intent.putExtra("Problem", problemID);
         startActivity(intent);
     }
 }

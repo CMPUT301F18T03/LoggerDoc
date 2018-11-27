@@ -13,9 +13,8 @@ public class ActivityEditProblem extends AppCompatActivity {
 
     private EditText editTitle;
     private EditText editDescription;
-    private Patient patient;
     private Problem problem;
-    private int problem_ID;
+    private int problemID;
     private ImageView problemTitleWarning;
     private ImageView problemDescriptionWarning;
     private DatePickerFragment datePickerFragment;
@@ -32,8 +31,8 @@ public class ActivityEditProblem extends AppCompatActivity {
         super.onResume();
 
         Intent intent = getIntent();
-        problem_ID = intent.getIntExtra("Problem",0);
-        problem = ProblemRecordListController.getProblemList().get(problem_ID);
+        problemID = intent.getIntExtra("Problem",0);
+        problem = ProblemRecordListController.getProblemList().get(problemID);
 
         editTitle = (EditText) findViewById(R.id.editTitle);
 
@@ -131,7 +130,7 @@ public class ActivityEditProblem extends AppCompatActivity {
     //Change the activity to ActivityViewProblems
     public void changeActivity(View v){
         Intent intent = new Intent(this, ActivityViewProblem.class);
-        intent.putExtra("Position", problem_ID);
+        intent.putExtra("Position", problemID);
         finish();
     }
 
