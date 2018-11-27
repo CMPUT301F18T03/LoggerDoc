@@ -15,11 +15,9 @@ import android.widget.Toast;
 
 import com.example.loggerdoc.elasticclient.ElasticDataCallback;
 import com.example.loggerdoc.elasticclient.getUsersTask;
-import com.example.loggerdoc.elasticclient.uploadUsersTask;
 import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
 import com.google.android.gms.ads.doubleclick.PublisherAdView;
 import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
-import com.example.loggerdoc.elasticclient.modifyUserTask;
 
 import java.util.ArrayList;
 
