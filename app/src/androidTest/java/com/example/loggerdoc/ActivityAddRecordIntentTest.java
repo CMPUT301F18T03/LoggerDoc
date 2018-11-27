@@ -25,6 +25,7 @@ public class ActivityAddRecordIntentTest {
     public IntentsTestRule<ActivityAddRecord> intentsTestRule =
             new IntentsTestRule<>(ActivityAddRecord.class, false, false);
 
+    /*
     @Before
     // create mock intent with mock patient and mock problem
     public void before() {
@@ -38,6 +39,7 @@ public class ActivityAddRecordIntentTest {
         intent.putExtra("Flag", "a");
         intentsTestRule.launchActivity(intent);
     }
+    */
 
     @Test
     public void TestResultFromActivity() {
