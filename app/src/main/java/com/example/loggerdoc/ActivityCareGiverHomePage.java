@@ -51,6 +51,7 @@ public class ActivityCareGiverHomePage extends AppCompatActivity {
     //Change to ActivityUserProfile.
     public void toUserProfile (View view, CareGiver caregiver){
         Intent intent = new Intent (this, ActivityUserProfile.class);
+        intent.putExtra("Caregiver", caregiver_ID);
         startActivity(intent);
     }
 }

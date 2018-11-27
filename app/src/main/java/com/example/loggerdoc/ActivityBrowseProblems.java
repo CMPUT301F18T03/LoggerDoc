@@ -109,6 +109,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
     //Change to ActivityUserProfile.
     public void changeToUserProfile (View view, Patient patient){
         Intent intent = new Intent (this, ActivityUserProfile.class);
+        intent.putExtra("Patient", patient_ID);
         startActivity(intent);
     }
 
