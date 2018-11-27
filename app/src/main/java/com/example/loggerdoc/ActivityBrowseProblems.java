@@ -89,6 +89,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
     //Change to ActivityViewProblem.
     public void changeToViewProblemActivity(View view, Patient patient, int position){
         Intent intent = new Intent(this, ActivityViewProblem.class);
+        intent.putExtra("Patient", patient_ID);
         intent.putExtra("Position", position);
         startActivity(intent);
     }
