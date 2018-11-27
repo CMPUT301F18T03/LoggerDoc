@@ -27,6 +27,10 @@ public class ProblemList extends GenericList<Problem> implements ElasticDataCall
         new modifyProblemTask(context).execute(data);
     }
 
+    protected void update(Problem data,Context context){
+        add(data,context);
+    }
+
     protected void remove(Problem data){
         super.remove(data);
     }
