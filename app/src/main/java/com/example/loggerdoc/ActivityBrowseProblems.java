@@ -92,7 +92,8 @@ public class ActivityBrowseProblems extends AppCompatActivity {
     public void changeToViewProblemActivity(View view, Patient patient, int position){
         Intent intent = new Intent(this, ActivityViewProblem.class);
         intent.putExtra("Patient", patient_ID);
-        intent.putExtra("Position", position);
+        intent.putExtra("Position",
+                ProblemRecordListController.getProblemList().getArray().get(position).getElasticID());
         startActivity(intent);
     }
 

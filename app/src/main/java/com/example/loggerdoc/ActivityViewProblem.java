@@ -38,7 +38,7 @@ public class ActivityViewProblem extends AppCompatActivity {
         //Set the problem
         Intent intent = getIntent();
         problem_ID= intent.getIntExtra("Position",0);
-        problem = ProblemRecordListController.getProblemList().getArray().get(problem_ID);
+        problem = ProblemRecordListController.getProblemList().get(problem_ID);
 
         TextView problemTitleView = (TextView) findViewById(R.id.TitleView);
         problemTitleView.setText(problem.getTitle());
@@ -81,9 +81,7 @@ public class ActivityViewProblem extends AppCompatActivity {
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent();
-                intent.putExtra("Problem", problem.getElasticID());
-                setResult(RESULT_OK, intent);
+                ProblemRecordListController.getProblemList().remove(problem);
                 finish();
             }
         });
