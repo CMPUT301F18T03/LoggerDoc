@@ -86,14 +86,14 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ADD_PROBLEM_RESULT) {
             if (resultCode == RESULT_OK) {
-                Problem problem = (Problem) data.getSerializableExtra("Problem");
-                ProblemRecordListController.getProblemList().add(problem,getApplicationContext());
+
+
             }
         }
 
         if (requestCode == VIEW_PROBLEM_RESULT){
             if (resultCode == RESULT_OK){
-                int position = (int) data.getSerializableExtra("Position");
+                //int position = (int) data.getSerializableExtra("Position");
                 //patient.getProblems().getArray().remove(position);//TODO I dont know what this does
             }
         }

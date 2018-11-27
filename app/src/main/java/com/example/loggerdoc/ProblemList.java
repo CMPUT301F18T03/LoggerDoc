@@ -10,9 +10,9 @@
 package com.example.loggerdoc;
 
 import android.content.Context;
-
 import com.example.loggerdoc.elasticclient.ElasticDataCallback;
 import com.example.loggerdoc.elasticclient.getProblemsTask;
+import com.example.loggerdoc.elasticclient.modifyProblemTask;
 
 import java.util.ArrayList;
 
@@ -20,6 +20,7 @@ public class ProblemList extends GenericList<Problem> implements ElasticDataCall
 
     protected void add(Problem data,Context context) {
         super.add_internal(data);
+        new modifyProblemTask(context).execute(data);
     }
 
     public void download(Integer elasticID, Context context) {

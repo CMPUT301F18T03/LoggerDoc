@@ -9,9 +9,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 public class getProblemsTask extends AsyncTask<Integer, Void,ArrayList<Problem>> {
@@ -40,17 +45,33 @@ public class getProblemsTask extends AsyncTask<Integer, Void,ArrayList<Problem>>
                 for(int num = 0; num < hits.length();num++){
                     JSONObject currentproblem = hits.getJSONObject(num).getJSONObject("_source");
                     ret.add(gson.fromJson(currentproblem.toString(),Problem.class));
+
+
                 }
 
-            } catch (JSONException e) {
+                OutputStream fos;
+                BufferedWriter out;
+                fos = new FileOutputStream(new File(context.getFilesDir().getAbsolutePath()+"/Problems/problem"+EID.toString()+".sav"));
+                out = new BufferedWriter(new OutputStreamWriter(fos));
+                for(Problem x:ret){
+                    out.write(gson.toJson(x));
+                    out.newLine();
+                }
+                out.flush();
+                fos.close();
+
+
+
+            } catch (JSONException | IOException e) {
                 e.printStackTrace();
             }
+
             return ret;
         }
         else {
             File datafile = new File(context.getFilesDir().getAbsolutePath()+"/Problems/");
             if(datafile.exists()){
-                File problems = new File(context.getFilesDir().getAbsolutePath()+"/Problems/problems"+EID.toString()+".sav");
+                File problems = new File(context.getFilesDir().getAbsolutePath()+"/Problems/problem"+EID.toString()+".sav");
                 try {
                     BufferedReader in = new BufferedReader(new FileReader(problems));
                     String linein = in.readLine();
