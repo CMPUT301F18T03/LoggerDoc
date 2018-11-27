@@ -53,11 +53,11 @@ public class UserListController {
     }
 
     public static boolean addUser(User user) {
-        if (userList != null) {
-            userList.add_internal(user);
-            return true;
+        if (userList == null) {
+            userList = new UserList();
         }
-        return false;
+        userList.add_internal(user);
+        return true;
     }
 }
 
