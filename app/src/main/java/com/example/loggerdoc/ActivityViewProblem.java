@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,14 +17,13 @@ public class ActivityViewProblem extends AppCompatActivity {
 
     private Problem problem;
     private int problem_ID;
-    private ArrayAdapter<CaregiverComment> commentAdapter;
+    private AdapterListComments commentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_problem);
     }
-
 
     @Override
     protected void onResume(){
@@ -83,6 +84,36 @@ public class ActivityViewProblem extends AppCompatActivity {
         Intent intent = new Intent(this, ActivityViewRecordList.class);
         intent.putExtra("Position", problem_ID);
         startActivity(intent);
+    }
+
+    public void addCaregiverComment (){
+        //Show an alert dialog to ask for user's confirmation whether they would like to delete
+        AlertDialog.Builder builder = new AlertDialog.Builder(ActivityViewProblem.this);
+        builder.setTitle("ADD CAREGIVER COMMENT: ");
+        final EditText input = new EditText(ActivityViewProblem.this);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        input.setLayoutParams(layoutParams);
+        builder.setView(input);
+
+        builder.setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String comment = input.getText().toString();
+                CaregiverComment caregiverComment = new CaregiverComment(comment);
+                ProblemRecordListController.getProblemList().get(problem_ID).addComment(caregiverComment);
+                commentAdapter.refresh(ProblemRecordListController.getProblemList().get(problem_ID).getCommentList().getComments());
+                commentAdapter.notifyDataSetChanged();
+            }
+        });
+
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
     }
 
 }

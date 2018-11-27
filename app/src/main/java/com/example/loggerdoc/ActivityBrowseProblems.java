@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -14,6 +15,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
     private AdapterListProblems adapter;
     private Patient patient;
     private Integer patient_ID;
+    private static final String TAG = "ActivityBrowseProblems.class";
 
     //To be called when the activity is created
     @Override

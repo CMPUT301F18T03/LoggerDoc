@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 
 
 public class ActivityAddProblem extends AppCompatActivity {
+    private int patientID;
     private DatePickerFragment datePicker;
     private TimePickerFragment timePicker;
     private EditText problemTitle;
@@ -28,7 +29,8 @@ public class ActivityAddProblem extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-
+        Intent intent = getIntent();
+        patientID = intent.getIntExtra("Patient",0);
         datePicker = DatePickerFragment.newInstance(LocalDateTime.now());
         timePicker = TimePickerFragment.newInstance(LocalDateTime.now());
         datePicker.setNextFragment(timePicker);

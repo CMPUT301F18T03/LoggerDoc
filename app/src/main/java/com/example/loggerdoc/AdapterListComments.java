@@ -22,6 +22,10 @@ public class AdapterListComments extends ArrayAdapter<CaregiverComment> {
         commentList = list;
     }
 
+    public void refresh(ArrayList<CaregiverComment> a) {
+        this.commentList = a;
+    }
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -31,9 +35,6 @@ public class AdapterListComments extends ArrayAdapter<CaregiverComment> {
             listitem = LayoutInflater.from(commentContext).inflate(R.layout.browse_problem_list_view,parent,false);
         }
         CaregiverComment currentComment = commentList.get(position);
-
-        TextView TitleView = (TextView) listitem.findViewById(R.id.ProblemTitle);
-        TitleView.setText(currentComment.getCaregiver().getUserID());
 
         TextView date = (TextView) listitem.findViewById(R.id.DateView);
         date.setText(currentComment.getDate().toString());
