@@ -155,7 +155,7 @@ public class ActivityAddRecord extends AppCompatActivity {
 
         else{
             //Create a new record
-           record = new Record (recordTitleText.getText().toString(),2147483647);
+           record = new Record (recordTitleText.getText().toString(),problemID);
            record.setComment(recordCommentText.getText().toString());
            //add_internal a geolocation to the record
            if (geoLocation != null) {
@@ -169,18 +169,11 @@ public class ActivityAddRecord extends AppCompatActivity {
                     record.getRecordPhotoList().addPhoto(photos.get(i));
                 }
 
-
            }
            record.setBodylocation(bodylocation);
-            ProblemRecordListController.getRecordList().add(record,getApplicationContext());
-            //patient.getProblems().getArray().get(position).getRecordList().getArray().add_internal(record);
+           ProblemRecordListController.getRecordList().add(record,getApplicationContext());
+           finish();
         }
-
-        //Add record to problem list
-        Intent intent = new Intent();
-        intent.putExtra("Record", record);
-        setResult(RESULT_OK, intent);
-        finish();
     }
 
     public boolean isServicesOkay(){

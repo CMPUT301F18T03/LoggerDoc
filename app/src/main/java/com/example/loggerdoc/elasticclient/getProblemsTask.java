@@ -2,6 +2,8 @@ package com.example.loggerdoc.elasticclient;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
+
 import com.example.loggerdoc.ElasticSearchController;
 import com.example.loggerdoc.Problem;
 import com.google.gson.Gson;
@@ -44,8 +46,6 @@ public class getProblemsTask extends AsyncTask<Integer, Void,ArrayList<Problem>>
                 for(int num = 0; num < hits.length();num++){
                     JSONObject currentproblem = hits.getJSONObject(num).getJSONObject("_source");
                     ret.add(gson.fromJson(currentproblem.toString(),Problem.class));
-
-
                 }
 
                 OutputStream fos;
@@ -64,7 +64,6 @@ public class getProblemsTask extends AsyncTask<Integer, Void,ArrayList<Problem>>
             } catch (JSONException | IOException e) {
                 e.printStackTrace();
             }
-
             return ret;
         }
         else {
@@ -90,7 +89,6 @@ public class getProblemsTask extends AsyncTask<Integer, Void,ArrayList<Problem>>
                 return null;
 
             }
-
         }
 
     }

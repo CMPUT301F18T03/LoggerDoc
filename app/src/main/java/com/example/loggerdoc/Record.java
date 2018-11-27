@@ -33,7 +33,7 @@ public class Record implements Serializable,ElasticID {
     }
 
 
-    public Record(String title,Integer Ownerproblem) {
+    public Record(String title, Integer Ownerproblem) {
         this.title = title;
         this.comment = "";
         this.timestamp = LocalDateTime.now();
