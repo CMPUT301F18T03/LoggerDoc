@@ -37,8 +37,8 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
         super.onResume();
 
         Intent intent = getIntent();
-        problemID = (int) intent.getSerializableExtra("Problem");
-        recordID = (int) intent.getSerializableExtra("Record");
+        problemID = intent.getIntExtra("Problem",0);
+        recordID = intent.getIntExtra("Record",0);
 
         Problem problem = ProblemRecordListController.getProblemList().get(problemID);
         record = ProblemRecordListController.getRecordList().get(recordID);
@@ -58,6 +58,9 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
                             record.getRecordGeoLocation().getLongitude()),
                     DEFAULT_ZOOM, record.getTitle());
         }
+        else{
+            moveCamera(DEFAULT_LOCATION, DEFAULT_ZOOM, "");
+        }
     }
 
     private void initializeMap() {
@@ -75,7 +78,7 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
             @Override
             public void onMapLongClick(LatLng latLng) {
                 editRecordMap.clear();
-                moveCamera(latLng, DEFAULT_ZOOM, "");
+                moveCamera(latLng, DEFAULT_ZOOM, record.getTitle());
             }
         });
     }

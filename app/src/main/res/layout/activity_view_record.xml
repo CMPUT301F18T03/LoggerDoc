@@ -2,7 +2,6 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/recordGeoTitle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ActivityViewRecord">
@@ -43,7 +42,6 @@
         android:layout_height="37dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:onClick="goEditRecord"
         android:text="@string/edit_problem_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recordTitleView" />
@@ -55,7 +53,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:onClick="goDeleteRecord()"
         android:text="@string/delete_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.869"
@@ -96,11 +93,16 @@
         android:id="@+id/recordGeoTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="210dp"
         android:text="@string/record_geo_title"
         android:textColor="@android:color/black"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="259dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recordCommentView" />
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -109,10 +111,13 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recordGeoTitle"
+        app:layout_constraintVertical_bias="0.0"
         tools:context=".MapsActivity" />
 
 </android.support.constraint.ConstraintLayout>

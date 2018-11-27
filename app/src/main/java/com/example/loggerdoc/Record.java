@@ -20,7 +20,7 @@ public class Record implements Serializable,ElasticID {
     private String comment;
     private LocalDateTime timestamp;
 
-    private RecordGeoLocation recordGeoLocation;
+    private RecordGeoLocation recordGeoLocation = null;
     private Bodylocation bodylocation;
     private RecordPhotoList recordPhotoList;
 

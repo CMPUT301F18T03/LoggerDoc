@@ -55,7 +55,11 @@ public class ActivityPatientHomePage extends AppCompatActivity {
 
     }
 
-
+    public void goProblemMap(View v){
+        Intent intent = new Intent (this, ActivityProblemMap.class);
+        intent.putExtra("Patient", patient_ID);
+        startActivity(intent);
+    }
 
 
 

@@ -18,17 +18,10 @@ public class ActivityViewRecordList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_record_list);
-    }
-
-    @Override
-    public void onResume(){
-        super.onResume();
 
         Intent intent = getIntent();
         problemID = intent.getIntExtra("Problem",0);
         Problem problem = ProblemRecordListController.getProblemList().get(problemID);
-
-        //TODO: somehow get the recordlist of the problem
 
         //Initialize the problem title
         TextView problemTitle = (TextView) findViewById(R.id.viewRecordListProblemTitle);
@@ -49,8 +42,14 @@ public class ActivityViewRecordList extends AppCompatActivity {
                 goSearchRecord(v);
             }
         });
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
         //Initialize and set the adapter for the records
-        /*ArrayAdapter<Record> recordAdapter = new AdapterListRecords(this, problem.getRecordList().getRecordArrayList());
+        ArrayAdapter<Record> recordAdapter = new AdapterListRecords(this, ProblemRecordListController.getRecordList().getRecords(problemID));
         ListView recordList = (ListView) findViewById(R.id.recordsListView);
         recordList.setAdapter(recordAdapter);
         //Set the onClickListener for the listView. This will call changeToViewProblemActivity().
@@ -61,13 +60,13 @@ public class ActivityViewRecordList extends AppCompatActivity {
             }
         });
 
-        recordAdapter.notifyDataSetChanged();*/
+        recordAdapter.notifyDataSetChanged();
     }
 
     public void goViewRecord(View v, int position){
         Intent intent = new Intent(this, ActivityViewRecord.class);
         intent.putExtra("Problem", problemID);
-        intent.putExtra("Record", position);
+        intent.putExtra("Record", ProblemRecordListController.getRecordList().getArray().get(position).getElasticID());
         startActivity(intent);
     }
 

@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyCallback {
 
+    private int problemID;
     private int recordID;
     private Record record;
     private GoogleMap recordMap;
@@ -36,8 +38,8 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
         super.onResume();
 
         Intent intent = getIntent();
-        int problemID = (int) intent.getSerializableExtra("Problem");
-        recordID = (int) intent.getSerializableExtra("Record");
+        problemID = intent.getIntExtra("Problem", 0);
+        recordID = intent.getIntExtra("Record", 0);
         Problem problem = ProblemRecordListController.getProblemList().get(problemID);
         record  = ProblemRecordListController.getRecordList().get(recordID);
 
@@ -51,12 +53,6 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
         recordComment.setText(record.getComment());
 
         initializeMap();
-        if (record.getRecordGeoLocation() != null){
-            moveCamera(new LatLng(record.getRecordGeoLocation().getLatitude(),
-                    record.getRecordGeoLocation().getLongitude()),
-                    DEFAULT_ZOOM, "Record Location");
-        }
-
     }
 
     private void initializeMap() {
@@ -76,6 +72,12 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
                 moveCamera(latLng, DEFAULT_ZOOM, "");
             }
         });
+
+        if (record.getRecordGeoLocation() != null){
+            moveCamera(new LatLng(record.getRecordGeoLocation().getLatitude(),
+                            record.getRecordGeoLocation().getLongitude()),
+                    DEFAULT_ZOOM, "Record Location");
+        }
     }
 
 
@@ -91,12 +93,12 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
 
     private void goEditRecord(View view){
         Intent intent = new Intent(this, ActivityEditRecord.class);
+        intent.putExtra("Problem", problemID);
         intent.putExtra("Record", recordID);
         startActivity(intent);
-        finish();
     }
 
-    private void goDeleteRecord (final View v){
+    private void goDeleteRecord (View view){
         //Show an alert dialog to ask for user's confirmation whether they would like to delete
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Are you sure you would like to delete this record?");

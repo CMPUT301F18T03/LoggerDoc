@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
@@ -160,6 +161,7 @@ public class ActivityAddRecord extends AppCompatActivity {
            //add_internal a geolocation to the record
            if (geoLocation != null) {
                record.setRecordGeoLocation(geoLocation);
+               Log.d("THe latitude is adding", String.valueOf(record.getRecordGeoLocation().getLatitude()));
            }
 
            //add_internal record to the problem

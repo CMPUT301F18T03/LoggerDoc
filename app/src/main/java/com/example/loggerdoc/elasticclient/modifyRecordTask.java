@@ -48,8 +48,6 @@ public class modifyRecordTask extends AsyncTask<Record, Void, Void> {
         } catch (IOException e) {
             e.printStackTrace();
 
-
-
         }
 
 
