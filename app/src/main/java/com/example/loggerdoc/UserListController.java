@@ -47,7 +47,7 @@ public class UserListController {
      * @return Returns True if user is in the userList, False if user is not in useList
      */
     public static boolean findUser(String id) {
-        for (User user : userList.getArray()) {
+        for (User user : getUserList().getArray()) {
             if (user.getUserID().equals(id)) {
                 return true;
             }

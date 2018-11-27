@@ -36,7 +36,7 @@ public class ActivityAddRecord extends AppCompatActivity {
     private TextView longitudeText;
     private Record record;
     private static Patient patient;
-    private static int position;
+    private static int problemID;
     private static final int ERROR_DIALOG_REQUEST = 9001;
 
     static final int REQUEST_IMAGE_CAPTURE_RECORD = 1000;
@@ -57,9 +57,7 @@ public class ActivityAddRecord extends AppCompatActivity {
         super.onResume();
         //get the objects that were passed from the previous activity
         Intent intent = getIntent();
-        patient = (Patient) intent.getSerializableExtra("Patient");
-        position = (int) intent.getSerializableExtra("Position");
-        String flag = (String) intent.getSerializableExtra("Flag");
+        problemID = (int) intent.getSerializableExtra("Problem");
 
         recordTitleText = (EditText) findViewById(R.id.record_title_text);
         latitudeText = (TextView) findViewById(R.id.latitude_text);
@@ -108,6 +106,7 @@ public class ActivityAddRecord extends AppCompatActivity {
             PhotoPath = null;
 
         }
+
         if (requestCode == GALLERY_REQUEST_RECORD && resultCode == RESULT_OK){
             final Uri imageUri = data.getData();
             RecordPhoto photo = new RecordPhoto();
@@ -115,11 +114,13 @@ public class ActivityAddRecord extends AppCompatActivity {
             photos.add(photo);
             Log.i("THIS_IS_TAG", "onActivityResult: "+ photos.size());
         }
+
         if (requestCode == ADD_GEOLOCATION_RESULT && resultCode == RESULT_OK) {
             geoLocation = (RecordGeoLocation) data.getSerializableExtra("geoLocation");
             latitudeText.setText("Latitude: " + String.valueOf(geoLocation.getLatitude()));
             longitudeText.setText("Longitude: " + String.valueOf(geoLocation.getLongitude()));
         }
+
         if(requestCode == BODY_LOCATION_REQUEST && resultCode == Activity.RESULT_OK){
             ArrayList<Integer> location = data.getIntegerArrayListExtra("BODYLOCATION");
             bodylocation.setFrontX(location.get(0));
@@ -142,9 +143,7 @@ public class ActivityAddRecord extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ActivityAddRecord.this, ActivityAddGeolocation.class);
-                intent.putExtra("Patient", patient);
-                intent.putExtra("Position", position);
-                intent.putExtra("Record", record);
+                intent.putExtra("Problem",problemID);
                 startActivityForResult(intent, ADD_GEOLOCATION_RESULT);
             }
         });

@@ -55,9 +55,7 @@ public class ActivityAddGeolocation extends AppCompatActivity implements OnMapRe
 
         //Get the objects that were passed from the previous activity
         Intent firstIntent = getIntent();
-        final Patient patient = (Patient) firstIntent.getSerializableExtra("Patient");
-        final Record record = (Record) firstIntent.getSerializableExtra("Record");
-        final int position = (int) firstIntent.getSerializableExtra("Position");
+        final int problem_ID = (int) firstIntent.getSerializableExtra("Problem");
 
         //Check the location permissions
         checkLocationPermissions();
@@ -70,6 +68,7 @@ public class ActivityAddGeolocation extends AppCompatActivity implements OnMapRe
                 // Return RecordGeoLocation to previous Activity
                 RecordGeoLocation geoLocation = new RecordGeoLocation(options.getPosition());
                 Intent intent = new Intent();
+                intent.putExtra("Problem", problem_ID);
                 intent.putExtra("geoLocation", geoLocation);
                 setResult(RESULT_OK, intent);
                 finish();
@@ -144,6 +143,14 @@ public class ActivityAddGeolocation extends AppCompatActivity implements OnMapRe
             }
             locationMap.setMyLocationEnabled(true);
             locationMap.getUiSettings().setZoomControlsEnabled(true);
+
+            locationMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+                @Override
+                public void onMapLongClick(LatLng latLng) {
+                    locationMap.clear();
+                    moveCamera(latLng, DEFAULT_ZOOM, "");
+                }
+            });
         }
     }
 

@@ -5,10 +5,10 @@
     android:id="@+id/recordGeoTitle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityViewRecord">
+    tools:context=".ActivityEditRecord">
 
     <TextView
-        android:id="@+id/recordProblemTitleView"
+        android:id="@+id/editRecordProblemTitleView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -22,8 +22,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/recordTitleView"
+    <EditText
+        android:id="@+id/editRecordTitleView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -35,76 +35,56 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recordProblemTitleView" />
-
-    <Button
-        android:id="@+id/editRecordButton"
-        android:layout_width="88dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:onClick="goEditRecord"
-        android:text="@string/edit_problem_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recordTitleView" />
-
-    <Button
-        android:id="@+id/deleteRecordButton"
-        android:layout_width="88dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:onClick="goDeleteRecord()"
-        android:text="@string/delete_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.869"
-        app:layout_constraintStart_toEndOf="@+id/editRecordButton"
-        app:layout_constraintTop_toBottomOf="@+id/recordTitleView" />
+        app:layout_constraintTop_toBottomOf="@+id/editRecordProblemTitleView" />
 
     <TextView
-        android:id="@+id/recordCommentTitle"
+        android:id="@+id/editRecordCommentTitle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="17dp"
         android:layout_marginEnd="8dp"
         android:text="@string/record_comment_title"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.038"
+        app:layout_constraintHorizontal_bias="0.035"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editRecordButton" />
+        app:layout_constraintTop_toBottomOf="@+id/editRecordTitleView" />
 
-    <TextView
-        android:id="@+id/recordCommentView"
-        android:layout_width="356dp"
-        android:layout_height="35dp"
+    <EditText
+        android:id="@+id/editRecordComment"
+        android:layout_width="355dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="9dp"
         android:layout_marginEnd="13dp"
         android:background="@drawable/textviewborder"
         android:padding="10dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recordCommentTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/editRecordCommentTitle" />
 
     <TextView
-        android:id="@+id/recordGeoTitle"
+        android:id="@+id/editRecordGeoTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="209dp"
         android:text="@string/record_geo_title"
         android:textColor="@android:color/black"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="259dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editRecordComment" />
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/recordMapView"
+        android:id="@+id/editRecordMapView"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="150dp"
@@ -112,7 +92,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recordGeoTitle"
+        app:layout_constraintTop_toBottomOf="@+id/editRecordGeoTitle"
         tools:context=".MapsActivity" />
+
+    <Button
+        android:id="@+id/editRecordSaveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="139dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="157dp"
+        android:layout_marginBottom="4dp"
+        android:onClick="saveRecord"
+        android:text="@string/save_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editRecordMapView" />
 
 </android.support.constraint.ConstraintLayout>

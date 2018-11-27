@@ -8,14 +8,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 public class RecordPhotoListUnitTest {
-@Test
-public void TestsetPhoto() {
+    @Test
+    public void TestsetPhoto() {
 
-    RecordPhotoList list = new RecordPhotoList();
-        RecordPhoto recordPhoto = new RecordPhoto();
-        list.addPhoto(recordPhoto);
-        assertTrue("Photo list should contain added photo", list.containsPhoto(recordPhoto));
-}
+        RecordPhotoList list = new RecordPhotoList();
+            RecordPhoto recordPhoto = new RecordPhoto();
+            list.addPhoto(recordPhoto);
+            assertTrue("Photo list should contain added photo", list.containsPhoto(recordPhoto));
+    }
     @Test
     public void TestProblemListRemove() {
         RecordPhotoList list = new RecordPhotoList();
