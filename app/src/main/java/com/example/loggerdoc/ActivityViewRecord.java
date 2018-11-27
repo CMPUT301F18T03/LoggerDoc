@@ -91,14 +91,14 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
         recordMap.addMarker(options);
     }
 
-    private void goEditRecord(View view){
+    public void goEditRecord(View view){
         Intent intent = new Intent(this, ActivityEditRecord.class);
         intent.putExtra("Problem", problemID);
         intent.putExtra("Record", recordID);
         startActivity(intent);
     }
 
-    private void goDeleteRecord (View view){
+    public void goDeleteRecord (View view){
         //Show an alert dialog to ask for user's confirmation whether they would like to delete
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Are you sure you would like to delete this record?");
