@@ -93,8 +93,7 @@ public class ActivityEditProblem extends AppCompatActivity {
 
             else {
                 //Update the problem's list
-                ProblemRecordListController.getProblemList().remove(problem);
-                ProblemRecordListController.getProblemList().add(problem,getApplicationContext());
+                ProblemRecordListController.getProblemList().update(problem,getApplicationContext());
                 changeActivity(v);
             }
         }

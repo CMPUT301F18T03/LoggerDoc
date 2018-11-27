@@ -98,7 +98,7 @@ public class ActivityViewProblem extends AppCompatActivity {
     }
 
 
-    public void addCaregiverComment (View view){
+    public void addCaregiverComment (final View view){
         //Show an alert dialog to ask for user's confirmation whether they would like to delete
         AlertDialog.Builder builder = new AlertDialog.Builder(ActivityViewProblem.this);
         builder.setTitle("ADD CAREGIVER COMMENT: ");
@@ -114,7 +114,8 @@ public class ActivityViewProblem extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 String comment = input.getText().toString();
                 CaregiverComment caregiverComment = new CaregiverComment(comment);
-                ProblemRecordListController.getProblemList().get(problem_ID).addComment(caregiverComment);
+                problem.addComment(caregiverComment);
+                ProblemRecordListController.getProblemList().update(problem, getApplicationContext());
                 commentAdapter.refresh(ProblemRecordListController.getProblemList().get(problem_ID).getCommentList().getComments());
                 commentAdapter.notifyDataSetChanged();
             }
@@ -126,6 +127,8 @@ public class ActivityViewProblem extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     public void goViewRecordList(View v){

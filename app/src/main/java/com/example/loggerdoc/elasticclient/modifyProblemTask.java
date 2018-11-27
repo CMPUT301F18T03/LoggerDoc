@@ -55,8 +55,6 @@ public class modifyProblemTask extends AsyncTask<Problem, Void, Void> {
         } catch (IOException e) {
             e.printStackTrace();
 
-
-
         }
 
 

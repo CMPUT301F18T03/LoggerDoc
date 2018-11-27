@@ -32,14 +32,14 @@ public class AdapterListComments extends ArrayAdapter<CaregiverComment> {
         View listitem = convertView;
 
         if (listitem == null){
-            listitem = LayoutInflater.from(commentContext).inflate(R.layout.browse_problem_list_view,parent,false);
+            listitem = LayoutInflater.from(commentContext).inflate(R.layout.caregiver_comment_listview,parent,false);
         }
         CaregiverComment currentComment = commentList.get(position);
 
         TextView date = (TextView) listitem.findViewById(R.id.DateView);
         date.setText(currentComment.getDate().toString());
 
-        TextView description = (TextView) listitem.findViewById(R.id.DescriptionView);
+        TextView description = (TextView) listitem.findViewById(R.id.CommentView);
         description.setText(currentComment.getComment());
 
         return listitem;
