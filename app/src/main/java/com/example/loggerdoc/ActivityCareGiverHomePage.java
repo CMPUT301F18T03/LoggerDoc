@@ -7,7 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 
 public class ActivityCareGiverHomePage extends AppCompatActivity {
-    CareGiver loggedInCareGiver;
+    private CareGiver caregiver;
+    private Integer caregiver_ID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,9 +17,10 @@ public class ActivityCareGiverHomePage extends AppCompatActivity {
         // Get the userID being passed from ActivityLogin.java
         // Set the textview to display the username
         Intent intent = getIntent();
-        loggedInCareGiver = (CareGiver) intent.getSerializableExtra("Caregiver");
+        caregiver_ID = intent.getIntExtra("Caregiver",0);
+        caregiver = (CareGiver) UserListController.getUserList().get(caregiver_ID);
         TextView usernameTextView = (TextView) findViewById(R.id.username_text);
-        usernameTextView.setText(loggedInCareGiver.getUserID());
+        usernameTextView.setText(caregiver.getUserID());
 
         UserList userList = UserListController.getUserList();
     }
@@ -26,7 +28,7 @@ public class ActivityCareGiverHomePage extends AppCompatActivity {
     //this method changes the current activity to the caregiver browse patients activity
     public void toCareGiverBrowsePatients(View view){
         Intent intent = new Intent(this, ActivityCareGiverBrowsePatients.class);
-        intent.putExtra("Caregiver", loggedInCareGiver);
+        intent.putExtra("Caregiver", caregiver_ID);
         startActivity(intent);
     }
 
@@ -34,7 +36,7 @@ public class ActivityCareGiverHomePage extends AppCompatActivity {
     //this method changes the current activity to the update contact info activity
     public void toEditContactInfo(View view){
         Intent intent = new Intent(this, ActivityUpdateContactInfo.class);
-        intent.putExtra("Caregiver", loggedInCareGiver);
+        intent.putExtra("Caregiver", caregiver_ID);
         startActivity(intent);
 
     }

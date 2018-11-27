@@ -26,7 +26,7 @@ public class ActivityCareGiverBrowsePatientsIntentTest {
     public void setup() {
         CareGiver c = new CareGiver("Test Caregiver", "test@example.com", "555-555-1234", "Caregiver");
         Patient p = new Patient("Test Patient", "test@example.com", "555-555-1234", "Patient");
-        c.getPatientList().addPatient(p);
+        c.addPatient(p);
         Intent i = new Intent();
         i.putExtra("Caregiver", c);
         intentsTestRule.launchActivity(i);

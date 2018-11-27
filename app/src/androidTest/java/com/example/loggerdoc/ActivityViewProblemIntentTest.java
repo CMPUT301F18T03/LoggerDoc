@@ -20,6 +20,7 @@ public class ActivityViewProblemIntentTest {
     public IntentsTestRule<ActivityViewProblem> intentsTestRule =
             new IntentsTestRule<>(ActivityViewProblem.class, false, false);
 
+    /*
     @Before
     // create mock patient with mock problem
     public void setup() {
@@ -31,6 +32,7 @@ public class ActivityViewProblemIntentTest {
         i.putExtra("Position", 0);
         intentsTestRule.launchActivity(i);
     }
+    */
 
     @Test
     public void TestEditProblemFromView() {

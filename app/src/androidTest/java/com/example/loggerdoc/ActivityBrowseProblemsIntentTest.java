@@ -21,6 +21,7 @@ public class ActivityBrowseProblemsIntentTest {
     public IntentsTestRule<ActivityBrowseProblems> intentsTestRule =
             new IntentsTestRule<>(ActivityBrowseProblems.class, false, false);
 
+    /*
     @Before
     // create mock patient with mock problem
     public void setup() {
@@ -31,6 +32,7 @@ public class ActivityBrowseProblemsIntentTest {
         i.putExtra("Patient", p);
         intentsTestRule.launchActivity(i);
     }
+    */
 
     @Test
     public void TestViewProblemFromBrowse() {
