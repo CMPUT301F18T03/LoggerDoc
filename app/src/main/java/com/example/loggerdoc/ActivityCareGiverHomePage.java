@@ -26,7 +26,7 @@ public class ActivityCareGiverHomePage extends AppCompatActivity {
         usernameTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toUserProfile(v, caregiver);
+                toUserProfile(v);
             }
         });
         UserList userList = UserListController.getUserList();
@@ -49,7 +49,7 @@ public class ActivityCareGiverHomePage extends AppCompatActivity {
     }
 
     //Change to ActivityUserProfile.
-    public void toUserProfile (View view, CareGiver caregiver){
+    public void toUserProfile (View view){
         Intent intent = new Intent (this, ActivityUserProfile.class);
         intent.putExtra("Caregiver", caregiver_ID);
         startActivity(intent);

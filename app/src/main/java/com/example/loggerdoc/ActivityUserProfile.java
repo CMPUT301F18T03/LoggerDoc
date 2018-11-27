@@ -8,16 +8,19 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.zxing.WriterException;
+
+import java.io.IOException;
+
 public class ActivityUserProfile extends AppCompatActivity {
 
     User viewedUser;
-    private EditText emailEditText;
-    private EditText phoneNumberEditText;
-    private ImageView contactInfoEmailWarning;
-    private ImageView contactInfoPhoneWarning;
+    private TextView emailEditText;
+    private TextView phoneNumberEditText;
     private TextView userIdView;
     private String userType;
     private Integer user_ID;
+    private ImageView qrCodeImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +28,10 @@ public class ActivityUserProfile extends AppCompatActivity {
         setContentView(R.layout.activity_user_profile);
 
         //initialize all of the views
-        emailEditText = (EditText) findViewById(R.id.edit_contact_info_email_view);
-        phoneNumberEditText = (EditText) findViewById(R.id.edit_contact_info_number_view);
-        contactInfoEmailWarning = (ImageView) findViewById(R.id.warningEditEmail);
-        contactInfoPhoneWarning = (ImageView) findViewById(R.id.warningEditPhoneNumber);
+        emailEditText = (TextView) findViewById(R.id.edit_contact_info_email_view);
+        phoneNumberEditText = (TextView) findViewById(R.id.edit_contact_info_number_view);
         userIdView = (TextView) findViewById(R.id.ProblemTitle);
+        qrCodeImageView = (ImageView) findViewById(R.id.QrCodeImageView);
 
         //get the user being viewed from the intent
         Intent intent = getIntent();
@@ -41,15 +43,23 @@ public class ActivityUserProfile extends AppCompatActivity {
         }
         viewedUser = UserListController.getUserList().get(user_ID);
         userType = viewedUser.getRole();
+        try {
+            qrCodeImageView.setImageBitmap(QRCodeController.generateQRCodeImage(Integer.toString(user_ID)));
+        } catch (WriterException | IOException e){
+            //yikes
+        }
+    }
 
-
-
+    @Override
+    protected void onResume () {
+        super.onResume();
+        viewedUser = UserListController.getUserList().get(user_ID);
         userIdView.setText(viewedUser.getUserID());
         emailEditText.setText(viewedUser.getEmailAddress());
         phoneNumberEditText.setText(viewedUser.getPhoneNumber());
+
+
     }
-
-
 
 
 
@@ -62,6 +72,11 @@ public class ActivityUserProfile extends AppCompatActivity {
         intent.putExtra(userType, user_ID);
         startActivity(intent);
 
+    }
+
+    //this method ends the current activity
+    public void endActivity(View v){
+        finish();
     }
 
 }
