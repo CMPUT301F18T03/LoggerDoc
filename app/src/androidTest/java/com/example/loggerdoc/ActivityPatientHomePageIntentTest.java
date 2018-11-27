@@ -23,7 +23,7 @@ public class ActivityPatientHomePageIntentTest {
     // create mock patient
     public void setup() {
         Patient p = new Patient("Test Patient", "test@example.com", "555-555-1234", "Patient");
-        UserListController.addUser(p);
+        UserListController.getUserList().add_internal(p);
 
         Intent i = new Intent();
         i.putExtra("Patient", p.getElasticID());

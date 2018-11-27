@@ -23,7 +23,7 @@ public class ActivityCareGiverHomePageIntentTest {
     // create mock caregiver
     public void setup() {
         CareGiver c = new CareGiver("Testy Caregiver", "test@example.com", "555-555-1234", "Caregiver");
-        UserListController.addUser(c);
+        UserListController.getUserList().add_internal(c);
 
         Intent i = new Intent();
         i.putExtra("Caregiver", c.getElasticID());

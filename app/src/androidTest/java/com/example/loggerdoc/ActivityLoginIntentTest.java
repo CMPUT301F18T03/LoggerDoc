@@ -26,8 +26,8 @@ public class ActivityLoginIntentTest {
         Patient p = new Patient("Test Patient", "test@example.com", "555-555-1234", "Patient");
         CareGiver c = new CareGiver("Test Caregiver", "test@example.com", "555-555-1234", "Caregiver");
 
-        UserListController.addUser(p);
-        UserListController.addUser(c);
+        UserListController.getUserList().add_internal(p);
+        UserListController.getUserList().add_internal(c);
     }
 
     @Test
