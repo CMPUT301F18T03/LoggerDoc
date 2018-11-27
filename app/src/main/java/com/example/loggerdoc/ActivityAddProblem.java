@@ -3,16 +3,13 @@ package com.example.loggerdoc;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import java.time.LocalDateTime;
 
-
-public class ActivityAddProblem extends AppCompatActivity {
-    private int patientID;
+public class ActivityAddProblem extends AppCompatActivity{
     private DatePickerFragment datePicker;
     private TimePickerFragment timePicker;
     private EditText problemTitle;
@@ -30,7 +27,6 @@ public class ActivityAddProblem extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         Intent intent = getIntent();
-        patientID = intent.getIntExtra("Patient",0);
         datePicker = DatePickerFragment.newInstance(LocalDateTime.now());
         timePicker = TimePickerFragment.newInstance(LocalDateTime.now());
         datePicker.setNextFragment(timePicker);

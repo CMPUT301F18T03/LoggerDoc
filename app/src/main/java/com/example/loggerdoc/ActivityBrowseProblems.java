@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -15,7 +14,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
     private AdapterListProblems adapter;
     private Patient patient;
     private Integer patient_ID;
-    private static final String TAG = "ActivityBrowseProblems.class";
+    private ListView problemsList;
 
     //To be called when the activity is created
     @Override
@@ -30,7 +29,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
 
         //Initialize and set the adapter
         adapter = new AdapterListProblems(this, ProblemRecordListController.getProblemList().getArray());
-        ListView problemsList = (ListView) findViewById(R.id.ProblemList);
+        problemsList = (ListView) findViewById(R.id.ProblemList);
         problemsList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
@@ -82,7 +81,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
 
     //To be called when the activity is resumed
     @Override
-    protected void onResume (){
+    protected void onResume(){
         super.onResume();
         adapter.refresh(ProblemRecordListController.getProblemList().getArray());
         adapter.notifyDataSetChanged();

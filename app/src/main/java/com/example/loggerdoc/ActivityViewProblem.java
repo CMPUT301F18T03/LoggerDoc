@@ -86,7 +86,7 @@ public class ActivityViewProblem extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void addCaregiverComment (){
+    public void addCaregiverComment (View view){
         //Show an alert dialog to ask for user's confirmation whether they would like to delete
         AlertDialog.Builder builder = new AlertDialog.Builder(ActivityViewProblem.this);
         builder.setTitle("ADD CAREGIVER COMMENT: ");

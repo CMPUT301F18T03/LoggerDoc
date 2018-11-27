@@ -2,6 +2,8 @@ package com.example.loggerdoc;
 
 import android.content.Context;
 
+import java.util.ArrayList;
+
 public class ProblemRecordListController {
 
     private static ProblemList problemList = null;
@@ -42,9 +44,5 @@ public class ProblemRecordListController {
     }
 
     /*public static void setList(ArrayList<Problem> list) {
-        getList().load(list);
     }*/
-
-
-
 }

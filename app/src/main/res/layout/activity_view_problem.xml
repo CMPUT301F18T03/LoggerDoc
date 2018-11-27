@@ -141,6 +141,7 @@
         android:layout_marginStart="199dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="27dp"
+        android:onClick="addCaregiverComment"
         android:text="@string/addCaregiverComment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

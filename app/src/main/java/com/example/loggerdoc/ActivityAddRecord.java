@@ -32,10 +32,7 @@ public class ActivityAddRecord extends AppCompatActivity {
     private EditText recordTitleText;
     private EditText recordCommentText;
     private RecordGeoLocation geoLocation;
-    private TextView latitudeText;
-    private TextView longitudeText;
     private Record record;
-    private static Patient patient;
     private static int problemID;
     private static final int ERROR_DIALOG_REQUEST = 9001;
 
@@ -60,8 +57,6 @@ public class ActivityAddRecord extends AppCompatActivity {
         problemID = (int) intent.getSerializableExtra("Problem");
 
         recordTitleText = (EditText) findViewById(R.id.record_title_text);
-        latitudeText = (TextView) findViewById(R.id.latitude_text);
-        longitudeText = (TextView) findViewById(R.id.longitude_text);
         recordCommentText = (EditText) findViewById(R.id.record_comment_text);
 
         Button recordGallery = findViewById(R.id.gallery_button);
