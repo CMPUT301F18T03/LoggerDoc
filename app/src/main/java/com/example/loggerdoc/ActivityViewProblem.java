@@ -112,9 +112,7 @@ public class ActivityViewProblem extends AppCompatActivity {
         builder.setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String comment = input.getText().toString();
-                CaregiverComment caregiverComment = new CaregiverComment(comment);
-                problem.addComment(caregiverComment);
+                problem.addComment(new CaregiverComment(input.getText().toString()));
                 ProblemRecordListController.getProblemList().update(problem, getApplicationContext());
                 commentAdapter.refresh(ProblemRecordListController.getProblemList().get(problem_ID).getCommentList().getComments());
                 commentAdapter.notifyDataSetChanged();
