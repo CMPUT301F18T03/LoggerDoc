@@ -22,9 +22,11 @@ public class ActivityCareGiverHomePageIntentTest {
     @Before
     // create mock caregiver
     public void setup() {
-        CareGiver c = new CareGiver("Test Caregiver", "test@example.com", "555-555-1234", "Caregiver");
+        CareGiver c = new CareGiver("Testy Caregiver", "test@example.com", "555-555-1234", "Caregiver");
+        UserListController.getUserList().add_internal(c);
+
         Intent i = new Intent();
-        i.putExtra("Caregiver", c);
+        i.putExtra("Caregiver", c.getElasticID());
         intentsTestRule.launchActivity(i);
     }
 

@@ -20,7 +20,8 @@ import android.widget.TextView;
 public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
     private ListView patientList;
     private ArrayAdapter<Patient> adapter;
-    private CareGiver loggedInCaregiver;
+    private CareGiver caregiver;
+    private Integer caregiver_ID;
     private TextView userId;
 
     @Override
@@ -31,12 +32,13 @@ public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
 
         //get the caregiver from the intent
         Intent intent = getIntent();
-        loggedInCaregiver = (CareGiver) intent.getSerializableExtra("Caregiver");
+        caregiver_ID = intent.getIntExtra("Caregiver", 0);
+        caregiver = (CareGiver) UserListController.getUserList().get(caregiver_ID);
         intent.removeExtra("Caregiver");
 
         //set textview to the logged in caregivers user ID
         userId = (TextView) findViewById(R.id.patientListUsernameText);
-        userId.setText(loggedInCaregiver.getUserID());
+        userId.setText(caregiver.getUserID());
     }
 
 
@@ -47,7 +49,7 @@ public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
         //their user ID, email and phone number
         //initialize adapter and set it to the patient list
         adapter = new AdapterListPatient(this,
-                R.layout.patient_listview_layout, UserListController.getSpecificUserList(loggedInCaregiver.getPatientList()));
+                R.layout.patient_listview_layout, UserListController.getSpecificUserList(caregiver.getPatientList()));
         patientList.setAdapter(adapter);
 
         //Set the onClickListener for the listView. This will call toProblemListActivity().
@@ -78,7 +80,7 @@ public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
     //this method changes the current activity to the addPatient activity
     public void toAddPatient(View view) {
         Intent intent = new Intent(this, ActivityCareGiverAddPatient.class);
-        intent.putExtra("Caregiver", loggedInCaregiver);
+        intent.putExtra("Caregiver", caregiver);
         startActivity(intent);
     }
 
