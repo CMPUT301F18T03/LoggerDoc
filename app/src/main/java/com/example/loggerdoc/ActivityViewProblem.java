@@ -16,9 +16,13 @@ import android.widget.TextView;
 
 public class ActivityViewProblem extends AppCompatActivity {
 
+    static final int ADD_RECORD_RESULT = 1;
+
+    private Integer position;
     private Problem problem;
     private int problem_ID;
     private AdapterListComments commentAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +38,8 @@ public class ActivityViewProblem extends AppCompatActivity {
 
         //Set the problem
         Intent intent = getIntent();
-        problem_ID = intent.getIntExtra("Position",0);
-        problem = ProblemRecordListController.getProblemList().get(problem_ID);
+        position = intent.getIntExtra("Position",0);
+        problem = ProblemRecordListController.getProblemList().getArray().get(position);
 
         TextView problemTitleView = (TextView) findViewById(R.id.TitleView);
         problemTitleView.setText(problem.getTitle());
@@ -53,10 +57,21 @@ public class ActivityViewProblem extends AppCompatActivity {
         commentAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADD_RECORD_RESULT) {
+            if (resultCode == RESULT_OK) {
+                //Record r = (Record) data.getSerializableExtra("Record");
+                //problem.addRecord(r);
+            }
+        }
+    }
+
     //Change to EditProblem activity
     public void goEditProblem (View v){
         Intent intent = new Intent(this, ActivityEditProblem.class);
-        intent.putExtra("Position", problem_ID);
+        intent.putExtra("Problem", problem.getElasticID());
         startActivity(intent);
     }
 
@@ -67,7 +82,9 @@ public class ActivityViewProblem extends AppCompatActivity {
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ProblemRecordListController.getProblemList().remove(problem);
+                Intent intent = new Intent();
+                intent.putExtra("Problem", problem.getElasticID());
+                setResult(RESULT_OK, intent);
                 finish();
             }
         });
@@ -80,15 +97,19 @@ public class ActivityViewProblem extends AppCompatActivity {
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+
     }
 
-    //Change to ViewRecordList Activity
-    public void goViewRecordList (View v){
-        Intent intent = new Intent(this, ActivityViewRecordList.class);
-        intent.putExtra("Position", problem_ID);
-        startActivity(intent);
+
+    //Change to AddRecord Activity
+    public void goAddRecord (View v){
+        Intent intent = new Intent(this, ActivityAddRecord.class);
+        intent.putExtra("Position", problem.getElasticID());
+        intent.putExtra("Flag", "a");
+        startActivityForResult(intent, ADD_RECORD_RESULT);
     }
 
+<<<<<<< HEAD
     public void addCaregiverComment (View view){
         //Show an alert dialog to ask for user's confirmation whether they would like to delete
         AlertDialog.Builder builder = new AlertDialog.Builder(ActivityViewProblem.this);
@@ -119,4 +140,10 @@ public class ActivityViewProblem extends AppCompatActivity {
         });
     }
 
+=======
+    public void goViewRecord(View v){
+        Intent intent = new Intent(this, ActivityViewRecord.class);
+        startActivity(intent);
+    }
+>>>>>>> d4818e20a8f76ed60e0191a46e69b7858154ad7f
 }
