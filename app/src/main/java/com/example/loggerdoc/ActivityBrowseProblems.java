@@ -11,9 +11,6 @@ import android.widget.TextView;
 
 public class ActivityBrowseProblems extends AppCompatActivity {
 
-    static final int ADD_PROBLEM_RESULT = 1;
-    static final int VIEW_PROBLEM_RESULT = 2;
-
     private AdapterListProblems adapter;
     private Patient patient;
     private Integer patient_ID;
@@ -81,24 +78,6 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == ADD_PROBLEM_RESULT) {
-            if (resultCode == RESULT_OK) {
-
-
-            }
-        }
-
-        if (requestCode == VIEW_PROBLEM_RESULT){
-            if (resultCode == RESULT_OK){
-                //int position = (int) data.getSerializableExtra("Position");
-                //patient.getProblems().getArray().remove(position);//TODO I dont know what this does
-            }
-        }
-    }
-
     //To be called when the activity is resumed
     @Override
     protected void onResume (){
@@ -110,29 +89,25 @@ public class ActivityBrowseProblems extends AppCompatActivity {
     //Change to ActivityViewProblem.
     public void changeToViewProblemActivity(View view, Patient patient, int position){
         Intent intent = new Intent(this, ActivityViewProblem.class);
-        intent.putExtra("Patient", patient);
         intent.putExtra("Position", position);
-        startActivityForResult(intent, VIEW_PROBLEM_RESULT);
+        startActivity(intent);
     }
 
     //Change to ActivityAddProblem.
     public void changeToAddProblemActivity (View view, Patient patient){
         Intent intent = new Intent(this, ActivityAddProblem.class);
-        intent.putExtra("Patient", patient);
-        startActivityForResult(intent, ADD_PROBLEM_RESULT);
+        startActivity(intent);
     }
 
     //Change to ActivitySearch.
     public void changeToSearchActivity(View view, Patient patient){
         Intent intent = new Intent (this, ActivitySearch.class);
-        intent.putExtra("Patient", patient);
         startActivity(intent);
     }
 
     //Change to ActivityUserProfile.
     public void changeToUserProfile (View view, Patient patient){
         Intent intent = new Intent (this, ActivityUserProfile.class);
-        intent.putExtra("Patient", patient);
         startActivity(intent);
     }
 

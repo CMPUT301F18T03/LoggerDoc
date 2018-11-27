@@ -45,9 +45,10 @@
     <string name="caregiver_flag">Caregiver</string>
     <string name="patient_flag">Patient</string>
     <string name="title_activity_photo_grid">ActivityPhotoGrid</string>
+    <string name="view_records_button">View Records</string>
+    <string name="record_geo_title">Record Geolocation</string>
+    <string name="record_comment_title">Record Comment:</string>
     <string name="title_activity_body_location">ActivityBodyLocation</string>
-
     <string name="body_location_instruction">Click on the image at the location where the issue is located.</string>
 
-    6d355acae24733ee9f9d9d0017dc972737fbf333
 </resources>
