@@ -51,8 +51,8 @@ public class ActivityViewProblem extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ADD_RECORD_RESULT) {
             if (resultCode == RESULT_OK) {
-                Record r = (Record) data.getSerializableExtra("Record");
-                problem.addRecord(r);
+                //Record r = (Record) data.getSerializableExtra("Record");
+                //problem.addRecord(r);
             }
         }
     }
