@@ -112,8 +112,6 @@ public class ActivityAddRecord extends AppCompatActivity {
 
         if (requestCode == ADD_GEOLOCATION_RESULT && resultCode == RESULT_OK) {
             geoLocation = (RecordGeoLocation) data.getSerializableExtra("geoLocation");
-            latitudeText.setText("Latitude: " + String.valueOf(geoLocation.getLatitude()));
-            longitudeText.setText("Longitude: " + String.valueOf(geoLocation.getLongitude()));
         }
 
         if(requestCode == BODY_LOCATION_REQUEST && resultCode == Activity.RESULT_OK){
