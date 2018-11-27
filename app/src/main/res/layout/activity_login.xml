@@ -34,7 +34,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.291" />
+        app:layout_constraintVertical_bias="0.571" />
 
     <Button
         android:id="@+id/Login_Button"
@@ -72,18 +72,23 @@
         app:layout_constraintStart_toEndOf="@+id/Login_Button"
         app:layout_constraintTop_toTopOf="@+id/Login_Button" />
 
-    <com.google.android.gms.ads.doubleclick.PublisherAdView
-        android:id="@+id/publisherAdView"
+    <TextView
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-1dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        app:adSize="BANNER"
-        app:adUnitId="/6499/example/banner"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/app_name"
+        android:textColor="@color/colorPrimary"
+        android:textSize="60sp"
+        android:typeface="serif"
+        app:layout_constraintBottom_toTopOf="@+id/Username_Field"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>

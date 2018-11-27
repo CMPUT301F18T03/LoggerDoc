@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class ActivityLogin extends AppCompatActivity implements ElasticDataCallback<ArrayList<User>>{
 
-    private PublisherAdView mPublisherAdView;
+
     private PublisherInterstitialAd mPublisherInterstitialAd;
 
     // Local userList to store all of the Users along with all the data associated with users
@@ -37,10 +37,6 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
         getUsersTask loadUserList = new getUsersTask(this,this);
         loadUserList.mkDirs();
         loadUserList.execute();
-
-        mPublisherAdView = findViewById(R.id.publisherAdView);
-        PublisherAdRequest adRequest = new PublisherAdRequest.Builder().build();
-        mPublisherAdView.loadAd(adRequest);
 
         mPublisherInterstitialAd = new PublisherInterstitialAd(this);
         mPublisherInterstitialAd.setAdUnitId("/6499/example/interstitial");
