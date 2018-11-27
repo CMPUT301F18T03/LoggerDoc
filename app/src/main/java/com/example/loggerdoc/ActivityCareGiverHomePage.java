@@ -28,7 +28,7 @@ public class ActivityCareGiverHomePage extends AppCompatActivity {
     //this method changes the current activity to the caregiver browse patients activity
     public void toCareGiverBrowsePatients(View view){
         Intent intent = new Intent(this, ActivityCareGiverBrowsePatients.class);
-        intent.putExtra("Caregiver", caregiver);
+        intent.putExtra("Caregiver", caregiver_ID);
         startActivity(intent);
     }
 
@@ -36,7 +36,7 @@ public class ActivityCareGiverHomePage extends AppCompatActivity {
     //this method changes the current activity to the update contact info activity
     public void toEditContactInfo(View view){
         Intent intent = new Intent(this, ActivityUpdateContactInfo.class);
-        intent.putExtra("Caregiver", caregiver);
+        intent.putExtra("Caregiver", caregiver_ID);
         startActivity(intent);
 
     }
