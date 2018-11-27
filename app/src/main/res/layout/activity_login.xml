@@ -60,12 +60,13 @@
 
     <com.google.android.gms.ads.doubleclick.PublisherAdView
         android:id="@+id/publisherAdView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="-1dp"
-        app:adSize="SMART_BANNER"
+        android:layout_marginEnd="8dp"
+        app:adSize="BANNER"
         app:adUnitId="/6499/example/banner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

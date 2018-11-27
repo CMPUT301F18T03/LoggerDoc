@@ -2,6 +2,7 @@ package com.example.loggerdoc.elasticclient;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.loggerdoc.ElasticSearchController;
 import com.example.loggerdoc.Problem;
@@ -56,7 +57,6 @@ public class modifyProblemTask extends AsyncTask<Problem, Void, Void> {
 
 
         }
-
 
 
         return null;
