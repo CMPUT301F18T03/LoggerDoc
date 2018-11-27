@@ -32,8 +32,7 @@ public class ActivityEditProblem extends AppCompatActivity {
         super.onResume();
 
         Intent intent = getIntent();
-        patient = (Patient) intent.getSerializableExtra("Patient");
-        problem_ID = (int) intent.getSerializableExtra("Position");
+        problem_ID = intent.getIntExtra("Position",0);
         problem = ProblemRecordListController.getProblemList().get(problem_ID);
 
         editTitle = (EditText) findViewById(R.id.editTitle);
@@ -95,6 +94,7 @@ public class ActivityEditProblem extends AppCompatActivity {
 
             else {
                 //Update the problem's list
+                ProblemRecordListController.getProblemList().remove(problem);
                 ProblemRecordListController.getProblemList().add(problem,getApplicationContext());
                 changeActivity(v);
             }
@@ -131,9 +131,8 @@ public class ActivityEditProblem extends AppCompatActivity {
     //Change the activity to ActivityViewProblems
     public void changeActivity(View v){
         Intent intent = new Intent(this, ActivityViewProblem.class);
-        intent.putExtra("Patient", patient);
         intent.putExtra("Position", problem_ID);
-        startActivity(intent);
+        finish();
     }
 
     /**

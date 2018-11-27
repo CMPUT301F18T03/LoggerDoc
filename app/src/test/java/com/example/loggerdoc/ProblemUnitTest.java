@@ -44,9 +44,9 @@ public class ProblemUnitTest {
     public void TestProblemRecordListAdd() {
         Problem problem = new Problem("",LocalDateTime.now(),"",0);
         Record record = new Record("ha",0,0);
-        problem.addRecord(record);
+        ProblemRecordListController.getRecordList().add_internal(record);
         assertTrue("Problem's record list should contain record",
-                problem.getRecordList().contains(record));
+                ProblemRecordListController.getRecordList().contains(record));
     }
 
     @Test
