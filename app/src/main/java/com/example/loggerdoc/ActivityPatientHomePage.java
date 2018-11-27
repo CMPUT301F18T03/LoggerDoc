@@ -25,15 +25,12 @@ public class ActivityPatientHomePage extends AppCompatActivity {
         // Set the textview to display the username
         TextView usernameTextView = findViewById(R.id.patient_username_text);
         usernameTextView.setText(patient.getUserID());
-
-
-        Log.d("TAG", "userID = " + patient.getUserID());
-        Log.d("TAG", "email = " + patient.getEmailAddress());
-        Log.d("TAG", "phone = " + patient.getPhoneNumber());
-        Log.d("TAG", "CareGiver List = " + patient.getCareGivers());
-
-        // find the patient object using the given userId that was passed through
-        // Patient patient = (Patient) UserListController.findUser(userID);
+        usernameTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toUserProfile(v, patient);
+            }
+        });
 
         Button browseProblems = (Button) findViewById(R.id.browse_problems_button);
 
@@ -53,6 +50,12 @@ public class ActivityPatientHomePage extends AppCompatActivity {
         intent.putExtra("Patient", patient_ID);
         startActivity(intent);
 
+    }
+
+    //Change to ActivityUserProfile.
+    public void toUserProfile (View view, Patient patient){
+        Intent intent = new Intent (this, ActivityUserProfile.class);
+        startActivity(intent);
     }
 
 

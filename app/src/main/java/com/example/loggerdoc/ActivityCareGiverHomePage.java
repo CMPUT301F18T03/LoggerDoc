@@ -14,14 +14,21 @@ public class ActivityCareGiverHomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_caregiver_home_page);
 
-        // Get the userID being passed from ActivityLogin.java
-        // Set the textview to display the username
+        // Get the elasticID being passed from ActivityLogin.java
         Intent intent = getIntent();
         caregiver_ID = intent.getIntExtra("Caregiver",0);
         caregiver = (CareGiver) UserListController.getUserList().get(caregiver_ID);
+
+        // Set the textview to display the username
         TextView usernameTextView = (TextView) findViewById(R.id.username_text);
         usernameTextView.setText(caregiver.getUserID());
 
+        usernameTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toUserProfile(v, caregiver);
+            }
+        });
         UserList userList = UserListController.getUserList();
     }
 
@@ -39,5 +46,11 @@ public class ActivityCareGiverHomePage extends AppCompatActivity {
         intent.putExtra("Caregiver", caregiver_ID);
         startActivity(intent);
 
+    }
+
+    //Change to ActivityUserProfile.
+    public void toUserProfile (View view, CareGiver caregiver){
+        Intent intent = new Intent (this, ActivityUserProfile.class);
+        startActivity(intent);
     }
 }
