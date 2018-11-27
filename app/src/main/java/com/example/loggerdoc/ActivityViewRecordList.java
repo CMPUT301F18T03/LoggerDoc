@@ -12,9 +12,7 @@ import android.widget.TextView;
 
 public class ActivityViewRecordList extends AppCompatActivity {
 
-    static final int VIEW_RECORD_RESULT = 1;
-    static final int ADD_RECORD_RESULT = 2;
-    private Problem problem;
+    private int problem_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +25,10 @@ public class ActivityViewRecordList extends AppCompatActivity {
         super.onResume();
 
         Intent intent = getIntent();
-        problem = (Problem) intent.getSerializableExtra("Problem");
+        problem_ID = (int) intent.getSerializableExtra("Position");
+        Problem problem = ProblemRecordListController.getProblemList().get(problem_ID);
+
+        //TODO: somehow get the recordlist of the problem
 
         //Initialize the problem title
         TextView problemTitle = (TextView) findViewById(R.id.viewRecordListProblemTitle);
@@ -42,7 +43,7 @@ public class ActivityViewRecordList extends AppCompatActivity {
         });
 
         //Initialize and set the adapter for the records
-        ArrayAdapter<Record> recordAdapter = new AdapterListRecords(this, problem.getRecordList().getRecordArrayList());
+        /*ArrayAdapter<Record> recordAdapter = new AdapterListRecords(this, problem.getRecordList().getRecordArrayList());
         ListView recordList = (ListView) findViewById(R.id.recordsListView);
         recordList.setAdapter(recordAdapter);
         //Set the onClickListener for the listView. This will call changeToViewProblemActivity().
@@ -53,31 +54,20 @@ public class ActivityViewRecordList extends AppCompatActivity {
             }
         });
 
-        recordAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == ADD_RECORD_RESULT) {
-            if (resultCode == RESULT_OK) {
-                Record r = (Record) data.getSerializableExtra("Record");
-                problem.addRecord(r);
-            }
-        }
+        recordAdapter.notifyDataSetChanged();*/
     }
 
     public void goViewRecord(View v, int position){
         Intent intent = new Intent(this, ActivityViewRecord.class);
-        intent.putExtra("Problem", problem);
-        intent.putExtra("Position", position);
-        startActivityForResult(intent, VIEW_RECORD_RESULT);
+        intent.putExtra("Problem", problem_ID);
+        intent.putExtra("Record", position);
+        startActivity(intent);
     }
 
     //Change to AddRecord Activity
     public void goAddRecord (View v){
         Intent intent = new Intent(this, ActivityAddRecord.class);
-        intent.putExtra("Flag", "ViewRecordList");
-        startActivityForResult(intent, ADD_RECORD_RESULT);
+        intent.putExtra("Problem", problem_ID);
+        startActivity(intent);
     }
 }

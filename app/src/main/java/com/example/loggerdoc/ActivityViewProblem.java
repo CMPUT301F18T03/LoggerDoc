@@ -13,16 +13,9 @@ import android.widget.TextView;
 
 public class ActivityViewProblem extends AppCompatActivity {
 
-    private Patient patient;
     private Problem problem;
-<<<<<<< HEAD
-    private int position;
-=======
     private int problem_ID;
-    private ArrayAdapter<Record> recordAdapter;
->>>>>>> origin
     private ArrayAdapter<CaregiverComment> commentAdapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +28,8 @@ public class ActivityViewProblem extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
 
-        //Set the patient and the problem
+        //Set the problem
         Intent intent = getIntent();
-        patient = (Patient) intent.getSerializableExtra("Patient");
         problem_ID = (int) intent.getSerializableExtra("Position");
         problem = ProblemRecordListController.getProblemList().get(problem_ID);
 
@@ -50,23 +42,6 @@ public class ActivityViewProblem extends AppCompatActivity {
         TextView problemDescriptionView = (TextView) findViewById(R.id.descriptionProblemView);
         problemDescriptionView.setText(problem.getDescription());
 
-<<<<<<< HEAD
-=======
-        //Initialize and set the adapter for the records
-        recordAdapter = new AdapterListRecords(this, problem.getRecordList().getArray());
-        ListView recordList = (ListView) findViewById(R.id.recordsListView);
-        recordList.setAdapter(recordAdapter);
-        //Set the onClickListener for the listView. This will call changeToViewProblemActivity().
-        recordList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                goViewRecord(view);
-            }
-        });
-
-        recordAdapter.notifyDataSetChanged();
-
->>>>>>> origin
         //Initialize and set the adapter for the caregiver's comments
         commentAdapter = new AdapterListComments(this, problem.getCommentList().getComments());
         ListView commentList = (ListView) findViewById(R.id.commentProblemListView);
@@ -77,7 +52,6 @@ public class ActivityViewProblem extends AppCompatActivity {
     //Change to EditProblem activity
     public void goEditProblem (View v){
         Intent intent = new Intent(this, ActivityEditProblem.class);
-        intent.putExtra("Patient", patient);
         intent.putExtra("Position", problem_ID);
         startActivity(intent);
     }
@@ -89,9 +63,7 @@ public class ActivityViewProblem extends AppCompatActivity {
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent();
-                intent.putExtra("Position", problem_ID);
-                setResult(RESULT_OK, intent);
+                ProblemRecordListController.getProblemList().remove(problem);
                 finish();
             }
         });
@@ -104,26 +76,13 @@ public class ActivityViewProblem extends AppCompatActivity {
         });
         AlertDialog dialog = builder.create();
         dialog.show();
-
     }
 
-<<<<<<< HEAD
-    public void goViewRecordList(View v, Problem problem){
-=======
-
-    //Change to AddRecord Activity
-    public void goAddRecord (View v){
-        Intent intent = new Intent(this, ActivityAddRecord.class);
-        intent.putExtra("Patient", patient);
+    //Change to ViewRecordList Activity
+    public void goViewRecordList (View v){
+        Intent intent = new Intent(this, ActivityViewRecordList.class);
         intent.putExtra("Position", problem_ID);
-        intent.putExtra("Flag", "a");
-        startActivityForResult(intent, ADD_RECORD_RESULT);
-    }
-
-    public void goViewRecord(View v){
->>>>>>> origin
-        Intent intent = new Intent(this, ActivityViewRecord.class);
-        intent.putExtra("Problem", problem);
         startActivity(intent);
     }
+
 }

@@ -20,10 +20,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyCallback {
 
+    private int recordID;
     private Record record;
     private GoogleMap recordMap;
     private static final float DEFAULT_ZOOM = 15;
-    private static final int EDIT_RECORD_RESULT = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +36,10 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
         super.onResume();
 
         Intent intent = getIntent();
-        Problem problem = (Problem) intent.getSerializableExtra("Problem");
-        int position = (int) intent.getSerializableExtra("Position");
-        record  = problem.getRecordList().getRecordArrayList().get(position);
+        int problemID = (int) intent.getSerializableExtra("Problem");
+        recordID = (int) intent.getSerializableExtra("Record");
+        Problem problem = ProblemRecordListController.getProblemList().get(problemID);
+        record  = ProblemRecordListController.getRecordList().get(recordID);
 
         TextView problemTitle = (TextView) findViewById(R.id.recordProblemTitleView);
         problemTitle.setText(problem.getTitle());
@@ -68,6 +69,13 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
     public void onMapReady(GoogleMap googleMap) {
         recordMap = googleMap;
         recordMap.getUiSettings().setZoomControlsEnabled(true);
+        recordMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng latLng) {
+                recordMap.clear();
+                moveCamera(latLng, DEFAULT_ZOOM, "");
+            }
+        });
     }
 
 
@@ -78,15 +86,16 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
 
         //set the marker to the set latitude and longitude, with a title.
         MarkerOptions options = new MarkerOptions().position(latLng).title(title);
-        options.draggable(true);
         recordMap.addMarker(options);
     }
 
     private void goEditRecord(View view){
         Intent intent = new Intent(this, ActivityEditRecord.class);
-        intent.putExtra("Record", record);
-        startActivityForResult(intent, EDIT_RECORD_RESULT);
+        intent.putExtra("Record", recordID);
+        startActivity(intent);
+        finish();
     }
+
     private void goDeleteRecord (final View v){
         //Show an alert dialog to ask for user's confirmation whether they would like to delete
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -94,9 +103,7 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent();
-                intent.putExtra("Position", position);
-                setResult(RESULT_OK, intent);
+                ProblemRecordListController.getRecordList().remove(record);
                 finish();
             }
         });
