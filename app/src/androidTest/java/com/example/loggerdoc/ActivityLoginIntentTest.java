@@ -23,16 +23,11 @@ public class ActivityLoginIntentTest {
     @Before
     // create mock users and mock userlist
     public void setup() {
-        ActivityLogin a = intentsTestRule.getActivity();
         Patient p = new Patient("Test Patient", "test@example.com", "555-555-1234", "Patient");
-        // SaveLoadController.savePatientToDisk(a.getBaseContext(), p);
         CareGiver c = new CareGiver("Test Caregiver", "test@example.com", "555-555-1234", "Caregiver");
-        // SaveLoadController.saveCareGiverToDisk(a.getBaseContext(), c);
 
-        UserList ul = new UserList();
-        ul.add_internal(p);
-        ul.add_internal(c);
-        ActivityLogin.userList = ul;
+        UserListController.addUser(p);
+        UserListController.addUser(c);
     }
 
     @Test
