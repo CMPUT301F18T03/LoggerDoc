@@ -100,14 +100,6 @@ public class ActivityViewProblem extends AppCompatActivity {
     }
 
 
-    //Change to AddRecord Activity
-    public void goAddRecord (View v){
-        Intent intent = new Intent(this, ActivityAddRecord.class);
-        intent.putExtra("Position", problem.getElasticID());
-        intent.putExtra("Flag", "a");
-        startActivityForResult(intent, ADD_RECORD_RESULT);
-    }
-
     public void addCaregiverComment (View view){
         //Show an alert dialog to ask for user's confirmation whether they would like to delete
         AlertDialog.Builder builder = new AlertDialog.Builder(ActivityViewProblem.this);
@@ -138,8 +130,9 @@ public class ActivityViewProblem extends AppCompatActivity {
         });
     }
 
-    public void goViewRecord(View v){
-        Intent intent = new Intent(this, ActivityViewRecord.class);
+    public void goViewRecordList(View v){
+        Intent intent = new Intent(this, ActivityViewRecordList.class);
+        intent.putExtra("Problem", problem.getElasticID());
         startActivity(intent);
     }
 }

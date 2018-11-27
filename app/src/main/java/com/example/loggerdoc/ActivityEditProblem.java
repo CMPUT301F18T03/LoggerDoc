@@ -32,7 +32,7 @@ public class ActivityEditProblem extends AppCompatActivity {
         super.onResume();
 
         Intent intent = getIntent();
-        problem_ID = intent.getIntExtra("Position",0);
+        problem_ID = intent.getIntExtra("Problem",0);
         problem = ProblemRecordListController.getProblemList().get(problem_ID);
 
         editTitle = (EditText) findViewById(R.id.editTitle);

@@ -25,7 +25,7 @@ public class ActivityViewRecordList extends AppCompatActivity {
         super.onResume();
 
         Intent intent = getIntent();
-        problem_ID = intent.getIntExtra("Position",0);
+        problem_ID = intent.getIntExtra("Problem",0);
         Problem problem = ProblemRecordListController.getProblemList().get(problem_ID);
 
         //TODO: somehow get the recordlist of the problem
@@ -34,7 +34,7 @@ public class ActivityViewRecordList extends AppCompatActivity {
         TextView problemTitle = (TextView) findViewById(R.id.viewRecordListProblemTitle);
         problemTitle.setText(problem.getTitle());
 
-        FloatingActionButton addRecordButton = (FloatingActionButton) findViewById(R.id.addProblemButton);
+        FloatingActionButton addRecordButton = (FloatingActionButton) findViewById(R.id.addRecordButton);
         addRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +67,6 @@ public class ActivityViewRecordList extends AppCompatActivity {
     //Change to AddRecord Activity
     public void goAddRecord (View v){
         Intent intent = new Intent(this, ActivityAddRecord.class);
-        intent.putExtra("Problem", problem_ID);
         startActivity(intent);
     }
 }
