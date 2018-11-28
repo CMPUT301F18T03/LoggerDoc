@@ -28,8 +28,10 @@
         android:layout_marginEnd="4dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="28dp"
+        android:background="@drawable/squarebuttonshape"
         android:onClick="toUpdateContactInfo"
         android:text="Edit Contact Info"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ProblemTitle"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,8 +42,10 @@
         android:layout_height="37dp"
         android:layout_marginEnd="1dp"
         android:layout_marginTop="30dp"
+        android:background="@drawable/squarebuttonshape"
         android:onClick="endActivity"
         android:text="Back"
+        android:textColor="@android:color/background_light"
         app:layout_constraintEnd_toStartOf="@+id/ProblemTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

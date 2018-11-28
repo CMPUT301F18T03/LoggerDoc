@@ -27,12 +27,14 @@
 
     <Button
         android:id="@+id/returnButton"
+        android:background="@drawable/squarebuttonshape"
         android:layout_width="80dp"
         android:layout_height="40dp"
         android:layout_below="@id/relLayout1"
         android:layout_marginStart="15dp"
         android:layout_marginTop="-48dp"
-        android:text="@string/returnButton" />
+        android:text="@string/returnButton"
+        android:textColor="@android:color/white" />
 
 
 </RelativeLayout>
