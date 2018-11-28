@@ -21,6 +21,7 @@ public class ActivityCareGiverAddPatient extends AppCompatActivity {
     private CareGiver loggedInCareGiver;
     private Patient patientToAdd;
     EditText userID;
+    Integer caregiver_ID;
 
 
 
@@ -31,7 +32,9 @@ public class ActivityCareGiverAddPatient extends AppCompatActivity {
         userID = (EditText) findViewById(R.id.AddPatientEditText);
 
         Intent intent = getIntent();
-        loggedInCareGiver = (CareGiver) intent.getSerializableExtra("Caregiver");
+        caregiver_ID = intent.getIntExtra("Caregiver", 0);
+        loggedInCareGiver = (CareGiver) UserListController.getUserList().get(caregiver_ID);
+        intent.removeExtra("Caregiver");
     }
 
 
