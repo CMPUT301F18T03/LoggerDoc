@@ -58,13 +58,8 @@ public class ActivityUpdateContactInfo extends AppCompatActivity {
         if(checkChanges(newEmail, newPhoneNumber)) {
             loggedInUser.setEmailAddress(newEmail);
             loggedInUser.setPhoneNumber(newPhoneNumber);
-            UserListController.getUserList().update(loggedInUser,getApplicationContext());
-            if (userType.equals("CareGiver")){
-                toCaregiverHomePage();
-            }
-            else if (userType.equals("Patient")){
-                toPatientHomePage();
-            }
+            UserListController.getUserList().add(loggedInUser, getApplicationContext());
+            finish();
         }
 
     }
@@ -149,18 +144,7 @@ public class ActivityUpdateContactInfo extends AppCompatActivity {
     }
 
 
-    public void toCaregiverHomePage(){
-        Intent intent = new Intent(this, ActivityCareGiverHomePage.class);
-        intent.putExtra("Caregiver", loggedInUser.getElasticID());
-        startActivity(intent);
-    }
 
-    public void toPatientHomePage(){
-        Intent intent = new Intent(this, ActivityPatientHomePage.class);
-        intent.putExtra("Patient", loggedInUser.getElasticID());
-        startActivity(intent);
-
-    }
 
 
 

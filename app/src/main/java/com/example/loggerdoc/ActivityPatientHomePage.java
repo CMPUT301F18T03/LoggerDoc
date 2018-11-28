@@ -8,11 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-
 public class ActivityPatientHomePage extends AppCompatActivity {
     private Patient patient;
     private Integer patient_ID;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,16 +25,12 @@ public class ActivityPatientHomePage extends AppCompatActivity {
         // Set the textview to display the username
         TextView usernameTextView = findViewById(R.id.patient_username_text);
         usernameTextView.setText(patient.getUserID());
-
-
-
-        Log.d("TAG", "userID = " + patient.getUserID());
-        Log.d("TAG", "email = " + patient.getEmailAddress());
-        Log.d("TAG", "phone = " + patient.getPhoneNumber());
-        Log.d("TAG", "CareGiver List = " + patient.getCareGivers());
-
-        // find the patient object using the given userId that was passed through
-        // Patient patient = (Patient) UserListController.findUser(userID);
+        usernameTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toUserProfile(v);
+            }
+        });
 
         Button browseProblems = (Button) findViewById(R.id.browse_problems_button);
 
@@ -50,20 +44,20 @@ public class ActivityPatientHomePage extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //this method changes the current activity to the update contact info activity
-    public void toUpdateContactInfo(View v){
-        Intent intent = new Intent(this, ActivityUpdateContactInfo.class);
+    //this method changes the current activity to the view profile activity
+    public void toViewProfile(View v){
+        Intent intent = new Intent(this, ActivityUserProfile.class);
         intent.putExtra("Patient", patient_ID);
         startActivity(intent);
 
     }
 
-    public void goProblemMap(View v){
-        Intent intent = new Intent (this, ActivityProblemMap.class);
+    //Change to ActivityUserProfile.
+    public void toUserProfile (View view){
+        Intent intent = new Intent (this, ActivityUserProfile.class);
         intent.putExtra("Patient", patient_ID);
         startActivity(intent);
     }
-
 
 
 }
