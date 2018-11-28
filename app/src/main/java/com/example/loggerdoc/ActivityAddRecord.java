@@ -113,6 +113,11 @@ public class ActivityAddRecord extends AppCompatActivity {
 
         if (requestCode == ADD_GEOLOCATION_RESULT && resultCode == RESULT_OK) {
             geoLocation = (RecordGeoLocation) data.getSerializableExtra("geoLocation");
+            TextView recordGeoText = (TextView) findViewById(R.id.recordGeoText);
+            recordGeoText.setVisibility(View.VISIBLE);
+            recordGeoText.setText("Geolocation Saved:\n" + "Lat: "+
+                    String.valueOf(geoLocation.getLatitude()) + "\n" + "Lon: "+
+                    String.valueOf(geoLocation.getLongitude()));
         }
 
         if(requestCode == BODY_LOCATION_REQUEST && resultCode == Activity.RESULT_OK){
@@ -161,7 +166,6 @@ public class ActivityAddRecord extends AppCompatActivity {
            //add_internal a geolocation to the record
            if (geoLocation != null) {
                record.setRecordGeoLocation(geoLocation);
-               Log.d("THe latitude is adding", String.valueOf(record.getRecordGeoLocation().getLatitude()));
            }
 
            //add_internal record to the problem
