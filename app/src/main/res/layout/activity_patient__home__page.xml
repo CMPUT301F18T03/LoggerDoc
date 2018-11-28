@@ -36,18 +36,17 @@
 
     <Button
         android:id="@+id/PHomePageEditContactInfo"
-        android:layout_width="180dp"
+        android:layout_width="0dp"
         android:layout_height="180dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="176dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/soft_blue"
-        android:onClick="toUpdateContactInfo"
-        android:text="Edit Contact Information"
+        android:onClick="toUserProfile"
+        android:text="View Profile"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toStartOf="@+id/browse_caregivers"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/browse_problems_button"
         app:layout_constraintVertical_bias="0.908" />
@@ -69,27 +68,27 @@
 
     <Button
         android:id="@+id/browse_problem_map"
-        android:layout_width="180dp"
+        android:layout_width="0dp"
         android:layout_height="180dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="200dp"
-        android:text="@string/browse_problem_map"
+        android:layout_marginTop="8dp"
         android:backgroundTint="@color/soft_blue"
+        android:text="@string/browse_problem_map"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/browse_problems_button"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/patient_username_text" />
 
     <Button
         android:id="@+id/browse_caregivers"
-        android:layout_width="180dp"
+        android:layout_width="0dp"
         android:layout_height="180dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/caregiver_information"
         android:backgroundTint="@color/soft_blue"
+        android:text="@string/caregiver_information"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/PHomePageEditContactInfo"
@@ -99,15 +98,17 @@
 
     <Button
         android:id="@+id/browse_problems_button"
-        android:layout_width="180dp"
+        android:layout_width="0dp"
         android:layout_height="180dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/soft_blue"
         android:onClick="changeActivity"
         android:text="@string/browse_problems"
-        android:backgroundTint="@color/soft_blue"
+        app:layout_constraintEnd_toStartOf="@+id/browse_problem_map"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/patient_username_text" />
 
     <TextView
         android:id="@+id/HomePageUsername"

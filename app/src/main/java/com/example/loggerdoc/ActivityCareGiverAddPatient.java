@@ -53,7 +53,7 @@ public class ActivityCareGiverAddPatient extends AppCompatActivity {
                 loggedInCareGiver.addPatient(patientToAdd);
                 UserListController.getUserList().add(loggedInCareGiver,getApplicationContext());
                 userID.setText("");
-                toBrowsePatientActivity();
+                finish();
             }
             else{
                 Toast.makeText(this, "That username does not exist. Please try again.", Toast.LENGTH_SHORT).show();
@@ -66,10 +66,6 @@ public class ActivityCareGiverAddPatient extends AppCompatActivity {
     }
 
 
-    public void toBrowsePatientActivity(){
-        Intent intent = new Intent(this, ActivityCareGiverBrowsePatients.class);
-        intent.putExtra("Caregiver", loggedInCareGiver);
-        startActivity(intent);
-    }
+
 
 }

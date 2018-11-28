@@ -28,7 +28,7 @@ public class ActivityPatientHomePage extends AppCompatActivity {
         usernameTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toUserProfile(v, patient);
+                toUserProfile(v);
             }
         });
 
@@ -44,16 +44,16 @@ public class ActivityPatientHomePage extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //this method changes the current activity to the update contact info activity
-    public void toUpdateContactInfo(View v){
-        Intent intent = new Intent(this, ActivityUpdateContactInfo.class);
+    //this method changes the current activity to the view profile activity
+    public void toViewProfile(View v){
+        Intent intent = new Intent(this, ActivityUserProfile.class);
         intent.putExtra("Patient", patient_ID);
         startActivity(intent);
 
     }
 
     //Change to ActivityUserProfile.
-    public void toUserProfile (View view, Patient patient){
+    public void toUserProfile (View view){
         Intent intent = new Intent (this, ActivityUserProfile.class);
         intent.putExtra("Patient", patient_ID);
         startActivity(intent);
