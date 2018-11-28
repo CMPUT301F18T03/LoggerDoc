@@ -21,6 +21,7 @@ public class ActivityCareGiverAddPatient extends AppCompatActivity {
     private CareGiver loggedInCareGiver;
     private Patient patientToAdd;
     EditText userID;
+    Integer caregiver_ID;
 
 
 
@@ -31,14 +32,16 @@ public class ActivityCareGiverAddPatient extends AppCompatActivity {
         userID = (EditText) findViewById(R.id.AddPatientEditText);
 
         Intent intent = getIntent();
-        loggedInCareGiver = (CareGiver) intent.getSerializableExtra("Caregiver");
+        caregiver_ID = intent.getIntExtra("Caregiver", 0);
+        loggedInCareGiver = (CareGiver) UserListController.getUserList().get(caregiver_ID);
+        intent.removeExtra("Caregiver");
     }
 
 
     @Override
     protected void onStart() {
         super.onStart();
-        //TODO Check If Entry Matches user
+
     }
 
     /*activated when a caregiver presses the add_internal button. This method confirms that the
@@ -53,7 +56,7 @@ public class ActivityCareGiverAddPatient extends AppCompatActivity {
                 loggedInCareGiver.addPatient(patientToAdd);
                 UserListController.getUserList().add(loggedInCareGiver,getApplicationContext());
                 userID.setText("");
-                toBrowsePatientActivity();
+                finish();
             }
             else{
                 Toast.makeText(this, "That username does not exist. Please try again.", Toast.LENGTH_SHORT).show();
@@ -66,10 +69,6 @@ public class ActivityCareGiverAddPatient extends AppCompatActivity {
     }
 
 
-    public void toBrowsePatientActivity(){
-        Intent intent = new Intent(this, ActivityCareGiverBrowsePatients.class);
-        intent.putExtra("Caregiver", loggedInCareGiver);
-        startActivity(intent);
-    }
+
 
 }
