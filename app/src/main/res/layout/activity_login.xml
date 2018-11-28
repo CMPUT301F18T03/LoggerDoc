@@ -7,34 +7,25 @@
     tools:context=".ActivityLogin">
 
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="@string/username"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/Login_Button"
-        app:layout_constraintEnd_toStartOf="@+id/Username_Field"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <EditText
         android:id="@+id/Username_Field"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="230dp"
+        android:layout_height="28dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:autofillHints=""
+        android:background="@drawable/texteditborder"
+        android:ellipsize="start"
         android:ems="10"
+        android:gravity="center_horizontal"
         android:hint="@string/enter_your_username"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.571" />
+        app:layout_constraintVertical_bias="0.55" />
 
     <Button
         android:id="@+id/Login_Button"
@@ -43,7 +34,7 @@
 
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/buttonshape"
         android:onClick="login"
         android:shadowColor="@color/colorPrimary"
