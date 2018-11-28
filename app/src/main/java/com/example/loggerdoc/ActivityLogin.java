@@ -61,7 +61,6 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
 
         // verify that the user actually exists, if true then proceed with login
         if (verifyUsername(userLogin)) {
-            Toast.makeText(this, "WORKS", Toast.LENGTH_SHORT).show();
             for (User user : userList.getArray()) {
                 Log.d("TAG", "email = " + user.getEmailAddress());
                 if (user.getUserID().equals(userLogin)) {

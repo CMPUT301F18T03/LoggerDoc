@@ -28,10 +28,8 @@ public class Record implements Serializable,ElasticID {
     private Integer ElasticID_Owner;
     private Integer ElasticID_OwnerProblem;
 
-    public Record() {
-        this("",null);
+    public Record(){
     }
-
 
     public Record(String title, Integer Ownerproblem) {
         this.title = title;
@@ -54,6 +52,18 @@ public class Record implements Serializable,ElasticID {
         ElasticID_Owner = Owner;
         ElasticID = this.hashCode();
 
+    }
+
+    public Record(String title, String comment, LocalDateTime timestamp, RecordGeoLocation recordGeoLocation, Bodylocation bodylocation, RecordPhotoList recordPhotoList, Integer elasticID, Integer elasticID_Owner, Integer elasticID_OwnerProblem) {
+        this.title = title;
+        this.comment = comment;
+        this.timestamp = timestamp;
+        this.recordGeoLocation = recordGeoLocation;
+        this.bodylocation = bodylocation;
+        this.recordPhotoList = recordPhotoList;
+        ElasticID = elasticID;
+        ElasticID_Owner = elasticID_Owner;
+        ElasticID_OwnerProblem = elasticID_OwnerProblem;
     }
 
 
