@@ -37,8 +37,8 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
         super.onResume();
 
         Intent intent = getIntent();
-        problemID = (int) intent.getSerializableExtra("Problem");
-        recordID = (int) intent.getSerializableExtra("Record");
+        problemID = intent.getIntExtra("Problem",0);
+        recordID = intent.getIntExtra("Record",0);
 
         Problem problem = ProblemRecordListController.getProblemList().get(problemID);
         record = ProblemRecordListController.getRecordList().get(recordID);
@@ -53,16 +53,11 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
         editRecordComment.setText(record.getComment());
 
         initializeMap();
-        if (record.getRecordGeoLocation() != null){
-            moveCamera(new LatLng(record.getRecordGeoLocation().getLatitude(),
-                            record.getRecordGeoLocation().getLongitude()),
-                    DEFAULT_ZOOM, record.getTitle());
-        }
     }
 
     private void initializeMap() {
         //intialize the map object
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.recordMapView);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.editRecordMapView);
         mapFragment.getMapAsync(ActivityEditRecord.this);
 
     }
@@ -75,9 +70,18 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
             @Override
             public void onMapLongClick(LatLng latLng) {
                 editRecordMap.clear();
-                moveCamera(latLng, DEFAULT_ZOOM, "");
+                moveCamera(latLng, DEFAULT_ZOOM, record.getTitle());
             }
         });
+
+        if (record.getRecordGeoLocation() != null){
+            moveCamera(new LatLng(record.getRecordGeoLocation().getLatitude(),
+                            record.getRecordGeoLocation().getLongitude()),
+                    DEFAULT_ZOOM, record.getTitle());
+        }
+        else{
+            moveCamera(DEFAULT_LOCATION, DEFAULT_ZOOM, "");
+        }
     }
 
     //move camera to specified location (latitude and longitude)
@@ -102,7 +106,7 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
         //TODO: Photos and Body Locations
 
         //TODO: Update the record in the recordList
-
+        ProblemRecordListController.getRecordList().update(record,getApplicationContext());
         finish();
     }
 }

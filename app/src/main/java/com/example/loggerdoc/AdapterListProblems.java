@@ -3,6 +3,7 @@ package com.example.loggerdoc;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public class AdapterListProblems extends ArrayAdapter<Problem> {
     }
 
     public void refresh(ArrayList<Problem> a) {
+        this.problemList.clear();
         this.problemList = a;
     }
 

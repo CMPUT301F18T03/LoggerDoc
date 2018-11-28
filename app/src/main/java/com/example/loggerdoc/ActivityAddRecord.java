@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
@@ -32,10 +33,7 @@ public class ActivityAddRecord extends AppCompatActivity {
     private EditText recordTitleText;
     private EditText recordCommentText;
     private RecordGeoLocation geoLocation;
-    private TextView latitudeText;
-    private TextView longitudeText;
     private Record record;
-    private static Patient patient;
     private static int problemID;
     private static final int ERROR_DIALOG_REQUEST = 9001;
 
@@ -60,8 +58,6 @@ public class ActivityAddRecord extends AppCompatActivity {
         problemID = (int) intent.getSerializableExtra("Problem");
 
         recordTitleText = (EditText) findViewById(R.id.record_title_text);
-        latitudeText = (TextView) findViewById(R.id.latitude_text);
-        longitudeText = (TextView) findViewById(R.id.longitude_text);
         recordCommentText = (EditText) findViewById(R.id.record_comment_text);
 
         Button recordGallery = findViewById(R.id.gallery_button);
@@ -117,8 +113,6 @@ public class ActivityAddRecord extends AppCompatActivity {
 
         if (requestCode == ADD_GEOLOCATION_RESULT && resultCode == RESULT_OK) {
             geoLocation = (RecordGeoLocation) data.getSerializableExtra("geoLocation");
-            latitudeText.setText("Latitude: " + String.valueOf(geoLocation.getLatitude()));
-            longitudeText.setText("Longitude: " + String.valueOf(geoLocation.getLongitude()));
         }
 
         if(requestCode == BODY_LOCATION_REQUEST && resultCode == Activity.RESULT_OK){
@@ -162,11 +156,12 @@ public class ActivityAddRecord extends AppCompatActivity {
 
         else{
             //Create a new record
-           record = new Record (recordTitleText.getText().toString(),2147483647);
+           record = new Record (recordTitleText.getText().toString(),problemID);
            record.setComment(recordCommentText.getText().toString());
            //add_internal a geolocation to the record
            if (geoLocation != null) {
                record.setRecordGeoLocation(geoLocation);
+               Log.d("THe latitude is adding", String.valueOf(record.getRecordGeoLocation().getLatitude()));
            }
 
            //add_internal record to the problem
@@ -176,18 +171,11 @@ public class ActivityAddRecord extends AppCompatActivity {
                     record.getRecordPhotoList().addPhoto(photos.get(i));
                 }
 
-
            }
            record.setBodylocation(bodylocation);
-            ProblemRecordListController.getRecordList().add(record,getApplicationContext());
-            //patient.getProblems().getArray().get(position).getRecordList().getArray().add_internal(record);
+           ProblemRecordListController.getRecordList().add(record,getApplicationContext());
+           finish();
         }
-
-        //Add record to problem list
-        Intent intent = new Intent();
-        intent.putExtra("Record", record);
-        setResult(RESULT_OK, intent);
-        finish();
     }
 
     public boolean isServicesOkay(){
