@@ -33,7 +33,7 @@ public class modifyRecordTask extends AsyncTask<Record, Void, Void> {
         OutputStream fos;
         BufferedWriter out;
         jsonout = gson.toJson(tosend);
-        sender.httpPUT("/problem/_doc/"+tosend.getElasticID().toString(),jsonout);
+        sender.httpPUT("/record/_doc/"+tosend.getElasticID().toString(),jsonout);
 
         try {
 
