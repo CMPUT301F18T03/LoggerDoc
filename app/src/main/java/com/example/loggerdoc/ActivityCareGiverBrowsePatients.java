@@ -80,7 +80,7 @@ public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
     //this method changes the current activity to the addPatient activity
     public void toAddPatient(View view) {
         Intent intent = new Intent(this, ActivityCareGiverAddPatient.class);
-        intent.putExtra("Caregiver", caregiver);
+        intent.putExtra("Caregiver", caregiver.getElasticID());
         startActivity(intent);
     }
 

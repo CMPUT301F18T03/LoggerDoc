@@ -36,8 +36,8 @@
 
     <Button
         android:id="@+id/PHomePageEditContactInfo"
-        android:layout_width="0dp"
-        android:layout_height="180dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -68,8 +68,8 @@
 
     <Button
         android:id="@+id/browse_problem_map"
-        android:layout_width="0dp"
-        android:layout_height="180dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -81,7 +81,7 @@
 
     <Button
         android:id="@+id/browse_caregivers"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="180dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -98,8 +98,8 @@
 
     <Button
         android:id="@+id/browse_problems_button"
-        android:layout_width="0dp"
-        android:layout_height="180dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"

@@ -60,7 +60,4 @@ public class ActivityPatientHomePage extends AppCompatActivity {
     }
 
 
-
-
-
 }
