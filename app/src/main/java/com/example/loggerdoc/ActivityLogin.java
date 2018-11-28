@@ -15,11 +15,16 @@ import android.widget.Toast;
 
 import com.example.loggerdoc.elasticclient.ElasticDataCallback;
 import com.example.loggerdoc.elasticclient.getUsersTask;
-import com.example.loggerdoc.elasticclient.modifyUserTask;
+import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
+import com.google.android.gms.ads.doubleclick.PublisherAdView;
+import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
 
 import java.util.ArrayList;
 
 public class ActivityLogin extends AppCompatActivity implements ElasticDataCallback<ArrayList<User>>{
+
+
+    private PublisherInterstitialAd mPublisherInterstitialAd;
 
     // Local userList to store all of the Users along with all the data associated with users
     static UserList userList = UserListController.getUserList();
@@ -32,8 +37,19 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
         getUsersTask loadUserList = new getUsersTask(this,this);
         loadUserList.mkDirs();
         loadUserList.execute();
+
+        mPublisherInterstitialAd = new PublisherInterstitialAd(this);
+        mPublisherInterstitialAd.setAdUnitId("/6499/example/interstitial");
+        mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        mPublisherInterstitialAd = new PublisherInterstitialAd(this);
+        mPublisherInterstitialAd.setAdUnitId("/6499/example/interstitial");
+        mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
+    }
 
     // If user hits the login button
     public void login(View v) {
@@ -45,7 +61,6 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
 
         // verify that the user actually exists, if true then proceed with login
         if (verifyUsername(userLogin)) {
-            Toast.makeText(this, "WORKS", Toast.LENGTH_SHORT).show();
             for (User user : userList.getArray()) {
                 Log.d("TAG", "email = " + user.getEmailAddress());
                 if (user.getUserID().equals(userLogin)) {
@@ -53,6 +68,10 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
                         Intent intent = new Intent(ActivityLogin.this, ActivityPatientHomePage.class);
                         intent.putExtra("Patient", user.getElasticID());
                         startActivity(intent);
+                        if (mPublisherInterstitialAd.isLoaded()) {
+                            mPublisherInterstitialAd.show();
+                        }
+
                         break;
                     }
                     else {

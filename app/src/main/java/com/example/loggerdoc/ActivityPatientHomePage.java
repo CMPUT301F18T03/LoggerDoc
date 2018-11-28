@@ -8,9 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+
 public class ActivityPatientHomePage extends AppCompatActivity {
     private Patient patient;
     private Integer patient_ID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +27,7 @@ public class ActivityPatientHomePage extends AppCompatActivity {
         // Set the textview to display the username
         TextView usernameTextView = findViewById(R.id.patient_username_text);
         usernameTextView.setText(patient.getUserID());
+
 
 
         Log.d("TAG", "userID = " + patient.getUserID());

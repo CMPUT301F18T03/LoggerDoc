@@ -17,6 +17,10 @@ public class UserList extends GenericList<User>{
         new modifyUserTask(context).execute(data);
     }
 
+    public void update(User data,Context context){
+        add(data,context);
+    }
+
     public ArrayList<User> getUsers(ArrayList<Integer> patientList) {
         ArrayList<User> ret = new ArrayList<>();
         for(Integer x: patientList){
