@@ -94,7 +94,7 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
         editRecordMap.addMarker(options);
     }
 
-    private void saveRecord(View v){
+    public void updateRecord(View v){
         record.setTitle(editRecordTitle.getText().toString());
         record.setComment(editRecordComment.getText().toString());
 

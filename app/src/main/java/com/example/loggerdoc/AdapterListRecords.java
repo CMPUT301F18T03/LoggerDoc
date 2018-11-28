@@ -27,14 +27,14 @@ public class AdapterListRecords extends ArrayAdapter<Record> {
         View listitem = convertView;
 
         if (listitem == null){
-            listitem = LayoutInflater.from(commentContext).inflate(R.layout.browse_problem_list_view,parent,false);
+            listitem = LayoutInflater.from(commentContext).inflate(R.layout.caregiver_comment_listview,parent,false);
         }
         Record currentRecords = recordsList.get(position);
 
-        TextView TitleView = (TextView) listitem.findViewById(R.id.ProblemTitle);
+        TextView TitleView = (TextView) listitem.findViewById(R.id.DateView);
         TitleView.setText(currentRecords.getTitle());
 
-        TextView date = (TextView) listitem.findViewById(R.id.DateView);
+        TextView date = (TextView) listitem.findViewById(R.id.CommentView);
         date.setText(currentRecords.getTimestamp().toString());
 
         return listitem;
