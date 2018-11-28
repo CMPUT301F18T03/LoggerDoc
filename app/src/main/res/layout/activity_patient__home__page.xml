@@ -34,22 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/HomePageUsername" />
 
 
-    <Button
-        android:id="@+id/PHomePageEditContactInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@color/soft_blue"
-        android:onClick="toUserProfile"
-        android:text="View Profile"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/browse_caregivers"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/browse_problems_button"
-        app:layout_constraintVertical_bias="0.908" />
+
 
     <TextView
         android:id="@+id/PatientHomePageflag"
@@ -66,49 +51,10 @@
         app:layout_constraintTop_toTopOf="@+id/HomePageLoggerDoc" />
 
 
-    <Button
-        android:id="@+id/browse_problem_map"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@color/soft_blue"
-        android:text="@string/browse_problem_map"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/browse_problems_button"
-        app:layout_constraintTop_toBottomOf="@+id/patient_username_text" />
-
-    <Button
-        android:id="@+id/browse_caregivers"
-        android:layout_width="wrap_content"
-        android:layout_height="180dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@color/soft_blue"
-        android:text="@string/caregiver_information"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/PHomePageEditContactInfo"
-        app:layout_constraintTop_toBottomOf="@+id/browse_problem_map"
-        app:layout_constraintVertical_bias="0.888" />
 
 
-    <Button
-        android:id="@+id/browse_problems_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@color/soft_blue"
-        android:onClick="changeActivity"
-        android:text="@string/browse_problems"
-        app:layout_constraintEnd_toStartOf="@+id/browse_problem_map"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/patient_username_text" />
+
+
 
     <TextView
         android:id="@+id/HomePageUsername"
@@ -123,5 +69,68 @@
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/HomePageLoggerDoc" />
+
+
+    <TableLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/patient_username_text">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/browse_problems_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/soft_blue"
+                android:onClick="changeActivity"
+                android:text="@string/browse_problems" />
+
+            <Button
+                android:id="@+id/browse_problem_map"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/soft_blue"
+                android:text="@string/browse_problem_map" />
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:weightSum="1"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/PHomePageEditContactInfo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:backgroundTint="@color/soft_blue"
+                android:onClick="toUserProfile"
+                android:text="View Profile"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </TableRow>
+
+
+    </TableLayout>
+
+
+
 
 </android.support.constraint.ConstraintLayout>
