@@ -28,7 +28,8 @@ public class Record implements Serializable,ElasticID {
     private Integer ElasticID_Owner;
     private Integer ElasticID_OwnerProblem;
 
-
+    public Record(){
+    }
 
     public Record(String title, Integer Ownerproblem) {
         this.title = title;
