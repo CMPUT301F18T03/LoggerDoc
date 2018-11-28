@@ -11,9 +11,7 @@ public class CaregiverCommentListUnitTest {
 
         CaregiverCommentList commentList = new CaregiverCommentList();
 
-        CaregiverComment caregiverComment = new CaregiverComment(new CareGiver("test",
-                "test", "test","test", new PatientList()),
-                "Looks good");
+        CaregiverComment caregiverComment = new CaregiverComment("Looks good");
 
         commentList.addComment(caregiverComment);
 
@@ -24,9 +22,7 @@ public class CaregiverCommentListUnitTest {
     public void testCaregiverCommentListDelete(){
         CaregiverCommentList commentList = new CaregiverCommentList();
 
-        CaregiverComment caregiverComment = new CaregiverComment(new CareGiver("test",
-                "test", "test","test", new PatientList()),
-                "Looks good");
+        CaregiverComment caregiverComment = new CaregiverComment("Looks good");
 
         commentList.addComment(caregiverComment);
         commentList.deleteComment(caregiverComment);
@@ -38,15 +34,11 @@ public class CaregiverCommentListUnitTest {
     public void testCaregiverCommentListGetSize(){
         CaregiverCommentList commentList = new CaregiverCommentList();
 
-        CaregiverComment caregiverComment = new CaregiverComment(new CareGiver("test",
-                "test", "test","test", new PatientList()),
-                "Looks good");
+        CaregiverComment caregiverComment = new CaregiverComment("Looks good");
 
         commentList.addComment(caregiverComment);
 
-        CaregiverComment secondComment = new CaregiverComment(new CareGiver("test",
-                "test", "test","test", new PatientList()),
-                "You should go to emergency");
+        CaregiverComment secondComment = new CaregiverComment("You should go to emergency");
 
         commentList.addComment(secondComment);
 

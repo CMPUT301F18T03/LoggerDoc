@@ -111,25 +111,6 @@ public class Problem implements Serializable,ElasticID {
         return timestamp;
     }
 
-    /**
-     * Returns the record list of the problem.
-     *
-     * @return the recordList.
-     */
-    @Deprecated
-    public RecordList getRecordList() {
-        return null;
-    }
-
-    /**
-     * Adds a record to the recordList.
-     *
-     * @param record The record that needs to be added.
-     */
-    @Deprecated
-    public void addRecord(Record record) {
-
-    }
 
     /**
      * Returns the caregiver's comment list of the problem.

@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="16dp"
         android:text="@string/add_geo_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/record_title_text" />
@@ -66,8 +66,8 @@
         android:id="@+id/body_location_button"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="@string/add_body_location_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mapButton" />
@@ -76,11 +76,13 @@
         android:id="@+id/gallery_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="137dp"
+        android:layout_marginEnd="58dp"
+        android:layout_marginBottom="208dp"
         android:text="@string/add_photo_button"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Camera_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button3" />
 
@@ -100,69 +102,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gallery_button"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/longitude_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="82dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="75dp"
-        android:layout_marginBottom="292dp"
-        android:text="Placeholder"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/mapButton"
-        app:layout_constraintTop_toBottomOf="@+id/latitude_text" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/record_comment_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:layout_marginEnd="97dp"
         android:layout_marginStart="72dp"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="97dp"
         android:ems="10"
         android:hint="Comment"
         android:inputType="textPersonName"
         android:textColor="@android:color/black"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/record_create_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gallery_button" />
-
-    <TextView
-        android:id="@+id/latitude_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="82dp"
-        android:layout_marginTop="66dp"
-        android:layout_marginEnd="73dp"
-        android:layout_marginBottom="2dp"
-        android:text="Placeholder"
-        android:textColor="@android:color/black"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/longitude_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/mapButton"
-        app:layout_constraintTop_toBottomOf="@+id/record_title_text"
-        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/Camera_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="137dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="208dp"
         android:text="@string/add_photo_camera_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button3" />
+
 </android.support.constraint.ConstraintLayout>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -14,6 +15,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
     private AdapterListProblems adapter;
     private Patient patient;
     private Integer patient_ID;
+    private ListView problemsList;
 
     //To be called when the activity is created
     @Override
@@ -26,20 +28,6 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         patient_ID = intent.getIntExtra("Patient",0);
         patient = (Patient) UserListController.getUserList().get(patient_ID);
 
-        //Initialize and set the adapter
-        adapter = new AdapterListProblems(this, ProblemRecordListController.getProblemList().getArray());
-        ListView problemsList = (ListView) findViewById(R.id.ProblemList);
-        problemsList.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-
-        //Set the onClickListener for the listView. This will call changeToViewProblemActivity().
-        problemsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                changeToViewProblemActivity(view, patient, position);
-            }
-        });
-
         /*
          * Set the Add Problem button. When this button is pressed it will call
          * changeToAddProblemActivity().
@@ -48,7 +36,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         addProblemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeToAddProblemActivity(v, patient);
+                changeToAddProblemActivity(v);
             }
         });
 
@@ -60,7 +48,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeToSearchActivity(v,patient);
+                changeToSearchActivity(v);
             }
         });
 
@@ -73,41 +61,54 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         username.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeToUserProfile(v, patient);
+                changeToUserProfile(v);
             }
         });
     }
 
     //To be called when the activity is resumed
     @Override
-    protected void onResume (){
+    protected void onResume(){
         super.onResume();
-        adapter.refresh(ProblemRecordListController.getProblemList().getArray());
+
+        //TODO: fix if we get listeners working
+        adapter = new AdapterListProblems(this, ProblemRecordListController.getProblemList().getArray());
+        problemsList = (ListView) findViewById(R.id.ProblemList);
+        problemsList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+        //Set the onClickListener for the listView. This will call changeToViewProblemActivity().
+        problemsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                changeToViewProblemActivity(view, patient, position);
+            }
+        });
     }
 
     //Change to ActivityViewProblem.
     public void changeToViewProblemActivity(View view, Patient patient, int position){
         Intent intent = new Intent(this, ActivityViewProblem.class);
         intent.putExtra("Patient", patient_ID);
-        intent.putExtra("Position", position);
+        intent.putExtra("Position",
+                ProblemRecordListController.getProblemList().getArray().get(position).getElasticID());
         startActivity(intent);
     }
 
     //Change to ActivityAddProblem.
-    public void changeToAddProblemActivity (View view, Patient patient){
+    public void changeToAddProblemActivity (View view){
         Intent intent = new Intent(this, ActivityAddProblem.class);
         startActivity(intent);
     }
 
     //Change to ActivitySearch.
-    public void changeToSearchActivity(View view, Patient patient){
+    public void changeToSearchActivity(View view){
         Intent intent = new Intent (this, ActivitySearch.class);
         startActivity(intent);
     }
 
     //Change to ActivityUserProfile.
-    public void changeToUserProfile (View view, Patient patient){
+    public void changeToUserProfile (View view){
         Intent intent = new Intent (this, ActivityUserProfile.class);
         intent.putExtra("Patient", patient_ID);
         startActivity(intent);

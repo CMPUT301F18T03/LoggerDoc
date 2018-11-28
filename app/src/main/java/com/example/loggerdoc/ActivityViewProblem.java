@@ -5,30 +5,36 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 public class ActivityViewProblem extends AppCompatActivity {
 
-    static final int ADD_RECORD_RESULT = 1;
-
-    private Integer position;
     private Problem problem;
-    private ArrayAdapter<CaregiverComment> commentAdapter;
+    private int problemID;
+    private AdapterListComments commentAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_problem);
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
 
         //Set the problem
         Intent intent = getIntent();
-        position = intent.getIntExtra("Position",0);
-        problem = ProblemRecordListController.getProblemList().getArray().get(position);
+        problemID= intent.getIntExtra("Position",0);
+        problem = ProblemRecordListController.getProblemList().get(problemID);
 
         TextView problemTitleView = (TextView) findViewById(R.id.TitleView);
         problemTitleView.setText(problem.getTitle());
@@ -46,17 +52,6 @@ public class ActivityViewProblem extends AppCompatActivity {
         commentAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == ADD_RECORD_RESULT) {
-            if (resultCode == RESULT_OK) {
-                Record r = (Record) data.getSerializableExtra("Record");
-                problem.addRecord(r);
-            }
-        }
-    }
-
     //Change to EditProblem activity
     public void goEditProblem (View v){
         Intent intent = new Intent(this, ActivityEditProblem.class);
@@ -71,9 +66,7 @@ public class ActivityViewProblem extends AppCompatActivity {
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent();
-                intent.putExtra("Problem", problem.getElasticID());
-                setResult(RESULT_OK, intent);
+                ProblemRecordListController.getProblemList().remove(problem);
                 finish();
             }
         });
@@ -90,16 +83,40 @@ public class ActivityViewProblem extends AppCompatActivity {
     }
 
 
-    //Change to AddRecord Activity
-    public void goAddRecord (View v){
-        Intent intent = new Intent(this, ActivityAddRecord.class);
-        intent.putExtra("Position", problem.getElasticID());
-        intent.putExtra("Flag", "a");
-        startActivityForResult(intent, ADD_RECORD_RESULT);
+    public void addCaregiverComment (final View view){
+        //Show an alert dialog for caregiver to comment on a problem
+        AlertDialog.Builder builder = new AlertDialog.Builder(ActivityViewProblem.this);
+        builder.setTitle("ADD CAREGIVER COMMENT: ");
+        final EditText input = new EditText(ActivityViewProblem.this);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        input.setLayoutParams(layoutParams);
+        builder.setView(input);
+
+        builder.setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                problem.addComment(new CaregiverComment(input.getText().toString()));
+                ProblemRecordListController.getProblemList().update(problem, getApplicationContext());
+                commentAdapter.refresh(ProblemRecordListController.getProblemList().get(problemID).getCommentList().getComments());
+                commentAdapter.notifyDataSetChanged();
+            }
+        });
+
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
-    public void goViewRecord(View v){
-        Intent intent = new Intent(this, ActivityViewRecord.class);
+    public void goViewRecordList(View v){
+        Intent intent = new Intent(this, ActivityViewRecordList.class);
+        intent.putExtra("Problem", problem.getElasticID());
         startActivity(intent);
     }
 }
