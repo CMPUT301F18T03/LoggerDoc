@@ -10,6 +10,7 @@ import android.content.Context;
 import com.example.loggerdoc.elasticclient.ElasticDataCallback;
 import com.example.loggerdoc.elasticclient.getRecordsTask;
 import com.example.loggerdoc.elasticclient.modifyRecordTask;
+import com.example.loggerdoc.elasticclient.removeRecordTask;
 
 import java.util.ArrayList;
 
@@ -23,6 +24,11 @@ public class RecordList extends GenericList<Record> implements ElasticDataCallba
 
     protected void update(Record data,Context context){
         add(data,context);
+    }
+
+    protected void remove(Record data,Context context){
+        super.remove_internal(data);
+        new removeRecordTask(context).execute(data);
     }
 
     public void download(Integer elasticID, Context context) {

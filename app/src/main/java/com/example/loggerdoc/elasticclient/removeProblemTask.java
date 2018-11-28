@@ -2,45 +2,35 @@ package com.example.loggerdoc.elasticclient;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.example.loggerdoc.ElasticSearchController;
 import com.example.loggerdoc.Problem;
 import com.example.loggerdoc.ProblemRecordListController;
-import com.example.loggerdoc.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
-public class modifyProblemTask extends AsyncTask<Problem, Void, Void> {
+public class removeProblemTask extends AsyncTask<Problem, Void, Void> {
     private Context context;
-    public modifyProblemTask(Context context){
+    public removeProblemTask(Context context){
         this.context = context;
     }
     @Override
     protected Void doInBackground(Problem... problems) {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create();
-        String jsonout;
         Problem tosend = problems[0];
-        //File datafile = new File(context.getFilesDir().getAbsolutePath()+"/Problems/");
         ArrayList<Problem> ret = ProblemRecordListController.getProblemList().getArray();
         httphandler sender = ElasticSearchController.getHttpHandler();
         OutputStream fos;
         BufferedWriter out;
-        jsonout = gson.toJson(tosend);
-        sender.httpPUT("/problem/_doc/"+tosend.getElasticID().toString(),jsonout);
+        sender.httpDELETE("/problem/_doc/"+tosend.getElasticID().toString());
 
         try {
 
@@ -58,10 +48,6 @@ public class modifyProblemTask extends AsyncTask<Problem, Void, Void> {
         }
 
 
-
-        Log.d ("The problem date is in the modifyProblemTask", problems[0].getTimestamp().toString());
-        Log.d ("The jsonout value is", jsonout);
-
         return null;
     }
     @Override
@@ -69,5 +55,3 @@ public class modifyProblemTask extends AsyncTask<Problem, Void, Void> {
         context = null;
     }
 }
-
-
