@@ -17,6 +17,8 @@ public class BodyLocationPhotoList {
         bodyLocationlist.remove(photo);
     }
 
+    public BodyLocationPhoto getPhoto(int position){return this.bodyLocationlist.get(position);}
+
     public boolean contains(BodyLocationPhoto photo) {
         return bodyLocationlist.contains(photo);
     }

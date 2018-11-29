@@ -71,7 +71,8 @@
             android:label="@string/title_activity_body_location" />
         <activity android:name=".ActivityEditRecord" />
         <activity android:name=".ActivityPhotoGrid" />
-        <activity android:name=".ActivityBlLabel"></activity>
+        <activity android:name=".ActivityBlLabel" />
+        <activity android:name=".ActivityViewBodyLocation"></activity>
     </application>
 
 </manifest>

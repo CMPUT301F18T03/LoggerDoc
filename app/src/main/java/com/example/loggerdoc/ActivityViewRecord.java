@@ -27,6 +27,8 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
     private Record record;
     private GoogleMap recordMap;
     public static RecordPhotoList photoList = new RecordPhotoList();
+    public static BodyLocationPhotoList blPhotolist = new BodyLocationPhotoList();
+    public static Bodylocation bodylocation = new Bodylocation();
     private static final float DEFAULT_ZOOM = 15;
 
     @Override
@@ -58,13 +60,22 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
         Button showBodyLocation = (Button) findViewById(R.id.showBodyLoc);
 
         photoList = record.getRecordPhotoList();
-        Log.i("THIS_TAG", String.valueOf(photoList.getPhoto(0).getPhoto()));
+        blPhotolist = record.getBlPhotoList();
+        bodylocation = record.getBodylocation();
+
         showimages.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
                 Intent intent = new Intent(v.getContext(), ActivityPhotoGrid.class);
                 startActivity(intent);
 
+            }
+        });
+        showBodyLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ActivityViewBodyLocation.class);
+                startActivity(intent);
             }
         });
 
