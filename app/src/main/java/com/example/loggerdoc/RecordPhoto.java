@@ -3,20 +3,21 @@ package com.example.loggerdoc;
 import android.graphics.Bitmap;
 import android.net.Uri;
 
+import java.io.File;
 import java.io.Serializable;
 
 public class RecordPhoto implements Serializable {
     /**
      * @param path the uri object for the images
      */
-    private transient Uri path;
+    private File path;
 
     /**
      *
      * @return uri object for the image
      */
 
-    public Uri getPhoto() {
+    public File getPhoto() {
         return this.path;
     }
 
@@ -25,7 +26,7 @@ public class RecordPhoto implements Serializable {
      * @param newPhoto photo that you want to be here
      */
 
-    public void setPhoto(Uri newPhoto) {
+    public void setPhoto(File newPhoto) {
         this.path = newPhoto;
     }
 }

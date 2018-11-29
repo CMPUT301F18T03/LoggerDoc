@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -25,6 +26,7 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
     private int recordID;
     private Record record;
     private GoogleMap recordMap;
+    public static RecordPhotoList photoList = new RecordPhotoList();
     private static final float DEFAULT_ZOOM = 15;
 
     @Override
@@ -51,6 +53,20 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
 
         TextView recordComment = (TextView) findViewById(R.id.recordCommentView);
         recordComment.setText(record.getComment());
+
+        Button showimages = (Button) findViewById(R.id.showRecordImage);
+        Button showBodyLocation = (Button) findViewById(R.id.showBodyLoc);
+
+        photoList = record.getRecordPhotoList();
+        Log.i("THIS_TAG", String.valueOf(photoList.getPhoto(0).getPhoto()));
+        showimages.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+                Intent intent = new Intent(v.getContext(), ActivityPhotoGrid.class);
+                startActivity(intent);
+
+            }
+        });
 
         initializeMap();
     }
