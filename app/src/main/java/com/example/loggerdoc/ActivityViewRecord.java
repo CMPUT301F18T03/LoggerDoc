@@ -57,6 +57,8 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
         Problem problem = ProblemRecordListController.getProblemList().get(problemID);
         record  = ProblemRecordListController.getRecordList().get(recordID);
 
+        Log.d ("The title of the record is ", record.getTitle());
+
         TextView problemTitle = (TextView) findViewById(R.id.recordProblemTitleView);
         problemTitle.setText(problem.getTitle());
 

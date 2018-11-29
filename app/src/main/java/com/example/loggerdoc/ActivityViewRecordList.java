@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -59,6 +60,7 @@ public class ActivityViewRecordList extends AppCompatActivity {
         }
 
         //Initialize and set the adapter for the records
+        Log.d ("The size of the record list is", String.valueOf(ProblemRecordListController.getRecordList().getRecords(problemID).size()));
         ArrayAdapter<Record> recordAdapter = new AdapterListRecords(this, ProblemRecordListController.getRecordList().getRecords(problemID));
         ListView recordList = (ListView) findViewById(R.id.recordsListView);
         recordList.setAdapter(recordAdapter);
@@ -66,6 +68,8 @@ public class ActivityViewRecordList extends AppCompatActivity {
         recordList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("The position is", String.valueOf(position));
+                Log.d("The title of the second record is", String.valueOf(ProblemRecordListController.getRecordList().getRecords(problemID).get(position).getTitle()));
                 goViewRecord(view, position);
             }
         });
@@ -76,7 +80,7 @@ public class ActivityViewRecordList extends AppCompatActivity {
     public void goViewRecord(View v, int position){
         Intent intent = new Intent(this, ActivityViewRecord.class);
         intent.putExtra("Problem", problemID);
-        intent.putExtra("Record", ProblemRecordListController.getRecordList().getArray().get(position).getElasticID());
+        intent.putExtra("Record", ProblemRecordListController.getRecordList().getRecords(problemID).get(position).getElasticID());
         startActivity(intent);
     }
 
