@@ -97,9 +97,4 @@ public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
 
 
 
-
-
-
-
-
 }

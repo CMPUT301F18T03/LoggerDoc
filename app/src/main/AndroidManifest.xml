@@ -38,7 +38,9 @@
         <meta-data
             android:name="com.google.android.gms.ads.AD_MANAGER_APP"
             android:value="true" />
-        <activity android:name=".ActivityLogin"
+
+        <activity
+            android:name=".ActivityLogin"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -66,7 +68,8 @@
         <activity
             android:name=".ActivityBodyLocation"
             android:label="@string/title_activity_body_location" />
-        <activity android:name=".ActivityEditRecord"></activity>
+        <activity android:name=".ActivityEditRecord" />
+        <activity android:name=".ActivityScanQR" />
     </application>
 
 </manifest>
