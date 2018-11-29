@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.test.espresso.intent.matcher.IntentMatchers;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -23,6 +24,8 @@ import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ActivityAddRecordIntentTest {
+
+    private Problem pr;
 
     @Rule
     public IntentsTestRule<ActivityAddRecord> intentsTestRule =
@@ -56,5 +59,10 @@ public class ActivityAddRecordIntentTest {
         Record r = ProblemRecordListController.getRecordList().getArray().get(0);
         assertTrue(r.getTitle().equals(testRecordTitle));
         assertTrue(intentsTestRule.getActivity().isFinishing());
+    }
+
+    @After
+    public void after() {
+        ProblemRecordListController.getProblemList().remove_internal(pr);
     }
 }

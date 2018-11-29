@@ -38,6 +38,8 @@ public class ActivityLoginIntentTest {
         onView(withId(R.id.Login_Button))
                 .perform(click());
         intended(hasComponent(ActivityPatientHomePage.class.getName()));
+
+        UserListController.getUserList().remove_internal(p);
     }
 
     @Test
@@ -50,5 +52,7 @@ public class ActivityLoginIntentTest {
         onView(withId(R.id.Login_Button))
                 .perform(click());
         intended(hasComponent(ActivityCareGiverHomePage.class.getName()));
+
+        UserListController.getUserList().remove_internal(c);
     }
 }

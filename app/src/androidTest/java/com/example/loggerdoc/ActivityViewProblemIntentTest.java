@@ -3,6 +3,7 @@ package com.example.loggerdoc;
 import android.content.Intent;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -62,5 +63,10 @@ public class ActivityViewProblemIntentTest {
                 .perform(click());
         assertFalse(ProblemRecordListController.getProblemList().contains(pr));
         assertTrue(intentsTestRule.getActivity().isFinishing());
+    }
+
+    @After
+    public void after() {
+        ProblemRecordListController.getProblemList().remove_internal(pr);
     }
 }
