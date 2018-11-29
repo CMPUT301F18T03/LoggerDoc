@@ -2,17 +2,22 @@ package com.example.loggerdoc;
 
 import android.net.Uri;
 
+import java.io.File;
+
 public class BodyLocationPhoto {
 
-    private Uri photo;
+    private File photo;
+    private String label = "";
 
+    public String getLabel(){ return this.getLabel(); }
+    public void setLabel(String newlabel){this.label = newlabel;}
 
-    public Uri getPhoto() {
+    public File getPhoto() {
         return this.photo;
     }
 
 
-    public void setPhoto(Uri newPhoto) {
+    public void setPhoto(File newPhoto) {
         this.photo = newPhoto;
     }
 }

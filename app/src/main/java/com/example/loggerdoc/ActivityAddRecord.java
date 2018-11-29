@@ -46,15 +46,22 @@ public class ActivityAddRecord extends AppCompatActivity {
     static final int GALLERY_REQUEST_RECORD = 1001;
     static final int ADD_GEOLOCATION_RESULT = 1002;
     static final int BODY_LOCATION_REQUEST = 1003;
+    static final int BODY_LOCATION_GALLARY_REQUEST = 1004;
+    static final int LABEL_REQUEST = 1005;
     private static final int MY_PERMISSIONS_REQUEST = 100;
 
 
     private ArrayList<RecordPhoto> photos = new ArrayList<RecordPhoto>();
+    private ArrayList<BodyLocationPhoto> blphotos = new ArrayList<BodyLocationPhoto>();
     private Bodylocation bodylocation = new Bodylocation();
+    private BodyLocationPhoto blPhoto = new BodyLocationPhoto();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_record);
+        requestStoragePermission();
+
     }
 
     @Override
@@ -70,11 +77,11 @@ public class ActivityAddRecord extends AppCompatActivity {
         Button recordGallery = findViewById(R.id.gallery_button);
         Button recordCamera = findViewById(R.id.Camera_button);
         Button bodyLocationButton = findViewById(R.id.body_location_button);
+        Button bodyLocationGallary = findViewById(R.id.BodyLocationGallary);
 
         recordGallery.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                requestStoragePermission();
 
                 GalleryIntent(GALLERY_REQUEST_RECORD);
             }
@@ -94,6 +101,20 @@ public class ActivityAddRecord extends AppCompatActivity {
             }
         });
 
+        bodyLocationGallary.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                // get comment from user than when it returns call the gallary app for user bl they already have
+                if (blphotos.size()<2){
+                Intent intent = new Intent(v.getContext(), ActivityBlLabel.class);
+                startActivityForResult(intent, LABEL_REQUEST);}
+                else{
+                    Toast.makeText(ActivityAddRecord.this, "You already have 2 bl photos for this record", Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        });
+
         if (isServicesOkay()){
           initialize();
         }
@@ -109,6 +130,24 @@ public class ActivityAddRecord extends AppCompatActivity {
             photo.setPhoto(path);
             photos.add(photo);
             PhotoPath = null;
+
+        }
+
+        if (requestCode == LABEL_REQUEST && resultCode == RESULT_OK){
+            String label = data.getStringExtra("THELABEL");
+            blPhoto.setLabel(label);
+            GalleryIntent(BODY_LOCATION_GALLARY_REQUEST);
+
+        }
+
+        if(requestCode == BODY_LOCATION_GALLARY_REQUEST && resultCode == RESULT_OK){
+            final Uri uri = data.getData();
+            File path =  new File(getRealPathFromURI(uri));
+            BodyLocationPhoto blphoto = new BodyLocationPhoto();
+            blphoto.setPhoto(path);
+            blphotos.add(blphoto);
+
+
 
         }
 
@@ -185,6 +224,11 @@ public class ActivityAddRecord extends AppCompatActivity {
                     record.getRecordPhotoList().addPhoto(photos.get(i));
                 }
 
+           }
+           if (blphotos.size() != 0){
+               for(int i =0; i<blphotos.size(); i++){
+                   record.getBlPhotoList().add(blphotos.get(i));
+               }
            }
            record.setBodylocation(bodylocation);
            ProblemRecordListController.getRecordList().add(record,getApplicationContext());
