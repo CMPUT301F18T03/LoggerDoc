@@ -22,7 +22,7 @@ public class ActivityCareGiverHomePageIntentTest {
     @Before
     // create mock caregiver
     public void setup() {
-        CareGiver c = new CareGiver("Testy Caregiver", "test@example.com", "555-555-1234", "Caregiver");
+        CareGiver c = new CareGiver("CareBear", "testcaregiver@example.com", "555-555-1234", "Caregiver");
         UserListController.getUserList().add_internal(c);
 
         Intent i = new Intent();
@@ -31,10 +31,10 @@ public class ActivityCareGiverHomePageIntentTest {
     }
 
     @Test
-    public void TestUpdateContactInfo() {
-        onView(withId(R.id.CHomePageEditContactInfo))
+    public void TestViewProfile() {
+        onView(withId(R.id.CViewProfileButton))
                 .perform(click());
-        intended(hasComponent(ActivityUpdateContactInfo.class.getName()));
+        intended(hasComponent(ActivityUserProfile.class.getName()));
     }
 
     @Test
