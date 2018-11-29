@@ -55,7 +55,7 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
         recordComment.setText(record.getComment());
 
         Button showimages = (Button) findViewById(R.id.showRecordImage);
-        Button showBodyLocation = (Button) findViewById(R.id.BodylocationButton);
+        Button showBodyLocation = (Button) findViewById(R.id.showBodyLoc);
 
         photoList = record.getRecordPhotoList();
         Log.i("THIS_TAG", String.valueOf(photoList.getPhoto(0).getPhoto()));
