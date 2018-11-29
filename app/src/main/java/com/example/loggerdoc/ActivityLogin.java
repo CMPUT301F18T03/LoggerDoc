@@ -64,6 +64,7 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
             for (User user : userList.getArray()) {
                 Log.d("TAG", "email = " + user.getEmailAddress());
                 if (user.getUserID().equals(userLogin)) {
+                    UserListController.setCurrentUser(user);
                     if (user.getRole().equals("Patient")) {
                         Intent intent = new Intent(ActivityLogin.this, ActivityPatientHomePage.class);
                         intent.putExtra("Patient", user.getElasticID());

@@ -23,7 +23,7 @@ public class ProblemListUnitTest {
         problemList.add_internal(problem);
         assertTrue("ProblemList should contain added problem", problemList.contains(problem));
 
-        problemList.remove(problem);
+        problemList.remove_internal(problem);
         assertFalse("ProblemList should not contain added problem", problemList.contains(problem));
     }
 
@@ -40,7 +40,7 @@ public class ProblemListUnitTest {
         problemList.add_internal(problemB);
         assertEquals("RecordList should have size 2", 2, problemList.size());
 
-        problemList.remove(problemA);
+        problemList.remove_internal(problemA);
         assertEquals("RecordList should have size 1 after deletion", 1, problemList.size());
     }
 }

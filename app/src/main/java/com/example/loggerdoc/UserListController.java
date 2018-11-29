@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class UserListController {
 
     private static UserList userList = null;
+    private static Integer currentUser = null;
 
     /**
      *
@@ -53,6 +54,13 @@ public class UserListController {
             }
         }
         return false;
+    }
+
+    public static void setCurrentUser(User newUser){
+        currentUser = newUser.getElasticID();
+    }
+    public static Integer getCurrentUserID(){
+        return currentUser;
     }
 }
 

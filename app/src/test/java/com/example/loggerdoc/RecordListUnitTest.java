@@ -21,7 +21,7 @@ public class RecordListUnitTest {
         recordList.add_internal(record);
         assertTrue("RecordList should contain added record", recordList.contains(record));
 
-        recordList.remove(record);
+        recordList.remove_internal(record);
         assertFalse("RecordList should not contain added record", recordList.contains(record));
     }
 
@@ -38,7 +38,7 @@ public class RecordListUnitTest {
         recordList.add_internal(recordB);
         assertEquals("RecordList should have size 2", 2, recordList.size());
 
-        recordList.remove(recordA);
+        recordList.remove_internal(recordA);
         assertEquals("RecordList should have size 1 after deletion", 1, recordList.size());
     }
 }

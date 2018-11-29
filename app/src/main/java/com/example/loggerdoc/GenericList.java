@@ -48,7 +48,7 @@ public class GenericList<T extends ElasticID>{
      *
      * @param data The data that needs to be updated from the generic list.
      */
-    protected void remove(T data) {
+    protected void remove_internal(T data) {
         datalist.remove(data.getElasticID());
     }
 

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.loggerdoc.ElasticSearchController;
-import com.example.loggerdoc.Problem;
 import com.example.loggerdoc.ProblemRecordListController;
 import com.example.loggerdoc.Record;
 import com.google.gson.Gson;
@@ -17,23 +16,20 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
-public class modifyRecordTask extends AsyncTask<Record, Void, Void> {
+public class removeRecordTask extends AsyncTask<Record, Void, Void> {
     private Context context;
-    public modifyRecordTask(Context context){
+    public removeRecordTask(Context context){
         this.context = context;
     }
     @Override
     protected Void doInBackground(Record... records) {
         Gson gson = new Gson();
-        String jsonout;
         Record tosend = records[0];
-        //File datafile = new File(context.getFilesDir().getAbsolutePath()+"/Problems/");
         ArrayList<Record> ret = ProblemRecordListController.getRecordList().getArray();
         httphandler sender = ElasticSearchController.getHttpHandler();
         OutputStream fos;
         BufferedWriter out;
-        jsonout = gson.toJson(tosend);
-        sender.httpPUT("/record/_doc/"+tosend.getElasticID().toString(),jsonout);
+        sender.httpDELETE("/record/_doc/"+tosend.getElasticID().toString());
 
         try {
 
@@ -59,7 +55,3 @@ public class modifyRecordTask extends AsyncTask<Record, Void, Void> {
         context = null;
     }
 }
-
-
-
-

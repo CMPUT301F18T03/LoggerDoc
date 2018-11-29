@@ -66,7 +66,7 @@ public class ActivityViewProblem extends AppCompatActivity {
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ProblemRecordListController.getProblemList().remove(problem);
+                ProblemRecordListController.getProblemList().remove(problem,getApplicationContext());
                 finish();
             }
         });
