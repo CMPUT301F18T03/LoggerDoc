@@ -1,5 +1,6 @@
 package com.example.loggerdoc;
 
+import android.content.Intent;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 
 import org.junit.Before;
@@ -18,22 +19,26 @@ public class ActivityLoginIntentTest {
 
     @Rule
     public IntentsTestRule<ActivityLogin> intentsTestRule =
-            new IntentsTestRule<>(ActivityLogin.class);
+            new IntentsTestRule<>(ActivityLogin.class, false, false);
 
     @Before
-    // create mock users and mock userlist
-    public void setup() {
-        Patient p = new Patient("Test Patient", "test@example.com", "555-555-1234", "Patient");
-        CareGiver c = new CareGiver("Test Caregiver", "test@example.com", "555-555-1234", "Caregiver");
-
-        UserListController.getUserList().add_internal(p);
-        UserListController.getUserList().add_internal(c);
+    public void before() {
+        intentsTestRule.launchActivity(new Intent());
+        try {
+            Thread.sleep(500); // a delay to ensure that new accounts get properly loaded
+        }
+        catch (InterruptedException e) {
+            // never
+        }
     }
 
     @Test
     public void TestLoginToPatientHomePage() {
+        Patient p = new Patient("Patty2222", "testpatient@example.com", "555-123-4567", "Patient");
+        UserListController.getUserList().add_internal(p);
+
         onView(withId(R.id.Username_Field))
-                .perform(typeText("Test Patient"), closeSoftKeyboard());
+                .perform(typeText("Patty2222"), closeSoftKeyboard());
         onView(withId(R.id.Login_Button))
                 .perform(click());
         intended(hasComponent(ActivityPatientHomePage.class.getName()));
@@ -41,8 +46,11 @@ public class ActivityLoginIntentTest {
 
     @Test
     public void TestLoginToCareGiverHomePage() {
+        CareGiver c = new CareGiver("CareBear", "testcaregiver@example.com", "555-555-1234", "Caregiver");
+        UserListController.getUserList().add_internal(c);
+
         onView(withId(R.id.Username_Field))
-                .perform(typeText("Test Caregiver"), closeSoftKeyboard());
+                .perform(typeText("CareBear"), closeSoftKeyboard());
         onView(withId(R.id.Login_Button))
                 .perform(click());
         intended(hasComponent(ActivityCareGiverHomePage.class.getName()));

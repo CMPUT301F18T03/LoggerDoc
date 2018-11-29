@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 public class ActivityViewRecordList extends AppCompatActivity {
 
     private int problemID;
+    private FloatingActionButton addRecordButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +29,7 @@ public class ActivityViewRecordList extends AppCompatActivity {
         TextView problemTitle = (TextView) findViewById(R.id.viewRecordListProblemTitle);
         problemTitle.setText(problem.getTitle());
 
-        FloatingActionButton addRecordButton = (FloatingActionButton) findViewById(R.id.addRecordButton);
+        addRecordButton = (FloatingActionButton) findViewById(R.id.addRecordButton);
         addRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,6 +50,15 @@ public class ActivityViewRecordList extends AppCompatActivity {
     public void onResume(){
         super.onResume();
 
+        User user = UserListController.getUserList().get(UserListController.getCurrentUserID());
+
+        if (user.getRole().equals("Caregiver")){
+            addRecordButton.setVisibility(View.INVISIBLE);
+        }
+        else{
+            addRecordButton.setVisibility(View.VISIBLE);
+        }
+
         //Initialize and set the adapter for the records
         ArrayAdapter<Record> recordAdapter = new AdapterListRecords(this, ProblemRecordListController.getRecordList().getRecords(problemID));
         ListView recordList = (ListView) findViewById(R.id.recordsListView);
@@ -66,7 +77,7 @@ public class ActivityViewRecordList extends AppCompatActivity {
     public void goViewRecord(View v, int position){
         Intent intent = new Intent(this, ActivityViewRecord.class);
         intent.putExtra("Problem", problemID);
-        intent.putExtra("Record", ProblemRecordListController.getRecordList().getArray().get(position).getElasticID());
+        intent.putExtra("Record", ProblemRecordListController.getRecordList().getRecords(problemID).get(position).getElasticID());
         startActivity(intent);
     }
 

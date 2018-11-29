@@ -16,6 +16,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
     private Patient patient;
     private Integer patient_ID;
     private ListView problemsList;
+    private FloatingActionButton addProblemButton;
 
     //To be called when the activity is created
     @Override
@@ -32,7 +33,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
          * Set the Add Problem button. When this button is pressed it will call
          * changeToAddProblemActivity().
          */
-        FloatingActionButton addProblemButton = (FloatingActionButton) findViewById(R.id.addProblemButton);
+        addProblemButton = (FloatingActionButton) findViewById(R.id.addProblemButton);
         addProblemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +71,15 @@ public class ActivityBrowseProblems extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
+        User user = UserListController.getUserList().get(UserListController.getCurrentUserID());
+
+        if (user.getRole().equals("Caregiver")){
+            addProblemButton.setVisibility(View.INVISIBLE);
+        }
+        else{
+            addProblemButton.setVisibility(View.VISIBLE);
+        }
+
 
         //TODO: fix if we get listeners working
         adapter = new AdapterListProblems(this, ProblemRecordListController.getProblemList().getArray());

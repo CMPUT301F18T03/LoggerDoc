@@ -10,6 +10,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.time.LocalDateTime;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
@@ -31,23 +33,17 @@ public class ActivityAddGeolocationIntentTest {
     public IntentsTestRule<ActivityAddGeolocation> intentsTestRule =
             new IntentsTestRule<>(ActivityAddGeolocation.class, false, false);
 
-    /*
     @Before
     // create mock intent with mock patient
     public void before() {
-        Patient p = new Patient("Test Patient", "test@example.com", "555-555-1234", "Patient");
-        Problem pr = new Problem("Test Problem", new DatePickerFragment(), "Test Problem's Description");
-        Record r = new Record("Test Record");
-        pr.addRecord(r);
-        p.getProblems().add(pr);
+        Patient p = new Patient("Patty2222", "testPatient@example.com", "555-555-1234", "Patient");
+        Problem pr = new Problem("Test Problem", LocalDateTime.now(),
+                "Test Problem's Description", p.getElasticID());
 
         Intent intent = new Intent();
-        intent.putExtra("Patient", p);
-        intent.putExtra("Position", 0);
-        intent.putExtra("Record", r);
+        intent.putExtra("Problem", pr.getElasticID());
         intentsTestRule.launchActivity(intent);
     }
-    */
 
     @Test
     public void TestResultFromActivity() {

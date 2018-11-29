@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -25,6 +26,7 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
     private int recordID;
     private Record record;
     private GoogleMap recordMap;
+    public static RecordPhotoList photoList = new RecordPhotoList();
     private static final float DEFAULT_ZOOM = 15;
 
     @Override
@@ -36,12 +38,26 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
     @Override
     public void onResume(){
         super.onResume();
+        Button editRecordButton = (Button) findViewById(R.id.editRecordButton);
+        Button deleteRecordButton = (Button) findViewById(R.id.deleteRecordButton);
+        User user = UserListController.getUserList().get(UserListController.getCurrentUserID());
+
+        if (user.getRole().equals("Caregiver")){
+            editRecordButton.setVisibility(View.INVISIBLE);
+            deleteRecordButton.setVisibility(View.INVISIBLE);
+        }
+        else{
+            editRecordButton.setVisibility(View.VISIBLE);
+            deleteRecordButton.setVisibility(View.VISIBLE);
+        }
 
         Intent intent = getIntent();
         problemID = intent.getIntExtra("Problem", 0);
         recordID = intent.getIntExtra("Record", 0);
         Problem problem = ProblemRecordListController.getProblemList().get(problemID);
         record  = ProblemRecordListController.getRecordList().get(recordID);
+
+        Log.d ("The title of the record is ", record.getTitle());
 
         TextView problemTitle = (TextView) findViewById(R.id.recordProblemTitleView);
         problemTitle.setText(problem.getTitle());
@@ -51,6 +67,20 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
 
         TextView recordComment = (TextView) findViewById(R.id.recordCommentView);
         recordComment.setText(record.getComment());
+
+        Button showimages = (Button) findViewById(R.id.showRecordImage);
+        Button showBodyLocation = (Button) findViewById(R.id.showBodyLoc);
+
+        photoList = record.getRecordPhotoList();
+        //Log.i("THIS_TAG", String.valueOf(photoList.getPhoto(0).getPhoto()));
+        showimages.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+                Intent intent = new Intent(v.getContext(), ActivityPhotoGrid.class);
+                startActivity(intent);
+
+            }
+        });
 
         initializeMap();
     }
@@ -65,13 +95,6 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
     public void onMapReady(GoogleMap googleMap) {
         recordMap = googleMap;
         recordMap.getUiSettings().setZoomControlsEnabled(true);
-        recordMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
-            @Override
-            public void onMapLongClick(LatLng latLng) {
-                recordMap.clear();
-                moveCamera(latLng, DEFAULT_ZOOM, "");
-            }
-        });
 
         if (record.getRecordGeoLocation() != null){
             moveCamera(new LatLng(record.getRecordGeoLocation().getLatitude(),
@@ -105,7 +128,7 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ProblemRecordListController.getRecordList().remove(record);
+                ProblemRecordListController.getRecordList().remove(record,getApplicationContext());
                 finish();
             }
         });

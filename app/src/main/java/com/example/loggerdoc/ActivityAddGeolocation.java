@@ -55,7 +55,7 @@ public class ActivityAddGeolocation extends AppCompatActivity implements OnMapRe
 
         //Get the objects that were passed from the previous activity
         Intent firstIntent = getIntent();
-        final int problem_ID = (int) firstIntent.getSerializableExtra("Problem");
+        final int problem_ID = firstIntent.getIntExtra("Problem", 0);
 
         //Check the location permissions
         checkLocationPermissions();

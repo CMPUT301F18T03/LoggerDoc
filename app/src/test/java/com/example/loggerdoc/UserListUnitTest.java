@@ -21,7 +21,7 @@ public class UserListUnitTest {
 
         assertTrue("Does the list contain the object we added", testList.contains(testPatient));
 
-        testList.remove(testPatient);
+        testList.remove_internal(testPatient);
 
     }
 
@@ -36,7 +36,7 @@ public class UserListUnitTest {
 
         assertTrue("Does the list contain the object we added", testList.contains(testPatient));
 
-        testList.remove(testPatient);
+        testList.remove_internal(testPatient);
         assertTrue("Size should be 0 since we have not added anything", testList.size() == 0);
 
     }
