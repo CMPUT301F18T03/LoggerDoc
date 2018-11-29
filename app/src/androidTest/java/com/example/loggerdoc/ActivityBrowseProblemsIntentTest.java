@@ -71,7 +71,8 @@ public class ActivityBrowseProblemsIntentTest {
 
     @After
     public void after() {
-        ProblemRecordListController.getProblemList().remove(pr);
+        ProblemRecordListController.getProblemList().remove(pr,
+                intentsTestRule.getActivity().getBaseContext());
     }
 
 }
