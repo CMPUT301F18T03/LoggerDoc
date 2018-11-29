@@ -57,15 +57,13 @@ public class ActivityCareGiverAddPatient extends AppCompatActivity {
                 UserListController.getUserList().add(loggedInCareGiver,getApplicationContext());
                 userID.setText("");
                 finish();
+                return;
             }
-            else{
-                Toast.makeText(this, "That username does not exist. Please try again.", Toast.LENGTH_SHORT).show();
-                userID.setText("");
-
-            }
-
-
         }
+
+        // otherwise, if the provided user isn't in the list:
+        Toast.makeText(this, "That username does not exist. Please try again.", Toast.LENGTH_SHORT).show();
+        userID.setText("");
     }
 
 
