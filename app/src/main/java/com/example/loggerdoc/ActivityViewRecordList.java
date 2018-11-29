@@ -60,7 +60,6 @@ public class ActivityViewRecordList extends AppCompatActivity {
         }
 
         //Initialize and set the adapter for the records
-        Log.d ("The size of the record list is", String.valueOf(ProblemRecordListController.getRecordList().getRecords(problemID).size()));
         ArrayAdapter<Record> recordAdapter = new AdapterListRecords(this, ProblemRecordListController.getRecordList().getRecords(problemID));
         ListView recordList = (ListView) findViewById(R.id.recordsListView);
         recordList.setAdapter(recordAdapter);
@@ -68,8 +67,6 @@ public class ActivityViewRecordList extends AppCompatActivity {
         recordList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("The position is", String.valueOf(position));
-                Log.d("The title of the second record is", String.valueOf(ProblemRecordListController.getRecordList().getRecords(problemID).get(position).getTitle()));
                 goViewRecord(view, position);
             }
         });

@@ -95,13 +95,6 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
     public void onMapReady(GoogleMap googleMap) {
         recordMap = googleMap;
         recordMap.getUiSettings().setZoomControlsEnabled(true);
-        recordMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
-            @Override
-            public void onMapLongClick(LatLng latLng) {
-                recordMap.clear();
-                moveCamera(latLng, DEFAULT_ZOOM, "");
-            }
-        });
 
         if (record.getRecordGeoLocation() != null){
             moveCamera(new LatLng(record.getRecordGeoLocation().getLatitude(),

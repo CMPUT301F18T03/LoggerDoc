@@ -21,7 +21,7 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
     private Record record;
     private EditText editRecordTitle;
     private EditText editRecordComment;
-    private  MarkerOptions options;
+    private  MarkerOptions options = null;
 
     private static final int DEFAULT_ZOOM = 15;
     private static final LatLng DEFAULT_LOCATION = new LatLng(53.5232, -113.5263);
@@ -78,9 +78,6 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
             moveCamera(new LatLng(record.getRecordGeoLocation().getLatitude(),
                             record.getRecordGeoLocation().getLongitude()),
                     DEFAULT_ZOOM, record.getTitle());
-        }
-        else{
-            moveCamera(DEFAULT_LOCATION, DEFAULT_ZOOM, "");
         }
     }
 
