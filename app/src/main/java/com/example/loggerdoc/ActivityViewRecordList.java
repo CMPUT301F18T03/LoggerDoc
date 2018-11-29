@@ -13,6 +13,7 @@ import android.widget.TextView;
 public class ActivityViewRecordList extends AppCompatActivity {
 
     private int problemID;
+    private FloatingActionButton addRecordButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,7 @@ public class ActivityViewRecordList extends AppCompatActivity {
         TextView problemTitle = (TextView) findViewById(R.id.viewRecordListProblemTitle);
         problemTitle.setText(problem.getTitle());
 
-        FloatingActionButton addRecordButton = (FloatingActionButton) findViewById(R.id.addRecordButton);
+        addRecordButton = (FloatingActionButton) findViewById(R.id.addRecordButton);
         addRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,6 +48,15 @@ public class ActivityViewRecordList extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
+
+        User user = UserListController.getUserList().get(UserListController.getCurrentUserID());
+
+        if (user.getRole().equals("Caregiver")){
+            addRecordButton.setVisibility(View.INVISIBLE);
+        }
+        else{
+            addRecordButton.setVisibility(View.VISIBLE);
+        }
 
         //Initialize and set the adapter for the records
         ArrayAdapter<Record> recordAdapter = new AdapterListRecords(this, ProblemRecordListController.getRecordList().getRecords(problemID));

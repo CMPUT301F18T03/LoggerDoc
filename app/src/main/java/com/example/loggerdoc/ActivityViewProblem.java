@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -30,6 +31,22 @@ public class ActivityViewProblem extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
+        Button addCommentButton = findViewById(R.id.addComment);
+        Button editProblemButton = findViewById(R.id.editButton);
+        Button deleteProblemButton = findViewById(R.id.deleteButton);
+
+        User user = UserListController.getUserList().get(UserListController.getCurrentUserID());
+
+        if (user.getRole().equals("Caregiver")){
+            addCommentButton.setVisibility(View.VISIBLE);
+            editProblemButton.setVisibility(View.INVISIBLE);
+            deleteProblemButton.setVisibility(View.INVISIBLE);
+        }
+        else{
+            addCommentButton.setVisibility(View.INVISIBLE);
+            editProblemButton.setVisibility(View.VISIBLE);
+            deleteProblemButton.setVisibility(View.VISIBLE);
+        }
 
         //Set the problem
         Intent intent = getIntent();

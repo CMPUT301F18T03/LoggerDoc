@@ -38,6 +38,18 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
     @Override
     public void onResume(){
         super.onResume();
+        Button editRecordButton = (Button) findViewById(R.id.editRecordButton);
+        Button deleteRecordButton = (Button) findViewById(R.id.deleteRecordButton);
+        User user = UserListController.getUserList().get(UserListController.getCurrentUserID());
+
+        if (user.getRole().equals("Caregiver")){
+            editRecordButton.setVisibility(View.INVISIBLE);
+            deleteRecordButton.setVisibility(View.INVISIBLE);
+        }
+        else{
+            editRecordButton.setVisibility(View.VISIBLE);
+            deleteRecordButton.setVisibility(View.VISIBLE);
+        }
 
         Intent intent = getIntent();
         problemID = intent.getIntExtra("Problem", 0);
@@ -58,7 +70,7 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
         Button showBodyLocation = (Button) findViewById(R.id.showBodyLoc);
 
         photoList = record.getRecordPhotoList();
-        Log.i("THIS_TAG", String.valueOf(photoList.getPhoto(0).getPhoto()));
+        //Log.i("THIS_TAG", String.valueOf(photoList.getPhoto(0).getPhoto()));
         showimages.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
