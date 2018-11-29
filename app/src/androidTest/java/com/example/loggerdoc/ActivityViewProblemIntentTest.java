@@ -7,32 +7,38 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.time.LocalDateTime;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 public class ActivityViewProblemIntentTest {
+
+    private Problem pr;
 
     @Rule
     public IntentsTestRule<ActivityViewProblem> intentsTestRule =
             new IntentsTestRule<>(ActivityViewProblem.class, false, false);
 
-    /*
     @Before
     // create mock patient with mock problem
     public void setup() {
-        Problem pr = new Problem("Test Problem", new DatePickerFragment(), "Test Problem's Description");
-        Patient p = new Patient("Test Patient", "test@example.com", "555-555-1234", "Patient");
-        p.getProblems().add(pr);
+        Patient p = new Patient("Patty2222", "testPatient@example.com", "555-123-4567", "Patient");
+        pr = new Problem("Possible concussion", LocalDateTime.now(),
+                "From car accident", p.getElasticID());
+        ProblemRecordListController.getProblemList().add_internal(pr);
+
         Intent i = new Intent();
-        i.putExtra("Patient", p);
-        i.putExtra("Position", 0);
+        i.putExtra("Patient", p.getElasticID());
+        i.putExtra("Position", pr.getElasticID());
         intentsTestRule.launchActivity(i);
     }
-    */
 
     @Test
     public void TestEditProblemFromView() {
@@ -42,10 +48,10 @@ public class ActivityViewProblemIntentTest {
     }
 
     @Test
-    public void TestAddRecordFromViewProblem() {
-        onView(withId(R.id.addRecordButton))
+    public void TestViewRecordsFromProblem() {
+        onView(withId(R.id.viewRecord))
                 .perform(click());
-        intended(hasComponent(ActivityAddRecord.class.getName()));
+        intended(hasComponent(ActivityViewRecordList.class.getName()));
     }
 
     @Test
@@ -54,6 +60,7 @@ public class ActivityViewProblemIntentTest {
                 .perform(click());
         onView(withId(android.R.id.button1))
                 .perform(click());
-        intended(hasComponent(ActivityBrowseProblems.class.getName()));
+        assertFalse(ProblemRecordListController.getProblemList().contains(pr));
+        assertTrue(intentsTestRule.getActivity().isFinishing());
     }
 }

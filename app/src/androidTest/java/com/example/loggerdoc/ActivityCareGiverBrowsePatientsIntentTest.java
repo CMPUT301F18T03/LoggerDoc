@@ -24,11 +24,15 @@ public class ActivityCareGiverBrowsePatientsIntentTest {
     @Before
     // create mock caregiver with mock patient
     public void setup() {
-        CareGiver c = new CareGiver("Test Caregiver", "test@example.com", "555-555-1234", "Caregiver");
-        Patient p = new Patient("Test Patient", "test@example.com", "555-555-1234", "Patient");
+        CareGiver c = new CareGiver("CareBear", "testcaregiver@example.com", "555-555-1234", "Caregiver");
+        Patient p = new Patient("Patty2222", "testpatient@example.com", "555-123-4567", "Patient");
         c.addPatient(p);
+
+        UserListController.getUserList().add_internal(c);
+        UserListController.getUserList().add_internal(p);
+
         Intent i = new Intent();
-        i.putExtra("Caregiver", c);
+        i.putExtra("Caregiver", c.getElasticID());
         intentsTestRule.launchActivity(i);
     }
 

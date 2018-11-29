@@ -29,8 +29,8 @@ public class ActivityBrowseProblemsIntentTest {
     @Before
     // create mock patient with mock problem
     public void setup() {
-        Patient p = new Patient("Test Patient", "test@example.com", "555-555-1234", "Patient");
-        pr = new Problem("Test Problem", LocalDateTime.now(), "Test Problem's Description", p.getElasticID());
+        Patient p = new Patient("Patty2222", "testpatient@example.com", "555-123-4567", "Patient");
+        pr = new Problem("Ear Infection", LocalDateTime.now(), "Right ear", p.getElasticID());
         p.getProblems().add(pr.getElasticID());
 
         UserListController.getUserList().add_internal(p);
