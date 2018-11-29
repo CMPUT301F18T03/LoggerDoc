@@ -16,7 +16,7 @@
         android:onClick="toCareGiverBrowsePatients"
         android:text="@string/browse_patients"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/CHomePageEditContactInfo"
+        app:layout_constraintEnd_toStartOf="@+id/CViewProfileButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.656" />
@@ -50,7 +50,7 @@
 
 
     <Button
-        android:id="@+id/CHomePageEditContactInfo"
+        android:id="@+id/CViewProfileButton"
         android:layout_width="180dp"
         android:layout_height="180dp"
         android:layout_marginBottom="8dp"
