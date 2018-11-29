@@ -3,7 +3,6 @@ package com.example.loggerdoc;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +37,7 @@ public class AdapterListProblems extends ArrayAdapter<Problem> {
         }
         Problem currentProblem = problemList.get(position);
 
-        TextView problemTitle = (TextView) listitem.findViewById(R.id.ProblemTitle);
+        TextView problemTitle = (TextView) listitem.findViewById(R.id.UserNameDisplay);
         problemTitle.setText(currentProblem.getTitle());
 
         TextView date = (TextView) listitem.findViewById(R.id.DateView);
