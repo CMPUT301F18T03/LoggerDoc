@@ -128,6 +128,7 @@
 
     <Button
         android:id="@+id/showRecordImage"
+        android:background="@drawable/squarebuttonshape"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -138,6 +139,7 @@
 
     <Button
         android:id="@+id/showBodyLoc"
+        android:background="@drawable/squarebuttonshape"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
