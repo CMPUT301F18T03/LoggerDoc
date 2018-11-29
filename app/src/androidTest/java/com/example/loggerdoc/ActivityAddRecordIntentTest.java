@@ -35,7 +35,7 @@ public class ActivityAddRecordIntentTest {
     // create mock intent with mock patient and mock problem
     public void before() {
         Patient p = new Patient("Patty2222", "testPatient@example.com", "555-123-4567", "Patient");
-        Problem pr = new Problem("Possible concussion", LocalDateTime.now(),
+        pr = new Problem("Possible concussion", LocalDateTime.now(),
                 "From car accident", p.getElasticID());
         ProblemRecordListController.getProblemList().add_internal(pr);
 
