@@ -24,6 +24,7 @@ public class ActivityViewBodyLocation extends AppCompatActivity {
                 GlideApp
                         .with(this)
                         .load(list.getPhoto(0).getPhoto())
+                        .override(500,750)                        .centerCrop()
                         .into(bl2);
                 label2.setText(list.getPhoto(0).getLabel());
 
@@ -33,6 +34,7 @@ public class ActivityViewBodyLocation extends AppCompatActivity {
                 GlideApp
                         .with(this)
                         .load(list.getPhoto(0).getPhoto())
+                        .override(500,750)                        .centerCrop()
                         .into(bl1);
                 label1.setText(list.getPhoto(0).getLabel());
 
@@ -44,12 +46,15 @@ public class ActivityViewBodyLocation extends AppCompatActivity {
             GlideApp
                     .with(this)
                     .load(list.getPhoto(0).getPhoto())
+                    .override(500,750)                    .centerCrop()
                     .into(bl1);
             label1.setText(list.getPhoto(0).getLabel());
 
             GlideApp
                     .with(this)
                     .load(list.getPhoto(1).getPhoto())
+                    .override(500,750)
+                    .centerCrop()
                     .into(bl2);
             label2.setText(list.getPhoto(1).getLabel());
         }

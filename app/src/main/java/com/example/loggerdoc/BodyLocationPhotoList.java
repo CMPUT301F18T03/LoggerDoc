@@ -1,8 +1,9 @@
 package com.example.loggerdoc;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class BodyLocationPhotoList {
+public class BodyLocationPhotoList implements Serializable {
     private ArrayList<BodyLocationPhoto> bodyLocationlist;
 
     public BodyLocationPhotoList() {
