@@ -12,10 +12,13 @@ public class BodLocationTest {
     @Test
     public void TestBodylocation(){
         Bodylocation bodylocation = new Bodylocation();
-        bodylocation.setFrontTuple(1,1);
-        bodylocation.setBackTuple(2,2);
-        ArrayList<Integer> back = new ArrayList<Integer>();
-        back = bodylocation.getBackTuple();
-        assertEquals(back.get(0),2);
+        bodylocation.setBackX(0);
+        bodylocation.setBackY(0);
+        bodylocation.setFrontX(0);
+        bodylocation.setFrontY(0);
+
+        assertEquals(bodylocation.getBackX(), bodylocation.getBackY());
+        assertEquals(bodylocation.getFrontX(), bodylocation.getFrontY());
+
     }
 }
