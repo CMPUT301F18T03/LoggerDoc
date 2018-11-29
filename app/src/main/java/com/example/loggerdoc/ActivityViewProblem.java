@@ -76,8 +76,14 @@ public class ActivityViewProblem extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /*
+     * @author = Alexandra Tyrrell
+     *
+     * Show an alert dialog to ask for user's confirmation whether they would like to delete the
+     * selected problem
+     */
     public void goDeleteProblem (final View v){
-        //Show an alert dialog to ask for user's confirmation whether they would like to delete
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Are you sure you would like to delete this problem?");
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
