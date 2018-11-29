@@ -22,7 +22,7 @@ public class ActivityPatientHomePageIntentTest {
     @Before
     // create mock patient
     public void setup() {
-        Patient p = new Patient("Test Patient", "test@example.com", "555-555-1234", "Patient");
+        Patient p = new Patient("Patty2222", "testpatient@example.com", "555-123-4567", "Patient");
         UserListController.getUserList().add_internal(p);
 
         Intent i = new Intent();
@@ -31,10 +31,10 @@ public class ActivityPatientHomePageIntentTest {
     }
 
     @Test
-    public void TestUpdateContactInfo() {
-        onView(withId(R.id.PHomePageEditContactInfo))
+    public void TestViewProfile() {
+        onView(withId(R.id.PViewProfileButton))
                 .perform(click());
-        intended(hasComponent(ActivityUpdateContactInfo.class.getName()));
+        intended(hasComponent(ActivityUserProfile.class.getName()));
     }
 
     @Test
