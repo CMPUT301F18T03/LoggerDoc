@@ -11,11 +11,24 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/*
+ * This class is to be used by ActivityViewProblem.class to create a custom ArrayAdapter and
+ * ListView. The ListView will show the comment and the date of a caregiver comment for a problem.
+ */
+
 public class AdapterListComments extends ArrayAdapter<CaregiverComment> {
 
     private ArrayList<CaregiverComment> commentList;
     private Context commentContext;
 
+    /**
+     * @author Alexandra Tyrrell
+     *
+     * Constructor for the AdapterListComments.
+     *
+     * @param context Context
+     * @param list ArrayList
+     */
     public AdapterListComments (@NonNull Context context, ArrayList<CaregiverComment> list){
         super (context, 0, list);
         commentContext = context;
@@ -25,7 +38,17 @@ public class AdapterListComments extends ArrayAdapter<CaregiverComment> {
     public void refresh(ArrayList<CaregiverComment> a) {
         this.commentList = a;
     }
-
+    
+    /**
+     * @author Alexandra Tyrrell
+     *
+     * This creates a custom ListView which displays the comment and the date of a caregiver comment
+     * for a problem.
+     *
+     * @param position int
+     * @param convertView View
+     * @param parent View Group
+     */
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

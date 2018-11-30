@@ -4,11 +4,15 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+/*This class displays the problems that the user has entered/saved using a custom array adapter
+ *(located in the AdapterListProblems class). The problem list of the user is used in the adapter to
+ *display the problems
+ */
 
 public class ActivityBrowseProblems extends AppCompatActivity {
 
@@ -18,7 +22,6 @@ public class ActivityBrowseProblems extends AppCompatActivity {
     private ListView problemsList;
     private FloatingActionButton addProblemButton;
 
-    //To be called when the activity is created
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,10 +70,13 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         });
     }
 
-    //To be called when the activity is resumed
     @Override
     protected void onResume(){
         super.onResume();
+        /*
+         * Check whether the currently logged in user is a patient or a caregiver. If a caregiver,
+         * make the add a problem button invisible.
+         */
         User user = UserListController.getUserList().get(UserListController.getCurrentUserID());
 
         if (user.getRole().equals("Caregiver")){
@@ -79,7 +85,6 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         else{
             addProblemButton.setVisibility(View.VISIBLE);
         }
-
 
         //TODO: fix if we get listeners working
         adapter = new AdapterListProblems(this, ProblemRecordListController.getProblemList().getArray());
@@ -96,7 +101,12 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         });
     }
 
-    //Change to ActivityViewProblem.
+    /** @author = Alexandra Tyrrell
+     *
+     * The method will change the Activity to Activity View Problem
+     *
+     * @param view View
+     */
     public void changeToViewProblemActivity(View view, Patient patient, int position){
         Intent intent = new Intent(this, ActivityViewProblem.class);
         intent.putExtra("Patient", patient_ID);
@@ -105,19 +115,34 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //Change to ActivityAddProblem.
+    /** @author = Alexandra Tyrrell
+     *
+     * The method will change the Activity to Add Problem Activity
+     *
+     * @param view View
+     */
     public void changeToAddProblemActivity (View view){
         Intent intent = new Intent(this, ActivityAddProblem.class);
         startActivity(intent);
     }
 
-    //Change to ActivitySearch.
+    /** @author = Alexandra Tyrrell
+     *
+     * The method will change the Activity to Search Activity
+     *
+     * @param view View
+     */
     public void changeToSearchActivity(View view){
         Intent intent = new Intent (this, ActivitySearch.class);
         startActivity(intent);
     }
 
-    //Change to ActivityUserProfile.
+    /** @author = Alexandra Tyrrell
+     *
+     * The method will change the Activity to Activity User Profile
+     *
+     * @param view View
+     */
     public void changeToUserProfile (View view){
         Intent intent = new Intent (this, ActivityUserProfile.class);
         intent.putExtra("Patient", patient_ID);

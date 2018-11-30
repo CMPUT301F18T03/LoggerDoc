@@ -9,6 +9,11 @@ import android.widget.ImageView;
 
 import java.time.LocalDateTime;
 
+/*
+ * This class displays the problem that the user has selected and it allows them to edit the title,
+ * starting date and the comment.
+ */
+
 public class ActivityEditProblem extends AppCompatActivity {
 
     private EditText editTitle;
@@ -49,7 +54,16 @@ public class ActivityEditProblem extends AppCompatActivity {
         datePickerFragment.setNextFragment(timePickerFragment);
 
     }
-
+    
+    /**
+     * @author Alexandra Tyrrell
+     *
+     * This method checks whether we have all the fields that are needed to update the problem. If
+     * not, there will be an appropriate error dialog shown. The method will then update the problem
+     * in the problem list.
+     *
+     * @param v View
+     */
     public void updateProblem (View v){
 
         //Check if the problemTitle and if the problemDescription is empty
@@ -99,9 +113,13 @@ public class ActivityEditProblem extends AppCompatActivity {
         }
     }
 
-    /*
-     * Check if the string is empty. Takes a string as a parameter and returns true if empty.
-     * Returns false otherwise.
+    /**
+     * @author Alexandra Tyrrell
+     *
+     * This method checks whether a string is empty or not. It returns true if the string is empty
+     * and false otherwise.
+     *
+     * @param string String
      */
     public boolean checkEmptyString(String string){
         if (string.length() == 0){
@@ -110,12 +128,25 @@ public class ActivityEditProblem extends AppCompatActivity {
         return false;
     }
 
-    //Show the Date Picker
+    /**
+     * @author Alexandra Tyrrell
+     *
+     * Show the Date and Time Picker.
+     *
+     * @param v View
+     */
     public void clickPickDate(View v){
         datePickerFragment.show(getSupportFragmentManager(), "Edit Date Fragment");
     }
 
-    //Show an error Alert Dialog.
+    /**
+     * @author Alexandra Tyrrell
+     *
+     * Uses the Dialog Problem class to show an error dialog with the specified string and message.
+     *
+     * @param title String
+     * @param message String
+     */
     private void showAlertDialog( String title, String message){
         Bundle messageArgs = new Bundle();
         messageArgs.putString(DialogProblem.TITLE_ID, title);
@@ -126,7 +157,13 @@ public class ActivityEditProblem extends AppCompatActivity {
         dialog.show(getSupportFragmentManager(), "error_dialog");
     }
 
-    //Change the activity to ActivityViewProblems
+    /**
+     * @author = Alexandra Tyrrell
+     *
+     * The method will change the Activity to Activity View Problem.
+     *
+     * @param v View
+     */
     public void changeActivity(View v){
         Intent intent = new Intent(this, ActivityViewProblem.class);
         intent.putExtra("Position", problemID);

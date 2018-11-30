@@ -1,11 +1,8 @@
 package com.example.loggerdoc;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,12 +17,19 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+/*
+ * This class displays the selected record. If the user is a patient, he/she can edit or delete the
+ * record. If the user is a caregiver, he/she can only view the record's geolocation, photos or/and
+ * body-location.
+ */
+
 public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyCallback {
 
     private int problemID;
     private int recordID;
     private Record record;
     private GoogleMap recordMap;
+
     public static RecordPhotoList photoList = new RecordPhotoList();
     public  static BodyLocationPhotoList blPhotoList = new BodyLocationPhotoList();
     public static Bodylocation bodylocation = new Bodylocation();
@@ -40,7 +44,24 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
     @Override
     public void onResume(){
         super.onResume();
+        Button editRecordButton = (Button) findViewById(R.id.editRecordButton);
+        Button deleteRecordButton = (Button) findViewById(R.id.deleteRecordButton);
 
+        /*
+         * Check whether the currently logged in user is a patient or a caregiver. If a caregiver,
+         * make the edit and delete record buttons invisible.
+         */
+        User user = UserListController.getUserList().get(UserListController.getCurrentUserID());
+        if (user.getRole().equals("Caregiver")){
+            editRecordButton.setVisibility(View.INVISIBLE);
+            deleteRecordButton.setVisibility(View.INVISIBLE);
+        }
+        else{
+            editRecordButton.setVisibility(View.VISIBLE);
+            deleteRecordButton.setVisibility(View.VISIBLE);
+        }
+
+        //Get the correct problem and record from the intent, and initialize the text fields accordingly.
         Intent intent = getIntent();
         problemID = intent.getIntExtra("Problem", 0);
         recordID = intent.getIntExtra("Record", 0);
@@ -60,6 +81,7 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
         Button showBodyLocation = (Button) findViewById(R.id.showBodyLoc);
 
         photoList = record.getRecordPhotoList();
+
         bodylocation = record.getBodylocation();
         blPhotoList = record.getBlPhotoList();
 
@@ -83,42 +105,48 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
         initializeMap();
     }
 
+    /*
+     * @author = Alexandra Tyrrell
+     *
+     * Initialize the map.
+     */
     private void initializeMap() {
-        //intialize the map object
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.recordMapView);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.recordMapView);
         mapFragment.getMapAsync(ActivityViewRecord.this);
     }
 
+    /*
+     * @author = Alexandra Tyrrell
+     *
+     * The callback interface implemented for when the Map is ready to used. In this activity, the
+     * map will display the geolocation of the record if it has one. It will also enable the zoom
+     * features for the GoogleMap.
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         recordMap = googleMap;
         recordMap.getUiSettings().setZoomControlsEnabled(true);
-        recordMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
-            @Override
-            public void onMapLongClick(LatLng latLng) {
-                recordMap.clear();
-                moveCamera(latLng, DEFAULT_ZOOM, "");
-            }
-        });
 
         if (record.getRecordGeoLocation() != null){
-            moveCamera(new LatLng(record.getRecordGeoLocation().getLatitude(),
-                            record.getRecordGeoLocation().getLongitude()),
-                    DEFAULT_ZOOM, "Record Location");
+            recordMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                    new LatLng(record.getRecordGeoLocation().getLatitude(),
+                            record.getRecordGeoLocation().getLongitude()),DEFAULT_ZOOM));
+
+            //set the marker to the set latitude and longitude, with a title.
+            MarkerOptions options = new MarkerOptions()
+                    .position(new LatLng(record.getRecordGeoLocation().getLatitude(),
+                    record.getRecordGeoLocation().getLongitude()))
+                    .title("Record Location");
+            recordMap.addMarker(options);
         }
     }
 
-
-    //move camera to specified location (latitude and longitude)
-    private void moveCamera (LatLng latLng, float zoom, String title){
-
-        recordMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,zoom));
-
-        //set the marker to the set latitude and longitude, with a title.
-        MarkerOptions options = new MarkerOptions().position(latLng).title(title);
-        recordMap.addMarker(options);
-    }
-
+    /*
+     * @author = Alexandra Tyrrell
+     *
+     * Change to the Edit Record Activity.
+     */
     public void goEditRecord(View view){
         Intent intent = new Intent(this, ActivityEditRecord.class);
         intent.putExtra("Problem", problemID);
@@ -126,6 +154,12 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
         startActivity(intent);
     }
 
+    /*
+     * @author = Alexandra Tyrrell
+     *
+     * Show an alert dialog to ask for user's confirmation whether they would like to delete the
+     * selected record.
+     */
     public void goDeleteRecord (View view){
         //Show an alert dialog to ask for user's confirmation whether they would like to delete
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
