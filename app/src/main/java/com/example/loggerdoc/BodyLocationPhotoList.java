@@ -1,8 +1,9 @@
 package com.example.loggerdoc;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class BodyLocationPhotoList {
+public class BodyLocationPhotoList implements Serializable {
     private ArrayList<BodyLocationPhoto> bodyLocationlist;
 
     public BodyLocationPhotoList() {
@@ -16,6 +17,8 @@ public class BodyLocationPhotoList {
     public void remove(BodyLocationPhoto photo) {
         bodyLocationlist.remove(photo);
     }
+
+    public BodyLocationPhoto getPhoto(int position){return this.bodyLocationlist.get(position);}
 
     public boolean contains(BodyLocationPhoto photo) {
         return bodyLocationlist.contains(photo);

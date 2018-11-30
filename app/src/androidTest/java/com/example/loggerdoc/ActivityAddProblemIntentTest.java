@@ -38,5 +38,8 @@ public class ActivityAddProblemIntentTest {
         Problem pr = ProblemRecordListController.getProblemList().getArray().get(0);
         assertTrue(pr.getTitle().equals(testProblemTitle));
         assertTrue(pr.getDescription().equals(testProblemDesc));
+
+        ProblemRecordListController.getProblemList().remove(pr,
+                intentsTestRule.getActivity().getBaseContext());
     }
 }

@@ -14,6 +14,11 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+/*
+ * This class displays the record that the user has selected and it allows them to edit the title,
+ * the comment, the geolocation, any photos, and/or body locations.
+ */
+
 public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyCallback {
     private int problemID;
     private int recordID;
@@ -21,10 +26,9 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
     private Record record;
     private EditText editRecordTitle;
     private EditText editRecordComment;
-    private  MarkerOptions options;
+    private MarkerOptions options = null;
 
     private static final int DEFAULT_ZOOM = 15;
-    private static final LatLng DEFAULT_LOCATION = new LatLng(53.5232, -113.5263);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,7 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
     protected void onResume(){
         super.onResume();
 
+        //Get the correct problem and record from the intent, and initialize the text fields accordingly.
         Intent intent = getIntent();
         problemID = intent.getIntExtra("Problem",0);
         recordID = intent.getIntExtra("Record",0);
@@ -55,13 +60,27 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
         initializeMap();
     }
 
+    /**
+     * @author = Alexandra Tyrrell
+     *
+     * Initialize the map.
+     */
     private void initializeMap() {
-        //intialize the map object
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.editRecordMapView);
         mapFragment.getMapAsync(ActivityEditRecord.this);
 
     }
 
+    /**
+     * @author = Alexandra Tyrrell
+     *
+     * The callback interface implemented for when the Map is ready to used. In this activity, the
+     * map will display the geolocation of the record if it has one. It will also enable the zoom
+     * features for the GoogleMap and the long click listener. The long click listener will add a
+     * marker to the map showing the new geolocation that the user would like to save.
+     *
+     * @param googleMap GoogleMap
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         editRecordMap = googleMap;
@@ -79,12 +98,14 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
                             record.getRecordGeoLocation().getLongitude()),
                     DEFAULT_ZOOM, record.getTitle());
         }
-        else{
-            moveCamera(DEFAULT_LOCATION, DEFAULT_ZOOM, "");
-        }
     }
 
-    //move camera to specified location (latitude and longitude)
+    /**
+     * @author = Alexandra Tyrrell
+     *
+     * The method will change the position of the camera to show the specified latitude and
+     * longitude coordinate. It will also add a marker to the specified location with a title.
+     */
     private void moveCamera (LatLng latLng, float zoom, String title){
 
         editRecordMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,zoom));
@@ -94,6 +115,12 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
         editRecordMap.addMarker(options);
     }
 
+    /**
+     * @author = Alexandra Tyrrell and Tristan Glover
+     *
+     * The method will update the record with changes from the title, comment, geolocation, photos
+     * and/or body locations. It will update it both on the server and the cache.
+     */
     public void updateRecord(View v){
         record.setTitle(editRecordTitle.getText().toString());
         record.setComment(editRecordComment.getText().toString());
@@ -105,7 +132,6 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
 
         //TODO: Photos and Body Locations
 
-        //TODO: Update the record in the recordList
         ProblemRecordListController.getRecordList().update(record,getApplicationContext());
         finish();
     }

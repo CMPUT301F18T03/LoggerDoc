@@ -104,6 +104,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/squarebuttonshape"
+                android:onClick="toProblemMap"
                 android:text="@string/browse_problem_map"
                 android:textColor="@android:color/white" />
         </TableRow>
