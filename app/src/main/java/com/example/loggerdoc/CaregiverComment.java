@@ -12,9 +12,18 @@ public class CaregiverComment {
      *
      * @param comment Comment is a string that the CareGiver is making as a comment
      */
-    public CaregiverComment ( String comment){
+    public CaregiverComment (CareGiver caregiver, String comment){
+        this.caregiver = caregiver;
         this.date = LocalDateTime.now();
         this.comment = comment;
+    }
+
+    public CareGiver getCaregiver(){
+        return this.caregiver;
+    }
+
+    public void setCaregiver (CareGiver newCaregiver){
+        this.caregiver = newCaregiver;
     }
 
     /**

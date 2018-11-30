@@ -217,4 +217,58 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
         loginbut.setAlpha(1f);
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent prevIntent) {
+        super.onActivityResult(requestCode, resultCode, prevIntent);
+        if (requestCode == 0) {
+
+            if (resultCode == RESULT_OK) {
+                //get the id read by the qrcode scanner
+                Integer user_ID = Integer.parseInt(prevIntent.getStringExtra("SCAN_RESULT"));
+
+                // log in as a patient or a caregiver depending on the QR code scanned
+                if (userList.get(user_ID).getRole().equals("Patient")){
+                    Intent intent = new Intent(ActivityLogin.this, ActivityPatientHomePage.class);
+                    intent.putExtra("Patient", user_ID);
+                    startActivity(intent);
+                    //if (mPublisherInterstitialAd.isLoaded()) {
+                    //    mPublisherInterstitialAd.show();
+                    //}
+
+                }
+                else if (userList.get(user_ID).getRole().equals("Caregiver")){
+                    Intent intent = new Intent(ActivityLogin.this, ActivityCareGiverHomePage.class);
+                    intent.putExtra("Caregiver", user_ID);
+                    startActivity(intent);
+
+                }
+                else{ //QR code scanned is not a patient or user and cant be used
+                    Toast.makeText(this, "Invalid QR Code. Please Scan another", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+            if(resultCode == RESULT_CANCELED){
+                //handle cancel
+            }
+        }
+    }
+
+    public void scanQR(View view){
+        try {
+
+            Intent intent = new Intent(this, ActivityScanQR.class);
+            intent.putExtra("SCAN_MODE", "QR_CODE_MODE"); // "PRODUCT_MODE for bar codes
+
+            startActivityForResult(intent, 0);
+
+        } catch (Exception e) {
+            Toast.makeText(this, "Error opening QR Scanner.", Toast.LENGTH_SHORT).show();
+            Log.e("QR Exception", "Exception: "+Log.getStackTraceString(e));
+            //Uri marketUri = Uri.parse("market://details?id=com.google.zxing.client.android");
+            //Intent marketIntent = new Intent(Intent.ACTION_VIEW,marketUri);
+            //startActivity(marketIntent);
+
+        }
+    }
 }

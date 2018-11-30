@@ -1,6 +1,7 @@
 package com.example.loggerdoc;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -57,13 +58,23 @@ public class AdapterListComments extends ArrayAdapter<CaregiverComment> {
         if (listitem == null){
             listitem = LayoutInflater.from(commentContext).inflate(R.layout.caregiver_comment_listview,parent,false);
         }
-        CaregiverComment currentComment = commentList.get(position);
+        final CaregiverComment currentComment = commentList.get(position);
 
-        TextView date = (TextView) listitem.findViewById(R.id.DateView);
-        date.setText(currentComment.getDate().toString());
+        TextView caregiver = (TextView) listitem.findViewById(R.id.CaregiverView);
+        caregiver.setText(currentComment.getCaregiver().getUserID());
+        caregiver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ActivityUserProfile.class);
+                intent.putExtra("Caregiver", currentComment.getCaregiver().getElasticID());
+                commentContext.startActivity(intent);            }
+        });
 
         TextView description = (TextView) listitem.findViewById(R.id.CommentView);
         description.setText(currentComment.getComment());
+
+        TextView date = (TextView) listitem.findViewById(R.id.DateView);
+        date.setText(currentComment.getDate().toString());
 
         return listitem;
     }
