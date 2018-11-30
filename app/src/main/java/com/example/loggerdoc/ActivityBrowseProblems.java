@@ -1,9 +1,11 @@
 package com.example.loggerdoc;
 
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -31,6 +33,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         Intent intent = getIntent();
         patient_ID = intent.getIntExtra("Patient",0);
         patient = (Patient) UserListController.getUserList().get(patient_ID);
+
 
         /*
          * Set the Add Problem button. When this button is pressed it will call
@@ -81,6 +84,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
 
         if (user.getRole().equals("Caregiver")){
             addProblemButton.setVisibility(View.INVISIBLE);
+            ProblemRecordListController.loadUser(patient_ID,getApplicationContext());
         }
         else{
             addProblemButton.setVisibility(View.VISIBLE);

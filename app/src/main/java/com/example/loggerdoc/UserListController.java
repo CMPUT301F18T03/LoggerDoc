@@ -29,16 +29,15 @@ public class UserListController {
     public static ArrayList<Patient> getSpecificUserList(ArrayList<Integer> patients) {
         ArrayList<Patient> ret = new ArrayList<>();
 
-        SparseArray<Patient> patientMap = new SparseArray<>();
-        for(User x : getUserList().getArray()){
-            // if the iterated user is a patient, add it to the list of patients
-            if (x.getClass() == Patient.class) {
-                patientMap.put(x.getElasticID(), (Patient) x);
-            }
+
+        for(Integer elastic_id : patients){
+            // add the patient object for this id to the patient list
+            //if (x.getClass() == Patient.class) {
+                //patientMap.put(x.getElasticID(), (Patient) x);
+           // }
+            ret.add((Patient) userList.get(elastic_id));
         }
-        for(Integer tar : patients){
-            ret.add(patientMap.get(tar));
-        }
+
         return ret;
     }
 

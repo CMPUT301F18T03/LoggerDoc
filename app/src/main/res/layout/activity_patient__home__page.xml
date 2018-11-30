@@ -94,6 +94,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/squarebuttonshape"
+                android:layout_marginRight="5dp"
                 android:onClick="changeActivity"
                 android:text="@string/browse_problems"
                 android:textColor="@android:color/white" />
@@ -122,8 +123,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
+                android:layout_marginTop="3dp"
                 android:background="@drawable/squarebuttonshape"
-                android:onClick="toUserProfile"
+                android:onClick="toViewProfile"
                 android:text="View Profile"
                 android:textColor="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -65,7 +65,7 @@ public class ActivityUserProfile extends AppCompatActivity {
 
 
 
-    //this method changes the current activity to the update contact info activity
+    //this method changes the current activity to the user profile activity
     public void toUpdateContactInfo(View v){
         Intent intent = new Intent(this, ActivityUpdateContactInfo.class);
         intent.putExtra(userType, user_ID);
