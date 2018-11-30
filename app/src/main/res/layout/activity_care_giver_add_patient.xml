@@ -56,6 +56,7 @@
         android:background="@drawable/squarebuttonshape"
         android:onClick="scanQR"
         android:text="ADD WITH QR CODE"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AddPatientEditText" />
