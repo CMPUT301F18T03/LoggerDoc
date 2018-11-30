@@ -3,6 +3,7 @@ package com.example.loggerdoc;
 import android.content.Intent;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -15,6 +16,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 public class ActivityPatientHomePageIntentTest {
 
+    private Patient p;
+
     @Rule
     public IntentsTestRule<ActivityPatientHomePage> intentsTestRule =
             new IntentsTestRule<>(ActivityPatientHomePage.class, false, false);
@@ -22,7 +25,7 @@ public class ActivityPatientHomePageIntentTest {
     @Before
     // create mock patient
     public void setup() {
-        Patient p = new Patient("Patty2222", "testpatient@example.com", "555-123-4567", "Patient");
+        p = new Patient("Patty2222", "testpatient@example.com", "555-123-4567", "Patient");
         UserListController.getUserList().add_internal(p);
 
         Intent i = new Intent();
@@ -42,5 +45,10 @@ public class ActivityPatientHomePageIntentTest {
         onView(withId(R.id.browse_problems_button))
                 .perform(click());
         intended(hasComponent(ActivityBrowseProblems.class.getName()));
+    }
+
+    @After
+    public void after() {
+        UserListController.getUserList().remove_internal(p);
     }
 }
