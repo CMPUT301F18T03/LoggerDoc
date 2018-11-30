@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
-import android.nfc.Tag;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
@@ -31,6 +30,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+/*
+ * This class lets the user add a record to a problem. The record can have a geolocation, photo,
+ * bodylocation and/or a comment. The record is then added to the record list.
+ */
 
 public class ActivityAddRecord extends AppCompatActivity {
 
@@ -40,21 +43,28 @@ public class ActivityAddRecord extends AppCompatActivity {
     private RecordGeoLocation geoLocation;
     private Record record;
     private static int problemID;
-    private static final int ERROR_DIALOG_REQUEST = 9001;
 
+    private static final int ERROR_DIALOG_REQUEST = 9001;
     static final int REQUEST_IMAGE_CAPTURE_RECORD = 1000;
     static final int GALLERY_REQUEST_RECORD = 1001;
     static final int ADD_GEOLOCATION_RESULT = 1002;
     static final int BODY_LOCATION_REQUEST = 1003;
+    static final int BODY_LOCATION_GALLARY_REQUEST = 1004;
+    static final int LABEL_REQUEST = 1005;
     private static final int MY_PERMISSIONS_REQUEST = 100;
 
 
     private ArrayList<RecordPhoto> photos = new ArrayList<RecordPhoto>();
+    private ArrayList<BodyLocationPhoto> blphotos = new ArrayList<BodyLocationPhoto>();
     private Bodylocation bodylocation = new Bodylocation();
+    private BodyLocationPhoto blPhoto;// = new BodyLocationPhoto();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_record);
+        requestStoragePermission();
+
     }
 
     @Override
@@ -70,11 +80,11 @@ public class ActivityAddRecord extends AppCompatActivity {
         Button recordGallery = findViewById(R.id.gallery_button);
         Button recordCamera = findViewById(R.id.Camera_button);
         Button bodyLocationButton = findViewById(R.id.body_location_button);
+        Button bodyLocationGallary = findViewById(R.id.BodyLocationGallary);
 
         recordGallery.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                requestStoragePermission();
 
                 GalleryIntent(GALLERY_REQUEST_RECORD);
             }
@@ -94,6 +104,20 @@ public class ActivityAddRecord extends AppCompatActivity {
             }
         });
 
+        bodyLocationGallary.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                // get comment from user than when it returns call the gallary app for user bl they already have
+                if (blphotos.size()<2){
+                Intent intent = new Intent(v.getContext(), ActivityBlLabel.class);
+                startActivityForResult(intent, LABEL_REQUEST);}
+                else{
+                    Toast.makeText(ActivityAddRecord.this, "You already have 2 bl photos for this record", Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        });
+
         if (isServicesOkay()){
           initialize();
         }
@@ -109,6 +133,29 @@ public class ActivityAddRecord extends AppCompatActivity {
             photo.setPhoto(path);
             photos.add(photo);
             PhotoPath = null;
+
+        }
+
+        if (requestCode == LABEL_REQUEST && resultCode == RESULT_OK){
+            String label = data.getStringExtra("THELABEL");
+            blPhoto = new BodyLocationPhoto();
+
+            blPhoto.setLabel(label);
+           // Log.i("THIS_TAG", blPhoto.getLabel());
+
+            GalleryIntent(BODY_LOCATION_GALLARY_REQUEST);
+
+        }
+
+        if(requestCode == BODY_LOCATION_GALLARY_REQUEST && resultCode == RESULT_OK){
+            final Uri uri = data.getData();
+            File path =  new File(getRealPathFromURI(uri));
+            blPhoto.setPhoto(path);
+            Log.i("THIS_TAG", blPhoto.getLabel());
+
+            blphotos.add(blPhoto);
+
+
 
         }
 
@@ -145,8 +192,12 @@ public class ActivityAddRecord extends AppCompatActivity {
         }
     }
 
+    /**
+     *   @author = Alexandra Tyrrell
+     *
+     *   Intialize the map button.
+     */
     private void initialize(){
-        //initialize the map button
         Button mapButton = (Button) findViewById(R.id.mapButton);
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,7 +209,14 @@ public class ActivityAddRecord extends AppCompatActivity {
         });
     }
 
-    //Called when the user presses the "Create" button on the ActivityAddRecord
+    /**
+     * @author = Alexandra Tyrrell
+     *
+     * Create the record and add it to the problem list. This method will also add photos, body
+     * locations and geolocations.
+     *
+     * @param v View
+     */
     public void createRecord (View v){
 
         //Check if the Record Title is empty
@@ -186,6 +244,11 @@ public class ActivityAddRecord extends AppCompatActivity {
                 }
 
            }
+           if (blphotos.size() != 0){
+               for(int i =0; i<blphotos.size(); i++){
+                   record.getBlPhotoList().add(blphotos.get(i));
+               }
+           }
            record.setBodylocation(bodylocation);
            ProblemRecordListController.getRecordList().add(record,getApplicationContext());
 
@@ -193,6 +256,14 @@ public class ActivityAddRecord extends AppCompatActivity {
         }
     }
 
+    /**
+     * @author Alexandra Tyrrell
+     *
+     * This method checks whether GooglePlayServices is okay to be used. It checks if we can connect
+     * to the map or not.
+     *
+     * @return true if everything is okay
+     */
     public boolean isServicesOkay(){
         //check if GooglePlayServices is Available
         int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(ActivityAddRecord.this);
@@ -215,7 +286,14 @@ public class ActivityAddRecord extends AppCompatActivity {
         return false;
     }
 
-    //check if the given string is empty or not
+    /**
+     * @author Alexandra Tyrrell
+     *
+     * This method checks whether a string is empty or not. It returns true if the string is empty
+     * and false otherwise.
+     *
+     * @param string String
+     */
     public boolean checkEmptyString(String string){
         if (string.length() == 0){
             return true;
@@ -223,7 +301,14 @@ public class ActivityAddRecord extends AppCompatActivity {
         return false;
     }
 
-    //Show an error alert dialog using the class DialogProblem()
+    /**
+     * @author Alexandra Tyrrell
+     *
+     * Uses the Dialog Problem class to show an error dialog with the specified string and message.
+     *
+     * @param title String
+     * @param message String
+     */
     private void showAlertDialog( String title, String message){
         Bundle messageArgs = new Bundle();
         messageArgs.putString(DialogProblem.TITLE_ID, title);

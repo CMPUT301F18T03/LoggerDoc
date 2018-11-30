@@ -7,7 +7,7 @@
     tools:context=".ActivityUserProfile">
 
     <TextView
-        android:id="@+id/ProblemTitle"
+        android:id="@+id/UserNameDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -33,7 +33,7 @@
         android:text="Edit Contact Info"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ProblemTitle"
+        app:layout_constraintStart_toEndOf="@+id/UserNameDisplay"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -46,7 +46,7 @@
         android:onClick="endActivity"
         android:text="Back"
         android:textColor="@android:color/background_light"
-        app:layout_constraintEnd_toStartOf="@+id/ProblemTitle"
+        app:layout_constraintEnd_toStartOf="@+id/UserNameDisplay"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -61,7 +61,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ProblemTitle">
+        app:layout_constraintTop_toBottomOf="@+id/UserNameDisplay">
 
         <TextView
             android:id="@+id/edit_contact_info_email_address"

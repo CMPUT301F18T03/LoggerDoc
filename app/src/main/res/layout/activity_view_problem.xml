@@ -33,7 +33,7 @@
         android:text="@string/delete_button"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ProblemTitle"
+        app:layout_constraintStart_toEndOf="@+id/UserNameDisplay"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -47,7 +47,7 @@
         android:onClick="goEditProblem"
         android:text="@string/edit_problem_button"
         android:textColor="@android:color/white"
-        app:layout_constraintEnd_toStartOf="@+id/ProblemTitle"
+        app:layout_constraintEnd_toStartOf="@+id/UserNameDisplay"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

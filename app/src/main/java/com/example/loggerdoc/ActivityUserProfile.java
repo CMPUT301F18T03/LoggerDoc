@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,7 +29,7 @@ public class ActivityUserProfile extends AppCompatActivity {
         //initialize all of the views
         emailEditText = (TextView) findViewById(R.id.edit_contact_info_email_view);
         phoneNumberEditText = (TextView) findViewById(R.id.edit_contact_info_number_view);
-        userIdView = (TextView) findViewById(R.id.ProblemTitle);
+        userIdView = (TextView) findViewById(R.id.UserNameDisplay);
         qrCodeImageView = (ImageView) findViewById(R.id.QrCodeImageView);
 
         //get the user being viewed from the intent
