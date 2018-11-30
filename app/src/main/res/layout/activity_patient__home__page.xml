@@ -123,7 +123,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
                 android:background="@drawable/squarebuttonshape"
-                android:onClick="toUserProfile"
+                android:onClick="toViewProfile"
                 android:text="View Profile"
                 android:textColor="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
