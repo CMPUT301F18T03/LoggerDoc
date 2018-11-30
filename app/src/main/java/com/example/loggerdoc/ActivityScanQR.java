@@ -1,6 +1,10 @@
 package com.example.loggerdoc;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +21,14 @@ public class ActivityScanQR extends AppCompatActivity implements ZXingScannerVie
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA}, 1);
+        }
+
         // Programmatically initialize the scanner view
         mScannerView = new ZXingScannerView(this);
         // Set the scanner view as the content view
