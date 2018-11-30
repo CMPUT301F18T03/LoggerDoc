@@ -25,11 +25,13 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.concurrent.locks.ReentrantLock;
 
 import okhttp3.OkHttpClient;
 
 public class ElasticCacheClient {
     private httphandler handler;
+    private ReentrantLock lock = new ReentrantLock();
 
     public ElasticCacheClient(String host, OkHttpClient client) {
         handler = new httphandler(client,host);
@@ -40,6 +42,7 @@ public class ElasticCacheClient {
      * @param context a context to use to open files with.
      */
     public void sendCache(Context context) {
+        lock.lock();
         File datafile = new File(context.getFilesDir().getAbsolutePath()+"/Data/Cache.sav");
         if(!datafile.exists()){
             return;
@@ -64,6 +67,7 @@ public class ElasticCacheClient {
                 }
                 else{
                     //panic
+                    lock.unlock();
                     return;
                 }
                 if(returnval != null){
@@ -86,15 +90,18 @@ public class ElasticCacheClient {
                     out.write(failed.toString());
                     out.flush();
                     fos.close();
+                    lock.unlock();
                     return;
 
                 }
             }
             datafile.delete();
 
-
         } catch ( IOException e) {
             e.printStackTrace();
+        }
+        finally {
+            lock.unlock();
         }
 
 
