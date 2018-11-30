@@ -27,14 +27,16 @@ public class modifyRecordTask extends AsyncTask<Record, Void, Void> {
         Gson gson = new Gson();
         String jsonout;
         Record tosend = records[0];
-        //File datafile = new File(context.getFilesDir().getAbsolutePath()+"/Problems/");
         ArrayList<Record> ret = ProblemRecordListController.getRecordList().getArray();
         httphandler sender = ElasticSearchController.getHttpHandler();
         OutputStream fos;
         BufferedWriter out;
         jsonout = gson.toJson(tosend);
-        sender.httpPUT("/record/_doc/"+tosend.getElasticID().toString(),jsonout);
-
+        ElasticSearchController.getCacheClient().sendCache(context);
+        String serverResponse = sender.httpPUT("/record/_doc/"+tosend.getElasticID().toString(),jsonout);
+        if(serverResponse == null){
+            ElasticSearchController.getCacheClient().cacheToSend("/record/_doc/",jsonout,context);
+        }
         try {
 
             fos = new FileOutputStream(new File(context.getFilesDir().getAbsolutePath()+"/Records/records"+tosend.getElasticID_Owner().toString()+".sav"));
