@@ -49,7 +49,6 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
          * Check whether the currently logged in user is a patient or a caregiver. If a caregiver,
          * make the edit and delete record buttons invisible.
          */
-
         User user = UserListController.getUserList().get(UserListController.getCurrentUserID());
         if (user.getRole().equals("Caregiver")){
             editRecordButton.setVisibility(View.INVISIBLE);
