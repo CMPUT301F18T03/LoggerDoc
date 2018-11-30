@@ -22,6 +22,7 @@ public class Record implements Serializable,ElasticID {
 
     private RecordGeoLocation recordGeoLocation = null;
     private Bodylocation bodylocation;
+    private BodyLocationPhotoList blPhotoList;
     private RecordPhotoList recordPhotoList;
 
     private Integer ElasticID;
@@ -36,6 +37,7 @@ public class Record implements Serializable,ElasticID {
         this.comment = "";
         this.timestamp = LocalDateTime.now();
         this.recordPhotoList = new RecordPhotoList();
+        this.blPhotoList = new BodyLocationPhotoList();
 
         ElasticID_OwnerProblem = Ownerproblem;
         ElasticID_Owner = ProblemRecordListController.getProblemList().get(ElasticID_OwnerProblem).getElasticID_Owner();
@@ -108,6 +110,7 @@ public class Record implements Serializable,ElasticID {
     public Bodylocation getBodylocation(){
         return this.bodylocation;
     }
+    public BodyLocationPhotoList getBlPhotoList(){return this.blPhotoList;}
 
     @Override
     public Integer getElasticID() {
