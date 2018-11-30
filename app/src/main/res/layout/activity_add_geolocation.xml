@@ -26,14 +26,15 @@
 
 
     <Button
+        android:id="@+id/saveGeolocationButton"
         android:layout_width="80dp"
         android:layout_height="40dp"
+        android:layout_below="@id/relLayout1"
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
+        android:background="@drawable/squarebuttonshape"
         android:text="@string/save_button"
-        android:id = "@+id/saveGeolocationButton"
-        android:layout_below="@id/relLayout1"
-        />
+        android:textColor="@android:color/white" />
 
 
 </RelativeLayout>
