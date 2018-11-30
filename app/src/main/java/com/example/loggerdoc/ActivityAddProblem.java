@@ -25,7 +25,7 @@ public class ActivityAddProblem extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_problem);
 
-        //intialize the EditTexts needed
+        //initialize the EditTexts needed
         problemTitle = (EditText) findViewById(R.id.problem_Title_Text);
         problemDescription = (EditText) findViewById(R.id.problem_desc_text);
         problemTitleWarning = (ImageView) findViewById(R.id.warning_Problem_Title);
@@ -155,6 +155,7 @@ public class ActivityAddProblem extends AppCompatActivity{
 
     /**
      * @author = Alexandra Tyrrell
+     *
      * Sets the timestamp of the problem. This method creates a LocalDateTime object that stores the
      * date of the problem. The day, month and year is taken from the datePickerFragment.
      *

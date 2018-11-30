@@ -35,6 +35,10 @@ public class AdapterListComments extends ArrayAdapter<CaregiverComment> {
         commentList = list;
     }
 
+    public void refresh(ArrayList<CaregiverComment> a) {
+        this.commentList = a;
+    }
+    
     /**
      * @author Alexandra Tyrrell
      *

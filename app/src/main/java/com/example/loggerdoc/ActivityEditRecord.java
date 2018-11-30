@@ -26,7 +26,7 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
     private Record record;
     private EditText editRecordTitle;
     private EditText editRecordComment;
-    private  MarkerOptions options = null;
+    private MarkerOptions options = null;
 
     private static final int DEFAULT_ZOOM = 15;
 

@@ -80,7 +80,7 @@ public class ActivityAddGeolocation extends AppCompatActivity implements OnMapRe
      * @author = Alexandra Tyrrell
      *
      * Check if we have permission to access fine location and coarse location. If not, we need to
-     * request the locations. 
+     * request the locations.
      */
     private void checkLocationPermissions() {
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
