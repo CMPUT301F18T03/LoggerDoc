@@ -42,7 +42,7 @@ public class modifyProblemTask extends AsyncTask<Problem, Void, Void> {
         ElasticSearchController.getCacheClient().sendCache(context);
         String serverResponse = sender.httpPUT("/problem/_doc/"+tosend.getElasticID().toString(),jsonout);
         if(serverResponse == null){
-            ElasticSearchController.getCacheClient().cacheToSend("/problem/_doc/",jsonout,context);
+            ElasticSearchController.getCacheClient().cacheToSend("/problem/_doc/"+tosend.getElasticID().toString(),jsonout,context);
         }
 
         try {

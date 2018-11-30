@@ -31,7 +31,7 @@ public class modifyUserTask extends AsyncTask<User, Void, Void> {
             jsonout = gson.toJson(tosend);
             String serverResponse = sender.httpPUT("/user/_doc/"+tosend.getElasticID().toString(),jsonout);
             if(serverResponse == null){
-                ElasticSearchController.getCacheClient().cacheToSend("/user/_doc/",jsonout,context);
+                ElasticSearchController.getCacheClient().cacheToSend("/user/_doc/"+tosend.getElasticID().toString(),jsonout,context);
             }
             try {
 

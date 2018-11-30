@@ -35,7 +35,7 @@ public class modifyRecordTask extends AsyncTask<Record, Void, Void> {
         ElasticSearchController.getCacheClient().sendCache(context);
         String serverResponse = sender.httpPUT("/record/_doc/"+tosend.getElasticID().toString(),jsonout);
         if(serverResponse == null){
-            ElasticSearchController.getCacheClient().cacheToSend("/record/_doc/",jsonout,context);
+            ElasticSearchController.getCacheClient().cacheToSend("/record/_doc/"+tosend.getElasticID().toString(),jsonout,context);
         }
         try {
 
