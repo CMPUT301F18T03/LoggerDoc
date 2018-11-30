@@ -14,6 +14,11 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+/*
+ * This class displays the record that the user has selected and it allows them to edit the title,
+ * the comment, the geolocation, any photos, and/or body locations.
+ */
+
 public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyCallback {
     private int problemID;
     private int recordID;

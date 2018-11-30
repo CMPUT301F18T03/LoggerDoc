@@ -98,7 +98,6 @@ public class ActivityAddProblem extends AppCompatActivity{
                 if (!problem.checkDescriptionLength(problem.getDescription())){
                     showAlertDialog("Error: Too Long Description",
                             "The description can be a maximum of 300 characters. Please shorten it");
-
                 }
             }
 

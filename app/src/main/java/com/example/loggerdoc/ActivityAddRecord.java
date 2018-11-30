@@ -30,6 +30,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+/*
+ * This class lets the user add a record to a problem. The record can have a geolocation, photo,
+ * bodylocation and/or a comment. The record is then added to the record list.
+ */
 
 public class ActivityAddRecord extends AppCompatActivity {
 
@@ -146,7 +150,8 @@ public class ActivityAddRecord extends AppCompatActivity {
 
     /**
      *   @author = Alexandra Tyrrell
-     *   initialize the map button
+     *
+     *   Intialize the map button.
      */
     private void initialize(){
         Button mapButton = (Button) findViewById(R.id.mapButton);
@@ -163,7 +168,9 @@ public class ActivityAddRecord extends AppCompatActivity {
     /**
      * @author = Alexandra Tyrrell
      *
-     * Create the
+     * Create the record and add it to the problem list. This method will also add photos, body
+     * locations and geolocations.
+     *
      * @param v View
      */
     public void createRecord (View v){
@@ -200,6 +207,14 @@ public class ActivityAddRecord extends AppCompatActivity {
         }
     }
 
+    /**
+     * @author Alexandra Tyrrell
+     *
+     * This method checks whether GooglePlayServices is okay to be used. It checks if we can connect
+     * to the map or not.
+     *
+     * @return true if everything is okay
+     */
     public boolean isServicesOkay(){
         //check if GooglePlayServices is Available
         int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(ActivityAddRecord.this);
@@ -222,7 +237,14 @@ public class ActivityAddRecord extends AppCompatActivity {
         return false;
     }
 
-    //check if the given string is empty or not
+    /**
+     * @author Alexandra Tyrrell
+     *
+     * This method checks whether a string is empty or not. It returns true if the string is empty
+     * and false otherwise.
+     *
+     * @param string String
+     */
     public boolean checkEmptyString(String string){
         if (string.length() == 0){
             return true;
@@ -230,7 +252,14 @@ public class ActivityAddRecord extends AppCompatActivity {
         return false;
     }
 
-    //Show an error alert dialog using the class DialogProblem()
+    /**
+     * @author Alexandra Tyrrell
+     *
+     * Uses the Dialog Problem class to show an error dialog with the specified string and message.
+     *
+     * @param title String
+     * @param message String
+     */
     private void showAlertDialog( String title, String message){
         Bundle messageArgs = new Bundle();
         messageArgs.putString(DialogProblem.TITLE_ID, title);
