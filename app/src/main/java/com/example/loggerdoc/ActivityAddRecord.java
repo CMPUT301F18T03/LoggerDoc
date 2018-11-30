@@ -54,7 +54,7 @@ public class ActivityAddRecord extends AppCompatActivity {
     private ArrayList<RecordPhoto> photos = new ArrayList<RecordPhoto>();
     private ArrayList<BodyLocationPhoto> blphotos = new ArrayList<BodyLocationPhoto>();
     private Bodylocation bodylocation = new Bodylocation();
-    private BodyLocationPhoto blPhoto = new BodyLocationPhoto();
+    private BodyLocationPhoto blPhoto;// = new BodyLocationPhoto();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,7 +135,11 @@ public class ActivityAddRecord extends AppCompatActivity {
 
         if (requestCode == LABEL_REQUEST && resultCode == RESULT_OK){
             String label = data.getStringExtra("THELABEL");
+            blPhoto = new BodyLocationPhoto();
+
             blPhoto.setLabel(label);
+           // Log.i("THIS_TAG", blPhoto.getLabel());
+
             GalleryIntent(BODY_LOCATION_GALLARY_REQUEST);
 
         }
@@ -143,9 +147,10 @@ public class ActivityAddRecord extends AppCompatActivity {
         if(requestCode == BODY_LOCATION_GALLARY_REQUEST && resultCode == RESULT_OK){
             final Uri uri = data.getData();
             File path =  new File(getRealPathFromURI(uri));
-            BodyLocationPhoto blphoto = new BodyLocationPhoto();
-            blphoto.setPhoto(path);
-            blphotos.add(blphoto);
+            blPhoto.setPhoto(path);
+            Log.i("THIS_TAG", blPhoto.getLabel());
+
+            blphotos.add(blPhoto);
 
 
 

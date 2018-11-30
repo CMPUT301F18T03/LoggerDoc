@@ -3,6 +3,7 @@ package com.example.loggerdoc;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,13 +19,16 @@ public class ActivityViewBodyLocation extends AppCompatActivity {
         ImageView bl2 = (ImageView) findViewById(R.id.BL2);
         TextView label1 = (TextView) findViewById(R.id.label1);
         TextView label2 = (TextView) findViewById(R.id.label2);
+        Log.i("THIS_TAG", list.getPhoto(1).getLabel() + list.getPhoto(0).getLabel());
+
 
         if (list.size() == 1){
             if (bodylocation.getFrontX() !=0 || bodylocation.getFrontY() != 0){
                 GlideApp
                         .with(this)
                         .load(list.getPhoto(0).getPhoto())
-                        .override(500,750)                        .centerCrop()
+                        .override(500,750)
+                        .centerCrop()
                         .into(bl2);
                 label2.setText(list.getPhoto(0).getLabel());
 
@@ -34,7 +38,8 @@ public class ActivityViewBodyLocation extends AppCompatActivity {
                 GlideApp
                         .with(this)
                         .load(list.getPhoto(0).getPhoto())
-                        .override(500,750)                        .centerCrop()
+                        .override(500,750)
+                        .centerCrop()
                         .into(bl1);
                 label1.setText(list.getPhoto(0).getLabel());
 
@@ -46,7 +51,8 @@ public class ActivityViewBodyLocation extends AppCompatActivity {
             GlideApp
                     .with(this)
                     .load(list.getPhoto(0).getPhoto())
-                    .override(500,750)                    .centerCrop()
+                    .override(500,750)
+                    .centerCrop()
                     .into(bl1);
             label1.setText(list.getPhoto(0).getLabel());
 

@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class BodyLocationPhoto implements Serializable {
 
     private File photo;
-    private String label = "";
+    private String label;
 
     public String getLabel(){ return this.label; }
     public void setLabel(String newlabel){this.label = newlabel;}
