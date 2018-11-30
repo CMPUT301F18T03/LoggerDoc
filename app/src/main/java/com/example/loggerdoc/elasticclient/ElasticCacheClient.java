@@ -45,6 +45,7 @@ public class ElasticCacheClient {
         lock.lock();
         File datafile = new File(context.getFilesDir().getAbsolutePath()+"/Data/Cache.sav");
         if(!datafile.exists()){
+            lock.unlock();
             return;
         }
         BufferedReader in;
