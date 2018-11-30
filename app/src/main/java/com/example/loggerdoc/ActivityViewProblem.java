@@ -155,4 +155,15 @@ public class ActivityViewProblem extends AppCompatActivity {
         intent.putExtra("Problem", problem.getElasticID());
         startActivity(intent);
     }
+
+    /*
+     * @author = Alexandra Tyrrell
+     *
+     * Change to the View Record Map activity.
+     */
+    public void goRecordMap(View v){
+        Intent intent = new Intent(this, ActivityViewRecordMap.class);
+        intent.putExtra("Problem", problem.getElasticID());
+        startActivity(intent);
+    }
 }
