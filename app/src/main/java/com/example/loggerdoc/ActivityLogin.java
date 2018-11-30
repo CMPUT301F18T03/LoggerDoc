@@ -231,9 +231,9 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
                     Intent intent = new Intent(ActivityLogin.this, ActivityPatientHomePage.class);
                     intent.putExtra("Patient", user_ID);
                     startActivity(intent);
-                    if (mPublisherInterstitialAd.isLoaded()) {
-                        mPublisherInterstitialAd.show();
-                    }
+                    //if (mPublisherInterstitialAd.isLoaded()) {
+                    //    mPublisherInterstitialAd.show();
+                    //}
 
                 }
                 else if (userList.get(user_ID).getRole().equals("Caregiver")){
@@ -263,6 +263,7 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
 
         } catch (Exception e) {
             Toast.makeText(this, "Error opening QR Scanner.", Toast.LENGTH_SHORT).show();
+            Log.e("QR Exception", "Exception: "+Log.getStackTraceString(e));
             //Uri marketUri = Uri.parse("market://details?id=com.google.zxing.client.android");
             //Intent marketIntent = new Intent(Intent.ACTION_VIEW,marketUri);
             //startActivity(marketIntent);
