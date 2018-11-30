@@ -31,6 +31,8 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
     private GoogleMap recordMap;
 
     public static RecordPhotoList photoList = new RecordPhotoList();
+    public  static BodyLocationPhotoList blPhotoList = new BodyLocationPhotoList();
+    public static Bodylocation bodylocation = new Bodylocation();
     private static final float DEFAULT_ZOOM = 15;
 
     @Override
@@ -79,12 +81,24 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
         Button showBodyLocation = (Button) findViewById(R.id.showBodyLoc);
 
         photoList = record.getRecordPhotoList();
+
+        bodylocation = record.getBodylocation();
+        blPhotoList = record.getBlPhotoList();
+
+       // Log.i("THIS_TAG", String.valueOf(photoList.getPhoto(0).getPhoto()));
         showimages.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
                 Intent intent = new Intent(v.getContext(), ActivityPhotoGrid.class);
                 startActivity(intent);
 
+            }
+        });
+        showBodyLocation.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent = new Intent(v.getContext(),ActivityViewBodyLocation.class);
+                intent.putExtra("BLPHOTOS", record.getBlPhotoList());
+                startActivity(intent);
             }
         });
 
@@ -113,6 +127,13 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
     public void onMapReady(GoogleMap googleMap) {
         recordMap = googleMap;
         recordMap.getUiSettings().setZoomControlsEnabled(true);
+        recordMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng latLng) {
+                recordMap.clear();
+                moveCamera(latLng, DEFAULT_ZOOM, "");
+            }
+        });
 
         if (record.getRecordGeoLocation() != null){
             recordMap.moveCamera(CameraUpdateFactory.newLatLngZoom(

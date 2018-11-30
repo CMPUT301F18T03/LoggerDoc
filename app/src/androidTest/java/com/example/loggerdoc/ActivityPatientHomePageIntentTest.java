@@ -27,6 +27,7 @@ public class ActivityPatientHomePageIntentTest {
     public void setup() {
         p = new Patient("Patty2222", "testpatient@example.com", "555-123-4567", "Patient");
         UserListController.getUserList().add_internal(p);
+        UserListController.setCurrentUser(p);
 
         Intent i = new Intent();
         i.putExtra("Patient", p.getElasticID());
