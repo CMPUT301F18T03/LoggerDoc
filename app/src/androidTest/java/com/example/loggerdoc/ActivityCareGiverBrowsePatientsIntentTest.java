@@ -34,6 +34,7 @@ public class ActivityCareGiverBrowsePatientsIntentTest {
 
         UserListController.getUserList().add_internal(c);
         UserListController.getUserList().add_internal(p);
+        UserListController.setCurrentUser(c);
 
         Intent i = new Intent();
         i.putExtra("Caregiver", c.getElasticID());

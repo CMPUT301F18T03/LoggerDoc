@@ -35,6 +35,7 @@ public class ActivityBrowseProblemsIntentTest {
         p.getProblems().add(pr.getElasticID());
 
         UserListController.getUserList().add_internal(p);
+        UserListController.setCurrentUser(p);
         ProblemRecordListController.getProblemList().add_internal(pr);
 
         Intent i = new Intent();

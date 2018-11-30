@@ -21,6 +21,7 @@ import static org.junit.Assert.assertFalse;
 
 public class ActivityViewProblemIntentTest {
 
+    private Patient p;
     private Problem pr;
 
     @Rule
@@ -30,7 +31,10 @@ public class ActivityViewProblemIntentTest {
     @Before
     // create mock patient with mock problem
     public void setup() {
-        Patient p = new Patient("Patty2222", "testPatient@example.com", "555-123-4567", "Patient");
+        p = new Patient("Patty2222", "testPatient@example.com", "555-123-4567", "Patient");
+        UserListController.getUserList().add_internal(p);
+        UserListController.setCurrentUser(p);
+
         pr = new Problem("Possible concussion", LocalDateTime.now(),
                 "From car accident", p.getElasticID());
         ProblemRecordListController.getProblemList().add_internal(pr);
@@ -67,6 +71,7 @@ public class ActivityViewProblemIntentTest {
 
     @After
     public void after() {
+        UserListController.getUserList().remove_internal(p);
         ProblemRecordListController.getProblemList().remove_internal(pr);
     }
 }
