@@ -72,7 +72,8 @@
         <activity android:name=".ActivityEditRecord" />
         <activity android:name=".ActivityPhotoGrid" />
         <activity android:name=".ActivityBlLabel" />
-        <activity android:name=".ActivityViewBodyLocation"></activity>
+        <activity android:name=".ActivityViewBodyLocation" />
+        <activity android:name=".ActivityViewRecordMap"></activity>
     </application>
 
 </manifest>
