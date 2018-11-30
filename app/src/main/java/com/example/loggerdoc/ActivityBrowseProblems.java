@@ -22,7 +22,6 @@ public class ActivityBrowseProblems extends AppCompatActivity {
     private ListView problemsList;
     private FloatingActionButton addProblemButton;
 
-    //To be called when the activity is created
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +70,6 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         });
     }
 
-    //To be called when the activity is resumed
     @Override
     protected void onResume(){
         super.onResume();
@@ -103,7 +101,12 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         });
     }
 
-    //Change to ActivityViewProblem.
+    /** @author = Alexandra Tyrrell
+     *
+     * The method will change the Activity to Activity View Problem
+     *
+     * @param view View
+     */
     public void changeToViewProblemActivity(View view, Patient patient, int position){
         Intent intent = new Intent(this, ActivityViewProblem.class);
         intent.putExtra("Patient", patient_ID);
@@ -112,19 +115,34 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //Change to ActivityAddProblem.
+    /** @author = Alexandra Tyrrell
+     *
+     * The method will change the Activity to Add Problem Activity
+     *
+     * @param view View
+     */
     public void changeToAddProblemActivity (View view){
         Intent intent = new Intent(this, ActivityAddProblem.class);
         startActivity(intent);
     }
 
-    //Change to ActivitySearch.
+    /** @author = Alexandra Tyrrell
+     *
+     * The method will change the Activity to Search Activity
+     *
+     * @param view View
+     */
     public void changeToSearchActivity(View view){
         Intent intent = new Intent (this, ActivitySearch.class);
         startActivity(intent);
     }
 
-    //Change to ActivityUserProfile.
+    /** @author = Alexandra Tyrrell
+     *
+     * The method will change the Activity to Activity User Profile
+     *
+     * @param view View
+     */
     public void changeToUserProfile (View view){
         Intent intent = new Intent (this, ActivityUserProfile.class);
         intent.putExtra("Patient", patient_ID);

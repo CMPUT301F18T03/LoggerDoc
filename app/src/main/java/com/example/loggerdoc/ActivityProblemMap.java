@@ -14,19 +14,22 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
+//This Activity lets the user see all the geolocations of all their records on a map.
+
 public class ActivityProblemMap extends AppCompatActivity implements OnMapReadyCallback {
     private ArrayList<Record> geoLocationArrayList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_problem_map);
 
+        //get the patient from the intent
         Intent intent = getIntent();
         int patientID = intent.getIntExtra("Patient",0);
-
         Patient patient = (Patient) UserListController.getUserList().get(patientID);
 
-         geoLocationArrayList = new ArrayList<Record>();
+        geoLocationArrayList = new ArrayList<Record>();
 
         for (Record record : ProblemRecordListController.getRecordList().getArray()){
             if (record.getRecordGeoLocation() != null){
@@ -34,6 +37,7 @@ public class ActivityProblemMap extends AppCompatActivity implements OnMapReadyC
             }
         }
 
+        //set the button to return to the Patient's homepage
         Button returnButton = (Button) findViewById(R.id.returnButton);
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,12 +49,26 @@ public class ActivityProblemMap extends AppCompatActivity implements OnMapReadyC
         initializeProblemMap();
     }
 
+    /**
+     * @author = Alexandra Tyrrell
+     *
+     * Initialize the map.
+     */
     private void initializeProblemMap() {
-        //intialize the map object
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.problemMap);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.problemMap);
         mapFragment.getMapAsync(ActivityProblemMap.this);
     }
 
+    /**
+     * @author = Alexandra Tyrrell
+     *
+     * The callback interface implemented for when the Map is ready to used. In this activity, the
+     * map will display all the geolocations for a patient. It will also enable the zoom
+     * features for the GoogleMap and the long click listener.
+     *
+     * @param googleMap GoogleMap
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         GoogleMap problemMap = googleMap;

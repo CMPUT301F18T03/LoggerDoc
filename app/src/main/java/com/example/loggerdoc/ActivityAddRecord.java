@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
-import android.nfc.Tag;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
@@ -40,8 +39,8 @@ public class ActivityAddRecord extends AppCompatActivity {
     private RecordGeoLocation geoLocation;
     private Record record;
     private static int problemID;
-    private static final int ERROR_DIALOG_REQUEST = 9001;
 
+    private static final int ERROR_DIALOG_REQUEST = 9001;
     static final int REQUEST_IMAGE_CAPTURE_RECORD = 1000;
     static final int GALLERY_REQUEST_RECORD = 1001;
     static final int ADD_GEOLOCATION_RESULT = 1002;
@@ -145,8 +144,11 @@ public class ActivityAddRecord extends AppCompatActivity {
         }
     }
 
+    /**
+     *   @author = Alexandra Tyrrell
+     *   initialize the map button
+     */
     private void initialize(){
-        //initialize the map button
         Button mapButton = (Button) findViewById(R.id.mapButton);
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,7 +160,12 @@ public class ActivityAddRecord extends AppCompatActivity {
         });
     }
 
-    //Called when the user presses the "Create" button on the ActivityAddRecord
+    /**
+     * @author = Alexandra Tyrrell
+     *
+     * Create the
+     * @param v View
+     */
     public void createRecord (View v){
 
         //Check if the Record Title is empty

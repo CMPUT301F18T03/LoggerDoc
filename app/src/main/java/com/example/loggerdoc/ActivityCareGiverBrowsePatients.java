@@ -94,12 +94,4 @@ public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-
-
-
-
-
-
-
 }

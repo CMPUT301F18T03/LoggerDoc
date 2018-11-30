@@ -73,6 +73,8 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
      * map will display the geolocation of the record if it has one. It will also enable the zoom
      * features for the GoogleMap and the long click listener. The long click listener will add a
      * marker to the map showing the new geolocation that the user would like to save.
+     *
+     * @param googleMap GoogleMap
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
