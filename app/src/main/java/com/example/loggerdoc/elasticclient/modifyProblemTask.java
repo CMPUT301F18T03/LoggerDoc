@@ -31,16 +31,19 @@ public class modifyProblemTask extends AsyncTask<Problem, Void, Void> {
     }
     @Override
     protected Void doInBackground(Problem... problems) {
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create();
+        Gson gson = new Gson();//new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create();
         String jsonout;
         Problem tosend = problems[0];
-        //File datafile = new File(context.getFilesDir().getAbsolutePath()+"/Problems/");
         ArrayList<Problem> ret = ProblemRecordListController.getProblemList().getArray();
         httphandler sender = ElasticSearchController.getHttpHandler();
         OutputStream fos;
         BufferedWriter out;
         jsonout = gson.toJson(tosend);
-        sender.httpPUT("/problem/_doc/"+tosend.getElasticID().toString(),jsonout);
+        ElasticSearchController.getCacheClient().sendCache(context);
+        String serverResponse = sender.httpPUT("/problem/_doc/"+tosend.getElasticID().toString(),jsonout);
+        if(serverResponse == null){
+            ElasticSearchController.getCacheClient().cacheToSend("/problem/_doc/"+tosend.getElasticID().toString(),jsonout,context);
+        }
 
         try {
 

@@ -34,7 +34,7 @@ public class getProblemsTask extends AsyncTask<Integer, Void,ArrayList<Problem>>
 
     @Override
     protected ArrayList<Problem> doInBackground(Integer... Integers) {
-
+        ElasticSearchController.getCacheClient().sendCache(context);
         Integer EID = Integers[0];
         httphandler receiver = ElasticSearchController.getHttpHandler();
         Gson gson = new Gson();

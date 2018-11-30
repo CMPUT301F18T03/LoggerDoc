@@ -32,7 +32,7 @@ public class getRecordsTask extends AsyncTask<Integer, Void,ArrayList<Record>> {
 
     @Override
     protected ArrayList<Record> doInBackground(Integer... Integers) {
-
+        ElasticSearchController.getCacheClient().sendCache(context);
         Integer EID = Integers[0];
         httphandler receiver = ElasticSearchController.getHttpHandler();
         Gson gson = new Gson();

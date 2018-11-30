@@ -39,6 +39,7 @@ public class getUsersTask extends AsyncTask<Void, Void,ArrayList<User>> {
 
     @Override
     protected ArrayList<User> doInBackground(Void... voids) {
+        ElasticSearchController.getCacheClient().sendCache(context);
         httphandler receiver = ElasticSearchController.getHttpHandler();
         Gson gson = new Gson();
         ArrayList<User> ret = new ArrayList<>();
