@@ -214,6 +214,7 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
         UserListController.setList(data);
         Button loginbut = findViewById(R.id.Login_Button);
         loginbut.setEnabled(true);
+        loginbut.setAlpha(1f);
 
     }
 

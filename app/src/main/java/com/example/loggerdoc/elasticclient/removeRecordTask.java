@@ -29,8 +29,11 @@ public class removeRecordTask extends AsyncTask<Record, Void, Void> {
         httphandler sender = ElasticSearchController.getHttpHandler();
         OutputStream fos;
         BufferedWriter out;
-        sender.httpDELETE("/record/_doc/"+tosend.getElasticID().toString());
-
+        ElasticSearchController.getCacheClient().sendCache(context);
+        String serverResponse = sender.httpDELETE("/record/_doc/"+tosend.getElasticID().toString());
+        if(serverResponse == null){
+            ElasticSearchController.getCacheClient().cacheToDelete("/record/_doc/",tosend.getElasticID(),context);
+        }
         try {
 
             fos = new FileOutputStream(new File(context.getFilesDir().getAbsolutePath()+"/Records/records"+tosend.getElasticID_Owner().toString()+".sav"));

@@ -4,16 +4,18 @@ import android.net.Uri;
 
 import org.junit.Test;
 
+import java.io.File;
+
 import static java.lang.Boolean.TRUE;
 import static org.junit.Assert.assertEquals;
 
 public class RecordBodyLocationUnitTest {
     @Test
     public void TestsetPhoto() {
-        Uri image = null;
+        File path  = new File("something.png");
         BodyLocationPhoto photo = new BodyLocationPhoto();
-        photo.setPhoto(image);
-        assertEquals("should be the same",image, photo.getPhoto() );
+        photo.setPhoto(path);
+        assertEquals("should be the same",path, photo.getPhoto() );
 
     }
 

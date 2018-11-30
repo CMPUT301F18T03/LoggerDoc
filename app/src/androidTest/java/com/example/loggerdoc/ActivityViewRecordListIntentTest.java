@@ -18,63 +18,61 @@ import static android.support.test.espresso.intent.matcher.IntentMatchers.hasCom
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.CoreMatchers.anything;
 
-public class ActivityBrowseProblemsIntentTest {
+public class ActivityViewRecordListIntentTest {
 
     private Patient p;
     private Problem pr;
+    private Record r;
 
     @Rule
-    public IntentsTestRule<ActivityBrowseProblems> intentsTestRule =
-            new IntentsTestRule<>(ActivityBrowseProblems.class, false, false);
+    public IntentsTestRule<ActivityViewRecordList> intentsTestRule =
+            new IntentsTestRule<>(ActivityViewRecordList.class, false, false);
 
     @Before
     // create mock patient with mock problem
     public void setup() {
-        p = new Patient("Patty2222", "testpatient@example.com", "555-123-4567", "Patient");
-        pr = new Problem("Ear Infection", LocalDateTime.now(), "Right ear", p.getElasticID());
-        p.getProblems().add(pr.getElasticID());
-
+        p = new Patient("Patty2222", "testPatient@example.com", "555-123-4567", "Patient");
         UserListController.getUserList().add_internal(p);
         UserListController.setCurrentUser(p);
+
+        pr = new Problem("Possible concussion", LocalDateTime.now(),
+                "From car accident", p.getElasticID());
         ProblemRecordListController.getProblemList().add_internal(pr);
 
+        r = new Record("Car crash", pr.getElasticID());
+        ProblemRecordListController.getRecordList().add_internal(r);
+
         Intent i = new Intent();
-        i.putExtra("Patient", p.getElasticID());
+        i.putExtra("Problem", pr.getElasticID());
         intentsTestRule.launchActivity(i);
     }
 
     @Test
-    public void TestViewProblemFromBrowse() {
-        onData(anything()).inAdapterView(withId(R.id.ProblemList)).atPosition(0)
+    public void TestAddRecordFromRecordList() {
+        onView(withId(R.id.addRecordButton))
                 .perform(click());
-        intended(hasComponent(ActivityViewProblem.class.getName()));
+        intended(hasComponent(ActivityAddRecord.class.getName()));
     }
 
+    // subject to change once search is implemented
     @Test
-    public void TestAddProblemFromBrowse() {
-        onView(withId(R.id.addProblemButton))
-                .perform(click());
-        intended(hasComponent(ActivityAddProblem.class.getName()));
-    }
-
-    @Test
-    public void TestSearchProblemFromBrowse() {
-        onView(withId(R.id.searchButton))
+    public void TestSearchFromRecordList() {
+        onView(withId(R.id.recordSearchButton))
                 .perform(click());
         intended(hasComponent(ActivitySearch.class.getName()));
     }
 
     @Test
-    public void TestViewProfileFromBrowse() {
-        onView(withId(R.id.usernameText))
+    public void TestViewRecordFromRecordList() {
+        onData(anything()).inAdapterView(withId(R.id.recordsListView)).atPosition(0)
                 .perform(click());
-        intended(hasComponent(ActivityUserProfile.class.getName()));
+        intended(hasComponent(ActivityViewRecord.class.getName()));
     }
 
     @After
     public void after() {
         UserListController.getUserList().remove_internal(p);
         ProblemRecordListController.getProblemList().remove_internal(pr);
+        ProblemRecordListController.getRecordList().remove_internal(r);
     }
-
 }

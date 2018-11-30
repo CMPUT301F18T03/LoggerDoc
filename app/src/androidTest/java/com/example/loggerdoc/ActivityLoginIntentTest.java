@@ -14,6 +14,7 @@ import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static com.example.loggerdoc.IntentTestUtils.waitForUserListUpdate;
 
 public class ActivityLoginIntentTest {
 
@@ -24,12 +25,7 @@ public class ActivityLoginIntentTest {
     @Before
     public void before() {
         intentsTestRule.launchActivity(new Intent());
-        try {
-            Thread.sleep(500); // a delay to ensure that new accounts get properly loaded
-        }
-        catch (InterruptedException e) {
-            // never
-        }
+        waitForUserListUpdate();
     }
 
     @Test
@@ -42,6 +38,8 @@ public class ActivityLoginIntentTest {
         onView(withId(R.id.Login_Button))
                 .perform(click());
         intended(hasComponent(ActivityPatientHomePage.class.getName()));
+
+        UserListController.getUserList().remove_internal(p);
     }
 
     @Test
@@ -54,5 +52,7 @@ public class ActivityLoginIntentTest {
         onView(withId(R.id.Login_Button))
                 .perform(click());
         intended(hasComponent(ActivityCareGiverHomePage.class.getName()));
+
+        UserListController.getUserList().remove_internal(c);
     }
 }

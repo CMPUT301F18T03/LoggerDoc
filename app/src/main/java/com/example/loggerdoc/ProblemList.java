@@ -17,6 +17,8 @@ import com.example.loggerdoc.elasticclient.modifyProblemTask;
 import com.example.loggerdoc.elasticclient.removeProblemTask;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ProblemList extends GenericList<Problem> implements ElasticDataCallback<ArrayList<Problem>> {
 
@@ -52,7 +54,4 @@ public class ProblemList extends GenericList<Problem> implements ElasticDataCall
         }
     }
 
-
 }
-
-

@@ -80,17 +80,15 @@
         android:id="@+id/gallery_button"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="208dp"
-        android:layout_marginEnd="58dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginEnd="58dp"
+        android:layout_marginBottom="208dp"
         android:background="@drawable/squarebuttonshape"
         android:text="@string/add_photo_button"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/Camera_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BodylocationButton" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/record_create_button"
@@ -155,5 +153,17 @@
         app:layout_constraintStart_toEndOf="@+id/mapButton"
         app:layout_constraintTop_toBottomOf="@+id/record_title_text"
         app:layout_constraintVertical_bias="0.1" />
+
+    <Button
+        android:id="@+id/BodyLocationGallary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/squarebuttonshape"
+        android:text="gallery bl"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recordGeoText" />
 
 </android.support.constraint.ConstraintLayout>
