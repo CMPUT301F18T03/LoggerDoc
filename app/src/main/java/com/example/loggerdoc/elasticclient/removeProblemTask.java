@@ -24,13 +24,17 @@ public class removeProblemTask extends AsyncTask<Problem, Void, Void> {
     }
     @Override
     protected Void doInBackground(Problem... problems) {
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create();
+        Gson gson = new Gson();//new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create();
         Problem tosend = problems[0];
         ArrayList<Problem> ret = ProblemRecordListController.getProblemList().getArray();
         httphandler sender = ElasticSearchController.getHttpHandler();
         OutputStream fos;
         BufferedWriter out;
-        sender.httpDELETE("/problem/_doc/"+tosend.getElasticID().toString());
+        ElasticSearchController.getCacheClient().sendCache(context);
+        String serverResponse = sender.httpDELETE("/problem/_doc/"+tosend.getElasticID().toString());
+        if(serverResponse == null){
+            ElasticSearchController.getCacheClient().cacheToDelete("/problem/_doc/",tosend.getElasticID(),context);
+        }
 
         try {
 
