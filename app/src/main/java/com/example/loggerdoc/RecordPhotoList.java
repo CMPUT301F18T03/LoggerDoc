@@ -20,7 +20,13 @@ public class RecordPhotoList extends GenericList<RecordPhoto> implements Elastic
      * @return the record phot list
      */
     public ArrayList<RecordPhoto> getRecordPhotos() {
-        return getArray();
+        ArrayList<RecordPhoto> dataArrayList = new ArrayList<>();
+        for(int num = 0;num < datalist.size();num++){
+            if(datalist.valueAt(num).getClass() == RecordPhoto.class){
+                dataArrayList.add(datalist.valueAt(num));
+            }
+        }
+        return dataArrayList;
     }
 
     /**
@@ -70,5 +76,15 @@ public class RecordPhotoList extends GenericList<RecordPhoto> implements Elastic
     @Override
     public void dataCallBack(ArrayList<RecordPhoto> data) {
         super.load(data);
+    }
+
+    public ArrayList<BodyLocationPhoto> getBodyLocationPhotos() {
+        ArrayList<BodyLocationPhoto> dataArrayList = new ArrayList<>();
+        for(int num = 0;num < datalist.size();num++){
+            if(datalist.valueAt(num).getClass() == BodyLocationPhoto.class){
+                dataArrayList.add((BodyLocationPhoto) datalist.valueAt(num));
+            }
+        }
+        return dataArrayList;
     }
 }

@@ -48,7 +48,7 @@ public class getRecordPhotosTask extends AsyncTask<Record, Void, ArrayList<Recor
                     toFetchBody.add(bodyloc);
                     continue;
                 }
-                data = gson.fromJson(fileread,BodyLocationPhoto.class);
+                data = toBody(gson.fromJson(fileread,photodata.class));
                 data.setPhoto(new File(context.getFilesDir().getAbsolutePath()+"/Data/"+bodyloc.toString()+".jpg"));
                 ret.add(data);
             }
@@ -63,7 +63,7 @@ public class getRecordPhotosTask extends AsyncTask<Record, Void, ArrayList<Recor
                     toFetchRec.add(recordphoto);
                     continue;
                 }
-                moredata = gson.fromJson(fileread,RecordPhoto.class);
+                moredata = toRec(gson.fromJson(fileread,photodata.class));
                 moredata.setPhoto(new File(context.getFilesDir().getAbsolutePath()+"/Data/"+recordphoto.toString()+".jpg"));
                 ret.add(moredata);
             }
@@ -71,16 +71,35 @@ public class getRecordPhotosTask extends AsyncTask<Record, Void, ArrayList<Recor
 
         for(Integer EID: toFetchBody){
             String jsonin = getter.httpGET("/photodata/_doc/" + EID.toString());
-            data = gson.fromJson(jsonin,BodyLocationPhoto.class);
+            photodata dat = gson.fromJson(jsonin,photodata.class);
+            data = toBody(dat);
             ret.add(data);
+            save(dat,gson);
         }
         for(Integer EID: toFetchRec){
             String jsonin = getter.httpGET("/photodata/_doc/" + EID.toString());
-            moredata = gson.fromJson(jsonin,RecordPhoto.class);
+            photodata dat = gson.fromJson(jsonin,photodata.class);
+            moredata = toRec(dat);
             ret.add(moredata);
+            save(dat,gson);
         }
 
         return ret;
+    }
+
+    private RecordPhoto toRec(photodata photodata) {
+        RecordPhoto x = new RecordPhoto();
+        x.setElasticID(photodata.ElasticID);
+        x.setElasticID_OwnerRecord(photodata.ElasticID_OwnerRecord);
+        return x;
+    }
+
+    private BodyLocationPhoto toBody(photodata photodata) {
+        BodyLocationPhoto x = new BodyLocationPhoto();
+        x.setElasticID(photodata.ElasticID);
+        x.setElasticID_OwnerRecord(photodata.ElasticID_OwnerRecord);
+        x.setLabel(photodata.lbl);
+        return x;
     }
 
     private String readin(File targfile) {

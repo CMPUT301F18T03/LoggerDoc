@@ -240,13 +240,15 @@ public class ActivityAddRecord extends AppCompatActivity {
 
             if (photos.size() != 0) {
                 for (int i = 0; i<photos.size(); i++){
-                    record.getRecordPhotoList().addPhoto(photos.get(i));
+                    record.addRecordPhoto(photos.get(i));
+                    ProblemRecordListController.getRecordPhotoList().addPhoto(photos.get(i),getApplicationContext());
                 }
 
            }
            if (blphotos.size() != 0){
                for(int i =0; i<blphotos.size(); i++){
-                   record.getBlPhotoList().add(blphotos.get(i));
+                   record.addRecordPhoto(blphotos.get(i));
+                   ProblemRecordListController.getRecordPhotoList().addPhoto(blphotos.get(i),getApplicationContext());
                }
            }
            record.setBodylocation(bodylocation);

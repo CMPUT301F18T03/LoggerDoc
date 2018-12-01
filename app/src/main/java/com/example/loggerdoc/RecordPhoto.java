@@ -50,4 +50,12 @@ public class RecordPhoto implements Serializable,ElasticID {
     public Integer getElasticID_OwnerRecord(){
         return this.ElasticID_OwnerRecord;
     }
+
+    public void setElasticID_OwnerRecord(Integer elasticID_ownerRecord) {
+        this.ElasticID_OwnerRecord = elasticID_ownerRecord;
+    }
+
+    public void setElasticID(Integer elasticID) {
+        this.ElasticID = elasticID;
+    }
 }
