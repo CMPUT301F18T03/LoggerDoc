@@ -70,18 +70,16 @@ public class ActivityCareGiverAddPatient extends AppCompatActivity {
         ArrayList<User> list = UserListController.getUserList().getArray();
         for(User user :list){
             if (user.getUserID().equals(entered)){
+                //add the patient to the caregivers patient list, update userlist with updated caregiver
                 patientToAdd =(Patient) user;
                 loggedInCareGiver.addPatient(patientToAdd);
                 UserListController.getUserList().add(loggedInCareGiver,getApplicationContext());
-                userID.setText("");
                 finish();
+                return;
             }
         //user not found, display text and do nothing
         Toast.makeText(this, "That username does not exist. Please try again.", Toast.LENGTH_SHORT).show();
         userID.setText("");
-
-
-
 
         }
     }

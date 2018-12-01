@@ -18,8 +18,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
-    private ListView patientList;
-    private ArrayAdapter<Patient> adapter;
+
+
     private CareGiver caregiver;
     private Integer caregiver_ID;
     private TextView userId;
@@ -28,7 +28,7 @@ public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_care_giver_browse_patients);
-        patientList = (ListView) findViewById(R.id.PatientList);
+
 
         //get the caregiver from the intent
         Intent intent = getIntent();
@@ -45,24 +45,6 @@ public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //The patient list adapter provides a custom view for each patient in the list, displaying
-        //their user ID, email and phone number
-        //initialize adapter and set it to the patient list
-        adapter = new AdapterListPatient(this,
-                R.layout.patient_listview_layout, UserListController.getSpecificUserList(caregiver.getPatientList()));
-        patientList.setAdapter(adapter);
-
-        //Set the onClickListener for the listView. This will call toProblemListActivity().
-        patientList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Patient selectedPatient = (Patient) parent.getItemAtPosition(position);
-                toBrowseProblemsActivity(selectedPatient);
-
-
-
-            }
-        });
 
 
         // Set the Add Patient button. When this button is pressed it will call toAddPatient().
@@ -71,6 +53,30 @@ public class ActivityCareGiverBrowsePatients extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 toAddPatient(view);
+            }
+        });
+
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+
+        //TODO: If listeners are added, no need to re initialize list
+        ListView patientList = (ListView) findViewById(R.id.PatientList);
+        ArrayAdapter<Patient> adapter = new AdapterListPatient(this,
+                R.layout.patient_listview_layout, UserListController.getSpecificUserList(caregiver.getPatientList()));
+        patientList.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+        //Set the onClickListener for the listView. This will call toProblemListActivity().
+        patientList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Patient selectedPatient = (Patient) parent.getItemAtPosition(position);
+                toBrowseProblemsActivity(selectedPatient);
+
             }
         });
 
