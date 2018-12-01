@@ -50,7 +50,7 @@ public class ActivityBodyLocation extends Activity {
                 int touchy = (int) event.getY();
 
                 int imagex = touchx - viewCoordsFront[0];
-                int imagey = touchx - viewCoordsFront[1];
+                int imagey = touchy - viewCoordsFront[1];
 
                 location.set(0,imagex);
                 location.set(1,imagey);
@@ -65,7 +65,7 @@ public class ActivityBodyLocation extends Activity {
                 int touchy = (int) event.getY();
 
                 int imagex = touchx - viewCoordsBack[0];
-                int imagey = touchx - viewCoordsBack[1];
+                int imagey = touchy - viewCoordsBack[1];
 
                 location.set(2,imagex);
                 location.set(3,imagey);
