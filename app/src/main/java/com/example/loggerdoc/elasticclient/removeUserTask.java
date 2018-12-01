@@ -35,22 +35,9 @@ public class removeUserTask extends AsyncTask<User, Void, Void> {
         if(serverResponse == null){
             ElasticSearchController.getCacheClient().cacheToDelete("/user/_doc/",tosend.getElasticID(),context);
         }
-        try {
 
-            fos = new FileOutputStream(new File(context.getFilesDir().getAbsolutePath()+"/Users/user"+tosend.getElasticID()+".sav"));
-            out = new BufferedWriter(new OutputStreamWriter(fos));
-            for(User x:ret){
-                out.write(gson.toJson(x));
-                out.newLine();
-            }
-            out.flush();
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-
-        }
-
-
+        File file = new File(context.getFilesDir().getAbsolutePath()+"/Users/user"+tosend.getElasticID()+".sav");
+        file.delete();
 
         return null;
     }
