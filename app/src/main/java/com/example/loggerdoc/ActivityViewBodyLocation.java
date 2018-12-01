@@ -1,5 +1,6 @@
 package com.example.loggerdoc;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -7,6 +8,8 @@ import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +36,31 @@ public class ActivityViewBodyLocation extends AppCompatActivity {
         Back = Back.copy(Bitmap.Config.ARGB_8888, true);
 
         int color = colorimage.getPixel(0,0);
+
+        Button removeFront = (Button) findViewById(R.id.remove1);
+        Button removeBack = (Button)findViewById(R.id.remove2);
+
+        removeFront.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                setResult(RESULT_OK);
+                Intent intent = new Intent();
+                intent.putExtra("REMOVE", 1);
+                setResult(ActivityLogin.RESULT_OK,intent);
+                finish();
+            }
+        });
+
+        removeBack.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                setResult(RESULT_OK);
+                Intent intent = new Intent();
+                intent.putExtra("REMOVE", 2);
+                setResult(ActivityLogin.RESULT_OK,intent);
+                finish();
+            }
+        });
 
 
         if (list.size() == 1){
