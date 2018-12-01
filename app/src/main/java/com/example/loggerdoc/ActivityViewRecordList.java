@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /*This class displays the records associated with the selected problem using a custom array adapter
  *(located in the AdapterListRecords class). The record list of the selected problem is used in the
  * adapter to display the records.
@@ -19,6 +21,7 @@ public class ActivityViewRecordList extends AppCompatActivity {
 
     private int problemID;
     private FloatingActionButton addRecordButton;
+    private ArrayList<Record> recordArrayList;
 
     //To be called when the activity is created
     @Override
