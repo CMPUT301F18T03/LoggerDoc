@@ -35,7 +35,6 @@ public class removeProblemTask extends AsyncTask<Problem, Void, Void> {
         if(serverResponse == null){
             ElasticSearchController.getCacheClient().cacheToDelete("/problem/_doc/",tosend.getElasticID(),context);
         }
-
         try {
 
             fos = new FileOutputStream(new File(context.getFilesDir().getAbsolutePath()+"/Problems/problem"+tosend.getElasticID_Owner().toString()+".sav"));

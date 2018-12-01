@@ -71,8 +71,11 @@ public class ActivityViewRecordListIntentTest {
 
     @After
     public void after() {
-        UserListController.getUserList().remove_internal(p);
-        ProblemRecordListController.getProblemList().remove_internal(pr);
-        ProblemRecordListController.getRecordList().remove_internal(r);
+        UserListController.getUserList().remove(p,
+                intentsTestRule.getActivity().getBaseContext());
+        ProblemRecordListController.getProblemList().remove(pr,
+                intentsTestRule.getActivity().getBaseContext());
+        ProblemRecordListController.getRecordList().remove(r,
+                intentsTestRule.getActivity().getBaseContext());
     }
 }
