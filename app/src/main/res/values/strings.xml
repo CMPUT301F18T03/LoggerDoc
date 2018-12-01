@@ -53,5 +53,12 @@
     <string name="addCaregiverComment">Add Comment</string>
     <string name="returnButton">Return</string>
     <string name="view_map">View Map</string>
+    <string name="searchProblemTitle">Search Problems</string>
+    <string name="searchProblemKeywordsText">Problem Keyword(s):</string>
+    <string name="searchRecordTitle">Search Records</string>
+    <string name="searchRecordKeywordsText">Record Keyword(s):</string>
+    <string name="searchGeolocationKeywordsText">Geolocation Keyword(s):</string>
+    <string name="searchBodyLocationKeywordsText">Bodypart Keyword(s):</string>
+    <string name="searchButtonText">Search</string>
 
 </resources>
