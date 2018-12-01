@@ -14,7 +14,7 @@ import java.security.acl.Owner;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Record implements Serializable,ElasticID {
+public class Record implements ElasticID {
 
     private String title;
     private String comment;
