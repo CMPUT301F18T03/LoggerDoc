@@ -57,9 +57,9 @@ public class ActivityViewRecordListIntentTest {
     // subject to change once search is implemented
     @Test
     public void TestSearchFromRecordList() {
-        onView(withId(R.id.recordSearchButton))
+        onView(withId(R.id.searchRecordButton))
                 .perform(click());
-        intended(hasComponent(ActivitySearch.class.getName()));
+        intended(hasComponent(ActivitySearchRecords.class.getName()));
     }
 
     @Test
