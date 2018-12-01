@@ -53,6 +53,7 @@ public class ActivityLoginIntentTest {
                 .perform(click());
         intended(hasComponent(ActivityCareGiverHomePage.class.getName()));
 
-        UserListController.getUserList().remove_internal(c);
+        UserListController.getUserList().remove(c,
+                intentsTestRule.getActivity().getBaseContext());
     }
 }

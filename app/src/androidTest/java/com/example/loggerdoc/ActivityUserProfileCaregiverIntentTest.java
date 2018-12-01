@@ -65,6 +65,7 @@ public class ActivityUserProfileCaregiverIntentTest {
 
     @After
     public void after() {
-        UserListController.getUserList().remove_internal(c);
+        UserListController.getUserList().remove(c,
+                intentsTestRule.getActivity().getBaseContext());
     }
 }

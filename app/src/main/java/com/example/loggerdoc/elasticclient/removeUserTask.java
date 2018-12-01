@@ -4,10 +4,10 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.loggerdoc.ElasticSearchController;
-import com.example.loggerdoc.Problem;
 import com.example.loggerdoc.ProblemRecordListController;
+import com.example.loggerdoc.User;
+import com.example.loggerdoc.UserListController;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -17,29 +17,29 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
-public class removeProblemTask extends AsyncTask<Problem, Void, Void> {
+public class removeUserTask extends AsyncTask<User, Void, Void> {
     private Context context;
-    public removeProblemTask(Context context){
+    public removeUserTask(Context context){
         this.context = context;
     }
     @Override
-    protected Void doInBackground(Problem... problems) {
-        Gson gson = new Gson();//new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create();
-        Problem tosend = problems[0];
-        ArrayList<Problem> ret = ProblemRecordListController.getProblemList().getArray();
+    protected Void doInBackground(User... users) {
+        Gson gson = new Gson();
+        User tosend = users[0];
+        ArrayList<User> ret = UserListController.getUserList().getArray();
         httphandler sender = ElasticSearchController.getHttpHandler();
         OutputStream fos;
         BufferedWriter out;
         ElasticSearchController.getCacheClient().sendCache(context);
-        String serverResponse = sender.httpDELETE("/problem/_doc/"+tosend.getElasticID().toString());
+        String serverResponse = sender.httpDELETE("/user/_doc/"+tosend.getElasticID().toString());
         if(serverResponse == null){
-            ElasticSearchController.getCacheClient().cacheToDelete("/problem/_doc/",tosend.getElasticID(),context);
+            ElasticSearchController.getCacheClient().cacheToDelete("/user/_doc/",tosend.getElasticID(),context);
         }
         try {
 
-            fos = new FileOutputStream(new File(context.getFilesDir().getAbsolutePath()+"/Problems/problem"+tosend.getElasticID_Owner().toString()+".sav"));
+            fos = new FileOutputStream(new File(context.getFilesDir().getAbsolutePath()+"/Users/user"+tosend.getElasticID()+".sav"));
             out = new BufferedWriter(new OutputStreamWriter(fos));
-            for(Problem x:ret){
+            for(User x:ret){
                 out.write(gson.toJson(x));
                 out.newLine();
             }
@@ -49,6 +49,7 @@ public class removeProblemTask extends AsyncTask<Problem, Void, Void> {
             e.printStackTrace();
 
         }
+
 
 
         return null;

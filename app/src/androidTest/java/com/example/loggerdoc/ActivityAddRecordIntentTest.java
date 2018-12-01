@@ -63,6 +63,7 @@ public class ActivityAddRecordIntentTest {
 
     @After
     public void after() {
-        ProblemRecordListController.getProblemList().remove_internal(pr);
+        ProblemRecordListController.getProblemList().remove(pr,
+                intentsTestRule.getActivity().getBaseContext());
     }
 }
