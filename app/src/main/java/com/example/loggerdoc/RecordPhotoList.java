@@ -2,13 +2,17 @@ package com.example.loggerdoc;
 
 import android.content.Context;
 
+import com.example.loggerdoc.elasticclient.ElasticDataCallback;
+import com.example.loggerdoc.elasticclient.getRecordPhotosTask;
+import com.example.loggerdoc.elasticclient.modifyPhotoTask;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.nio.file.Files;
 import java.util.ArrayList;
 
-public class RecordPhotoList extends GenericList<RecordPhoto> {
+public class RecordPhotoList extends GenericList<RecordPhoto> implements ElasticDataCallback<ArrayList<RecordPhoto>> {
 
 
     /**
@@ -26,26 +30,15 @@ public class RecordPhotoList extends GenericList<RecordPhoto> {
     public void addPhoto(RecordPhoto photo,Context context) {
         Record x = ProblemRecordListController.getRecordList().get(photo.getElasticID_OwnerRecord());
         x.addRecordPhoto(photo);
-        photo.setPhoto(validatefileloc(photo,context));
         super.add_internal(photo);
-
+        new modifyPhotoTask(context).execute(photo);
     }
 
-    private File validatefileloc(RecordPhoto photo,Context context) {
-        File datafile = new File(context.getFilesDir().getAbsolutePath()+"/Data/");
-        //validate its in our directory
-        if(!photo.getPhoto().toPath().startsWith(datafile.toPath())){
-            //If not, move it
-            datafile = new File(context.getFilesDir().getAbsolutePath()+"/Data/"+photo.getElasticID()+".jpg");
-            try {
-                Files.move(photo.getPhoto().toPath(),datafile.toPath());
-                return datafile;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return photo.getPhoto();
+    public void loadRecord(Record toload,Context context){
+        datalist.clear();
+        new getRecordPhotosTask(context,this).execute(toload);
     }
+
 
     /**
      *
@@ -74,4 +67,8 @@ public class RecordPhotoList extends GenericList<RecordPhoto> {
     }
 
 
+    @Override
+    public void dataCallBack(ArrayList<RecordPhoto> data) {
+        super.load(data);
+    }
 }

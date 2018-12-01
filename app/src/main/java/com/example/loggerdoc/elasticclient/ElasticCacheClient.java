@@ -41,20 +41,21 @@ public class ElasticCacheClient {
             String data;
             String returnval;
             while(Line != null && !Line.equals("")){
-                if(Line.substring(0,1).equals("s")){
-                    address = Line.substring(1);
-                    data = in.readLine();
-                    returnval = handler.httpPUT(address,data);
-                }
-                else if(Line.substring(0,1).equals("d")){
-                    address = Line.substring(1);
-                    data = in.readLine();
-                    returnval = handler.httpDELETE(address+data);
-                }
-                else{
-                    //panic
-                    lock.unlock();
-                    return;
+                switch (Line.substring(0, 1)) {
+                    case "s":
+                        address = Line.substring(1);
+                        data = in.readLine();
+                        returnval = handler.httpPUT(address, data);
+                        break;
+                    case "d":
+                        address = Line.substring(1);
+                        data = in.readLine();
+                        returnval = handler.httpDELETE(address + data);
+                        break;
+                    default:
+                        //panic
+                        lock.unlock();
+                        return;
                 }
                 if(returnval != null){
                     Line = in.readLine();
@@ -101,6 +102,7 @@ public class ElasticCacheClient {
     void cacheToSend(String path,String jsonout, Context context) {
         cache(path,jsonout,context,"s");
     }
+
 
     void cacheToDelete(String path,Integer toDelete,Context context){
         cache(path,toDelete.toString(),context,"d");

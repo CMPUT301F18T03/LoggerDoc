@@ -12,7 +12,7 @@ public class RecordPhoto implements Serializable,ElasticID {
     /**
      * @param path the uri object for the images
      */
-    private File path;
+    private transient File path;
     private Integer ElasticID;
     private Integer ElasticID_OwnerRecord;
 
