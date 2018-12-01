@@ -21,7 +21,9 @@ public class RecordPhoto implements Serializable,ElasticID {
         ElasticID = this.hashCode();
     }
 
+    public RecordPhoto(){
 
+    }
 
     /**
      *
