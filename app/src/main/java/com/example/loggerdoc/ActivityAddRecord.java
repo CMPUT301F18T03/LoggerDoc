@@ -385,6 +385,12 @@ public class ActivityAddRecord extends AppCompatActivity {
         return result;
     }
 
+    /**
+     * @author = Alexandra Tyrrell
+     *
+     * Check if we have permission to access external storage (photos). If not, we need to
+     * request the permission.
+     */
     private void checkStoragePermission() {
         String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
 
@@ -398,6 +404,12 @@ public class ActivityAddRecord extends AppCompatActivity {
         }
     }
 
+    /**
+     * @author = Alexandra Tyrrell
+     *
+     * Check if we have permission to access the camera. If not, we need to request the camera
+     * permission.
+     */
     private void checkCameraPermission(){
         String[] permissions = {Manifest.permission.CAMERA};
 
@@ -411,6 +423,13 @@ public class ActivityAddRecord extends AppCompatActivity {
         }
     }
 
+    /**
+     * @author = Alexandra Tyrrell
+     *
+     * Callback interface for the result of requesting permissions. If we don't have the camera permission
+     * than cameraPermissionsGranted is set to false. If we have the camera permission than
+     * cameraPermissionsGranted is set to true. Same thing for pictureStoragePermissionsGranted.
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
