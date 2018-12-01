@@ -45,7 +45,7 @@ public class ActivityViewRecordList extends AppCompatActivity {
         });
 
         //Intialize the search record button
-        FloatingActionButton searchRecordsButton = (FloatingActionButton)findViewById(R.id.recordSearchButton);
+        FloatingActionButton searchRecordsButton = (FloatingActionButton)findViewById(R.id.searchRecordButton);
         searchRecordsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,7 +104,7 @@ public class ActivityViewRecordList extends AppCompatActivity {
 
     //Change to ActivitySearch.
     public void goSearchRecord(View view){
-        Intent intent = new Intent (this, ActivitySearch.class);
+        Intent intent = new Intent (this, ActivitySearchRecords.class);
         startActivity(intent);
     }
 }
