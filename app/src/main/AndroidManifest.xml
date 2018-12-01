@@ -58,7 +58,8 @@
         <activity android:name=".ActivityCareGiverAddPatient" />
         <activity android:name=".ActivityBrowseProblems" />
         <activity android:name=".ActivityAddProblem" />
-        <activity android:name=".ActivitySearch" />
+        <activity android:name=".ActivitySearchProblems" />
+        <activity android:name=".ActivitySearchRecords" />
         <activity android:name=".ActivityViewProblem" />
         <activity android:name=".ActivityEditProblem" />
         <activity android:name=".ActivityViewRecord" />

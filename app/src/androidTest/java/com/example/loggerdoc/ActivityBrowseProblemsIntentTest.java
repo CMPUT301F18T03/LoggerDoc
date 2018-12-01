@@ -59,9 +59,9 @@ public class ActivityBrowseProblemsIntentTest {
 
     @Test
     public void TestSearchProblemFromBrowse() {
-        onView(withId(R.id.searchButton))
+        onView(withId(R.id.searchProblemButton))
                 .perform(click());
-        intended(hasComponent(ActivitySearch.class.getName()));
+        intended(hasComponent(ActivitySearchProblems.class.getName()));
     }
 
     @Test
