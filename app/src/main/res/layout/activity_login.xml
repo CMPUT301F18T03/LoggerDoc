@@ -85,18 +85,33 @@
 
     <Button
         android:id="@+id/QRCodeLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_width="187dp"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/buttonshape"
         android:onClick="scanQR"
         android:text="LOG IN WITH QR CODE"
         android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/Login_Button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Login_Button" />
+
+    <Switch
+        android:id="@+id/AdsSwitch"
+        android:layout_width="190dp"
+        android:layout_height="47dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/buttonshape"
+        android:switchMinWidth="50dp"
+        android:text="Ads"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textColorLink="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Create_Account_Button" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -51,14 +51,14 @@ public class AdapterListRecords extends ArrayAdapter<Record> {
         View listitem = convertView;
 
         if (listitem == null){
-            listitem = LayoutInflater.from(commentContext).inflate(R.layout.caregiver_comment_listview,parent,false);
+            listitem = LayoutInflater.from(commentContext).inflate(R.layout.record_view_list,parent,false);
         }
         Record currentRecords = recordsList.get(position);
 
         TextView TitleView = (TextView) listitem.findViewById(R.id.DateView);
         TitleView.setText(currentRecords.getTitle());
 
-        TextView date = (TextView) listitem.findViewById(R.id.CommentView);
+        TextView date = (TextView) listitem.findViewById(R.id.DescriptionView);
         date.setText(currentRecords.getTimestamp().toString());
 
         return listitem;

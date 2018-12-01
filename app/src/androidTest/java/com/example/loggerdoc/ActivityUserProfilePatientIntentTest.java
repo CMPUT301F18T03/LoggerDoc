@@ -64,6 +64,7 @@ public class ActivityUserProfilePatientIntentTest {
 
     @After
     public void after() {
-        UserListController.getUserList().remove_internal(p);
+        UserListController.getUserList().remove(p,
+                intentsTestRule.getActivity().getBaseContext());
     }
 }

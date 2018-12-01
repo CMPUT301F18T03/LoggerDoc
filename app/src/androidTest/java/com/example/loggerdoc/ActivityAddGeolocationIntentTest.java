@@ -6,6 +6,7 @@ import android.support.test.espresso.intent.matcher.IntentMatchers;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.rule.GrantPermissionRule;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -29,6 +30,9 @@ public class ActivityAddGeolocationIntentTest {
     @Rule
     public GrantPermissionRule coarsePerm = GrantPermissionRule.grant(android.Manifest.permission.ACCESS_COARSE_LOCATION);
 
+    private Patient p;
+    private Problem pr;
+
     @Rule
     public IntentsTestRule<ActivityAddGeolocation> intentsTestRule =
             new IntentsTestRule<>(ActivityAddGeolocation.class, false, false);
@@ -36,8 +40,8 @@ public class ActivityAddGeolocationIntentTest {
     @Before
     // create mock intent with mock patient
     public void before() {
-        Patient p = new Patient("Patty2222", "testPatient@example.com", "555-555-1234", "Patient");
-        Problem pr = new Problem("Test Problem", LocalDateTime.now(),
+        p = new Patient("Patty2222", "testPatient@example.com", "555-555-1234", "Patient");
+        pr = new Problem("Test Problem", LocalDateTime.now(),
                 "Test Problem's Description", p.getElasticID());
 
         Intent intent = new Intent();
@@ -52,5 +56,13 @@ public class ActivityAddGeolocationIntentTest {
         assertThat(intentsTestRule.getActivityResult(), hasResultCode(Activity.RESULT_OK));
         assertThat(intentsTestRule.getActivityResult(),
                 hasResultData(IntentMatchers.hasExtraWithKey("geoLocation")));
+    }
+
+    @After
+    public void after() {
+        UserListController.getUserList().remove(p,
+                intentsTestRule.getActivity().getBaseContext());
+        ProblemRecordListController.getProblemList().remove(pr,
+                intentsTestRule.getActivity().getBaseContext());
     }
 }

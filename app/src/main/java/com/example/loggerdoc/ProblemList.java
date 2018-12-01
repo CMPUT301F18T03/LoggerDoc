@@ -54,4 +54,23 @@ public class ProblemList extends GenericList<Problem> implements ElasticDataCall
         }
     }
 
+    /**
+     * @author = Alexandra Tyrrell
+     *
+     * This method returns an arraylist of problems that is sorted by the most recent timestamp.
+     * 
+     * @return ArrayLIst<Problem> a sorted array list
+     */
+
+    public ArrayList<Problem> sort (){
+        ArrayList<Problem> problems = this.getArray();
+        Collections.sort(problems, new Comparator<Problem>() {
+            @Override
+            public int compare(Problem o1, Problem o2) {
+                return o2.getTimestamp().compareTo(o1.getTimestamp());
+            }
+        });
+        return problems;
+    }
+
 }
