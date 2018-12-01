@@ -67,7 +67,9 @@ public class ActivityCareGiverAddPatientIntentTest {
 
     @After
     public void after() {
-        UserListController.getUserList().remove_internal(c);
-        UserListController.getUserList().remove_internal(p);
+        UserListController.getUserList().remove(c,
+                intentsTestRule.getActivity().getBaseContext());
+        UserListController.getUserList().remove(p,
+                intentsTestRule.getActivity().getBaseContext());
     }
 }
