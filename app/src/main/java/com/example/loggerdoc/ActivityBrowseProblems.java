@@ -1,11 +1,9 @@
 package com.example.loggerdoc;
 
 import android.content.Intent;
-import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -51,7 +49,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
          * Set the Search Problem button. When this button is pressed it will call
          * changeToSearchActivity().
          */
-        FloatingActionButton searchButton = (FloatingActionButton) findViewById(R.id.searchButton);
+        FloatingActionButton searchButton = (FloatingActionButton) findViewById(R.id.searchProblemButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,7 +135,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
      * @param view View
      */
     public void changeToSearchActivity(View view){
-        Intent intent = new Intent (this, ActivitySearch.class);
+        Intent intent = new Intent (this, ActivitySearchProblems.class);
         startActivity(intent);
     }
 

@@ -67,7 +67,7 @@
         app:srcCompat="@android:drawable/ic_input_add" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/recordSearchButton"
+        android:id="@+id/searchRecordButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -76,6 +76,7 @@
         android:layout_marginTop="8dp"
         android:background="@color/colorPrimary"
         android:clickable="true"
+        android:onClick="goSearchRecord"
         app:backgroundTint="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/recordsListView"
         app:layout_constraintEnd_toEndOf="parent"
