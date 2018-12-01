@@ -34,6 +34,18 @@ public class ProblemRecordListController {
         return recordList;
     }
 
+
+    /**
+     *
+     * @return Returns the RecordPhotoList that the app will use. We keep reusing the same list over and over again.
+     */
+    static public RecordPhotoList getRecordPhotoList() {
+        if (photolist == null) {
+            photolist = new RecordPhotoList();
+        }
+        return photolist;
+    }
+
     /**
      * load a users data into the lists
      * @param ElasticID the ID of the user
