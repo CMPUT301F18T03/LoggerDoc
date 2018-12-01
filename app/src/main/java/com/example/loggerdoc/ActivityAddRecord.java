@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
@@ -44,6 +45,7 @@ public class ActivityAddRecord extends AppCompatActivity {
     private Record record;
     private static int problemID;
 
+
     private static final int ERROR_DIALOG_REQUEST = 9001;
     static final int REQUEST_IMAGE_CAPTURE_RECORD = 1000;
     static final int GALLERY_REQUEST_RECORD = 1001;
@@ -51,8 +53,10 @@ public class ActivityAddRecord extends AppCompatActivity {
     static final int BODY_LOCATION_REQUEST = 1003;
     static final int BODY_LOCATION_GALLARY_REQUEST = 1004;
     static final int LABEL_REQUEST = 1005;
-    private static final int MY_PERMISSIONS_REQUEST = 100;
-
+    private static final int CAMERA_PERMISSION_REQUEST = 100;
+    private static final int STORAGE_PERMISSION_REQUEST = 200;
+    private boolean cameraPermissionsGranted = false;
+    private boolean pictureStoragePermissionsGranted = false;
 
     private ArrayList<RecordPhoto> photos = new ArrayList<RecordPhoto>();
     private ArrayList<BodyLocationPhoto> blphotos = new ArrayList<BodyLocationPhoto>();
@@ -63,8 +67,6 @@ public class ActivityAddRecord extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_record);
-        requestStoragePermission();
-
     }
 
     @Override
@@ -80,20 +82,19 @@ public class ActivityAddRecord extends AppCompatActivity {
         Button recordGallery = findViewById(R.id.gallery_button);
         Button recordCamera = findViewById(R.id.Camera_button);
         Button bodyLocationButton = findViewById(R.id.body_location_button);
-        Button bodyLocationGallary = findViewById(R.id.BodyLocationGallary);
+        Button bodyLocationGallery = findViewById(R.id.BodyLocationGallary);
 
         recordGallery.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-
-                GalleryIntent(GALLERY_REQUEST_RECORD);
+                checkStoragePermission();
             }
         });
 
         recordCamera.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                dispatchTakePictureIntent(REQUEST_IMAGE_CAPTURE_RECORD);
+                checkCameraPermission();
             }
         });
 
@@ -104,17 +105,15 @@ public class ActivityAddRecord extends AppCompatActivity {
             }
         });
 
-        bodyLocationGallary.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                // get comment from user than when it returns call the gallary app for user bl they already have
+        bodyLocationGallery.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                // get comment from user than when it returns call the gallery app for user bl they already have
                 if (blphotos.size()<2){
-                Intent intent = new Intent(v.getContext(), ActivityBlLabel.class);
-                startActivityForResult(intent, LABEL_REQUEST);}
+                    Intent intent = new Intent(v.getContext(), ActivityBlLabel.class);
+                    startActivityForResult(intent, LABEL_REQUEST);}
                 else{
                     Toast.makeText(ActivityAddRecord.this, "You already have 2 bl photos for this record", Toast.LENGTH_SHORT).show();
                 }
-
-
             }
         });
 
@@ -154,8 +153,6 @@ public class ActivityAddRecord extends AppCompatActivity {
             Log.i("THIS_TAG", blPhoto.getLabel());
 
             blphotos.add(blPhoto);
-
-
 
         }
 
@@ -320,6 +317,7 @@ public class ActivityAddRecord extends AppCompatActivity {
     }
 
     private void GalleryIntent(int request) {
+
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, request);
@@ -387,14 +385,84 @@ public class ActivityAddRecord extends AppCompatActivity {
         return result;
     }
 
-    private void requestStoragePermission() {
-        if (ContextCompat.checkSelfPermission(ActivityAddRecord.this,
-                Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(ActivityAddRecord.this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                    MY_PERMISSIONS_REQUEST);
+    /**
+     * @author = Alexandra Tyrrell
+     *
+     * Check if we have permission to access external storage (photos). If not, we need to
+     * request the permission.
+     */
+    private void checkStoragePermission() {
+        String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
+
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                pictureStoragePermissionsGranted = true;
+                GalleryIntent(GALLERY_REQUEST_RECORD);
+        }
+        else{
+            ActivityCompat.requestPermissions(this, permissions, STORAGE_PERMISSION_REQUEST);
         }
     }
 
+    /**
+     * @author = Alexandra Tyrrell
+     *
+     * Check if we have permission to access the camera. If not, we need to request the camera
+     * permission.
+     */
+    private void checkCameraPermission(){
+        String[] permissions = {Manifest.permission.CAMERA};
+
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            cameraPermissionsGranted = true;
+            dispatchTakePictureIntent(REQUEST_IMAGE_CAPTURE_RECORD);
+        }
+        else{
+            ActivityCompat.requestPermissions(this, permissions, CAMERA_PERMISSION_REQUEST);
+        }
+    }
+
+    /**
+     * @author = Alexandra Tyrrell
+     *
+     * Callback interface for the result of requesting permissions. If we don't have the camera permission
+     * than cameraPermissionsGranted is set to false. If we have the camera permission than
+     * cameraPermissionsGranted is set to true. Same thing for pictureStoragePermissionsGranted.
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        cameraPermissionsGranted = false;
+        pictureStoragePermissionsGranted = false;
+
+        if (requestCode == CAMERA_PERMISSION_REQUEST) {
+            if (grantResults.length > 0) {
+                for (int result : grantResults) {
+                    if (result != PackageManager.PERMISSION_GRANTED) {
+                        cameraPermissionsGranted= false;
+                        Toast.makeText(ActivityAddRecord.this, "Do not have permission to access camera", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+                cameraPermissionsGranted= true;
+                dispatchTakePictureIntent(REQUEST_IMAGE_CAPTURE_RECORD);
+            }
+        }
+
+        if (requestCode == STORAGE_PERMISSION_REQUEST){
+            if (grantResults.length > 0) {
+                for (int result : grantResults) {
+                    if (result != PackageManager.PERMISSION_GRANTED) {
+                        pictureStoragePermissionsGranted= false;
+                        Toast.makeText(ActivityAddRecord.this, "Do not have permission to access storage/photos", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+                pictureStoragePermissionsGranted= true;
+                GalleryIntent(GALLERY_REQUEST_RECORD);
+            }
+        }
+
+    }
 }
