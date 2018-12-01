@@ -3,12 +3,20 @@ package com.example.loggerdoc;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Switch;
 import android.widget.TextView;
+
+import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
+import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
 
 public class ActivityCareGiverHomePage extends AppCompatActivity {
     private CareGiver caregiver;
     private Integer caregiver_ID;
+    private PublisherInterstitialAd mPublisherInterstitialAd;
+    static Switch adsSwitch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +38,19 @@ public class ActivityCareGiverHomePage extends AppCompatActivity {
             }
         });
         UserList userList = UserListController.getUserList();
+
+        adsSwitch = ActivityLogin.adsSwitch;
+        mPublisherInterstitialAd = new PublisherInterstitialAd(this);
+        mPublisherInterstitialAd.setAdUnitId("/6499/example/interstitial");
+        mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        mPublisherInterstitialAd = new PublisherInterstitialAd(this);
+        mPublisherInterstitialAd.setAdUnitId("/6499/example/interstitial");
+        mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
     }
 
     //this method changes the current activity to the caregiver browse patients activity
@@ -37,6 +58,9 @@ public class ActivityCareGiverHomePage extends AppCompatActivity {
         Intent intent = new Intent(this, ActivityCareGiverBrowsePatients.class);
         intent.putExtra("Caregiver", caregiver_ID);
         startActivity(intent);
+        if (mPublisherInterstitialAd.isLoaded() && adsSwitch.isChecked()) {
+            mPublisherInterstitialAd.show();
+        }
     }
 
 
@@ -45,7 +69,9 @@ public class ActivityCareGiverHomePage extends AppCompatActivity {
         Intent intent = new Intent(this, ActivityUpdateContactInfo.class);
         intent.putExtra("Caregiver", caregiver_ID);
         startActivity(intent);
-
+        if (mPublisherInterstitialAd.isLoaded() && adsSwitch.isChecked()) {
+            mPublisherInterstitialAd.show();
+        }
     }
 
     //Change to ActivityUserProfile.
@@ -53,5 +79,9 @@ public class ActivityCareGiverHomePage extends AppCompatActivity {
         Intent intent = new Intent (this, ActivityUserProfile.class);
         intent.putExtra("Caregiver", caregiver_ID);
         startActivity(intent);
+        if (mPublisherInterstitialAd.isLoaded() && adsSwitch.isChecked()) {
+            mPublisherInterstitialAd.show();
+        }
+
     }
 }
