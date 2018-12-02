@@ -105,16 +105,30 @@
         android:id="@+id/viewRecord"
         android:layout_width="181dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="115dp"
-        android:layout_marginStart="115dp"
-        android:layout_marginTop="21dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/squarebuttonshape"
         android:onClick="goViewRecordList"
         android:text="@string/view_records_button"
         android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descriptionProblemView" />
+
+    <Button
+        android:id="@+id/slideshow"
+        android:layout_width="181dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="22dp"
+        android:background="@drawable/squarebuttonshape"
+        android:onClick="goSlideshow"
+        android:text="@string/slideshow"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/caregiverCommentTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionProblemView"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/caregiverCommentTitle"

@@ -60,5 +60,6 @@
     <string name="searchGeolocationKeywordsText">Geolocation Keyword(s):</string>
     <string name="searchBodyLocationKeywordsText">Bodypart Keyword(s):</string>
     <string name="searchButtonText">Search</string>
+    <string name="slideshow">View Slideshow</string>
 
 </resources>
