@@ -3,14 +3,27 @@ package com.example.loggerdoc;
 import android.graphics.Bitmap;
 import android.net.Uri;
 
+import com.example.loggerdoc.elasticclient.ElasticID;
+
 import java.io.File;
 import java.io.Serializable;
 
-public class RecordPhoto implements Serializable {
+public class RecordPhoto implements Serializable,ElasticID {
     /**
      * @param path the uri object for the images
      */
-    private File path;
+    private transient File path;
+    private Integer ElasticID;
+    private Integer ElasticID_OwnerRecord;
+
+    public RecordPhoto(Integer elasticID_OwnerRecord) {
+        this.ElasticID_OwnerRecord = elasticID_OwnerRecord;
+        ElasticID = this.hashCode();
+    }
+
+    public RecordPhoto(){
+
+    }
 
     /**
      *
@@ -28,5 +41,27 @@ public class RecordPhoto implements Serializable {
 
     public void setPhoto(File newPhoto) {
         this.path = newPhoto;
+    }
+
+    @Override
+    public Integer getElasticID() {
+        return this.ElasticID;
+    }
+    public Integer getElasticID_OwnerRecord(){
+        return this.ElasticID_OwnerRecord;
+    }
+
+    public void setElasticID_OwnerRecord(Integer elasticID_ownerRecord) {
+        this.ElasticID_OwnerRecord = elasticID_ownerRecord;
+    }
+
+    public void setElasticID(Integer elasticID) {
+        this.ElasticID = elasticID;
+    }
+
+    public void genID() {
+        if(ElasticID == null){
+            ElasticID = this.hashCode();
+        }
     }
 }

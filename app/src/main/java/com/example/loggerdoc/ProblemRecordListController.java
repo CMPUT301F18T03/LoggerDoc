@@ -8,6 +8,7 @@ public class ProblemRecordListController {
 
     private static ProblemList problemList = null;
     private static RecordList recordList = null;
+    private static RecordPhotoList photolist = null;
     private static Integer Loaded_Patient = -1;
 
 
@@ -33,6 +34,23 @@ public class ProblemRecordListController {
         return recordList;
     }
 
+
+    /**
+     *
+     * @return Returns the RecordPhotoList that the app will use. We keep reusing the same list over and over again.
+     */
+    static public RecordPhotoList getRecordPhotoList() {
+        if (photolist == null) {
+            photolist = new RecordPhotoList();
+        }
+        return photolist;
+    }
+
+    /**
+     * load a users data into the lists
+     * @param ElasticID the ID of the user
+     * @param context a context to load files with.
+     */
     static public void loadUser(Integer ElasticID, Context context){
         Loaded_Patient = ElasticID;
         getProblemList().download(ElasticID,context);
@@ -48,7 +66,5 @@ public class ProblemRecordListController {
     public static Integer getUserID() {
         return Loaded_Patient;
     }
-
-    /*public static void setList(ArrayList<Problem> list) {
-    }*/
+    
 }

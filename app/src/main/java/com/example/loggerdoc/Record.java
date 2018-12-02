@@ -14,7 +14,7 @@ import java.security.acl.Owner;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Record implements Serializable,ElasticID {
+public class Record implements ElasticID {
 
     private String title;
     private String comment;
@@ -22,8 +22,9 @@ public class Record implements Serializable,ElasticID {
 
     private RecordGeoLocation recordGeoLocation = null;
     private Bodylocation bodylocation;
-    private BodyLocationPhotoList blPhotoList;
-    private RecordPhotoList recordPhotoList;
+
+    private ArrayList<Integer> blPhotoList;
+    private ArrayList<Integer> recordPhotoList;
 
     private Integer ElasticID;
     private Integer ElasticID_Owner;
@@ -36,8 +37,8 @@ public class Record implements Serializable,ElasticID {
         this.title = title;
         this.comment = "";
         this.timestamp = LocalDateTime.now();
-        this.recordPhotoList = new RecordPhotoList();
-        this.blPhotoList = new BodyLocationPhotoList();
+        this.recordPhotoList = new ArrayList<>();
+        this.blPhotoList = new ArrayList<>();
 
         ElasticID_OwnerProblem = Ownerproblem;
         ElasticID_Owner = ProblemRecordListController.getProblemList().get(ElasticID_OwnerProblem).getElasticID_Owner();
@@ -49,14 +50,14 @@ public class Record implements Serializable,ElasticID {
         this.title = title;
         this.comment = "";
         this.timestamp = LocalDateTime.now();
-        this.recordPhotoList = new RecordPhotoList();
+        this.recordPhotoList = new ArrayList<>();
         ElasticID_OwnerProblem = Ownerproblem;
         ElasticID_Owner = Owner;
         ElasticID = this.hashCode();
 
     }
 
-    public Record(String title, String comment, LocalDateTime timestamp, RecordGeoLocation recordGeoLocation, Bodylocation bodylocation, RecordPhotoList recordPhotoList, Integer elasticID, Integer elasticID_Owner, Integer elasticID_OwnerProblem) {
+    /*public Record(String title, String comment, LocalDateTime timestamp, RecordGeoLocation recordGeoLocation, Bodylocation bodylocation, RecordPhotoList recordPhotoList, Integer elasticID, Integer elasticID_Owner, Integer elasticID_OwnerProblem) {
         this.title = title;
         this.comment = comment;
         this.timestamp = timestamp;
@@ -66,7 +67,7 @@ public class Record implements Serializable,ElasticID {
         ElasticID = elasticID;
         ElasticID_Owner = elasticID_Owner;
         ElasticID_OwnerProblem = elasticID_OwnerProblem;
-    }
+    }*/
 
 
     public String getTitle() {
@@ -93,14 +94,22 @@ public class Record implements Serializable,ElasticID {
         this.recordGeoLocation = geoLocation;
     }
 
-    public RecordPhotoList getRecordPhotoList(){return this.recordPhotoList;}
+    public ArrayList<Integer> getRecordPhotoList(){return this.recordPhotoList;}
 
-    public void setList(RecordPhotoList photos){this.recordPhotoList = photos;}
+    /*public void setList(RecordPhotoList photos){this.recordPhotoList = photos;}*/
 
-    public void addRecordPhoto(RecordPhoto photo){this.recordPhotoList.addPhoto(photo);}
+    /*public void addRecordPhoto(RecordPhoto photo){this.recordPhotoList.addPhoto(photo);}*/
 
     public RecordGeoLocation getRecordGeoLocation(){
         return this.recordGeoLocation;
+    }
+
+    public void setRecordPhotoList(ArrayList<Integer> newRecordPhotoList){
+        recordPhotoList = newRecordPhotoList;
+    }
+
+    public void setBlPhotoList(ArrayList<Integer> newList){
+        this.blPhotoList = newList;
     }
 
     public void setBodylocation(Bodylocation BodLoc){
@@ -110,7 +119,7 @@ public class Record implements Serializable,ElasticID {
     public Bodylocation getBodylocation(){
         return this.bodylocation;
     }
-    public BodyLocationPhotoList getBlPhotoList(){return this.blPhotoList;}
+    public ArrayList<Integer> getBlPhotoList(){return this.blPhotoList;}
 
     @Override
     public Integer getElasticID() {
@@ -121,6 +130,11 @@ public class Record implements Serializable,ElasticID {
     }
     public Integer getElasticID_OwnerProblem(){
         return this.ElasticID_OwnerProblem;
+    }
+
+    public void addRecordPhoto(RecordPhoto photo){
+        recordPhotoList.add(photo.getElasticID());
+
     }
 
 }

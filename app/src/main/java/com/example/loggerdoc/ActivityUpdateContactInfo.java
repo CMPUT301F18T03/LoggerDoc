@@ -1,10 +1,3 @@
-/* Created 2018-11-16 by Stephen Zuk
- *
- *  The Update contact info activity displays the users contact info and lets the user modify
- *  and save the info
- *
- */
-
 package com.example.loggerdoc;
 
 import android.content.Intent;
@@ -14,6 +7,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+/* Created 2018-11-16 by Stephen Zuk
+ *  The Update contact info activity displays the users contact info and lets the user modify
+ *  and save the info
+ */
 
 public class ActivityUpdateContactInfo extends AppCompatActivity {
 
@@ -47,14 +45,17 @@ public class ActivityUpdateContactInfo extends AppCompatActivity {
 
     }
 
-    //this method gets the entered email and phone number from the EditTexts, calls checkChanges
-    //to make sure valid changes were made and updates the users email and phone number if
-    //valid values were entered
+    /* this method gets the entered email and phone number from the EditTexts, calls checkChanges
+     * to make sure valid changes were made and updates the users email and phone number if
+     * valid values were entered
+     */
     public void saveChanges(View view){
         String newEmail = emailEditText.getText().toString();
         String newPhoneNumber = phoneNumberEditText.getText().toString();
 
-        //if the new changes are valid, set them to the user and close the activity
+        /*
+         * if the new changes are valid, set them to the user and close the activity
+         */
         if(checkChanges(newEmail, newPhoneNumber)) {
             loggedInUser.setEmailAddress(newEmail);
             loggedInUser.setPhoneNumber(newPhoneNumber);
@@ -71,23 +72,25 @@ public class ActivityUpdateContactInfo extends AppCompatActivity {
     }
 
 
-    //this method takes the entered email and phone number and checks if they are the proper
-    //length, otherwise it displays an error message
+    /*
+     * this method takes the entered email and phone number and checks if they are the proper
+     * length, otherwise it displays an error message
+     */
     public boolean checkChanges(String newEmail, String newPhoneNumber){
 
-        //Check if the problemTitle and if the problemDescription is empty
+        //Check if the entered email or phone number are empty
         boolean emptyEmail = newEmail.length()== 0;
         boolean emptyPhoneNumber = newPhoneNumber.length()==0;
 
-        //If either of the problemTitle or the problemDescription is empty
+
         if (emptyEmail || emptyPhoneNumber){
 
-            //Set the flag for the user to indicate the Title Field is Empty
+            //Set the flag for the user to indicate that the email field is empty
             if (emptyEmail){
                 contactInfoEmailWarning.setVisibility(View.VISIBLE);
             }
 
-            //Set the flag for the user to indicate the Description Field is Empty
+            //Set the flag for the user to indicate the phone number field is empty
             if (emptyPhoneNumber){
                 contactInfoPhoneWarning.setVisibility(View.VISIBLE);
             }
@@ -104,7 +107,7 @@ public class ActivityUpdateContactInfo extends AppCompatActivity {
                 return false;
             }
 
-            //check if the description is too long
+            //check if the phone number is too long
             if (newPhoneNumber.length() > 13){
                 showAlertDialog("Error: Too Long Phone Number","The entered phone number has too many numbers. Please enter a valid number");
                 contactInfoPhoneWarning.setVisibility(View.VISIBLE);
@@ -133,7 +136,10 @@ public class ActivityUpdateContactInfo extends AppCompatActivity {
         dialog.show(getSupportFragmentManager(), "error_dialog");
     }
 
-
+    /*
+     * This method gets the user passed from the previous intent, whether it is a caregiver
+     * or a patient
+     */
     public void getLoggedInUser(Intent intent){
         Integer patient_ID = intent.getIntExtra("Patient",0);
         if(patient_ID == 0){
@@ -142,10 +148,6 @@ public class ActivityUpdateContactInfo extends AppCompatActivity {
         loggedInUser = UserListController.getUserList().get(patient_ID);
         userType = loggedInUser.getRole();
     }
-
-
-
-
 
 
 }

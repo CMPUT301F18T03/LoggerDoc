@@ -18,21 +18,49 @@ import java.util.Comparator;
 
 public class RecordList extends GenericList<Record> implements ElasticDataCallback<ArrayList<Record>> {
 
-
+    /**
+     * This method adds the input Record 'data' to the RecordList
+     *
+     * @param data the Record to add
+     *
+     */
     protected void add(Record data,Context context) {
         super.add_internal(data);
         new modifyRecordTask(context).execute(data);
     }
 
+
+    /**
+     * See "add" for explanation. This method was implemented to reduce confusion as
+     * adding and updating Records is done by the same method.
+     *
+     * @param data the Record to update
+     *
+     */
     protected void update(Record data,Context context){
         add(data,context);
     }
 
+
+    /**
+     * This method removes the input Record 'data' from the RecordList
+     *
+     * @param data the Record to remove
+     *
+     */
     protected void remove(Record data,Context context){
         super.remove_internal(data);
         new removeRecordTask(context).execute(data);
     }
 
+
+    /**
+     * This method creates an async task to download a recordlist from elastic or
+     * read it from memory if no connectivity
+     *
+     * @param elasticID the elastic id of the user to get the record list for
+     *
+     */
     public void download(Integer elasticID, Context context) {
         new getRecordsTask(context,this).execute(elasticID);
     }

@@ -3,7 +3,7 @@ package com.example.loggerdoc;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class BodyLocationPhotoList implements Serializable {
+public class BodyLocationPhotoList extends GenericList<BodyLocationPhoto> {
     private ArrayList<BodyLocationPhoto> bodyLocationlist;
 
     public BodyLocationPhotoList() {

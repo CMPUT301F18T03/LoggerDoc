@@ -29,6 +29,7 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
 
     // Local userList to store all of the Users along with all the data associated with users
     static UserList userList = UserListController.getUserList();
+    static Switch adsSwitch;
 
 
     @Override
@@ -40,7 +41,7 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
         loadUserList.mkDirs();
         loadUserList.execute();
 
-
+        adsSwitch = findViewById(R.id.AdsSwitch);
         mPublisherInterstitialAd = new PublisherInterstitialAd(this);
         mPublisherInterstitialAd.setAdUnitId("/6499/example/interstitial");
         mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
@@ -84,6 +85,9 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
                         Intent intent = new Intent(ActivityLogin.this, ActivityCareGiverHomePage.class);
                         intent.putExtra("Caregiver", user.getElasticID());
                         startActivity(intent);
+                        if (mPublisherInterstitialAd.isLoaded() && adsSwitch.isChecked()) {
+                            mPublisherInterstitialAd.show();
+                        }
                         break;
                     }
                 }
@@ -223,6 +227,33 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
 
     }
 
+
+    /*
+     * This method brings the user to the activity used to scan QR codes
+     */
+    public void scanQR(View view){
+        try {
+
+            Intent intent = new Intent(this, ActivityScanQR.class);
+            intent.putExtra("SCAN_MODE", "QR_CODE_MODE"); // "PRODUCT_MODE for bar codes
+
+            startActivityForResult(intent, 0);
+
+        } catch (Exception e) {
+            Toast.makeText(this, "Error opening QR Scanner.", Toast.LENGTH_SHORT).show();
+            Log.e("QR Exception", "Exception: "+Log.getStackTraceString(e));
+            //Uri marketUri = Uri.parse("market://details?id=com.google.zxing.client.android");
+            //Intent marketIntent = new Intent(Intent.ACTION_VIEW,marketUri);
+            //startActivity(marketIntent);
+
+        }
+    }
+
+    /*
+     * This method is called upon returning from the QR code scanner. It takes the QR code that
+     * was scanned in the activity and logs in the user associated to that code. If the code
+     * is not a user, an error message appears that lets the user know.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent prevIntent) {
         super.onActivityResult(requestCode, resultCode, prevIntent);
@@ -256,24 +287,6 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
             if(resultCode == RESULT_CANCELED){
                 //handle cancel
             }
-        }
-    }
-
-    public void scanQR(View view){
-        try {
-
-            Intent intent = new Intent(this, ActivityScanQR.class);
-            intent.putExtra("SCAN_MODE", "QR_CODE_MODE"); // "PRODUCT_MODE for bar codes
-
-            startActivityForResult(intent, 0);
-
-        } catch (Exception e) {
-            Toast.makeText(this, "Error opening QR Scanner.", Toast.LENGTH_SHORT).show();
-            Log.e("QR Exception", "Exception: "+Log.getStackTraceString(e));
-            //Uri marketUri = Uri.parse("market://details?id=com.google.zxing.client.android");
-            //Intent marketIntent = new Intent(Intent.ACTION_VIEW,marketUri);
-            //startActivity(marketIntent);
-
         }
     }
 }

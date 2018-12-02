@@ -17,6 +17,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.File;
+
 /*
  * This class displays the selected record. If the user is a patient, he/she can edit or delete the
  * record. If the user is a caregiver, he/she can only view the record's geolocation, photos or/and
@@ -30,10 +32,11 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
     private Record record;
     private GoogleMap recordMap;
 
-    public static RecordPhotoList photoList = new RecordPhotoList();
-    public  static BodyLocationPhotoList blPhotoList = new BodyLocationPhotoList();
+    //public static RecordPhotoList photoList = new RecordPhotoList();
+    //public  static BodyLocationPhotoList blPhotoList = new BodyLocationPhotoList();
     public static Bodylocation bodylocation = new Bodylocation();
     private static final float DEFAULT_ZOOM = 15;
+    private static final int REMOVE_BL = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,7 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         Button editRecordButton = (Button) findViewById(R.id.editRecordButton);
         Button deleteRecordButton = (Button) findViewById(R.id.deleteRecordButton);
@@ -52,11 +55,10 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
          * make the edit and delete record buttons invisible.
          */
         User user = UserListController.getUserList().get(UserListController.getCurrentUserID());
-        if (user.getRole().equals("Caregiver")){
+        if (user.getRole().equals("Caregiver")) {
             editRecordButton.setVisibility(View.INVISIBLE);
             deleteRecordButton.setVisibility(View.INVISIBLE);
-        }
-        else{
+        } else {
             editRecordButton.setVisibility(View.VISIBLE);
             deleteRecordButton.setVisibility(View.VISIBLE);
         }
@@ -66,7 +68,7 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
         problemID = intent.getIntExtra("Problem", 0);
         recordID = intent.getIntExtra("Record", 0);
         Problem problem = ProblemRecordListController.getProblemList().get(problemID);
-        record  = ProblemRecordListController.getRecordList().get(recordID);
+        record = ProblemRecordListController.getRecordList().get(recordID);
 
         TextView problemTitle = (TextView) findViewById(R.id.recordProblemTitleView);
         problemTitle.setText(problem.getTitle());
@@ -80,12 +82,10 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
         Button showimages = (Button) findViewById(R.id.showRecordImage);
         Button showBodyLocation = (Button) findViewById(R.id.showBodyLoc);
 
-        photoList = record.getRecordPhotoList();
 
         bodylocation = record.getBodylocation();
-        blPhotoList = record.getBlPhotoList();
 
-       // Log.i("THIS_TAG", String.valueOf(photoList.getPhoto(0).getPhoto()));
+        // Log.i("THIS_TAG", String.valueOf(photoList.getPhoto(0).getPhoto()));
         showimages.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
@@ -94,11 +94,11 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
 
             }
         });
-        showBodyLocation.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                Intent intent = new Intent(v.getContext(),ActivityViewBodyLocation.class);
-                intent.putExtra("BLPHOTOS", record.getBlPhotoList());
-                startActivity(intent);
+        showBodyLocation.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ActivityViewBodyLocation.class);
+
+                startActivityForResult(intent, REMOVE_BL);
             }
         });
 
@@ -128,15 +128,15 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
         recordMap = googleMap;
         recordMap.getUiSettings().setZoomControlsEnabled(true);
 
-        if (record.getRecordGeoLocation() != null){
+        if (record.getRecordGeoLocation() != null) {
             recordMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                     new LatLng(record.getRecordGeoLocation().getLatitude(),
-                            record.getRecordGeoLocation().getLongitude()),DEFAULT_ZOOM));
+                            record.getRecordGeoLocation().getLongitude()), DEFAULT_ZOOM));
 
             //set the marker to the set latitude and longitude, with a title.
             MarkerOptions options = new MarkerOptions()
                     .position(new LatLng(record.getRecordGeoLocation().getLatitude(),
-                    record.getRecordGeoLocation().getLongitude()))
+                            record.getRecordGeoLocation().getLongitude()))
                     .title("Record Location");
             recordMap.addMarker(options);
         }
@@ -147,7 +147,7 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
      *
      * Change to the Edit Record Activity.
      */
-    public void goEditRecord(View view){
+    public void goEditRecord(View view) {
         Intent intent = new Intent(this, ActivityEditRecord.class);
         intent.putExtra("Problem", problemID);
         intent.putExtra("Record", recordID);
@@ -160,14 +160,14 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
      * Show an alert dialog to ask for user's confirmation whether they would like to delete the
      * selected record.
      */
-    public void goDeleteRecord (View view){
+    public void goDeleteRecord(View view) {
         //Show an alert dialog to ask for user's confirmation whether they would like to delete
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Are you sure you would like to delete this record?");
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ProblemRecordListController.getRecordList().remove(record,getApplicationContext());
+                ProblemRecordListController.getRecordList().remove(record, getApplicationContext());
                 finish();
             }
         });
@@ -182,4 +182,36 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
         dialog.show();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REMOVE_BL && resultCode == RESULT_OK) {
+            int index = data.getIntExtra("REMOVE", 0);
+            if (index == 1) {
+                record.getBodylocation().setFrontX(0);
+                record.getBodylocation().setFrontY(0);
+                if (record.getBlPhotoList().size() > 0) {
+                    record.getBlPhotoList().remove(record.getBlPhotoList().get(0));
+                }
+                ProblemRecordListController.getRecordList().update(record, getApplicationContext());
+            }
+            if (index == 2) {
+                record.getBodylocation().setBackX(0);
+                record.getBodylocation().setBackY(0);
+                if (record.getBlPhotoList().size() == 2) {
+                    record.getBlPhotoList().remove(record.getBlPhotoList().get(1));
+                }
+                else if (record.getBlPhotoList().size() == 1) {
+                    record.getBlPhotoList().remove(record.getBlPhotoList().get(0));
+                }
+
+
+                ProblemRecordListController.getRecordList().update(record, getApplicationContext());
+            }
+
+
+        }
+    }
 }
+
+

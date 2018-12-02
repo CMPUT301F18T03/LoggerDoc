@@ -4,25 +4,23 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.loggerdoc.ElasticSearchController;
 import com.example.loggerdoc.Problem;
 import com.example.loggerdoc.ProblemRecordListController;
-import com.example.loggerdoc.User;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+
+/*
+ * Class used to asynchronously handle when a problem list is modified. Updates ElasticSearch and then
+ * writes to device memory. If no response is received from the ElasticSearch server,
+ * write to cache instead
+ */
 
 public class modifyProblemTask extends AsyncTask<Problem, Void, Void> {
     private Context context;
@@ -40,11 +38,17 @@ public class modifyProblemTask extends AsyncTask<Problem, Void, Void> {
         BufferedWriter out;
         jsonout = gson.toJson(tosend);
         ElasticSearchController.getCacheClient().sendCache(context);
+
+        //send to elasticSearch server
         String serverResponse = sender.httpPUT("/problem/_doc/"+tosend.getElasticID().toString(),jsonout);
+
+        //if no response is received from the server, write to cache instead
         if(serverResponse == null){
             ElasticSearchController.getCacheClient().cacheToSend("/problem/_doc/"+tosend.getElasticID().toString(),jsonout,context);
         }
 
+
+        //write to memory at the path for problem storage
         try {
 
             fos = new FileOutputStream(new File(context.getFilesDir().getAbsolutePath()+"/Problems/problem"+tosend.getElasticID_Owner().toString()+".sav"));
@@ -60,13 +64,13 @@ public class modifyProblemTask extends AsyncTask<Problem, Void, Void> {
 
         }
 
-
-
         Log.d ("The problem date is in the modifyProblemTask", problems[0].getTimestamp().toString());
         Log.d ("The jsonout value is", jsonout);
 
         return null;
     }
+
+    //called after asynchronous task is complete
     @Override
     protected void onPostExecute(Void v){
         context = null;

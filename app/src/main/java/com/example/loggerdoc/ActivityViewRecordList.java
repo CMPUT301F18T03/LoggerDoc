@@ -93,8 +93,9 @@ public class ActivityViewRecordList extends AppCompatActivity {
     public void goViewRecord(View v, int position){
         Intent intent = new Intent(this, ActivityViewRecord.class);
         intent.putExtra("Problem", problemID);
-        intent.putExtra("Record",
-                ProblemRecordListController.getRecordList().getRecords(problemID).get(position).getElasticID());
+        Record next = ProblemRecordListController.getRecordList().getRecords(problemID).get(position);
+        intent.putExtra("Record", next.getElasticID());
+        ProblemRecordListController.getRecordPhotoList().loadRecord(next,getApplicationContext());
         startActivity(intent);
     }
 

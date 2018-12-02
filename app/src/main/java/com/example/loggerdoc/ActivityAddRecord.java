@@ -87,14 +87,26 @@ public class ActivityAddRecord extends AppCompatActivity {
         recordGallery.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                checkStoragePermission();
+                if(photos.size() <10 ){
+                checkStoragePermission();}
+                else{
+                    Toast.makeText(ActivityAddRecord.this, "You already have 10 record photos for this record", Toast.LENGTH_SHORT).show();
+
+                }
             }
         });
 
         recordCamera.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                checkCameraPermission();
+                if(photos.size() < 10){
+                checkCameraPermission();}
+
+                else{
+                    Toast.makeText(ActivityAddRecord.this, "You already have 10 record Photos for this record", Toast.LENGTH_SHORT).show();
+
+                }
+
             }
         });
 
@@ -157,11 +169,16 @@ public class ActivityAddRecord extends AppCompatActivity {
         }
 
         if (requestCode == GALLERY_REQUEST_RECORD && resultCode == RESULT_OK){
+            if (photos.size() > 9) {
+                Toast.makeText(this, "You cannot add more than 10 photos", Toast.LENGTH_SHORT).show();
+                return;
+            }
             final Uri imageUri = data.getData();
             File path = new File(getRealPathFromURI(imageUri));
             RecordPhoto photo = new RecordPhoto();
             photo.setPhoto(path);
             photos.add(photo);
+            Toast.makeText(this, "Photo added successfully!", Toast.LENGTH_SHORT).show();
             Log.i("THIS_TAG", String.valueOf(path));
         }
 
@@ -180,10 +197,6 @@ public class ActivityAddRecord extends AppCompatActivity {
             bodylocation.setFrontY(location.get(1));
             bodylocation.setBackX(location.get(2));
             bodylocation.setBackY(location.get(3));
-            Log.i("THISTAG", String.valueOf(location.get(0)));
-            Log.i("THISTAG", String.valueOf(location.get(1)));
-            Log.i("THISTAG", String.valueOf(location.get(2)));
-            Log.i("THISTAG", String.valueOf(location.get(3)));
 
 
         }
@@ -237,13 +250,21 @@ public class ActivityAddRecord extends AppCompatActivity {
 
             if (photos.size() != 0) {
                 for (int i = 0; i<photos.size(); i++){
-                    record.getRecordPhotoList().addPhoto(photos.get(i));
+                    RecordPhoto x = photos.get(i);
+                    x.genID();
+                    x.setElasticID_OwnerRecord(record.getElasticID());
+                    record.addRecordPhoto(x);
+                    ProblemRecordListController.getRecordPhotoList().addPhoto(x,getApplicationContext());
                 }
 
            }
            if (blphotos.size() != 0){
                for(int i =0; i<blphotos.size(); i++){
-                   record.getBlPhotoList().add(blphotos.get(i));
+                   BodyLocationPhoto y = blphotos.get(i);
+                   y.genID();
+                   y.setElasticID_OwnerRecord(record.getElasticID());
+                   record.addRecordPhoto(y);
+                   ProblemRecordListController.getRecordPhotoList().addPhoto(y,getApplicationContext());
                }
            }
            record.setBodylocation(bodylocation);

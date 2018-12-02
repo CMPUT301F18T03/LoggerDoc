@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="ProblemTitlePlaceHolder"
         android:textColor="@android:color/black"
@@ -72,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="209dp"
         android:text="@string/record_geo_title"
         android:textColor="@android:color/black"
@@ -97,17 +97,73 @@
 
     <Button
         android:id="@+id/editRecordSaveButton"
-        android:layout_width="131dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="157dp"
-        android:layout_marginStart="139dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/squarebuttonshape"
         android:onClick="updateRecord"
         android:text="@string/save_button"
         android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editRecordMapView" />
+
+    <Button
+        android:id="@+id/RecordGallary"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/squarebuttonshape"
+        android:text="Gallery"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/BodyLocationGallary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editRecordMapView" />
+
+    <Button
+        android:id="@+id/RecordCamera"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/squarebuttonshape"
+        android:text="Camera"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/BodyLocation"
+        app:layout_constraintEnd_toStartOf="@+id/editRecordSaveButton"
+        app:layout_constraintStart_toEndOf="@+id/RecordGallary"
+        app:layout_constraintTop_toBottomOf="@+id/editRecordMapView" />
+
+    <Button
+        android:id="@+id/BodyLocation"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/squarebuttonshape"
+        android:text="BodyLocation"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/editRecordSaveButton"
+        app:layout_constraintStart_toEndOf="@+id/BodyLocationGallary" />
+
+    <Button
+        android:id="@+id/BodyLocationGallary"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/squarebuttonshape"
+        android:text="BL Gallery"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

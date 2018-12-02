@@ -23,21 +23,48 @@ import java.util.Comparator;
 public class ProblemList extends GenericList<Problem> implements ElasticDataCallback<ArrayList<Problem>> {
 
     ElasticCallback callback = null;
-    
+
+
+    /**
+     * This method adds the input problem 'data' to the ProblemList
+     *
+     * @param data the Problem to add
+     *
+     */
     protected void add(Problem data,Context context) {
         super.add_internal(data);
         new modifyProblemTask(context).execute(data);
     }
 
+    /**
+     * See "add" for explanation. This method was implemented to reduce confusion as
+     * adding and updating Problems is done by the same method.
+     *
+     * @param data the Problem to update
+     *
+     */
     protected void update(Problem data,Context context){
         add(data,context);
     }
 
+    /**
+     * This method removes the input Problem 'data' from the ProblemList
+     *
+     * @param data the Problem to remove
+     *
+     */
     protected void remove(Problem data,Context context){
         super.remove_internal(data);
         new removeProblemTask(context).execute(data);
     }
 
+    /**
+     * This method creates an async task to download a problemlist from elastic or
+     * read it from memory if no connectivity
+     *
+     * @param elasticID the elastic id of the user to get the problem list for
+     *
+     */
     public void download(Integer elasticID, Context context) {
         new getProblemsTask(context,this).execute(elasticID);
     }
@@ -59,7 +86,7 @@ public class ProblemList extends GenericList<Problem> implements ElasticDataCall
      *
      * This method returns an arraylist of problems that is sorted by the most recent timestamp.
      *
-     * @return ArrayLIst<Problem> a sorted array list
+     * @return ArrayList<Problem> a sorted array list
      */
 
     public ArrayList<Problem> sort (){
