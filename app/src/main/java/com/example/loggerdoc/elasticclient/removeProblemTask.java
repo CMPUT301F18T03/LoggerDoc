@@ -3,11 +3,9 @@ package com.example.loggerdoc.elasticclient;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.example.loggerdoc.ElasticSearchController;
 import com.example.loggerdoc.Problem;
 import com.example.loggerdoc.ProblemRecordListController;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -35,7 +33,6 @@ public class removeProblemTask extends AsyncTask<Problem, Void, Void> {
         if(serverResponse == null){
             ElasticSearchController.getCacheClient().cacheToDelete("/problem/_doc/",tosend.getElasticID(),context);
         }
-
         try {
 
             fos = new FileOutputStream(new File(context.getFilesDir().getAbsolutePath()+"/Problems/problem"+tosend.getElasticID_Owner().toString()+".sav"));

@@ -24,7 +24,7 @@ public class ActivityAddProblemIntentTest {
             new IntentsTestRule<>(ActivityAddProblem.class);
 
     @Test
-    public void TestResultFromActivity() {
+    public void TestAddProblem() {
         String testProblemTitle = "Broken kneecaps";
         String testProblemDesc = "Bicycle accident";
 

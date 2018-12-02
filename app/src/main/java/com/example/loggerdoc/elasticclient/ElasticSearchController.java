@@ -1,4 +1,4 @@
-package com.example.loggerdoc;
+package com.example.loggerdoc.elasticclient;
 
 import com.example.loggerdoc.elasticclient.ElasticCacheClient;
 import com.example.loggerdoc.elasticclient.httphandler;
