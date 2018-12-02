@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class ActivityViewProblem extends AppCompatActivity {
 
     private Problem problem;
@@ -51,6 +53,11 @@ public class ActivityViewProblem extends AppCompatActivity {
         //Get the correct problem from the intent, and initialize the text fields accordingly.
         Intent intent = getIntent();
         problemID= intent.getIntExtra("Position",0);
+
+        //Load all the photos pertaining to this problem
+        ArrayList<Record> records = ProblemRecordListController.getRecordList().getRecords(problemID);
+        ProblemRecordListController.getRecordPhotoList().loadMultipleRecord(records, getApplicationContext());
+
         problem = ProblemRecordListController.getProblemList().get(problemID);
 
         TextView problemTitleView = (TextView) findViewById(R.id.TitleView);
@@ -175,7 +182,6 @@ public class ActivityViewProblem extends AppCompatActivity {
      */
     public void goSlideshow(View v){
         Intent intent = new Intent(this, ActivitySlideShow.class);
-        intent.putExtra("Problem", problem.getElasticID());
         startActivity(intent);
     }
 }

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -106,7 +107,6 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
                 startActivityForResult(intent, REMOVE_BL);
             }
         });
-
         initializeMap();
     }
 
