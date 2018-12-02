@@ -45,6 +45,12 @@ public class RecordPhotoList extends GenericList<RecordPhoto> implements Elastic
         new getRecordPhotosTask(context,this).execute(toload);
     }
 
+    public void loadMultipleRecord(ArrayList<Record> toload,Context context){
+        datalist.clear();
+        Record[] records = toload.toArray(new Record[toload.size()]);
+        new getRecordPhotosTask(context,this).execute(records);
+    }
+
 
     /**
      * This method removes the photo from the record photo list if it is in the list
