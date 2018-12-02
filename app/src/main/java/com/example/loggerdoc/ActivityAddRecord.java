@@ -128,7 +128,7 @@ public class ActivityAddRecord extends AppCompatActivity {
         if (requestCode == REQUEST_IMAGE_CAPTURE_RECORD && resultCode == RESULT_OK) {
             File path = new File(PhotoPath);
             //Uri uri = Uri.fromFile(f);
-            RecordPhoto photo = new RecordPhoto(record.getElasticID());
+            RecordPhoto photo = new RecordPhoto();
             photo.setPhoto(path);
             photos.add(photo);
             PhotoPath = null;
@@ -237,15 +237,21 @@ public class ActivityAddRecord extends AppCompatActivity {
 
             if (photos.size() != 0) {
                 for (int i = 0; i<photos.size(); i++){
-                    record.addRecordPhoto(photos.get(i));
-                    ProblemRecordListController.getRecordPhotoList().addPhoto(photos.get(i),getApplicationContext());
+                    RecordPhoto x = photos.get(i);
+                    x.genID();
+                    x.setElasticID_OwnerRecord(record.getElasticID());
+                    record.addRecordPhoto(x);
+                    ProblemRecordListController.getRecordPhotoList().addPhoto(x,getApplicationContext());
                 }
 
            }
            if (blphotos.size() != 0){
                for(int i =0; i<blphotos.size(); i++){
-                   record.addRecordPhoto(blphotos.get(i));
-                   ProblemRecordListController.getRecordPhotoList().addPhoto(blphotos.get(i),getApplicationContext());
+                   BodyLocationPhoto y = blphotos.get(i);
+                   y.genID();
+                   y.setElasticID_OwnerRecord(record.getElasticID());
+                   record.addRecordPhoto(y);
+                   ProblemRecordListController.getRecordPhotoList().addPhoto(y,getApplicationContext());
                }
            }
            record.setBodylocation(bodylocation);

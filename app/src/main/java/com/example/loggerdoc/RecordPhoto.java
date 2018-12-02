@@ -58,4 +58,10 @@ public class RecordPhoto implements Serializable,ElasticID {
     public void setElasticID(Integer elasticID) {
         this.ElasticID = elasticID;
     }
+
+    public void genID() {
+        if(ElasticID == null){
+            ElasticID = this.hashCode();
+        }
+    }
 }

@@ -2,25 +2,19 @@ package com.example.loggerdoc.elasticclient;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import java.util.Base64;
 
 import com.example.loggerdoc.BodyLocationPhoto;
-import com.example.loggerdoc.ProblemRecordListController;
-import com.example.loggerdoc.Record;
 import com.example.loggerdoc.RecordPhoto;
-import com.example.loggerdoc.RecordPhotoList;
 import com.google.gson.Gson;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.nio.file.Files;
 
 public class modifyPhotoTask extends AsyncTask<RecordPhoto, Void, Void> {
     private Context context;
@@ -36,7 +30,7 @@ public class modifyPhotoTask extends AsyncTask<RecordPhoto, Void, Void> {
         photodata data  = new photodata();
 
         try {
-            data.img =  new Scanner(tosend.getPhoto()).useDelimiter("\\Z").next();
+            data.img = new String(Base64.getEncoder().encode(Files.readAllBytes(tosend.getPhoto().toPath())));
             data.ElasticID = tosend.getElasticID();
             data.ElasticID_OwnerRecord = tosend.getElasticID_OwnerRecord();
             if(tosend.getClass() == BodyLocationPhoto.class){
@@ -44,18 +38,10 @@ public class modifyPhotoTask extends AsyncTask<RecordPhoto, Void, Void> {
                 data.lbl = ((BodyLocationPhoto)tosend).getLabel();
             }
 
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         String serverResponse;
-
-        /*
-        jsonout = gson.toJson(tosend);
-        ElasticSearchController.getCacheClient().sendCache(context);
-        serverResponse = sender.httpPUT("/photo/_doc/"+tosend.getElasticID().toString(),jsonout);
-        if(serverResponse == null){
-            ElasticSearchController.getCacheClient().cacheToSend("/photo/_doc/"+tosend.getElasticID().toString(),jsonout,context);
-        }*/
 
         jsonout = gson.toJson(data);
         serverResponse = sender.httpPUT("/photodata/_doc/"+tosend.getElasticID().toString(),jsonout);
@@ -71,10 +57,9 @@ public class modifyPhotoTask extends AsyncTask<RecordPhoto, Void, Void> {
             out.write(gson.toJson(data));
             out.flush();
             fos.close();
+
             fos = new FileOutputStream(new File(context.getFilesDir().getAbsolutePath()+"/Data/"+tosend.getElasticID().toString()+".jpg"));
-            out = new BufferedWriter(new OutputStreamWriter(fos));
-            out.write(data.img);
-            out.flush();
+            fos.write(Base64.getDecoder().decode(data.img));
             fos.close();
         } catch (IOException e) {
             e.printStackTrace();

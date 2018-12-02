@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Base64;
 
 public class getRecordPhotosTask extends AsyncTask<Record, Void, ArrayList<RecordPhoto>> {
     private Context context;
@@ -122,9 +123,7 @@ public class getRecordPhotosTask extends AsyncTask<Record, Void, ArrayList<Recor
             out.flush();
             fos.close();
             fos = new FileOutputStream(new File(context.getFilesDir().getAbsolutePath() + "/Data/" + data.ElasticID.toString() + ".jpg"));
-            out = new BufferedWriter(new OutputStreamWriter(fos));
-            out.write(data.img);
-            out.flush();
+            fos.write(Base64.getDecoder().decode(data.img));
             fos.close();
         } catch (IOException e) {
             e.printStackTrace();

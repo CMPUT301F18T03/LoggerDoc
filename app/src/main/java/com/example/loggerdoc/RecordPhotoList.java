@@ -34,8 +34,6 @@ public class RecordPhotoList extends GenericList<RecordPhoto> implements Elastic
      * @param photo record photo to add_internal to list
      */
     public void addPhoto(RecordPhoto photo,Context context) {
-        Record x = ProblemRecordListController.getRecordList().get(photo.getElasticID_OwnerRecord());
-        x.addRecordPhoto(photo);
         super.add_internal(photo);
         new modifyPhotoTask(context).execute(photo);
     }
