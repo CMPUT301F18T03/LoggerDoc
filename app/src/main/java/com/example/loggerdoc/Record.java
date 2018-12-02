@@ -103,6 +103,14 @@ public class Record implements Serializable,ElasticID {
         return this.recordGeoLocation;
     }
 
+    public void setRecordPhotoList(RecordPhotoList newRecordPhotoList){
+        this.recordPhotoList = newRecordPhotoList;
+    }
+
+    public void setBlPhotoList(BodyLocationPhotoList newList){
+        this.blPhotoList = newList;
+    }
+
     public void setBodylocation(Bodylocation BodLoc){
         this.bodylocation = BodLoc;
     }
