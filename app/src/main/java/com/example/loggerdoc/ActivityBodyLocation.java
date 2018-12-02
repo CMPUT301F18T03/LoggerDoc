@@ -34,16 +34,26 @@ public class ActivityBodyLocation extends Activity {
         BackPic = (ImageView) findViewById(R.id.BackPic);
         Save = (Button)findViewById(R.id.BodLocSave);
 
+        final int[] viewCoordsFront = new int[2];
+        FrontPic.getLocationOnScreen(viewCoordsFront);
+
+        final int[] viewCoordsBack = new int[2];
+        BackPic.getLocationOnScreen(viewCoordsBack);
+
 
 
 
         FrontPic.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                int x = (int) event.getX();
-                int y = (int) event.getY();
-                location.set(0,x);
-                location.set(1,y);
+                int touchx = (int) event.getX();
+                int touchy = (int) event.getY();
+
+                int imagex = touchx - viewCoordsFront[0];
+                int imagey = touchy - viewCoordsFront[1];
+
+                location.set(0,imagex);
+                location.set(1,imagey);
                 return false;
             }
         });
@@ -51,10 +61,14 @@ public class ActivityBodyLocation extends Activity {
         BackPic.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                int x = (int) event.getX();
-                int y = (int) event.getY();
-                location.set(2,x);
-                location.set(3,y);
+                int touchx = (int) event.getX();
+                int touchy = (int) event.getY();
+
+                int imagex = touchx - viewCoordsBack[0];
+                int imagey = touchy - viewCoordsBack[1];
+
+                location.set(2,imagex);
+                location.set(3,imagey);
                 return false;
             }
         });

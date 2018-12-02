@@ -17,7 +17,7 @@ public class RecordPhotoList extends GenericList<RecordPhoto> implements Elastic
 
     /**
      *
-     * @return the record phot list
+     * @return the record phot0 list
      */
     public ArrayList<RecordPhoto> getRecordPhotos() {
         ArrayList<RecordPhoto> dataArrayList = new ArrayList<>();
@@ -30,13 +30,15 @@ public class RecordPhotoList extends GenericList<RecordPhoto> implements Elastic
     }
 
     /**
+     * This method adds a photo to a the RecordPhotoList
      *
-     * @param photo record photo to add_internal to list
+     * @param photo record photo to add to list
      */
     public void addPhoto(RecordPhoto photo,Context context) {
         super.add_internal(photo);
         new modifyPhotoTask(context).execute(photo);
     }
+
 
     public void loadRecord(Record toload,Context context){
         datalist.clear();
@@ -45,6 +47,7 @@ public class RecordPhotoList extends GenericList<RecordPhoto> implements Elastic
 
 
     /**
+     * This method removes the photo from the record photo list if it is in the list
      *
      * @param photo record photo object to be removed
      */
@@ -53,6 +56,7 @@ public class RecordPhotoList extends GenericList<RecordPhoto> implements Elastic
     }
 
     /**
+     * This method returns the photo at the index represented by the position parameter
      *
      * @param position the index for array
      * @return return the record photo at specified index
@@ -62,6 +66,7 @@ public class RecordPhotoList extends GenericList<RecordPhoto> implements Elastic
     }
 
     /**
+     *This method returns true if the input photo is in the RecordPhotoList, and false otherwise
      *
      * @param photo record photo to find
      * @return returns a bool if the list has the record photo
@@ -78,6 +83,9 @@ public class RecordPhotoList extends GenericList<RecordPhoto> implements Elastic
 
     public ArrayList<BodyLocationPhoto> getBodyLocationPhotos() {
         ArrayList<BodyLocationPhoto> dataArrayList = new ArrayList<>();
+        if(datalist.size() == 0){
+            return dataArrayList;
+        }
         for(int num = 0;num < datalist.size();num++){
             if(datalist.valueAt(num).getClass() == BodyLocationPhoto.class){
                 dataArrayList.add((BodyLocationPhoto) datalist.valueAt(num));
