@@ -51,6 +51,7 @@ public class Record implements ElasticID {
         this.comment = "";
         this.timestamp = LocalDateTime.now();
         this.recordPhotoList = new ArrayList<>();
+        this.blPhotoList = new ArrayList<>();
         ElasticID_OwnerProblem = Ownerproblem;
         ElasticID_Owner = Owner;
         ElasticID = this.hashCode();
@@ -96,9 +97,7 @@ public class Record implements ElasticID {
 
     public ArrayList<Integer> getRecordPhotoList(){return this.recordPhotoList;}
 
-    /*public void setList(RecordPhotoList photos){this.recordPhotoList = photos;}*/
 
-    /*public void addRecordPhoto(RecordPhoto photo){this.recordPhotoList.addPhoto(photo);}*/
 
     public RecordGeoLocation getRecordGeoLocation(){
         return this.recordGeoLocation;
@@ -134,6 +133,14 @@ public class Record implements ElasticID {
 
     public void addRecordPhoto(RecordPhoto photo){
         recordPhotoList.add(photo.getElasticID());
+
+    }
+    public void addBlPhoto(BodyLocationPhoto photo){
+        blPhotoList.add(photo.getElasticID());
+
+    }
+    public void removeBlPhoto(BodyLocationPhoto photo){
+        blPhotoList.remove(photo.getElasticID());
 
     }
 
