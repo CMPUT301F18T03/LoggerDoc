@@ -87,14 +87,26 @@ public class ActivityAddRecord extends AppCompatActivity {
         recordGallery.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                checkStoragePermission();
+                if(photos.size() <10 ){
+                checkStoragePermission();}
+                else{
+                    Toast.makeText(ActivityAddRecord.this, "You already have 10 record photos for this record", Toast.LENGTH_SHORT).show();
+
+                }
             }
         });
 
         recordCamera.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                checkCameraPermission();
+                if(photos.size() < 10){
+                checkCameraPermission();}
+
+                else{
+                    Toast.makeText(ActivityAddRecord.this, "You already have 10 record Photos for this record", Toast.LENGTH_SHORT).show();
+
+                }
+
             }
         });
 
@@ -180,10 +192,6 @@ public class ActivityAddRecord extends AppCompatActivity {
             bodylocation.setFrontY(location.get(1));
             bodylocation.setBackX(location.get(2));
             bodylocation.setBackY(location.get(3));
-            Log.i("THISTAG", String.valueOf(location.get(0)));
-            Log.i("THISTAG", String.valueOf(location.get(1)));
-            Log.i("THISTAG", String.valueOf(location.get(2)));
-            Log.i("THISTAG", String.valueOf(location.get(3)));
 
 
         }
