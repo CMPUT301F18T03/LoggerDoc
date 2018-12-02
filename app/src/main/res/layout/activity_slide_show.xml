@@ -46,11 +46,13 @@
         android:id="@+id/returnSlideshow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginEnd="52dp"
         android:layout_marginBottom="24dp"
         android:background="@drawable/squarebuttonshape"
         android:text="@string/returnButton"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/Next"
+        app:layout_constraintStart_toEndOf="@+id/Back" />
 </android.support.constraint.ConstraintLayout>
