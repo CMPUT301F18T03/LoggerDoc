@@ -3,8 +3,6 @@ package com.example.loggerdoc.elasticclient;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.example.loggerdoc.ElasticSearchController;
-import com.example.loggerdoc.Problem;
 import com.example.loggerdoc.ProblemRecordListController;
 import com.example.loggerdoc.Record;
 import com.google.gson.Gson;

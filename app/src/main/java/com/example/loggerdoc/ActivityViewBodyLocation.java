@@ -1,11 +1,12 @@
 package com.example.loggerdoc;
 
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class ActivityViewBodyLocation extends AppCompatActivity {
 
@@ -13,36 +14,36 @@ public class ActivityViewBodyLocation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_body_location);
-        BodyLocationPhotoList list = ActivityViewRecord.blPhotoList;
+        ArrayList<BodyLocationPhoto> list = ProblemRecordListController.getRecordPhotoList().getBodyLocationPhotos();
         Bodylocation bodylocation = ActivityViewRecord.bodylocation;
 
         ImageView bl1 = (ImageView) findViewById(R.id.BL1);
         ImageView bl2 = (ImageView) findViewById(R.id.BL2);
         TextView label1 = (TextView) findViewById(R.id.label1);
         TextView label2 = (TextView) findViewById(R.id.label2);
-        Log.i("THIS_TAG", list.getPhoto(1).getLabel() + list.getPhoto(0).getLabel());
+        Log.i("THIS_TAG", list.get(0).getLabel() + list.get(0).getLabel());
 
 
         if (list.size() == 1){
             if (bodylocation.getFrontX() !=0 || bodylocation.getFrontY() != 0){
                 GlideApp
                         .with(this)
-                        .load(list.getPhoto(0).getPhoto())
+                        .load(list.get(0).getPhoto())
                         .override(500,750)
                         .centerCrop()
                         .into(bl2);
-                label2.setText(list.getPhoto(0).getLabel());
+                label2.setText(list.get(0).getLabel());
 
                 //TODO mask for other image
             }
             else{
                 GlideApp
                         .with(this)
-                        .load(list.getPhoto(0).getPhoto())
+                        .load(list.get(0).getPhoto())
                         .override(500,750)
                         .centerCrop()
                         .into(bl1);
-                label1.setText(list.getPhoto(0).getLabel());
+                label1.setText(list.get(0).getLabel());
 
                 //TODO mask for other image
 
@@ -51,19 +52,19 @@ public class ActivityViewBodyLocation extends AppCompatActivity {
         else if (list.size() == 2){
             GlideApp
                     .with(this)
-                    .load(list.getPhoto(0).getPhoto())
+                    .load(list.get(0).getPhoto())
                     .override(500,750)
                     .centerCrop()
                     .into(bl1);
-            label1.setText(list.getPhoto(0).getLabel());
+            label1.setText(list.get(0).getLabel());
 
             GlideApp
                     .with(this)
-                    .load(list.getPhoto(1).getPhoto())
+                    .load(list.get(1).getPhoto())
                     .override(500,750)
                     .centerCrop()
                     .into(bl2);
-            label2.setText(list.getPhoto(1).getLabel());
+            label2.setText(list.get(1).getLabel());
         }
 
         else{
