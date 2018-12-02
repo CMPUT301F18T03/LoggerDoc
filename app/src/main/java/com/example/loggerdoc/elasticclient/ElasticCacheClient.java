@@ -40,6 +40,8 @@ public class ElasticCacheClient {
             String address;
             String data;
             String returnval;
+
+            //separate substrings of lines and process
             while(Line != null && !Line.equals("")){
                 switch (Line.substring(0, 1)) {
                     case "s":

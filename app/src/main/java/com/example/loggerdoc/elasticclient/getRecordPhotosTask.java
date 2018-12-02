@@ -23,13 +23,20 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Base64;
 
+/*
+ * Class used to asynchronously get photos from elastic search and return a photo list
+ * usable by the application
+ */
+
 public class getRecordPhotosTask extends AsyncTask<Record, Void, ArrayList<RecordPhoto>> {
     private Context context;
     private ElasticDataCallback<ArrayList<RecordPhoto>> callback;
+
     public getRecordPhotosTask(Context context,ElasticDataCallback<ArrayList<RecordPhoto>> callback){
         this.context = context;
         this.callback = callback;
     }
+
     @Override
     protected ArrayList<RecordPhoto> doInBackground(Record... records) {
         Gson gson = new Gson();
