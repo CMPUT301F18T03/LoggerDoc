@@ -48,7 +48,9 @@ public class searchProblemsTask extends AsyncTask<Integer, Void,ArrayList<Intege
         Integer EID = Integers[0];
         httphandler receiver = ElasticSearchController.getHttpHandler();
         Gson gson = new Gson();
-        ArrayList<Problem> ret = new ArrayList<>();
+        ArrayList<Integer> ret = new ArrayList<>();
+
+        JSONObject jsonout = new JSONObject();
 
         // get a string representing problems from the server
         String jsonin = receiver.httpGET("/problem/_doc/_search?q=ElasticID_Owner:"+ EID.toString()+"&filter_path=hits.hits.*&size=10000");
