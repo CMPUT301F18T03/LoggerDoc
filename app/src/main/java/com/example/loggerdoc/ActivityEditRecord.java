@@ -224,7 +224,7 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
             RecordGeoLocation newGeoLocation = new RecordGeoLocation(options.getPosition());
             record.setRecordGeoLocation(newGeoLocation);
         }
-        
+
 
         record.setBodylocation(bodylocation);
         record.setBlPhotoList(blphotos);
@@ -388,6 +388,8 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
             record.addRecordPhoto(photo);
             ProblemRecordListController.getRecordPhotoList().addPhoto(photo,getApplicationContext());
             PhotoPath = null;
+            Toast.makeText(ActivityEditRecord.this, "Saved image from camera", Toast.LENGTH_SHORT).show();
+
 
         }
 
@@ -408,6 +410,8 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
             blPhoto.setPhoto(path);
             ProblemRecordListController.getRecordPhotoList().addPhoto(blPhoto,getApplicationContext());
             blphotos.add(blPhoto.getElasticID());
+            Toast.makeText(ActivityEditRecord.this, "Saved body location from gallary", Toast.LENGTH_SHORT).show();
+
 
         }
 
@@ -420,6 +424,8 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
             photo.setElasticID_OwnerRecord(record.getElasticID());
             record.addRecordPhoto(photo);
             ProblemRecordListController.getRecordPhotoList().addPhoto(photo,getApplicationContext());
+            Toast.makeText(ActivityEditRecord.this, "Saved image from gallary", Toast.LENGTH_SHORT).show();
+
         }
         if (requestCode == BODY_LOCATION_REQUEST && resultCode == Activity.RESULT_OK) {
             ArrayList<Integer> location = data.getIntegerArrayListExtra("BODYLOCATION");
@@ -427,6 +433,8 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
             bodylocation.setFrontY(location.get(1));
             bodylocation.setBackX(location.get(2));
             bodylocation.setBackY(location.get(3));
+            Toast.makeText(ActivityEditRecord.this, "Saved clicked body location", Toast.LENGTH_SHORT).show();
+
 
         }
     }

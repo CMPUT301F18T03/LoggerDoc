@@ -144,6 +144,8 @@ public class ActivityAddRecord extends AppCompatActivity {
             photo.setPhoto(path);
             photos.add(photo);
             PhotoPath = null;
+            Toast.makeText(ActivityAddRecord.this, "saved image from camera", Toast.LENGTH_SHORT).show();
+
 
         }
 
@@ -165,6 +167,8 @@ public class ActivityAddRecord extends AppCompatActivity {
             Log.i("THIS_TAG", blPhoto.getLabel());
 
             blphotos.add(blPhoto);
+            Toast.makeText(ActivityAddRecord.this, "saved body location from gallery", Toast.LENGTH_SHORT).show();
+
 
         }
 
@@ -178,7 +182,7 @@ public class ActivityAddRecord extends AppCompatActivity {
             RecordPhoto photo = new RecordPhoto();
             photo.setPhoto(path);
             photos.add(photo);
-            Toast.makeText(this, "Photo added successfully!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "saved photo from galary", Toast.LENGTH_SHORT).show();
             Log.i("THIS_TAG", String.valueOf(path));
         }
 
@@ -197,6 +201,8 @@ public class ActivityAddRecord extends AppCompatActivity {
             bodylocation.setFrontY(location.get(1));
             bodylocation.setBackX(location.get(2));
             bodylocation.setBackY(location.get(3));
+            Toast.makeText(ActivityAddRecord.this, "Saved clickable body location", Toast.LENGTH_SHORT).show();
+
 
 
         }
