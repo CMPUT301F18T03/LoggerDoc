@@ -53,13 +53,15 @@ public class ActivityAddRecord extends AppCompatActivity {
     static final int BODY_LOCATION_REQUEST = 1003;
     static final int BODY_LOCATION_GALLARY_REQUEST = 1004;
     static final int LABEL_REQUEST = 1005;
+    static final int CUSTOM_BL_REQUEST = 1006;
+
     private static final int CAMERA_PERMISSION_REQUEST = 100;
     private static final int STORAGE_PERMISSION_REQUEST = 200;
     private boolean cameraPermissionsGranted = false;
     private boolean pictureStoragePermissionsGranted = false;
 
-    private ArrayList<RecordPhoto> photos = new ArrayList<RecordPhoto>();
-    private ArrayList<BodyLocationPhoto> blphotos = new ArrayList<BodyLocationPhoto>();
+    public ArrayList<RecordPhoto> photos = new ArrayList<RecordPhoto>();
+    public ArrayList<BodyLocationPhoto> blphotos = new ArrayList<BodyLocationPhoto>();
     private Bodylocation bodylocation = new Bodylocation();
     private BodyLocationPhoto blPhoto;// = new BodyLocationPhoto();
 
@@ -144,6 +146,7 @@ public class ActivityAddRecord extends AppCompatActivity {
             photo.setPhoto(path);
             photos.add(photo);
             PhotoPath = null;
+
             Toast.makeText(ActivityAddRecord.this, "saved image from camera", Toast.LENGTH_SHORT).show();
 
 
@@ -164,12 +167,24 @@ public class ActivityAddRecord extends AppCompatActivity {
             final Uri uri = data.getData();
             File path =  new File(getRealPathFromURI(uri));
             blPhoto.setPhoto(path);
-            Log.i("THIS_TAG", blPhoto.getLabel());
+            //blphotos.add(blPhoto);
 
+            Intent intent = new Intent(ActivityAddRecord.this, ActivityGetblCoord.class);
+            intent.putExtra("TheImage", path.toString());
+            startActivityForResult(intent, CUSTOM_BL_REQUEST);
+
+        }
+        if(requestCode == CUSTOM_BL_REQUEST && resultCode == RESULT_OK){
+            ArrayList<Integer> location = data.getIntegerArrayListExtra("BODYLOCATION");
+            blPhoto.setX(location.get(0));
+            blPhoto.setY(location.get(1));
             blphotos.add(blPhoto);
+            Log.i("THISTAG", String.valueOf(blPhoto.getX()));
+            Log.i("THISTAG", String.valueOf(blPhoto.getY()));
+            Log.i("THISTAG", String.valueOf(location.get(0)));
+
+
             Toast.makeText(ActivityAddRecord.this, "saved body location from gallery", Toast.LENGTH_SHORT).show();
-
-
         }
 
         if (requestCode == GALLERY_REQUEST_RECORD && resultCode == RESULT_OK){

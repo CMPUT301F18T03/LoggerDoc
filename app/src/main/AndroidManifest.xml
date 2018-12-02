@@ -77,7 +77,8 @@
         <activity android:name=".ActivityBlLabel" />
         <activity android:name=".ActivityViewBodyLocation" />
         <activity android:name=".ActivityViewRecordMap" />
-        <activity android:name=".ActivitySlideShow"></activity>
+        <activity android:name=".ActivitySlideShow" />
+        <activity android:name=".ActivityGetblCoord"></activity>
     </application>
 
 </manifest>
