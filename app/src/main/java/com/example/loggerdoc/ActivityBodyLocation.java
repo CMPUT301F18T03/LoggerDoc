@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -54,6 +55,8 @@ public class ActivityBodyLocation extends Activity {
 
                 location.set(0,imagex);
                 location.set(1,imagey);
+                Toast.makeText(ActivityBodyLocation.this, "Good Click", Toast.LENGTH_SHORT).show();
+
                 return false;
             }
         });
@@ -69,6 +72,8 @@ public class ActivityBodyLocation extends Activity {
 
                 location.set(2,imagex);
                 location.set(3,imagey);
+                Toast.makeText(ActivityBodyLocation.this, "Good Click", Toast.LENGTH_SHORT).show();
+
                 return false;
             }
         });
