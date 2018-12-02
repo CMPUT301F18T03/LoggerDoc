@@ -13,6 +13,8 @@ import com.example.loggerdoc.elasticclient.modifyRecordTask;
 import com.example.loggerdoc.elasticclient.removeRecordTask;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class RecordList extends GenericList<Record> implements ElasticDataCallback<ArrayList<Record>> {
 
@@ -61,6 +63,15 @@ public class RecordList extends GenericList<Record> implements ElasticDataCallba
                 ret.add(datalist.valueAt(num));
             }
         }
+
+        Collections.sort(ret, new Comparator<Record>() {
+            @Override
+            public int compare(Record o1, Record o2) {
+                return o2.getTimestamp().compareTo(o1.getTimestamp());
+            }
+        });
+
         return ret;
     }
+
 }

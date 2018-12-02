@@ -19,12 +19,15 @@ import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.contrib.ActivityResultMatchers.hasResultCode;
 import static android.support.test.espresso.contrib.ActivityResultMatchers.hasResultData;
+import static android.support.test.espresso.intent.Intents.intended;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ActivityAddRecordIntentTest {
 
+    private Patient p;
     private Problem pr;
 
     @Rule
@@ -34,7 +37,7 @@ public class ActivityAddRecordIntentTest {
     @Before
     // create mock intent with mock patient and mock problem
     public void before() {
-        Patient p = new Patient("Patty2222", "testPatient@example.com", "555-123-4567", "Patient");
+        p = new Patient("Patty2222", "testPatient@example.com", "555-123-4567", "Patient");
         pr = new Problem("Possible concussion", LocalDateTime.now(),
                 "From car accident", p.getElasticID());
         ProblemRecordListController.getProblemList().add_internal(pr);
@@ -61,8 +64,18 @@ public class ActivityAddRecordIntentTest {
         assertTrue(intentsTestRule.getActivity().isFinishing());
     }
 
+    @Test
+    public void TestAddGeolocationFromAddRecord() {
+        onView(withId(R.id.mapButton))
+                .perform(click());
+        intended(hasComponent(ActivityAddGeolocation.class.getName()));
+    }
+
     @After
     public void after() {
-        ProblemRecordListController.getProblemList().remove_internal(pr);
+        UserListController.getUserList().remove(p,
+                intentsTestRule.getActivity().getBaseContext());
+        ProblemRecordListController.getProblemList().remove(pr,
+                intentsTestRule.getActivity().getBaseContext());
     }
 }

@@ -2,13 +2,10 @@ package com.example.loggerdoc.elasticclient;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.SparseArray;
 
 import com.example.loggerdoc.CareGiver;
-import com.example.loggerdoc.ElasticSearchController;
 import com.example.loggerdoc.Patient;
 import com.example.loggerdoc.User;
-import com.example.loggerdoc.UserList;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;

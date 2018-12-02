@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.loggerdoc.elasticclient.ElasticDataCallback;
@@ -29,6 +30,7 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
     // Local userList to store all of the Users along with all the data associated with users
     static UserList userList = UserListController.getUserList();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,7 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
         getUsersTask loadUserList = new getUsersTask(this,this);
         loadUserList.mkDirs();
         loadUserList.execute();
+
 
         mPublisherInterstitialAd = new PublisherInterstitialAd(this);
         mPublisherInterstitialAd.setAdUnitId("/6499/example/interstitial");
@@ -54,10 +57,12 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
     // If user hits the login button
     public void login(View v) {
         final EditText userID = findViewById(R.id.Username_Field);
+
+        // Switch to turn ads on and off. Before displaying an ad, check if button is on.
+        Switch adsSwitch = (Switch) findViewById(R.id.AdsSwitch);
         String userLogin = userID.getText().toString();
 
         Log.d("TAG", "edit text = " + userLogin);
-
 
         // verify that the user actually exists, if true then proceed with login
         if (verifyUsername(userLogin)) {
@@ -69,7 +74,7 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
                         Intent intent = new Intent(ActivityLogin.this, ActivityPatientHomePage.class);
                         intent.putExtra("Patient", user.getElasticID());
                         startActivity(intent);
-                        if (mPublisherInterstitialAd.isLoaded()) {
+                        if (mPublisherInterstitialAd.isLoaded() && adsSwitch.isChecked()) {
                             mPublisherInterstitialAd.show();
                         }
 

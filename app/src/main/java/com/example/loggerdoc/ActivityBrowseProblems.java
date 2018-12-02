@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /*This class displays the problems that the user has entered/saved using a custom array adapter
  *(located in the AdapterListProblems class). The problem list of the user is used in the adapter to
  *display the problems
@@ -21,6 +23,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
     private Integer patient_ID;
     private ListView problemsList;
     private FloatingActionButton addProblemButton;
+    private ArrayList<Problem> problemArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +92,8 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         }
 
         //TODO: fix if we get listeners working
-        adapter = new AdapterListProblems(this, ProblemRecordListController.getProblemList().getArray());
+        problemArrayList = ProblemRecordListController.getProblemList().sort();
+        adapter = new AdapterListProblems(this, problemArrayList);
         problemsList = (ListView) findViewById(R.id.ProblemList);
         problemsList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -113,7 +117,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
         Intent intent = new Intent(this, ActivityViewProblem.class);
         intent.putExtra("Patient", patient_ID);
         intent.putExtra("Position",
-                ProblemRecordListController.getProblemList().getArray().get(position).getElasticID());
+                problemArrayList.get(position).getElasticID());
         startActivity(intent);
     }
 

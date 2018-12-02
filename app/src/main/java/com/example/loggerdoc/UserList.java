@@ -7,6 +7,7 @@ package com.example.loggerdoc;
 
 import android.content.Context;
 import com.example.loggerdoc.elasticclient.modifyUserTask;
+import com.example.loggerdoc.elasticclient.removeUserTask;
 
 import java.util.ArrayList;
 
@@ -27,5 +28,10 @@ public class UserList extends GenericList<User>{
             ret.add(datalist.get(x));
         }
         return ret;
+    }
+
+    public void remove(User data, Context context) {
+        super.remove_internal(data);
+        new removeUserTask(context).execute(data);
     }
 }
