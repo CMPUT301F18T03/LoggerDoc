@@ -218,6 +218,33 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
 
     }
 
+
+    /*
+     * This method brings the user to the activity used to scan QR codes
+     */
+    public void scanQR(View view){
+        try {
+
+            Intent intent = new Intent(this, ActivityScanQR.class);
+            intent.putExtra("SCAN_MODE", "QR_CODE_MODE"); // "PRODUCT_MODE for bar codes
+
+            startActivityForResult(intent, 0);
+
+        } catch (Exception e) {
+            Toast.makeText(this, "Error opening QR Scanner.", Toast.LENGTH_SHORT).show();
+            Log.e("QR Exception", "Exception: "+Log.getStackTraceString(e));
+            //Uri marketUri = Uri.parse("market://details?id=com.google.zxing.client.android");
+            //Intent marketIntent = new Intent(Intent.ACTION_VIEW,marketUri);
+            //startActivity(marketIntent);
+
+        }
+    }
+
+    /*
+     * This method is called upon returning from the QR code scanner. It takes the QR code that
+     * was scanned in the activity and logs in the user associated to that code. If the code
+     * is not a user, an error message appears that lets the user know.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent prevIntent) {
         super.onActivityResult(requestCode, resultCode, prevIntent);
@@ -251,24 +278,6 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
             if(resultCode == RESULT_CANCELED){
                 //handle cancel
             }
-        }
-    }
-
-    public void scanQR(View view){
-        try {
-
-            Intent intent = new Intent(this, ActivityScanQR.class);
-            intent.putExtra("SCAN_MODE", "QR_CODE_MODE"); // "PRODUCT_MODE for bar codes
-
-            startActivityForResult(intent, 0);
-
-        } catch (Exception e) {
-            Toast.makeText(this, "Error opening QR Scanner.", Toast.LENGTH_SHORT).show();
-            Log.e("QR Exception", "Exception: "+Log.getStackTraceString(e));
-            //Uri marketUri = Uri.parse("market://details?id=com.google.zxing.client.android");
-            //Intent marketIntent = new Intent(Intent.ACTION_VIEW,marketUri);
-            //startActivity(marketIntent);
-
         }
     }
 }
