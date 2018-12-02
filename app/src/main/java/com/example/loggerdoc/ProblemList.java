@@ -85,7 +85,7 @@ public class ProblemList extends GenericList<Problem> implements ElasticDataCall
      * @author = Alexandra Tyrrell
      *
      * This method returns an arraylist of problems that is sorted by the most recent timestamp.
-     * 
+     *
      * @return ArrayList<Problem> a sorted array list
      */
 
