@@ -159,7 +159,7 @@ public class ActivityAddRecord extends AppCompatActivity {
         if (requestCode == GALLERY_REQUEST_RECORD && resultCode == RESULT_OK){
             final Uri imageUri = data.getData();
             File path = new File(getRealPathFromURI(imageUri));
-            RecordPhoto photo = new RecordPhoto(record.getElasticID());
+            RecordPhoto photo = new RecordPhoto();
             photo.setPhoto(path);
             photos.add(photo);
             Log.i("THIS_TAG", String.valueOf(path));
