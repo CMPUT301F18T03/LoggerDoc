@@ -62,8 +62,8 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
     private boolean pictureStoragePermissionsGranted = false;
 
 
-    private RecordPhotoList recordPhotoList;
-    private BodyLocationPhotoList blphotos;
+    private ArrayList<Integer> recordPhotoList;
+    private ArrayList<Integer> blphotos;
     private Bodylocation bodylocation = new Bodylocation();
     private BodyLocationPhoto blPhoto;// = new BodyLocationPhoto();
 
@@ -374,7 +374,8 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
             //Uri uri = Uri.fromFile(f);
             RecordPhoto photo = new RecordPhoto();
             photo.setPhoto(path);
-            recordPhotoList.addPhoto(photo);
+            photo.genID();
+            ProblemRecordListController.getRecordPhotoList().addPhoto(photo,getApplicationContext());
             PhotoPath = null;
 
         }
@@ -382,7 +383,7 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
         if (requestCode == LABEL_REQUEST && resultCode == RESULT_OK) {
             String label = data.getStringExtra("THELABEL");
             blPhoto = new BodyLocationPhoto();
-
+            blPhoto.genID();
             blPhoto.setLabel(label);
             // Log.i("THIS_TAG", blPhoto.getLabel());
 
@@ -395,8 +396,8 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
             File path = new File(getRealPathFromURI(uri));
             blPhoto.setPhoto(path);
             Log.i("THIS_TAG", blPhoto.getLabel());
-
-            blphotos.add(blPhoto);
+            ProblemRecordListController.getRecordPhotoList().addPhoto(blPhoto,getApplicationContext());
+            blphotos.add(blPhoto.getElasticID());
 
         }
 
@@ -405,7 +406,7 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
             File path = new File(getRealPathFromURI(imageUri));
             RecordPhoto photo = new RecordPhoto();
             photo.setPhoto(path);
-            recordPhotoList.addPhoto(photo);
+            ProblemRecordListController.getRecordPhotoList().addPhoto(photo,getApplicationContext());
             Log.i("THIS_TAG", String.valueOf(path));
         }
         if (requestCode == BODY_LOCATION_REQUEST && resultCode == Activity.RESULT_OK) {
