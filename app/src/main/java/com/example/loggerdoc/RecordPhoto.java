@@ -7,6 +7,9 @@ import com.example.loggerdoc.elasticclient.ElasticID;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class RecordPhoto implements Serializable,ElasticID {
     /**
@@ -64,4 +67,5 @@ public class RecordPhoto implements Serializable,ElasticID {
             ElasticID = this.hashCode();
         }
     }
+
 }

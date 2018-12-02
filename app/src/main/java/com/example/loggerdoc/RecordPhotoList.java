@@ -93,4 +93,19 @@ public class RecordPhotoList extends GenericList<RecordPhoto> implements Elastic
         }
         return dataArrayList;
     }
+
+    /**
+     * Returns the records associated with a given problem ID
+     * @param RecordID the problem in question
+     * @return an arraylist of record photos
+     */
+    public ArrayList<RecordPhoto> getRecordPhotos(Integer RecordID){
+        ArrayList<RecordPhoto> ret = new ArrayList<>();
+        for(int num = 0;num < datalist.size();num++){
+            if(datalist.valueAt(num).getElasticID_OwnerRecord().equals(RecordID)){
+                ret.add(datalist.valueAt(num));
+            }
+        }
+        return ret;
+    }
 }
