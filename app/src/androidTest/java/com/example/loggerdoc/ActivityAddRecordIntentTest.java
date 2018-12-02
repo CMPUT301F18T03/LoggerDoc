@@ -71,6 +71,20 @@ public class ActivityAddRecordIntentTest {
         intended(hasComponent(ActivityAddGeolocation.class.getName()));
     }
 
+    @Test
+    public void TestAddBodyLocationFromAddRecord() {
+        onView(withId(R.id.body_location_button))
+                .perform(click());
+        intended(hasComponent(ActivityBodyLocation.class.getName()));
+    }
+
+    @Test
+    public void TestViewBodyLocationsFromAddRecord() {
+        onView(withId(R.id.BodyLocationGallary))
+                .perform(click());
+        intended(hasComponent(ActivityBlLabel.class.getName()));
+    }
+
     @After
     public void after() {
         UserListController.getUserList().remove(p,
