@@ -20,6 +20,12 @@ public class httphandler{
         this.host = host;
     }
 
+    /**
+     * Sends a put request to the elastic server.
+     * @param address the address to send too, not including the actual IP and port.
+     * @param payload the data to send, as a json string.
+     * @return the response from the server, if it is reached
+     */
     public String httpPUT(String address,String payload){
         RequestBody body = RequestBody.create(JSON, payload);
         Request request = new Request.Builder()
@@ -32,6 +38,7 @@ public class httphandler{
             response = client.newCall(request).execute();
 
             ResponseBody x = response.body();
+            if(x == null)return null;
             return x.string();
         } catch (IOException e) {
             e.printStackTrace();
@@ -40,6 +47,11 @@ public class httphandler{
 
     }
 
+    /**
+     * Gets data from the elastic server
+     * @param address the address to get from, not including ip and port.
+     * @return the data recevied from the server
+     */
     public String httpGET(String address){
         Request request = new Request.Builder()
                 .url(host+address)
@@ -51,6 +63,7 @@ public class httphandler{
             response = client.newCall(request).execute();
 
             ResponseBody x = response.body();
+            if(x == null)return null;
             return x.string();
         } catch (IOException e) {
             e.printStackTrace();
@@ -59,6 +72,11 @@ public class httphandler{
 
     }
 
+    /**
+     * Sends a delete request to the elastic server
+     * @param address the address to delete on the elastic server
+     * @return the response from the server.
+     */
     public String httpDELETE(String address){
         Request request = new Request.Builder()
                 .url(host+address)
@@ -70,6 +88,7 @@ public class httphandler{
             response = client.newCall(request).execute();
 
             ResponseBody x = response.body();
+            if(x == null)return null;
             return x.string();
         } catch (IOException e) {
             e.printStackTrace();
