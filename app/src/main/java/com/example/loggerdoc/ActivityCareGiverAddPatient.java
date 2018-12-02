@@ -1,10 +1,3 @@
-/* Created 2018-11-13 by Stephen Zuk
-*
-*  The Caregiver add_internal patient activity provides a screen for caregivers to add_internal a patient
-*  to their list of patients, and can be accessed from the caregiver patient list activity
-*
-*/
-
 package com.example.loggerdoc;
 
 import android.content.Intent;
@@ -18,6 +11,11 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/* Created 2018-11-13 by Stephen Zuk
+ *  The Caregiver add patient activity provides a screen for caregivers to add a patient
+ *  to their list of patients, and can be accessed from the caregiver patient list activity
+ */
+
 public class ActivityCareGiverAddPatient extends AppCompatActivity {
 
     private CareGiver loggedInCareGiver;
@@ -26,26 +24,24 @@ public class ActivityCareGiverAddPatient extends AppCompatActivity {
     Integer caregiver_ID;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_care_giver_add_patient);
         userID = (EditText) findViewById(R.id.AddPatientEditText);
 
+        //Get the patient from the intent
         Intent intent = getIntent();
         caregiver_ID = intent.getIntExtra("Caregiver", 0);
         loggedInCareGiver = (CareGiver) UserListController.getUserList().get(caregiver_ID);
         intent.removeExtra("Caregiver");
     }
 
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-    }
-
+    /*
+     *This method is called upon returning from the QR scanning activity. It gets the
+     *result of scanning and gets the patient object associated to the scanned qr code if it exists,
+     *and adds the patient object to the caregivers list.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent prevIntent) {
         super.onActivityResult(requestCode, resultCode, prevIntent);
@@ -61,32 +57,34 @@ public class ActivityCareGiverAddPatient extends AppCompatActivity {
             }
         }
     }
-
-    /*activated when a caregiver presses the add_internal button. This method confirms that the
-    string entered into the edittext is a user and adds the user to the caregivers patient list
-    if it is. If the entered value is not a user, an error message pops up and the edittext is cleared*/
+    /*
+     * activated when a caregiver presses the add button. This method confirms that the
+     * string entered into the edittext is a user and adds the user to the caregivers patient list
+     * if it is. If the entered value is not a user, an error message pops up and the edittext is cleared
+     */
     public void addPatient(View view){
         String entered = userID.getText().toString();
         ArrayList<User> list = UserListController.getUserList().getArray();
         for(User user :list){
             if (user.getUserID().equals(entered)){
+                //add the patient to the caregivers patient list, update userlist with updated caregiver
                 patientToAdd =(Patient) user;
                 loggedInCareGiver.addPatient(patientToAdd);
                 UserListController.getUserList().add(loggedInCareGiver,getApplicationContext());
-                userID.setText("");
                 finish();
+                return;
             }
         //user not found, display text and do nothing
         Toast.makeText(this, "That username does not exist. Please try again.", Toast.LENGTH_SHORT).show();
         userID.setText("");
 
-
-
-
         }
     }
 
-
+    /*
+     * this method opens the QR scanning activity and is called when the user presses the
+     * "ADD WITH QR CODE" button
+     */
     public void scanQR(View view){
         try {
 
@@ -98,9 +96,6 @@ public class ActivityCareGiverAddPatient extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(this, "Error opening QR Scanner.", Toast.LENGTH_SHORT).show();
             Log.e("QR Exception", "Exception: "+Log.getStackTraceString(e));
-            //Uri marketUri = Uri.parse("market://details?id=com.google.zxing.client.android");
-            //Intent marketIntent = new Intent(Intent.ACTION_VIEW,marketUri);
-            //startActivity(marketIntent);
 
         }
     }
