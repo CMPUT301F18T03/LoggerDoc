@@ -83,6 +83,9 @@ public class RecordPhotoList extends GenericList<RecordPhoto> implements Elastic
 
     public ArrayList<BodyLocationPhoto> getBodyLocationPhotos() {
         ArrayList<BodyLocationPhoto> dataArrayList = new ArrayList<>();
+        if(datalist.size() == 0){
+            return dataArrayList;
+        }
         for(int num = 0;num < datalist.size();num++){
             if(datalist.valueAt(num).getClass() == BodyLocationPhoto.class){
                 dataArrayList.add((BodyLocationPhoto) datalist.valueAt(num));

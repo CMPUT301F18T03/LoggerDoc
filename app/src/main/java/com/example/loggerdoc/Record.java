@@ -22,8 +22,7 @@ public class Record implements ElasticID {
 
     private RecordGeoLocation recordGeoLocation = null;
     private Bodylocation bodylocation;
-    //private BodyLocationPhotoList blPhotoList;
-    //private RecordPhotoList recordPhotoList;
+
     private ArrayList<Integer> blPhotoList;
     private ArrayList<Integer> recordPhotoList;
 
@@ -103,6 +102,14 @@ public class Record implements ElasticID {
 
     public RecordGeoLocation getRecordGeoLocation(){
         return this.recordGeoLocation;
+    }
+
+    public void setRecordPhotoList(ArrayList<Integer> newRecordPhotoList){
+        recordPhotoList = newRecordPhotoList;
+    }
+
+    public void setBlPhotoList(ArrayList<Integer> newList){
+        this.blPhotoList = newList;
     }
 
     public void setBodylocation(Bodylocation BodLoc){
