@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -112,9 +113,14 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
         SlideShow.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                Intent intent = new Intent(v.getContext(), ActivitySlideShow.class);
-                startActivity(intent);
-
+                if (ProblemRecordListController.getRecordPhotoList().size() > 0){
+                    Intent intent = new Intent(v.getContext(), ActivitySlideShow.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "This record has no photos. Add a photo to view the slideshow",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
