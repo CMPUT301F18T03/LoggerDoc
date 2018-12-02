@@ -174,7 +174,7 @@ public class ActivityViewProblem extends AppCompatActivity {
      * Change to the slideshow activity.
      */
     public void goSlideshow(View v){
-        Intent intent = new Intent(this, ActivitySlideshow.class);
+        Intent intent = new Intent(this, ActivitySlideShow.class);
         intent.putExtra("Problem", problem.getElasticID());
         startActivity(intent);
     }

@@ -86,8 +86,6 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
 
         Button showimages = (Button) findViewById(R.id.showRecordImage);
         Button showBodyLocation = (Button) findViewById(R.id.showBodyLoc);
-        Button SlideShow = (Button) findViewById(R.id.SlideShow);
-
 
         list = ProblemRecordListController.getRecordPhotoList().getBodyLocationPhotos();
         bodylocation = record.getBodylocation();
@@ -106,15 +104,6 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
                 Intent intent = new Intent(v.getContext(), ActivityViewBodyLocation.class);
 
                 startActivityForResult(intent, REMOVE_BL);
-            }
-        });
-
-        SlideShow.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Code here executes on main thread after user presses button
-                Intent intent = new Intent(v.getContext(), ActivitySlideShow.class);
-                startActivity(intent);
-
             }
         });
 

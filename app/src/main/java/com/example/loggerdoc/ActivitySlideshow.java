@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class ActivitySlideShow extends AppCompatActivity {
@@ -25,9 +26,23 @@ public class ActivitySlideShow extends AppCompatActivity {
 
         Button Back = (Button) findViewById(R.id.Back);
         Button Next = (Button) findViewById(R.id.Next);
+        Button returnButton = (Button) findViewById(R.id.returnSlideshow);
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         image = (ImageView) findViewById(R.id.imageView);
         context  = ActivitySlideShow.this;
         index = 0;
+
+        Intent intent = getIntent();
+        int problemID = intent.getIntExtra("Problem", 0);
+
+        ArrayList<Record> records = ProblemRecordListController.getRecordList().getRecords(problemID);
+        ProblemRecordListController.getRecordPhotoList().loadMultipleRecord(records, getApplicationContext());
         final ArrayList<RecordPhoto> photoList = ProblemRecordListController.getRecordPhotoList().getRecordPhotos();
 
         GlideApp

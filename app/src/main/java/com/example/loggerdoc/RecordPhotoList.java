@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class RecordPhotoList extends GenericList<RecordPhoto> implements ElasticDataCallback<ArrayList<RecordPhoto>> {
 
@@ -101,17 +103,22 @@ public class RecordPhotoList extends GenericList<RecordPhoto> implements Elastic
     }
 
     /**
-     * Returns the records associated with a given problem ID
-     * @param RecordID the problem in question
-     * @return an arraylist of record photos
+     * @author = Alexandra Tyrrell
+     *
+     * This method returns an arraylist of recordphotos that is sorted by the most recent timestamp.
+     *
+     * @return ArrayList<Problem> a sorted array list
      */
-    public ArrayList<RecordPhoto> getRecordPhotos(Integer RecordID){
-        ArrayList<RecordPhoto> ret = new ArrayList<>();
-        for(int num = 0;num < datalist.size();num++){
-            if(datalist.valueAt(num).getElasticID_OwnerRecord().equals(RecordID)){
-                ret.add(datalist.valueAt(num));
+
+    public ArrayList<RecordPhoto> sort (){
+        ArrayList<RecordPhoto> problems = this.getArray();
+        Collections.sort(problems, new Comparator<RecordPhoto>() {
+            @Override
+            public int compare(RecordPhoto o1, RecordPhoto o2) {
+                return o2.getTimestamp().compareTo(o1.getTimestamp());
             }
-        }
-        return ret;
+        });
+        return problems;
     }
+
 }

@@ -7,6 +7,7 @@ import com.example.loggerdoc.elasticclient.ElasticID;
 
 import java.io.File;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -18,10 +19,12 @@ public class RecordPhoto implements Serializable,ElasticID {
     private transient File path;
     private Integer ElasticID;
     private Integer ElasticID_OwnerRecord;
+    private LocalDateTime timestamp;
 
     public RecordPhoto(Integer elasticID_OwnerRecord) {
         this.ElasticID_OwnerRecord = elasticID_OwnerRecord;
         ElasticID = this.hashCode();
+        timestamp = LocalDateTime.now();
     }
 
     public RecordPhoto(){
@@ -44,6 +47,10 @@ public class RecordPhoto implements Serializable,ElasticID {
 
     public void setPhoto(File newPhoto) {
         this.path = newPhoto;
+    }
+
+    public LocalDateTime getTimestamp(){
+        return this.timestamp;
     }
 
     @Override

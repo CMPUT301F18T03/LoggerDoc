@@ -77,11 +77,7 @@
         <activity android:name=".ActivityBlLabel" />
         <activity android:name=".ActivityViewBodyLocation" />
         <activity android:name=".ActivityViewRecordMap" />
-<<<<<<< HEAD
-        <activity android:name=".ActivitySlideshow"></activity>
-=======
         <activity android:name=".ActivitySlideShow"></activity>
->>>>>>> 7bf4430e6752251de0002829979d67c169372d78
     </application>
 
 </manifest>
