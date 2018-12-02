@@ -13,13 +13,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class ActivityViewBodyLocation extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_body_location);
-        BodyLocationPhotoList list = ActivityViewRecord.blPhotoList;
+        ArrayList<BodyLocationPhoto> list = ProblemRecordListController.getRecordPhotoList().getBodyLocationPhotos();
         Bodylocation bodylocation = ActivityViewRecord.bodylocation;
 
         ImageView bl1 = (ImageView) findViewById(R.id.BL1);
@@ -67,11 +69,11 @@ public class ActivityViewBodyLocation extends AppCompatActivity {
             if (bodylocation.getFrontX() !=0 || bodylocation.getFrontY() != 0) {
                 GlideApp
                         .with(this)
-                        .load(list.getPhoto(0).getPhoto())
-                        .override(500, 750)
+                        .load(list.get(0).getPhoto())
+                        .override(500,750)
                         .centerCrop()
                         .into(bl2);
-                label2.setText(list.getPhoto(0).getLabel());
+                label2.setText(list.get(0).getLabel());
 
                 for (int i=bodylocation.getFrontX(); i<bodylocation.getFrontX() + 20 && i < Front.getWidth(); i++){
                     for (int j=bodylocation.getFrontY(); j<bodylocation.getFrontY() +20 && i < Front.getHeight(); j++){
@@ -88,11 +90,11 @@ public class ActivityViewBodyLocation extends AppCompatActivity {
             else{
                 GlideApp
                         .with(this)
-                        .load(list.getPhoto(0).getPhoto())
+                        .load(list.get(0).getPhoto())
                         .override(500,750)
                         .centerCrop()
                         .into(bl1);
-                label1.setText(list.getPhoto(0).getLabel());
+                label1.setText(list.get(0).getLabel());
 
                 for(int i = bodylocation.getBackX(); i<bodylocation.getBackX() + 20 && i < Back.getWidth(); i++){
                     for (int j = bodylocation.getBackY(); j<bodylocation.getBackY() +20 && j<Back.getHeight(); j++){
@@ -112,19 +114,19 @@ public class ActivityViewBodyLocation extends AppCompatActivity {
         else if (list.size() == 2){
             GlideApp
                     .with(this)
-                    .load(list.getPhoto(0).getPhoto())
+                    .load(list.get(0).getPhoto())
                     .override(500,750)
                     .centerCrop()
                     .into(bl1);
-            label1.setText(list.getPhoto(0).getLabel());
+            label1.setText(list.get(0).getLabel());
 
             GlideApp
                     .with(this)
-                    .load(list.getPhoto(1).getPhoto())
+                    .load(list.get(1).getPhoto())
                     .override(500,750)
                     .centerCrop()
                     .into(bl2);
-            label2.setText(list.getPhoto(1).getLabel());
+            label2.setText(list.get(1).getLabel());
         }
 
         else{

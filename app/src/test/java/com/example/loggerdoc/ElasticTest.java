@@ -1,9 +1,9 @@
 package com.example.loggerdoc;
 
+import com.example.loggerdoc.elasticclient.ElasticSearchController;
 import com.example.loggerdoc.elasticclient.httphandler;
 
 import org.junit.Before;
-import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;

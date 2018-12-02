@@ -245,13 +245,21 @@ public class ActivityAddRecord extends AppCompatActivity {
 
             if (photos.size() != 0) {
                 for (int i = 0; i<photos.size(); i++){
-                    record.getRecordPhotoList().addPhoto(photos.get(i));
+                    RecordPhoto x = photos.get(i);
+                    x.genID();
+                    x.setElasticID_OwnerRecord(record.getElasticID());
+                    record.addRecordPhoto(x);
+                    ProblemRecordListController.getRecordPhotoList().addPhoto(x,getApplicationContext());
                 }
 
            }
            if (blphotos.size() != 0){
                for(int i =0; i<blphotos.size(); i++){
-                   record.getBlPhotoList().add(blphotos.get(i));
+                   BodyLocationPhoto y = blphotos.get(i);
+                   y.genID();
+                   y.setElasticID_OwnerRecord(record.getElasticID());
+                   record.addRecordPhoto(y);
+                   ProblemRecordListController.getRecordPhotoList().addPhoto(y,getApplicationContext());
                }
            }
            record.setBodylocation(bodylocation);

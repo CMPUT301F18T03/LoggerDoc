@@ -1,30 +1,15 @@
 package com.example.loggerdoc.elasticclient;
 
 import android.content.Context;
-import android.os.AsyncTask;
-
-import com.example.loggerdoc.CareGiver;
-import com.example.loggerdoc.ElasticSearchController;
-import com.example.loggerdoc.Patient;
-import com.example.loggerdoc.User;
-import com.example.loggerdoc.UserList;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 
 import okhttp3.OkHttpClient;
@@ -56,20 +41,21 @@ public class ElasticCacheClient {
             String data;
             String returnval;
             while(Line != null && !Line.equals("")){
-                if(Line.substring(0,1).equals("s")){
-                    address = Line.substring(1);
-                    data = in.readLine();
-                    returnval = handler.httpPUT(address,data);
-                }
-                else if(Line.substring(0,1).equals("d")){
-                    address = Line.substring(1);
-                    data = in.readLine();
-                    returnval = handler.httpDELETE(address+data);
-                }
-                else{
-                    //panic
-                    lock.unlock();
-                    return;
+                switch (Line.substring(0, 1)) {
+                    case "s":
+                        address = Line.substring(1);
+                        data = in.readLine();
+                        returnval = handler.httpPUT(address, data);
+                        break;
+                    case "d":
+                        address = Line.substring(1);
+                        data = in.readLine();
+                        returnval = handler.httpDELETE(address + data);
+                        break;
+                    default:
+                        //panic
+                        lock.unlock();
+                        return;
                 }
                 if(returnval != null){
                     Line = in.readLine();
@@ -116,6 +102,7 @@ public class ElasticCacheClient {
     void cacheToSend(String path,String jsonout, Context context) {
         cache(path,jsonout,context,"s");
     }
+
 
     void cacheToDelete(String path,Integer toDelete,Context context){
         cache(path,toDelete.toString(),context,"d");

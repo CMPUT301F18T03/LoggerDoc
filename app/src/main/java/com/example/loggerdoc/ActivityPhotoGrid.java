@@ -18,7 +18,7 @@ public class ActivityPhotoGrid extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_grid);
         GridView gridView = (GridView) findViewById(R.id.photo_grid);
-        ArrayList<RecordPhoto> photoList = ActivityViewRecord.photoList.getRecordPhotos();
+        ArrayList<RecordPhoto> photoList = ProblemRecordListController.getRecordPhotoList().getRecordPhotos();
         requestStoragePermission();
 
         gridView.setAdapter(
