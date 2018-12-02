@@ -7,7 +7,7 @@ import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
-public class RecordPhotoListUnitTest {
+public class RecordPhotoListUnitTest {/*
     @Test
     public void TestsetPhoto() {
 
@@ -42,5 +42,5 @@ public class RecordPhotoListUnitTest {
 
         list.removePhoto(photo1);
         assertEquals("RecordList should have size 1 after deletion", 1, list.size());
-    }
+    }*/
 }
