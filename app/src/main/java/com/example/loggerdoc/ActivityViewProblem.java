@@ -167,4 +167,15 @@ public class ActivityViewProblem extends AppCompatActivity {
         intent.putExtra("Problem", problem.getElasticID());
         startActivity(intent);
     }
+
+    /*
+     * @author = Alexandra Tyrrell
+     *
+     * Change to the slideshow activity.
+     */
+    public void goSlideshow(View v){
+        Intent intent = new Intent(this, ActivitySlideshow.class);
+        intent.putExtra("Problem", problem.getElasticID());
+        startActivity(intent);
+    }
 }

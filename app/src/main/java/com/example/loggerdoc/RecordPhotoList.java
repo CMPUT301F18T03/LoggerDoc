@@ -17,7 +17,7 @@ public class RecordPhotoList extends GenericList<RecordPhoto> implements Elastic
 
     /**
      *
-     * @return the record phot0 list
+     * @return the record photo list
      */
     public ArrayList<RecordPhoto> getRecordPhotos() {
         ArrayList<RecordPhoto> dataArrayList = new ArrayList<>();
