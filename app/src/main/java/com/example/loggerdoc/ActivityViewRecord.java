@@ -200,9 +200,13 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
             if (index == 2) {
                 record.getBodylocation().setBackX(0);
                 record.getBodylocation().setBackY(0);
-                if (record.getBlPhotoList().size() > 1) {
+                if (record.getBlPhotoList().size() == 2) {
                     record.getBlPhotoList().remove(record.getBlPhotoList().getPhoto(1));
                 }
+                else if (record.getBlPhotoList().size() == 1) {
+                    record.getBlPhotoList().remove(record.getBlPhotoList().getPhoto(0));
+                }
+
 
                 ProblemRecordListController.getRecordList().update(record, getApplicationContext());
             }
