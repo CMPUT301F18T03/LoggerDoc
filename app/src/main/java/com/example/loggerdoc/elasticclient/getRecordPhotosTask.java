@@ -8,6 +8,9 @@ import com.example.loggerdoc.Record;
 import com.example.loggerdoc.RecordPhoto;
 import com.google.gson.Gson;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -53,6 +56,9 @@ public class getRecordPhotosTask extends AsyncTask<Record, Void, ArrayList<Recor
                 data.setPhoto(new File(context.getFilesDir().getAbsolutePath()+"/Data/"+bodyloc.toString()+".jpg"));
                 ret.add(data);
             }
+            else{
+                toFetchBody.add(bodyloc);
+            }
         }
 
         RecordPhoto moredata;//Theres just more data
@@ -68,21 +74,34 @@ public class getRecordPhotosTask extends AsyncTask<Record, Void, ArrayList<Recor
                 moredata.setPhoto(new File(context.getFilesDir().getAbsolutePath()+"/Data/"+recordphoto.toString()+".jpg"));
                 ret.add(moredata);
             }
+            else{
+                toFetchRec.add(recordphoto);
+            }
         }
 
         for(Integer EID: toFetchBody){
             String jsonin = getter.httpGET("/photodata/_doc/" + EID.toString());
-            photodata dat = gson.fromJson(jsonin,photodata.class);
-            data = toBody(dat);
-            ret.add(data);
-            save(dat,gson);
+            try {
+                JSONObject datain = new JSONObject(jsonin);
+                photodata dat = gson.fromJson(datain.getJSONObject("_source").toString(),photodata.class);
+                data = toBody(dat);
+                ret.add(data);
+                save(dat,gson);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
         for(Integer EID: toFetchRec){
             String jsonin = getter.httpGET("/photodata/_doc/" + EID.toString());
-            photodata dat = gson.fromJson(jsonin,photodata.class);
-            moredata = toRec(dat);
-            ret.add(moredata);
-            save(dat,gson);
+            try {
+                JSONObject datain = new JSONObject(jsonin);
+                photodata dat = gson.fromJson(datain.getJSONObject("_source").toString(),photodata.class);
+                moredata = toRec(dat);
+                ret.add(moredata);
+                save(dat,gson);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         return ret;
