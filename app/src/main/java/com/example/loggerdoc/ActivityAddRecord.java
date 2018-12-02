@@ -179,9 +179,6 @@ public class ActivityAddRecord extends AppCompatActivity {
             blPhoto.setX(location.get(0));
             blPhoto.setY(location.get(1));
             blphotos.add(blPhoto);
-            Log.i("THISTAG", String.valueOf(blPhoto.getX()));
-            Log.i("THISTAG", String.valueOf(blPhoto.getY()));
-            Log.i("THISTAG", String.valueOf(location.get(0)));
 
 
             Toast.makeText(ActivityAddRecord.this, "saved body location from gallery", Toast.LENGTH_SHORT).show();

@@ -56,6 +56,8 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
     static final int BODY_LOCATION_REQUEST = 1003;
     static final int BODY_LOCATION_GALLARY_REQUEST = 1004;
     static final int LABEL_REQUEST = 1005;
+    static final int CUSTOM_BL_REQUEST = 1006;
+
     private static final int CAMERA_PERMISSION_REQUEST = 100;
     private static final int STORAGE_PERMISSION_REQUEST = 200;
     private boolean cameraPermissionsGranted = false;
@@ -408,11 +410,25 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
             final Uri uri = data.getData();
             File path = new File(getRealPathFromURI(uri));
             blPhoto.setPhoto(path);
+            Intent intent = new Intent(ActivityEditRecord.this, ActivityGetblCoord.class);
+            intent.putExtra("TheImage", path.toString());
+            startActivityForResult(intent, CUSTOM_BL_REQUEST);
+            /*
             ProblemRecordListController.getRecordPhotoList().addPhoto(blPhoto,getApplicationContext());
             blphotos.add(blPhoto.getElasticID());
             Toast.makeText(ActivityEditRecord.this, "Saved body location from gallary", Toast.LENGTH_SHORT).show();
+*/
+
+        }
+        if(requestCode == CUSTOM_BL_REQUEST && resultCode == RESULT_OK){
+            ArrayList<Integer> location = data.getIntegerArrayListExtra("BODYLOCATION");
+            blPhoto.setX(location.get(0));
+            blPhoto.setY(location.get(1));
+            ProblemRecordListController.getRecordPhotoList().addPhoto(blPhoto,getApplicationContext());
+            blphotos.add(blPhoto.getElasticID());
 
 
+            Toast.makeText(ActivityEditRecord.this, "saved body location from gallery", Toast.LENGTH_SHORT).show();
         }
 
         if (requestCode == GALLERY_REQUEST_RECORD && resultCode == RESULT_OK) {
