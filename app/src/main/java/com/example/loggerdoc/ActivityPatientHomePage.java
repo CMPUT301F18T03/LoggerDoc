@@ -1,13 +1,18 @@
 package com.example.loggerdoc;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 
+
+import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
+import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
 /* @Author Stephen Zuk
  *  The Patient Home Page is self explanatory. From the home page, a patient can
  *  view their profile, browse, edit and add problems and records and view a map of all of their
@@ -17,6 +22,9 @@ import android.widget.TextView;
 public class ActivityPatientHomePage extends AppCompatActivity {
     private Patient patient;
     private Integer patient_ID;
+    private PublisherInterstitialAd mPublisherInterstitialAd;
+    static Switch adsSwitch;
+
     @Override
 
 
@@ -46,6 +54,19 @@ public class ActivityPatientHomePage extends AppCompatActivity {
         });
         Button browseProblems = (Button) findViewById(R.id.browse_problems_button);
 
+        adsSwitch = ActivityLogin.adsSwitch;
+        mPublisherInterstitialAd = new PublisherInterstitialAd(this);
+        mPublisherInterstitialAd.setAdUnitId("/6499/example/interstitial");
+        mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
+
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        mPublisherInterstitialAd = new PublisherInterstitialAd(this);
+        mPublisherInterstitialAd.setAdUnitId("/6499/example/interstitial");
+        mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
     }
 
 
@@ -57,6 +78,9 @@ public class ActivityPatientHomePage extends AppCompatActivity {
         Intent intent = new Intent(this, ActivityBrowseProblems.class);
         intent.putExtra("Patient", patient_ID);
         startActivity(intent);
+        if (mPublisherInterstitialAd.isLoaded() && adsSwitch.isChecked()) {
+            mPublisherInterstitialAd.show();
+        }
     }
 
     /*
@@ -66,7 +90,9 @@ public class ActivityPatientHomePage extends AppCompatActivity {
         Intent intent = new Intent(this, ActivityUserProfile.class);
         intent.putExtra("Patient", patient_ID);
         startActivity(intent);
-
+        if (mPublisherInterstitialAd.isLoaded() && adsSwitch.isChecked()) {
+            mPublisherInterstitialAd.show();
+        }
     }
 
     /*
@@ -77,6 +103,9 @@ public class ActivityPatientHomePage extends AppCompatActivity {
         Intent intent = new Intent (this, ActivityProblemMap.class);
         intent.putExtra("Patient", patient_ID);
         startActivity(intent);
+        if (mPublisherInterstitialAd.isLoaded() && adsSwitch.isChecked()) {
+            mPublisherInterstitialAd.show();
+        }
     }
 
 

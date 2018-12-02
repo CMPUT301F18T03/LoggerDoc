@@ -29,6 +29,7 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
 
     // Local userList to store all of the Users along with all the data associated with users
     static UserList userList = UserListController.getUserList();
+    static Switch adsSwitch;
 
 
     @Override
@@ -40,7 +41,7 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
         loadUserList.mkDirs();
         loadUserList.execute();
 
-
+        adsSwitch = findViewById(R.id.AdsSwitch);
         mPublisherInterstitialAd = new PublisherInterstitialAd(this);
         mPublisherInterstitialAd.setAdUnitId("/6499/example/interstitial");
         mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
@@ -84,6 +85,9 @@ public class ActivityLogin extends AppCompatActivity implements ElasticDataCallb
                         Intent intent = new Intent(ActivityLogin.this, ActivityCareGiverHomePage.class);
                         intent.putExtra("Caregiver", user.getElasticID());
                         startActivity(intent);
+                        if (mPublisherInterstitialAd.isLoaded() && adsSwitch.isChecked()) {
+                            mPublisherInterstitialAd.show();
+                        }
                         break;
                     }
                 }

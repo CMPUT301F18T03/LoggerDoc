@@ -169,11 +169,16 @@ public class ActivityAddRecord extends AppCompatActivity {
         }
 
         if (requestCode == GALLERY_REQUEST_RECORD && resultCode == RESULT_OK){
+            if (photos.size() > 9) {
+                Toast.makeText(this, "You cannot add more than 10 photos", Toast.LENGTH_SHORT).show();
+                return;
+            }
             final Uri imageUri = data.getData();
             File path = new File(getRealPathFromURI(imageUri));
             RecordPhoto photo = new RecordPhoto();
             photo.setPhoto(path);
             photos.add(photo);
+            Toast.makeText(this, "Photo added successfully!", Toast.LENGTH_SHORT).show();
             Log.i("THIS_TAG", String.valueOf(path));
         }
 
