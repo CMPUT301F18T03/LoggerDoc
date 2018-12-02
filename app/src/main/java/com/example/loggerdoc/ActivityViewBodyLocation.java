@@ -24,6 +24,7 @@ public class ActivityViewBodyLocation extends AppCompatActivity {
         ArrayList<BodyLocationPhoto> list = ProblemRecordListController.getRecordPhotoList().getBodyLocationPhotos();
         Bodylocation bodylocation = ActivityViewRecord.bodylocation;
 
+
         ImageView bl1 = (ImageView) findViewById(R.id.BL1);
         ImageView bl2 = (ImageView) findViewById(R.id.BL2);
         TextView label1 = (TextView) findViewById(R.id.label1);

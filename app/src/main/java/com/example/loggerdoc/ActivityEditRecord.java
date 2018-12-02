@@ -67,6 +67,8 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
     private Bodylocation bodylocation = new Bodylocation();
     private BodyLocationPhoto blPhoto;// = new BodyLocationPhoto();
 
+    private RecordPhotoList photoList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +101,7 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
         blphotos = record.getBlPhotoList();
         recordPhotoList = record.getRecordPhotoList();
 
+
         Button recordGallery = findViewById(R.id.RecordGallary);
         final Button recordCamera = findViewById(R.id.RecordCamera);
         Button BodyLocationButton = findViewById(R.id.BodyLocation);
@@ -107,7 +110,7 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
         recordGallery.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                if(recordPhotoList.size() < 10){
+                if(ProblemRecordListController.getRecordPhotoList().size() < 10){
                     checkStoragePermission();
                 }
                 else{
@@ -120,7 +123,13 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
         recordCamera.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                checkCameraPermission();
+                if(ProblemRecordListController.getRecordPhotoList().size() < 10){
+                    checkCameraPermission();
+                }
+                else{
+                    Toast.makeText(ActivityEditRecord.this, "You already have 10 recordPhotos for this record", Toast.LENGTH_SHORT).show();
+
+                }
             }
         });
 
@@ -215,11 +224,11 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
             RecordGeoLocation newGeoLocation = new RecordGeoLocation(options.getPosition());
             record.setRecordGeoLocation(newGeoLocation);
         }
+        
 
-        //TODO: Photos and Body Locations
         record.setBodylocation(bodylocation);
         record.setBlPhotoList(blphotos);
-        record.setRecordPhotoList(recordPhotoList);
+        //record.setRecordPhotoList(recordPhotoList);
 
         ProblemRecordListController.getRecordList().update(record,getApplicationContext());
         finish();
@@ -375,6 +384,8 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
             RecordPhoto photo = new RecordPhoto();
             photo.setPhoto(path);
             photo.genID();
+            photo.setElasticID_OwnerRecord(record.getElasticID());
+            record.addRecordPhoto(photo);
             ProblemRecordListController.getRecordPhotoList().addPhoto(photo,getApplicationContext());
             PhotoPath = null;
 
@@ -395,7 +406,6 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
             final Uri uri = data.getData();
             File path = new File(getRealPathFromURI(uri));
             blPhoto.setPhoto(path);
-            Log.i("THIS_TAG", blPhoto.getLabel());
             ProblemRecordListController.getRecordPhotoList().addPhoto(blPhoto,getApplicationContext());
             blphotos.add(blPhoto.getElasticID());
 
@@ -406,8 +416,10 @@ public class ActivityEditRecord extends AppCompatActivity implements OnMapReadyC
             File path = new File(getRealPathFromURI(imageUri));
             RecordPhoto photo = new RecordPhoto();
             photo.setPhoto(path);
+            photo.genID();
+            photo.setElasticID_OwnerRecord(record.getElasticID());
+            record.addRecordPhoto(photo);
             ProblemRecordListController.getRecordPhotoList().addPhoto(photo,getApplicationContext());
-            Log.i("THIS_TAG", String.valueOf(path));
         }
         if (requestCode == BODY_LOCATION_REQUEST && resultCode == Activity.RESULT_OK) {
             ArrayList<Integer> location = data.getIntegerArrayListExtra("BODYLOCATION");

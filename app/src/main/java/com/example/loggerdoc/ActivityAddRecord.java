@@ -263,7 +263,7 @@ public class ActivityAddRecord extends AppCompatActivity {
                    BodyLocationPhoto y = blphotos.get(i);
                    y.genID();
                    y.setElasticID_OwnerRecord(record.getElasticID());
-                   record.addRecordPhoto(y);
+                   record.addBlPhoto(y);
                    ProblemRecordListController.getRecordPhotoList().addPhoto(y,getApplicationContext());
                }
            }
