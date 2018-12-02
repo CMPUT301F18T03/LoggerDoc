@@ -12,7 +12,13 @@ import com.google.zxing.WriterException;
 
 import java.io.IOException;
 
+/* @Author Stephen Zuk
+ *  The Update contact info activity displays the users contact info and lets the user modify
+ *  and save the info
+ */
+
 public class ActivityUserProfile extends AppCompatActivity {
+
 
     User viewedUser;
     private TextView emailEditText;
@@ -43,11 +49,20 @@ public class ActivityUserProfile extends AppCompatActivity {
         if(user_ID == 0){
             user_ID = intent.getIntExtra("Caregiver",0);
         }
+
+        /*
+         * if the user viewing the profile is not the logged in user, hide the update
+         * contact info button
+         */
         if (UserListController.getCurrentUserID().equals(user_ID) == false){
             editContactInfoButton.setVisibility(View.INVISIBLE);
         }
         viewedUser = UserListController.getUserList().get(user_ID);
         userType = viewedUser.getRole();
+
+        /*
+         * generate and display the QR code that represents the user whose profile is being used
+         */
         try {
             qrCodeImageView.setImageBitmap(QRCodeController.generateQRCodeImage(Integer.toString(user_ID)));
         } catch (WriterException | IOException e){
