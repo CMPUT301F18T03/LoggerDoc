@@ -40,12 +40,16 @@ public class getRecordPhotosTask extends AsyncTask<Record, Void, ArrayList<Recor
     @Override
     protected ArrayList<RecordPhoto> doInBackground(Record... records) {
         Gson gson = new Gson();
-        Record tosend = records[0];
-        ArrayList<Integer> BodyLocs = tosend.getBlPhotoList();
-        ArrayList<Integer> RecordPhotos = tosend.getRecordPhotoList();
+        ArrayList<Integer> BodyLocs = new ArrayList<>();
+        ArrayList<Integer> RecordPhotos = new ArrayList<>();
         ArrayList<Integer> toFetchBody = new ArrayList<>();
         ArrayList<Integer> toFetchRec = new ArrayList<>();
         httphandler getter = ElasticSearchController.getHttpHandler();
+
+        for (Record record : records) {
+            BodyLocs.addAll(record.getBlPhotoList());
+            RecordPhotos.addAll(record.getRecordPhotoList());
+        }
 
         ArrayList<RecordPhoto> ret = new ArrayList<>();
         File targfile;

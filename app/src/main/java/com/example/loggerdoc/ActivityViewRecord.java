@@ -87,8 +87,6 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
 
         Button showimages = (Button) findViewById(R.id.showRecordImage);
         Button showBodyLocation = (Button) findViewById(R.id.showBodyLoc);
-        Button SlideShow = (Button) findViewById(R.id.SlideShow);
-
 
         list = ProblemRecordListController.getRecordPhotoList().getBodyLocationPhotos();
         bodylocation = record.getBodylocation();
@@ -109,21 +107,6 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
                 startActivityForResult(intent, REMOVE_BL);
             }
         });
-
-        SlideShow.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Code here executes on main thread after user presses button
-                if (ProblemRecordListController.getRecordPhotoList().size() > 0){
-                    Intent intent = new Intent(v.getContext(), ActivitySlideShow.class);
-                    startActivity(intent);
-                }
-                else{
-                    Toast.makeText(getApplicationContext(), "This record has no photos. Add a photo to view the slideshow",
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
         initializeMap();
     }
 
