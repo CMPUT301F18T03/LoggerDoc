@@ -12,6 +12,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * has two images that the user can click when they do it saves the location of
+ * that click and returns it to the activity to be stored and used later
+ */
 public class ActivityBodyLocation extends Activity {
     public Bodylocation bodylocation;
 
@@ -72,7 +76,7 @@ public class ActivityBodyLocation extends Activity {
 
                 location.set(2,imagex);
                 location.set(3,imagey);
-                Toast.makeText(ActivityBodyLocation.this, "Good Click", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ActivityBodyLocation.this, "Pin successfully added!", Toast.LENGTH_SHORT).show();
 
                 return false;
             }

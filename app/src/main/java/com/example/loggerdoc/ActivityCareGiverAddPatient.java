@@ -74,6 +74,7 @@ public class ActivityCareGiverAddPatient extends AppCompatActivity {
                 finish();
                 return;
             }
+
         }
         //user not found, display text and do nothing
         Toast.makeText(this, "That username does not exist. Please try again.", Toast.LENGTH_SHORT).show();
