@@ -22,6 +22,8 @@ public class ActivityViewRecordList extends AppCompatActivity {
     private int problemID;
     private FloatingActionButton addRecordButton;
     private ArrayList<Record> recordArrayList;
+    private ArrayList<Record> searchResult;
+    ArrayAdapter<Record> recordAdapter;
 
     //To be called when the activity is created
     @Override
@@ -76,7 +78,12 @@ public class ActivityViewRecordList extends AppCompatActivity {
         }
 
         //Initialize and set the adapter for the records
-        ArrayAdapter<Record> recordAdapter = new AdapterListRecords(this, ProblemRecordListController.getRecordList().getRecords(problemID));
+        if (searchResult != null){
+            recordAdapter = new AdapterListRecords(this, searchResult);
+        }else {
+            recordAdapter = new AdapterListRecords(this, ProblemRecordListController.getRecordList().getRecords(problemID));
+        }
+
         ListView recordList = (ListView) findViewById(R.id.recordsListView);
         recordList.setAdapter(recordAdapter);
         //Set the onClickListener for the listView. This will call goViewRecord().

@@ -94,7 +94,12 @@ public class ActivityBrowseProblems extends AppCompatActivity {
 
         //TODO: fix if we get listeners working
         problemArrayList = ProblemRecordListController.getProblemList().sort();
-        adapter = new AdapterListProblems(this, problemArrayList);
+        if (searchResult!= null){
+            adapter = new AdapterListProblems(this, searchResult);
+        }else{
+            adapter = new AdapterListProblems(this, problemArrayList);
+        }
+
         problemsList = (ListView) findViewById(R.id.ProblemList);
         problemsList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -115,6 +120,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
      * @param view View
      */
     public void changeToViewProblemActivity(View view, Patient patient, int position){
+        searchResult = null;
         Intent intent = new Intent(this, ActivityViewProblem.class);
         intent.putExtra("Patient", patient_ID);
         intent.putExtra("Position",
@@ -166,6 +172,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
      * @param view View
      */
     public void changeToUserProfile (View view){
+        searchResult = null;
         Intent intent = new Intent (this, ActivityUserProfile.class);
         intent.putExtra("Patient", patient_ID);
         startActivity(intent);

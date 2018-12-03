@@ -22,9 +22,9 @@ public class ActivitySearchProblems extends AppCompatActivity implements Elastic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_problems);
-        problemKeywordEditText = findViewById(R.id.searchRecordKeywordsEditText);
+        problemKeywordEditText = findViewById(R.id.searchProblemKeywordsEditText);
         problemGeoLocationEditText = findViewById(R.id.searchProblemGeolocationKeywordsEditText);
-        searchProblemBodyLocationEditText = findViewById(R.id.searchRecordBodyLocationKeywordsEditText);
+        searchProblemBodyLocationEditText = findViewById(R.id.searchProblemBodyLocationKeywordsEditText);
     }
 
     public void searchButtonPress(View view) {
@@ -34,7 +34,7 @@ public class ActivitySearchProblems extends AppCompatActivity implements Elastic
 
         searchProblemsTask searchProblems = new searchProblemsTask(getApplicationContext(),
                 this, keywords, null, null);
-        searchProblems.execute();
+        searchProblems.execute(UserListController.getCurrentUserID());
 
     }
 
