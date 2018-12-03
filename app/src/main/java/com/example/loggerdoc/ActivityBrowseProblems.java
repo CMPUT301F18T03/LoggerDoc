@@ -24,6 +24,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
     private ListView problemsList;
     private FloatingActionButton addProblemButton;
     private ArrayList<Problem> problemArrayList;
+    private ArrayList<Problem> searchResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,7 +141,22 @@ public class ActivityBrowseProblems extends AppCompatActivity {
      */
     public void changeToSearchActivity(View view){
         Intent intent = new Intent (this, ActivitySearchProblems.class);
-        startActivity(intent);
+        startActivityForResult(intent, 0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent prevIntent) {
+        super.onActivityResult(requestCode, resultCode, prevIntent);
+        if (requestCode == 0) {
+
+            if (resultCode == RESULT_OK) {
+                ArrayList<Integer> contents = prevIntent.getIntegerArrayListExtra("searchResult");
+                ArrayList<Problem> searchResult = ProblemRecordListController.getProblemList().getList(contents);
+            }
+            if(resultCode == RESULT_CANCELED){
+                //handle cancel
+            }
+        }
     }
 
     /** @author = Alexandra Tyrrell

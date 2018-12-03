@@ -44,6 +44,21 @@ public class GenericList<T extends ElasticID>{
     }
 
     /**
+     * Convert a list of elastic ID's to the objects they represent
+     *
+     * @param ElasticIDs The list of elastic ID's to convert to objects
+     */
+    public ArrayList<T> getList(ArrayList<Integer> ElasticIDs){
+        ArrayList<T> ret = new ArrayList<T>();
+
+        for( Integer ID: ElasticIDs){
+            ret.add(datalist.get(ID));
+        }
+
+        return ret;
+    }
+
+    /**
      * Remove data from the generic list.
      *
      * @param data The data that needs to be updated from the generic list.

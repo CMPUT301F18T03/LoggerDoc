@@ -109,6 +109,21 @@ public class ActivityViewRecordList extends AppCompatActivity {
     //Change to ActivitySearch.
     public void goSearchRecord(View view){
         Intent intent = new Intent (this, ActivitySearchRecords.class);
-        startActivity(intent);
+        startActivityForResult(intent, 0);;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent prevIntent) {
+        super.onActivityResult(requestCode, resultCode, prevIntent);
+        if (requestCode == 0) {
+
+            if (resultCode == RESULT_OK) {
+                ArrayList<Integer> contents = prevIntent.getIntegerArrayListExtra("searchResult");
+                ArrayList<Record> searchResult = ProblemRecordListController.getRecordList().getList(contents);
+            }
+            if(resultCode == RESULT_CANCELED){
+                //handle cancel
+            }
+        }
     }
 }
