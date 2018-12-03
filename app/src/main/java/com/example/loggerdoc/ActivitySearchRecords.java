@@ -33,9 +33,10 @@ public class ActivitySearchRecords extends AppCompatActivity implements ElasticD
         String keywords = recordKeywordEditText.getText().toString();
         String geoLocation = recordGeoLocationEditText.getText().toString();
         String bodyLocation = searchRecordBodyLocationEditText.getText().toString();
-
+        Intent intent = getIntent();
+        Integer problemID = intent.getIntExtra("Problem",0);
         searchRecordsTask searchRecords = new searchRecordsTask(getApplicationContext(),
-                this, keywords, null, null);
+                this, keywords, null, null,problemID);
         searchRecords.execute(UserListController.getCurrentUserID());
 
     }

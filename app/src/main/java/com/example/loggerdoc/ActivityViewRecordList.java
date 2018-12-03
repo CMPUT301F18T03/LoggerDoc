@@ -120,7 +120,8 @@ public class ActivityViewRecordList extends AppCompatActivity {
     public void goSearchRecord(View view){
         searchResult = null;
         Intent intent = new Intent (this, ActivitySearchRecords.class);
-        startActivityForResult(intent, 0);;
+        intent.putExtra("Problem",problemID);
+        startActivityForResult(intent, 0);
     }
 
     @Override

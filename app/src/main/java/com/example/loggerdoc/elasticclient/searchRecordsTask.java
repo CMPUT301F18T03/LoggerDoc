@@ -20,17 +20,19 @@ public class searchRecordsTask extends AsyncTask<Integer, Void,ArrayList<Integer
     private String keywords;
     private RecordGeoLocation targgeo;
     private Bodylocation targloc;
+    private Integer problemID;
 
     private final String querya = "{\"query\":{\"multi_match\":{\"query\":\"";
     private final String queryb = "\",\"fields\":[\"title\", \"description\"],\"operator\":\"and\"}}}";
 
 
-    public searchRecordsTask(Context context, ElasticDataCallback<ArrayList<Integer>> callback, String keywords, RecordGeoLocation targgeo, Bodylocation targloc){
+    public searchRecordsTask(Context context, ElasticDataCallback<ArrayList<Integer>> callback, String keywords, RecordGeoLocation targgeo, Bodylocation targloc,Integer problemID){
         this.context = context;
         this.callback = callback;
         this.keywords = keywords;
         this.targgeo = targgeo;
         this.targloc = targloc;
+        this.problemID = problemID;
     }
 
 
@@ -60,7 +62,7 @@ public class searchRecordsTask extends AsyncTask<Integer, Void,ArrayList<Integer
                 for (int num = 0; num < hits.length(); num++) {
                     JSONObject currentproblem = hits.getJSONObject(num).getJSONObject("_source");
                     Record x = gson.fromJson(currentproblem.toString(), Record.class);
-                    if(x.getElasticID_Owner().equals(EID)) ret.add(x.getElasticID());
+                    if(x.getElasticID_Owner().equals(EID) && x.getElasticID_OwnerProblem().equals(problemID)) ret.add(x.getElasticID());
 
                 }
                 return ret;
