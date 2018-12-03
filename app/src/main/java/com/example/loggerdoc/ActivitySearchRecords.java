@@ -4,7 +4,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-public class ActivitySearchRecords extends AppCompatActivity {
+import com.example.loggerdoc.elasticclient.ElasticCallback;
+import com.example.loggerdoc.elasticclient.ElasticDataCallback;
+
+import java.util.ArrayList;
+
+public class ActivitySearchRecords extends AppCompatActivity implements ElasticDataCallback<ArrayList<Integer>> {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,5 +23,11 @@ public class ActivitySearchRecords extends AppCompatActivity {
         // do something to update ProblemRecordListController
 
         finish();
+    }
+
+
+    @Override
+    public void dataCallBack(ArrayList<Integer> data) {
+
     }
 }
