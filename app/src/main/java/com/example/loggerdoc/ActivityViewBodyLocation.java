@@ -73,8 +73,8 @@ public class ActivityViewBodyLocation extends AppCompatActivity {
                 image1 = image1.copy(Bitmap.Config.ARGB_8888, true);
 
 
-                for (int i=list.get(0).getX(); i<list.get(0).getX() + 200 && i < image1.getWidth(); i++){
-                    for (int j=list.get(0).getY(); j<list.get(0).getY() + 200 && i < image1.getHeight(); j++){
+                for (int i=list.get(0).getX(); i<list.get(0).getX() + 40 && i < image1.getWidth(); i++){
+                    for (int j=list.get(0).getY(); j<list.get(0).getY() + 40 && i < image1.getHeight(); j++){
                         image1.setPixel(i,j,color);
                     }
                 }
@@ -105,8 +105,8 @@ public class ActivityViewBodyLocation extends AppCompatActivity {
                 Log.i("THISTAG", String.valueOf(list.get(0).getX()));
 
 
-                for (int i=list.get(0).getX(); i<list.get(0).getX() + 80 && i < image1.getWidth(); i++){
-                    for (int j=list.get(0).getY(); j<list.get(0).getY() + 80 && i < image1.getHeight(); j++){
+                for (int i=list.get(0).getX(); i<list.get(0).getX() + 40 && i < image1.getWidth(); i++){
+                    for (int j=list.get(0).getY(); j<list.get(0).getY() + 40 && i < image1.getHeight(); j++){
                         image1.setPixel(i,j,color);
                     }
                 }
@@ -141,14 +141,14 @@ public class ActivityViewBodyLocation extends AppCompatActivity {
             image1 = image1.copy(Bitmap.Config.ARGB_8888, true);
             image2 = image2.copy(Bitmap.Config.ARGB_8888, true);
 
-            for (int i=list.get(0).getX(); i<list.get(0).getX() + 20 && i < image1.getWidth(); i++){
-                for (int j=list.get(0).getY(); j<list.get(0).getY() + 20 && i < image1.getHeight(); j++){
+            for (int i=list.get(0).getX(); i<list.get(0).getX() + 40 && i < image1.getWidth(); i++){
+                for (int j=list.get(0).getY(); j<list.get(0).getY() + 40 && i < image1.getHeight(); j++){
                     image1.setPixel(i,j,color);
                 }
             }
 
-            for(int i = list.get(1).getX(); i < list.get(1).getX() + 20 && i < image2.getWidth(); i++){
-                for (int j =list.get(1).getY(); j<list.get(1).getY() +20 && j<image2.getHeight(); j++){
+            for(int i = list.get(1).getX(); i < list.get(1).getX() + 40 && i < image2.getWidth(); i++){
+                for (int j =list.get(1).getY(); j<list.get(1).getY() +40 && j<image2.getHeight(); j++){
                     image2.setPixel(i,j,color);
 
                 }
