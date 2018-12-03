@@ -98,6 +98,7 @@ public class ActivityViewRecordList extends AppCompatActivity {
 
     //Change to ViewRecord Activity
     public void goViewRecord(View v, int position){
+        searchResult = null;
         Intent intent = new Intent(this, ActivityViewRecord.class);
         intent.putExtra("Problem", problemID);
         Record next = ProblemRecordListController.getRecordList().getRecords(problemID).get(position);
@@ -108,13 +109,16 @@ public class ActivityViewRecordList extends AppCompatActivity {
 
     //Change to AddRecord Activity
     public void goAddRecord (View v){
+        searchResult = null;
         Intent intent = new Intent(this, ActivityAddRecord.class);
         intent.putExtra("Problem", problemID);
         startActivity(intent);
     }
 
     //Change to ActivitySearch.
+
     public void goSearchRecord(View view){
+        searchResult = null;
         Intent intent = new Intent (this, ActivitySearchRecords.class);
         startActivityForResult(intent, 0);;
     }
