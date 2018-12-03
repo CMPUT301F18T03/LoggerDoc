@@ -145,9 +145,19 @@ public class ActivityAddRecord extends AppCompatActivity {
         }
     }
 
+    /**
+     * all the activity results are handles here
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        /**
+         * the return block for camera return for record photo, will generate a
+         * file and then adds it to the list
+         */
         if (requestCode == REQUEST_IMAGE_CAPTURE_RECORD && resultCode == RESULT_OK) {
             File path = new File(PhotoPath);
             //Uri uri = Uri.fromFile(f);
@@ -159,7 +169,9 @@ public class ActivityAddRecord extends AppCompatActivity {
 
 
         }
-
+        /**
+         * gets label for body location and adds to the blphoto
+         */
         if (requestCode == LABEL_REQUEST && resultCode == RESULT_OK){
             String label = data.getStringExtra("THELABEL");
             blPhoto = new BodyLocationPhoto();
@@ -171,6 +183,9 @@ public class ActivityAddRecord extends AppCompatActivity {
 
         }
 
+        /**
+         * return gallary image and gets filebefore adding it to the blphoto list
+         */
         if(requestCode == BODY_LOCATION_GALLARY_REQUEST && resultCode == RESULT_OK){
             final Uri uri = data.getData();
             File path =  new File(getRealPathFromURI(uri));
@@ -183,6 +198,10 @@ public class ActivityAddRecord extends AppCompatActivity {
 
         }
 
+        /**
+         * gallary request for record photo gets the image path from uri and
+         * adds the photo to the list
+         */
         if (requestCode == GALLERY_REQUEST_RECORD && resultCode == RESULT_OK){
             if (photos.size() > 9) {
                 Toast.makeText(this, "You cannot add more than 10 photos", Toast.LENGTH_SHORT).show();
@@ -206,6 +225,10 @@ public class ActivityAddRecord extends AppCompatActivity {
                     String.valueOf(geoLocation.getLongitude()));
         }
 
+        /**
+         * gets the pixel location form the clickable body location
+         * index 0,1 are for front view and 2,3 are for back
+         */
         if(requestCode == BODY_LOCATION_REQUEST && resultCode == Activity.RESULT_OK){
             ArrayList<Integer> location = data.getIntegerArrayListExtra("BODYLOCATION");
             bodylocation.setFrontX(location.get(0));
@@ -354,6 +377,11 @@ public class ActivityAddRecord extends AppCompatActivity {
         dialog.show(getSupportFragmentManager(), "error_dialog");
     }
 
+    /**
+     * intent for launching the gallary app on the user phone to
+     * retun an image uri
+     * @param request request code for result
+     */
     private void GalleryIntent(int request) {
 
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
@@ -361,6 +389,10 @@ public class ActivityAddRecord extends AppCompatActivity {
         startActivityForResult(photoPickerIntent, request);
     }
 
+    /**
+     * launches the camera app on the user phone assumeing they gave permission
+     * @param request request code for result
+     */
     private void dispatchTakePictureIntent(int request) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -409,6 +441,13 @@ public class ActivityAddRecord extends AppCompatActivity {
         return image;
     }
 
+    /**
+     * parses a uri gotten from the user gallery and gets the file path for it
+     * code used from https://stackoverflow.com/questions/27602986/convert-a-file-path-to-uri-in-android
+     * by user duggu
+     * @param contentURI
+     * @return File path
+     */
     private String getRealPathFromURI(Uri contentURI) {
         String result;
         Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);

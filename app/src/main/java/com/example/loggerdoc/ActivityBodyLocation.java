@@ -12,6 +12,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * has two images that the user can click when they do it saves the location of
+ * that click and returns it to the activity to be stored and used later
+ */
 public class ActivityBodyLocation extends Activity {
     public Bodylocation bodylocation;
 
