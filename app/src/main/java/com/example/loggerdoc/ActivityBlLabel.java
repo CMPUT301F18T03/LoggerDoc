@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * this only returns the name of the label for a user chosen body location
+ */
 public class ActivityBlLabel extends AppCompatActivity {
     private EditText label;
     @Override

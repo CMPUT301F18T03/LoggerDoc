@@ -15,6 +15,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * activity is used to display body location the user image bl will take priority over
+ * the clickable default one
+ */
 public class ActivityViewBodyLocation extends AppCompatActivity {
 
     @Override
@@ -30,6 +34,7 @@ public class ActivityViewBodyLocation extends AppCompatActivity {
         TextView label1 = (TextView) findViewById(R.id.label1);
         TextView label2 = (TextView) findViewById(R.id.label2);
 
+        //these bitmap are used to redraw the image with point at specific location
         Bitmap Front = BitmapFactory.decodeResource(getResources(), R.drawable.cutout);
         Bitmap Back = BitmapFactory.decodeResource(getResources(),R.drawable.cutout);
         Bitmap colorimage = BitmapFactory.decodeResource(getResources(),R.drawable.redsquare);
@@ -43,6 +48,9 @@ public class ActivityViewBodyLocation extends AppCompatActivity {
         Button removeFront = (Button) findViewById(R.id.remove1);
         Button removeBack = (Button)findViewById(R.id.remove2);
 
+        /**
+         * on click listeners will delete the specified bodylocation
+         */
         removeFront.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -76,6 +84,7 @@ public class ActivityViewBodyLocation extends AppCompatActivity {
                         .into(bl2);
                 label2.setText(list.get(0).getLabel());
 
+                //this is the redrawing proceedure to draw the clickable bodylocation with red dot at location picked by the user
                 for (int i=bodylocation.getFrontX(); i<bodylocation.getFrontX() + 20 && i < Front.getWidth(); i++){
                     for (int j=bodylocation.getFrontY(); j<bodylocation.getFrontY() +20 && i < Front.getHeight(); j++){
                         Front.setPixel(i,j,color);
