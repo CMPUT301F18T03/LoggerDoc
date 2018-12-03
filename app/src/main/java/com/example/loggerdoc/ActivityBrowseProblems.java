@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -135,6 +136,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
      * @param view View
      */
     public void changeToAddProblemActivity (View view){
+        searchResult = null;
         Intent intent = new Intent(this, ActivityAddProblem.class);
         startActivity(intent);
     }
@@ -146,6 +148,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
      * @param view View
      */
     public void changeToSearchActivity(View view){
+        searchResult = null;
         Intent intent = new Intent (this, ActivitySearchProblems.class);
         startActivityForResult(intent, 0);
     }
@@ -157,7 +160,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
 
             if (resultCode == RESULT_OK) {
                 ArrayList<Integer> contents = prevIntent.getIntegerArrayListExtra("searchResult");
-                ArrayList<Problem> searchResult = ProblemRecordListController.getProblemList().getList(contents);
+                searchResult = ProblemRecordListController.getProblemList().getList(contents);
             }
             if(resultCode == RESULT_CANCELED){
                 //handle cancel

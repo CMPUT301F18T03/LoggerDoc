@@ -130,7 +130,7 @@ public class ActivityViewRecordList extends AppCompatActivity {
 
             if (resultCode == RESULT_OK) {
                 ArrayList<Integer> contents = prevIntent.getIntegerArrayListExtra("searchResult");
-                ArrayList<Record> searchResult = ProblemRecordListController.getRecordList().getList(contents);
+                searchResult = ProblemRecordListController.getRecordList().getList(contents);
             }
             if(resultCode == RESULT_CANCELED){
                 //handle cancel
