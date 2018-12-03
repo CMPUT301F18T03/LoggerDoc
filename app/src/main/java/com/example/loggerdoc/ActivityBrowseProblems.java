@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
     private ListView problemsList;
     private FloatingActionButton addProblemButton;
     private ArrayList<Problem> problemArrayList;
+    private ArrayList<Problem> searchResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +95,12 @@ public class ActivityBrowseProblems extends AppCompatActivity {
 
         //TODO: fix if we get listeners working
         problemArrayList = ProblemRecordListController.getProblemList().sort();
-        adapter = new AdapterListProblems(this, problemArrayList);
+        if (searchResult!= null){
+            adapter = new AdapterListProblems(this, searchResult);
+        }else{
+            adapter = new AdapterListProblems(this, problemArrayList);
+        }
+
         problemsList = (ListView) findViewById(R.id.ProblemList);
         problemsList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -114,6 +121,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
      * @param view View
      */
     public void changeToViewProblemActivity(View view, Patient patient, int position){
+        searchResult = null;
         Intent intent = new Intent(this, ActivityViewProblem.class);
         intent.putExtra("Patient", patient_ID);
         intent.putExtra("Position",
@@ -128,6 +136,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
      * @param view View
      */
     public void changeToAddProblemActivity (View view){
+        searchResult = null;
         Intent intent = new Intent(this, ActivityAddProblem.class);
         startActivity(intent);
     }
@@ -139,8 +148,24 @@ public class ActivityBrowseProblems extends AppCompatActivity {
      * @param view View
      */
     public void changeToSearchActivity(View view){
+        searchResult = null;
         Intent intent = new Intent (this, ActivitySearchProblems.class);
-        startActivity(intent);
+        startActivityForResult(intent, 0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent prevIntent) {
+        super.onActivityResult(requestCode, resultCode, prevIntent);
+        if (requestCode == 0) {
+
+            if (resultCode == RESULT_OK) {
+                ArrayList<Integer> contents = prevIntent.getIntegerArrayListExtra("searchResult");
+                searchResult = ProblemRecordListController.getProblemList().getList(contents);
+            }
+            if(resultCode == RESULT_CANCELED){
+                //handle cancel
+            }
+        }
     }
 
     /** @author = Alexandra Tyrrell
@@ -150,6 +175,7 @@ public class ActivityBrowseProblems extends AppCompatActivity {
      * @param view View
      */
     public void changeToUserProfile (View view){
+        searchResult = null;
         Intent intent = new Intent (this, ActivityUserProfile.class);
         intent.putExtra("Patient", patient_ID);
         startActivity(intent);
