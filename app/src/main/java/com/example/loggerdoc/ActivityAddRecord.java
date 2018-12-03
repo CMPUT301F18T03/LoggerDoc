@@ -25,6 +25,8 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -44,6 +46,7 @@ public class ActivityAddRecord extends AppCompatActivity {
     private RecordGeoLocation geoLocation;
     private Record record;
     private static int problemID;
+    private int currentPhotoCount = 0;
 
 
     private static final int ERROR_DIALOG_REQUEST = 9001;
@@ -67,6 +70,9 @@ public class ActivityAddRecord extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_record);
+
+        TextView photoCount = (TextView) findViewById(R.id.photoCount);
+        photoCount.setText(String.format("Current number of photos: %s", Integer.toString(photos.size())));
     }
 
     @Override
@@ -83,6 +89,11 @@ public class ActivityAddRecord extends AppCompatActivity {
         Button recordCamera = findViewById(R.id.Camera_button);
         Button bodyLocationButton = findViewById(R.id.body_location_button);
         Button bodyLocationGallery = findViewById(R.id.BodyLocationGallary);
+
+        TextView photoCount = findViewById(R.id.photoCount);
+        photoCount.setText(String.format("Current number of photos: %s", Integer.toString(photos.size())));
+
+
 
         recordGallery.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -167,7 +178,7 @@ public class ActivityAddRecord extends AppCompatActivity {
             Log.i("THIS_TAG", blPhoto.getLabel());
 
             blphotos.add(blPhoto);
-            Toast.makeText(ActivityAddRecord.this, "saved body location from gallery", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ActivityAddRecord.this, "Saved body location from gallery", Toast.LENGTH_SHORT).show();
 
 
         }
@@ -182,7 +193,7 @@ public class ActivityAddRecord extends AppCompatActivity {
             RecordPhoto photo = new RecordPhoto();
             photo.setPhoto(path);
             photos.add(photo);
-            Toast.makeText(this, "saved photo from galary", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Saved photo from gallery", Toast.LENGTH_SHORT).show();
             Log.i("THIS_TAG", String.valueOf(path));
         }
 
