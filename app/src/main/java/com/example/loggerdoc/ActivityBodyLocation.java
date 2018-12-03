@@ -72,7 +72,7 @@ public class ActivityBodyLocation extends Activity {
 
                 location.set(2,imagex);
                 location.set(3,imagey);
-                Toast.makeText(ActivityBodyLocation.this, "Good Click", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ActivityBodyLocation.this, "Pin successfully added!", Toast.LENGTH_SHORT).show();
 
                 return false;
             }
