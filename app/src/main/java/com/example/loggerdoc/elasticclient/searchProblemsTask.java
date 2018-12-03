@@ -57,7 +57,7 @@ public class searchProblemsTask extends AsyncTask<Integer, Void,ArrayList<Intege
 
 
         // get a string representing problems from the server
-        String jsonin = receiver.httpPOST("/problem/_doc/_search?q=ElasticID_Owner:" + EID.toString() + "&filter_path=hits.hits.*&size=10000",
+        String jsonin = receiver.httpPOST("/problem/_doc/_search",
                 querya + keywords + queryb);
 
         //if string is successfully returned from server
@@ -69,7 +69,7 @@ public class searchProblemsTask extends AsyncTask<Integer, Void,ArrayList<Intege
                 for (int num = 0; num < hits.length(); num++) {
                     JSONObject currentproblem = hits.getJSONObject(num).getJSONObject("_source");
                     Problem x = gson.fromJson(currentproblem.toString(), Problem.class);
-                    ret.add(x.getElasticID());
+                    if(x.getElasticID_Owner().equals(EID)) ret.add(x.getElasticID());
 
                 }
                 return ret;
