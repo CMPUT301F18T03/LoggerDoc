@@ -22,6 +22,8 @@ public class ActivityViewRecordList extends AppCompatActivity {
     private int problemID;
     private FloatingActionButton addRecordButton;
     private ArrayList<Record> recordArrayList;
+    private ArrayList<Record> searchResult;
+    ArrayAdapter<Record> recordAdapter;
 
     //To be called when the activity is created
     @Override
@@ -76,7 +78,12 @@ public class ActivityViewRecordList extends AppCompatActivity {
         }
 
         //Initialize and set the adapter for the records
-        ArrayAdapter<Record> recordAdapter = new AdapterListRecords(this, ProblemRecordListController.getRecordList().getRecords(problemID));
+        if (searchResult != null){
+            recordAdapter = new AdapterListRecords(this, searchResult);
+        }else {
+            recordAdapter = new AdapterListRecords(this, ProblemRecordListController.getRecordList().getRecords(problemID));
+        }
+
         ListView recordList = (ListView) findViewById(R.id.recordsListView);
         recordList.setAdapter(recordAdapter);
         //Set the onClickListener for the listView. This will call goViewRecord().
@@ -91,6 +98,7 @@ public class ActivityViewRecordList extends AppCompatActivity {
 
     //Change to ViewRecord Activity
     public void goViewRecord(View v, int position){
+        searchResult = null;
         Intent intent = new Intent(this, ActivityViewRecord.class);
         intent.putExtra("Problem", problemID);
         Record next = ProblemRecordListController.getRecordList().getRecords(problemID).get(position);
@@ -101,14 +109,33 @@ public class ActivityViewRecordList extends AppCompatActivity {
 
     //Change to AddRecord Activity
     public void goAddRecord (View v){
+        searchResult = null;
         Intent intent = new Intent(this, ActivityAddRecord.class);
         intent.putExtra("Problem", problemID);
         startActivity(intent);
     }
 
     //Change to ActivitySearch.
+
     public void goSearchRecord(View view){
+        searchResult = null;
         Intent intent = new Intent (this, ActivitySearchRecords.class);
-        startActivity(intent);
+        intent.putExtra("Problem",problemID);
+        startActivityForResult(intent, 0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent prevIntent) {
+        super.onActivityResult(requestCode, resultCode, prevIntent);
+        if (requestCode == 0) {
+
+            if (resultCode == RESULT_OK) {
+                ArrayList<Integer> contents = prevIntent.getIntegerArrayListExtra("searchResult");
+                searchResult = ProblemRecordListController.getRecordList().getList(contents);
+            }
+            if(resultCode == RESULT_CANCELED){
+                //handle cancel
+            }
+        }
     }
 }

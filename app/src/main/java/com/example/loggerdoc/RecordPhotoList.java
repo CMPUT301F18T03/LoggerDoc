@@ -49,7 +49,7 @@ public class RecordPhotoList extends GenericList<RecordPhoto> implements Elastic
 
     public void loadMultipleRecord(ArrayList<Record> toload,Context context){
         datalist.clear();
-        Record[] records = toload.toArray(new Record[toload.size()]);
+        Record[] records = toload.toArray(new Record[0]);
         new getRecordPhotosTask(context,this).execute(records);
     }
 

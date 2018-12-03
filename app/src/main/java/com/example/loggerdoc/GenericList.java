@@ -1,6 +1,8 @@
 package com.example.loggerdoc;
 
 import android.util.SparseArray;
+
+import com.example.loggerdoc.elasticclient.ElasticCallback;
 import com.example.loggerdoc.elasticclient.ElasticID;
 
 import java.util.ArrayList;
@@ -9,6 +11,23 @@ import java.util.ArrayList;
 public class GenericList<T extends ElasticID>{
 
     protected SparseArray<T> datalist;
+
+    private ArrayList<ElasticCallback> callbacks = new ArrayList<>();
+    private void doCalls(){
+        for(ElasticCallback callback:callbacks){
+            if(callback!=null){
+                callback.callBack("");
+            }
+        }
+    }
+
+    public void registerCallback(ElasticCallback x){
+        callbacks.add(x);
+    }
+
+    public void removeCallback(ElasticCallback x){
+        callbacks.remove(x);
+    }
 
     public GenericList(){
         datalist = new SparseArray<>();
@@ -20,6 +39,7 @@ public class GenericList<T extends ElasticID>{
      */
     protected void add_internal(T data) {
         datalist.put(data.getElasticID(),data);
+        doCalls();
     }
 
     /**
@@ -32,6 +52,7 @@ public class GenericList<T extends ElasticID>{
         for(T x: data){
             datalist.put(x.getElasticID(),x);
         }
+        doCalls();
     }
 
     /**
@@ -44,12 +65,28 @@ public class GenericList<T extends ElasticID>{
     }
 
     /**
+     * Convert a list of elastic ID's to the objects they represent
+     *
+     * @param ElasticIDs The list of elastic ID's to convert to objects
+     */
+    public ArrayList<T> getList(ArrayList<Integer> ElasticIDs){
+        ArrayList<T> ret = new ArrayList<T>();
+
+        for( Integer ID: ElasticIDs){
+            ret.add(datalist.get(ID));
+        }
+
+        return ret;
+    }
+
+    /**
      * Remove data from the generic list.
      *
      * @param data The data that needs to be updated from the generic list.
      */
     protected void remove_internal(T data) {
         datalist.remove(data.getElasticID());
+        doCalls();
     }
 
 

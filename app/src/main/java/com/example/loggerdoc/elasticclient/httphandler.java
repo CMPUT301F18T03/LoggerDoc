@@ -96,4 +96,30 @@ public class httphandler{
         return null;
 
     }
+
+    /**
+     * Posts data to elastic search
+     * @param address the address to send too, not including the actual IP and port.
+     * @param payload the data to send, as a json string.
+     * @return the response from the server, if it is reached
+     */
+    public String httpPOST(String address,String payload) {
+        RequestBody body = RequestBody.create(JSON, payload);
+        Request request = new Request.Builder()
+                .url(host+address)
+                .post(body)
+                .build();
+
+        Response response;
+        try {
+            response = client.newCall(request).execute();
+
+            ResponseBody x = response.body();
+            if(x == null)return null;
+            return x.string();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

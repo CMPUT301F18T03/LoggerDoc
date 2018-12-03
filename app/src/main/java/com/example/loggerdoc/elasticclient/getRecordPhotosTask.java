@@ -40,7 +40,6 @@ public class getRecordPhotosTask extends AsyncTask<Record, Void, ArrayList<Recor
     @Override
     protected ArrayList<RecordPhoto> doInBackground(Record... records) {
         Gson gson = new Gson();
-        Record tosend = records[0];
         ArrayList<Integer> BodyLocs = new ArrayList<>();
         ArrayList<Integer> RecordPhotos = new ArrayList<>();
         ArrayList<Integer> toFetchBody = new ArrayList<>();
