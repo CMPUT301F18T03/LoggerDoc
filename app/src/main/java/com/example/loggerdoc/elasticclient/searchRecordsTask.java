@@ -48,7 +48,7 @@ public class searchRecordsTask extends AsyncTask<Integer, Void,ArrayList<Integer
 
 
         // get a string representing Records from the server
-        String jsonin = receiver.httpPOST("/record/_doc/_search?q=ElasticID_Owner:" + EID.toString() + "&filter_path=hits.hits.*&size=10000",
+        String jsonin = receiver.httpPOST("/record/_doc/_search",
                 querya + keywords + queryb);
 
         //if string is successfully returned from server
@@ -60,7 +60,7 @@ public class searchRecordsTask extends AsyncTask<Integer, Void,ArrayList<Integer
                 for (int num = 0; num < hits.length(); num++) {
                     JSONObject currentproblem = hits.getJSONObject(num).getJSONObject("_source");
                     Record x = gson.fromJson(currentproblem.toString(), Record.class);
-                    ret.add(x.getElasticID());
+                    if(x.getElasticID_Owner().equals(EID)) ret.add(x.getElasticID());
 
                 }
                 return ret;
