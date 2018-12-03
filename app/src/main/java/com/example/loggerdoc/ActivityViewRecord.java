@@ -5,10 +5,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.transition.Slide;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,6 +20,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /*
  * This class displays the selected record. If the user is a patient, he/she can edit or delete the
@@ -37,6 +40,9 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
     public static Bodylocation bodylocation = new Bodylocation();
     private static final float DEFAULT_ZOOM = 15;
     private static final int REMOVE_BL = 2000;
+
+    public static ArrayList<BodyLocationPhoto> list;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +88,7 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
         Button showimages = (Button) findViewById(R.id.showRecordImage);
         Button showBodyLocation = (Button) findViewById(R.id.showBodyLoc);
 
-
+        list = ProblemRecordListController.getRecordPhotoList().getBodyLocationPhotos();
         bodylocation = record.getBodylocation();
 
         // Log.i("THIS_TAG", String.valueOf(photoList.getPhoto(0).getPhoto()));
@@ -101,7 +107,6 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
                 startActivityForResult(intent, REMOVE_BL);
             }
         });
-
         initializeMap();
     }
 
@@ -186,23 +191,30 @@ public class ActivityViewRecord extends AppCompatActivity implements OnMapReadyC
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REMOVE_BL && resultCode == RESULT_OK) {
+
             int index = data.getIntExtra("REMOVE", 0);
+
             if (index == 1) {
                 record.getBodylocation().setFrontX(0);
                 record.getBodylocation().setFrontY(0);
-                if (record.getBlPhotoList().size() > 0) {
-                    record.getBlPhotoList().remove(record.getBlPhotoList().get(0));
+                if (list.size() > 0) {
+                    record.removeBlPhoto(list.get(0));
+                    ProblemRecordListController.getRecordPhotoList().removePhoto(list.get(0));
                 }
                 ProblemRecordListController.getRecordList().update(record, getApplicationContext());
             }
             if (index == 2) {
                 record.getBodylocation().setBackX(0);
                 record.getBodylocation().setBackY(0);
-                if (record.getBlPhotoList().size() == 2) {
-                    record.getBlPhotoList().remove(record.getBlPhotoList().get(1));
+                if (list.size() == 2) {
+                    record.removeBlPhoto(list.get(1));
+                    ProblemRecordListController.getRecordPhotoList().removePhoto(list.get(1));
+
                 }
-                else if (record.getBlPhotoList().size() == 1) {
-                    record.getBlPhotoList().remove(record.getBlPhotoList().get(0));
+                else if (list.size() == 1) {
+                    record.removeBlPhoto(list.get(0));
+                    ProblemRecordListController.getRecordPhotoList().removePhoto(list.get(0));
+
                 }
 
 

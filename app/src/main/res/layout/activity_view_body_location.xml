@@ -10,8 +10,11 @@
         android:id="@+id/BL1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="25dp"
+        app:layout_constraintEnd_toStartOf="@+id/BL2"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/label1"
         app:srcCompat="@drawable/cutout" />
@@ -20,9 +23,12 @@
         android:id="@+id/BL2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
         android:layout_marginEnd="40dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="25dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/BL1"
         app:layout_constraintTop_toBottomOf="@+id/label2"
         app:srcCompat="@drawable/cutout" />
 
@@ -40,8 +46,8 @@
         android:id="@+id/label2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:layout_marginEnd="128dp"
+        android:layout_marginTop="50dp"
         android:text="Back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -52,7 +58,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
         android:layout_marginTop="16dp"
+        android:background="@drawable/squarebuttonshape"
         android:text="remove"
+        android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BL1" />
 
@@ -60,9 +68,11 @@
         android:id="@+id/remove2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="55dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/squarebuttonshape"
         android:text="Remove"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BL2" />
 </android.support.constraint.ConstraintLayout>
